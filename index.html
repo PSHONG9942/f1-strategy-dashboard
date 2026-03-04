@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 F1 Australian Grand Prix - Strategy Deep Dive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Rajdhani:wght@500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0E14;
+            color: #E2E8F0;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-display {
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .f1-red {
+            color: #E10600;
+        }
+
+        .bg-f1-red {
+            background-color: #E10600;
+        }
+
+        .border-f1-red {
+            border-color: #E10600;
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0B0E14;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E10600;
+        }
+
+        /* Phase Transition Animations */
+        .phase-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .phase-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Timeline styling */
+        .timeline-btn.active {
+            background-color: #E10600;
+            color: white;
+            border-color: #E10600;
+            box-shadow: 0 0 15px rgba(225, 6, 0, 0.4);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-red-600 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0 border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-solid fa-flag-checkered text-2xl f1-red"></i>
+                    <span class="font-display font-bold text-xl tracking-wider text-white">AUS<span
+                            class="f1-red">GP</span> '26</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#epoch"
+                            class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">The
+                            2026 Epoch</a>
+                        <a href="#aero"
+                            class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Active
+                            Aero</a>
+                        <a href="#telemetry"
+                            class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Telemetry</a>
+                        <a href="#strategy"
+                            class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Strategy
+                            & Tires</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1505322022379-7c3353ee6291?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+                alt="F1 Racing" class="w-full h-full object-cover opacity-20"
+                onerror="this.src='https://images.unsplash.com/photo-1532983330958-4b32c0af3861?auto=format&fit=crop&q=80'">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0B0E14] via-[#0B0E14]/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0B0E14] via-transparent to-[#0B0E14]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/20 mb-6 text-sm font-medium uppercase tracking-widest text-gray-300">
+                <span class="w-2 h-2 rounded-full bg-f1-red animate-pulse"></span>
+                Albert Park Circuit • 58 Laps • 306.124 km
+            </div>
+            <h1
+                class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 uppercase">
+                A New Regulatory <span class="f1-red">Epoch</span>
+            </h1>
+            <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-400 font-light leading-relaxed">
+                Strategic and Technical Analysis of the 2026 Formula 1 Australian Grand Prix. Deconstructing the
+                kinetic, aerodynamic, and thermodynamic challenges of Melbourne's high-speed crucible.
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <a href="#weekend-timeline"
+                    class="px-8 py-4 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(225,6,0,0.4)]">EXPLORE
+                    ANALYSIS</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Phase Timeline Navigator -->
+    <div id="weekend-timeline"
+        class="sticky top-16 z-40 bg-[#0B0E14]/90 backdrop-blur-md border-y border-gray-800 py-4 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div
+                    class="text-sm font-bold uppercase tracking-widest text-gray-400 w-full md:w-auto text-center md:text-left">
+                    Weekend Progression
+                </div>
+                <div class="flex flex-wrap justify-center gap-2 w-full md:w-auto">
+                    <button onclick="switchPhase('overview')" id="btn-overview"
+                        class="timeline-btn active px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-book-open mr-2"></i> The Overview
+                    </button>
+                    <button onclick="switchPhase('problem')" id="btn-problem"
+                        class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-magnifying-glass-chart mr-2"></i> The Real Problem
+                    </button>
+                    <button onclick="switchPhase('solution')" id="btn-solution"
+                        class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-lightbulb mr-2"></i> The Solution
+                    </button>
+                    <button onclick="switchPhase('endgame')" id="btn-endgame"
+                        class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+                        <i class="fa-solid fa-flag-checkered mr-2"></i> The End Game
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="min-h-screen">
+        <!-- ============================================== -->
+        <!-- PHASE 1: THE OVERVIEW (Original Content wrapped) -->
+        <!-- ============================================== -->
+        <div id="phase-overview" class="phase-content active">
+            <!-- Section: The 2026 Epoch -->
+            <section id="epoch" class="py-20 relative border-t border-white/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6 uppercase">The
+                                Mechanical <span class="gradient-text">Anatomy</span></h2>
+                            <p class="text-gray-400 text-lg mb-6 leading-relaxed">
+                                The 2026 regulations aggressively downsize the vehicles to promote agility and reduce
+                                inertial penalties. Combined with a radical 50/50 power unit philosophy, the complex
+                                MGU-H is eradicated, and the MGU-K output is nearly tripled.
+                            </p>
+                            <p class="text-gray-400 text-lg leading-relaxed">
+                                This architectural shift inextricably links aerodynamic efficiency and tire preservation
+                                to real-time electrical energy management algorithms.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Stat Cards -->
+                            <div
+                                class="glass-panel p-6 rounded-xl border-l-4 border-f1-red hover:bg-white/5 transition duration-300">
+                                <i class="fa-solid fa-weight-scale text-2xl text-gray-500 mb-4"></i>
+                                <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Minimum Weight</div>
+                                <div class="font-display text-4xl font-bold text-white">770<span
+                                        class="text-xl text-gray-500 ml-1">kg</span></div>
+                                <div class="text-xs text-green-400 mt-2"><i class="fa-solid fa-arrow-down mr-1"></i>30kg
+                                    reduction</div>
+                            </div>
+                            <div
+                                class="glass-panel p-6 rounded-xl border-l-4 border-f1-red hover:bg-white/5 transition duration-300">
+                                <i class="fa-solid fa-bolt text-2xl text-yellow-500 mb-4"></i>
+                                <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">MGU-K Output</div>
+                                <div class="font-display text-4xl font-bold text-white">350<span
+                                        class="text-xl text-gray-500 ml-1">kW</span></div>
+                                <div class="text-xs text-red-400 mt-2"><i class="fa-solid fa-arrow-up mr-1"></i>Tripled
+                                    from 120kW</div>
+                            </div>
+                            <div
+                                class="glass-panel p-6 rounded-xl border-l-4 border-blue-500 hover:bg-white/5 transition duration-300">
+                                <i class="fa-solid fa-ruler-horizontal text-2xl text-gray-500 mb-4"></i>
+                                <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Max Wheelbase</div>
+                                <div class="font-display text-4xl font-bold text-white">3,400<span
+                                        class="text-xl text-gray-500 ml-1">mm</span></div>
+                                <div class="text-xs text-green-400 mt-2"><i
+                                        class="fa-solid fa-arrow-down mr-1"></i>200mm reduction</div>
+                            </div>
+                            <div
+                                class="glass-panel p-6 rounded-xl border-l-4 border-blue-500 hover:bg-white/5 transition duration-300">
+                                <i class="fa-solid fa-arrows-left-right text-2xl text-gray-500 mb-4"></i>
+                                <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Overall Width</div>
+                                <div class="font-display text-4xl font-bold text-white">1,900<span
+                                        class="text-xl text-gray-500 ml-1">mm</span></div>
+                                <div class="text-xs text-green-400 mt-2"><i
+                                        class="fa-solid fa-arrow-down mr-1"></i>100mm narrower</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Active Aero & Kinetic Warfare -->
+            <section id="aero" class="py-20 relative bg-[#131822]">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">Active
+                            Aerodynamics & <span class="text-blue-500">Kinetic Warfare</span></h2>
+                        <p class="max-w-2xl mx-auto text-gray-400">The historical DRS has been eradicated. Welcome to
+                            the era of Venetian blind aero systems and intricate kinetic deployment mapping.</p>
+                    </div>
+
+                    <!-- Aero Modes -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                        <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+                            <div
+                                class="absolute top-0 right-0 w-32 h-32 bg-f1-red/10 rounded-full blur-3xl group-hover:bg-f1-red/20 transition-all">
+                            </div>
+                            <h3 class="font-display text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-compress text-f1-red"></i> Corner Mode (Default)
+                            </h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Multi-element flaps remain closed, maximizing angle of attack. Generates critical
+                                aerodynamic downforce for high-speed lateral load transfers and heavy braking zones.
+                                Mandatory for transitional stability.
+                            </p>
+                        </div>
+                        <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+                            <div
+                                class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all">
+                            </div>
+                            <h3 class="font-display text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-wind text-blue-500"></i> Straight Mode (Activated)
+                            </h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                Flaps flatten out, shedding up to 40% of total drag. Available to all drivers on every
+                                lap within 5 designated zones. ECU enforces automated "lap distance turn-offs" to revert
+                                to Corner Mode before braking.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Straight Mode Zones Table -->
+                    <div class="mb-20">
+                        <h3 class="font-display text-2xl font-bold text-white mb-6 uppercase tracking-wider">2026
+                            Straight Mode Zones</h3>
+                        <div class="overflow-x-auto rounded-xl border border-gray-800 shadow-2xl">
+                            <table class="min-w-full text-left border-collapse">
+                                <thead>
+                                    <tr
+                                        class="bg-gray-800/50 text-gray-300 text-sm uppercase tracking-wider font-semibold">
+                                        <th class="p-4 border-b border-gray-700">Zone</th>
+                                        <th class="p-4 border-b border-gray-700">Track Location</th>
+                                        <th class="p-4 border-b border-gray-700">Deployment Phase</th>
+                                        <th class="p-4 border-b border-gray-700">Subsequent Corner Transition</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-400 text-sm divide-y divide-gray-800 bg-[#0B0E14]/50">
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-bold text-white"><span
+                                                class="bg-blue-600/20 text-blue-400 px-2 py-1 rounded">Zone 1</span>
+                                        </td>
+                                        <td class="p-4">Pit Straight</td>
+                                        <td class="p-4">Exit of Turn 14 through Start/Finish</td>
+                                        <td class="p-4">Braking phase for Turn 1</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-bold text-white"><span
+                                                class="bg-blue-600/20 text-blue-400 px-2 py-1 rounded">Zone 2</span>
+                                        </td>
+                                        <td class="p-4">Short Chute</td>
+                                        <td class="p-4">Exit of Turn 2 to Turn 3 approach</td>
+                                        <td class="p-4">Heavy braking for Turn 3</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-bold text-white"><span
+                                                class="bg-blue-600/20 text-blue-400 px-2 py-1 rounded">Zone 3</span>
+                                        </td>
+                                        <td class="p-4">Mid-Sector Burst</td>
+                                        <td class="p-4">Exit of Turn 5 to Turn 6 approach</td>
+                                        <td class="p-4">Entry phase of Turn 6</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-bold text-white"><span
+                                                class="bg-blue-600/20 text-blue-400 px-2 py-1 rounded">Zone 4</span>
+                                        </td>
+                                        <td class="p-4">Lakeside Drive</td>
+                                        <td class="p-4">Exit of Turn 8 to Turn 9 approach</td>
+                                        <td class="p-4">High-speed entry of Turn 9</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-bold text-white"><span
+                                                class="bg-blue-600/20 text-blue-400 px-2 py-1 rounded">Zone 5</span>
+                                        </td>
+                                        <td class="p-4">Penultimate Run</td>
+                                        <td class="p-4">Exit of Turn 10 to Turn 11 approach</td>
+                                        <td class="p-4">Heavy braking for Turn 11</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Kinetic Deployment Modes -->
+                    <h3 class="font-display text-2xl font-bold text-white mb-6 uppercase tracking-wider text-center">
+                        Kinetic Energy Deployment</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Boost Mode -->
+                        <div
+                            class="bg-gradient-to-b from-yellow-500/10 to-transparent p-6 rounded-xl border border-yellow-500/30">
+                            <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-bolt text-yellow-500 text-xl"></i>
+                            </div>
+                            <h4 class="font-display text-xl font-bold text-white mb-2">Boost Mode</h4>
+                            <p class="text-sm text-gray-400 mb-4">On-demand override delivering maximum 350kW permitted
+                                electrical power. Unrestricted by track position, limited solely by battery State of
+                                Charge (SoC). Used offensively or defensively.</p>
+                        </div>
+                        <!-- Overtake Mode -->
+                        <div
+                            class="bg-gradient-to-b from-f1-red/10 to-transparent p-6 rounded-xl border border-f1-red/30">
+                            <div class="w-12 h-12 bg-f1-red/20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-rocket text-f1-red text-xl"></i>
+                            </div>
+                            <h4 class="font-display text-xl font-bold text-white mb-2">Overtake Mode</h4>
+                            <p class="text-sm text-gray-400 mb-4">Proximity-dependent (within 1s at detection point
+                                after T13). Grants +0.5 MJ energy, overriding the 290 km/h cut-off to allow sustained
+                                electrical output up to 340 km/h on the pit straight.</p>
+                        </div>
+                        <!-- Super-Clipping -->
+                        <div
+                            class="bg-gradient-to-b from-purple-500/10 to-transparent p-6 rounded-xl border border-purple-500/30">
+                            <div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-battery-empty text-purple-400 text-xl"></i>
+                            </div>
+                            <h4 class="font-display text-xl font-bold text-white mb-2">Super-Clipping</h4>
+                            <p class="text-sm text-gray-400 mb-4">The violent deceleration occurring mid-straight (esp.
+                                Lakeside Drive) if electrical deployment ceases due to an empty battery. Exposes
+                                defensive drivers to massive overspeeds from attackers.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Telemetry & Circuit Engineering -->
+            <section id="telemetry" class="py-20 relative border-t border-white/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                        <div class="max-w-3xl">
+                            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">
+                                Turn-by-Turn <span class="gradient-text">Telemetry</span></h2>
+                            <p class="text-gray-400 text-lg">A 5.278km lap demanding ~35 gear changes and 71% full
+                                throttle. The bumpy surface necessitates stiff front (AR: 16) and soft rear (AR: 10)
+                                roll bars, with elevated ride heights to prevent aggressive floor strikes.</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-sm text-gray-500 uppercase tracking-widest font-bold">Max Lateral Load
+                            </div>
+                            <div class="font-display text-5xl font-bold text-f1-red">5.1G <span
+                                    class="text-lg text-gray-400 font-sans">@ Turn 9/10</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Telemetry Table -->
+                    <div class="overflow-x-auto rounded-xl border border-gray-800 shadow-2xl bg-[#0B0E14] mb-12">
+                        <table class="min-w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-gray-800 text-gray-300 text-xs uppercase tracking-wider font-semibold">
+                                    <th class="p-4 border-b border-gray-700">Sector</th>
+                                    <th class="p-4 border-b border-gray-700">Corner</th>
+                                    <th class="p-4 border-b border-gray-700">Direction</th>
+                                    <th class="p-4 border-b border-gray-700">Est. Gear</th>
+                                    <th class="p-4 border-b border-gray-700">Est. Speed</th>
+                                    <th class="p-4 border-b border-gray-700">Aero Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-400 text-sm divide-y divide-gray-800 font-mono">
+                                <!-- Sector 1 -->
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-center border-r border-gray-800 text-yellow-500" rowspan="5">1
+                                    </td>
+                                    <td class="p-3 text-white font-sans">Turn 1</td>
+                                    <td class="p-3">Right</td>
+                                    <td class="p-3 text-blue-400">5th/6th</td>
+                                    <td class="p-3 text-f1-red">150+ km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-white font-sans">Turn 2</td>
+                                    <td class="p-3">Left</td>
+                                    <td class="p-3 text-blue-400">7th</td>
+                                    <td class="p-3 text-f1-red">210+ km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-white font-sans">Turn 3</td>
+                                    <td class="p-3">Right</td>
+                                    <td class="p-3 text-blue-400">3rd/4th</td>
+                                    <td class="p-3 text-f1-red font-bold">110 km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-white font-sans">Turn 4</td>
+                                    <td class="p-3">Left</td>
+                                    <td class="p-3 text-blue-400">6th</td>
+                                    <td class="p-3 text-f1-red">220+ km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group border-b-2 border-gray-700">
+                                    <td class="p-3 text-white font-sans">Turn 5</td>
+                                    <td class="p-3">Right</td>
+                                    <td class="p-3 text-blue-400">7th</td>
+                                    <td class="p-3 text-f1-red">250+ km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+
+                                <!-- Sector 2 -->
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-center border-r border-gray-800 text-purple-500" rowspan="5">2
+                                    </td>
+                                    <td class="p-3 text-white font-sans">Turn 6</td>
+                                    <td class="p-3">Right</td>
+                                    <td class="p-3 text-blue-400">6th</td>
+                                    <td class="p-3 text-f1-red">219 km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-white font-sans">Turn 7</td>
+                                    <td class="p-3">Left</td>
+                                    <td class="p-3 text-blue-400">7th</td>
+                                    <td class="p-3 text-f1-red">240+ km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group bg-blue-900/10">
+                                    <td class="p-3 text-white font-sans">Turn 8</td>
+                                    <td class="p-3">Right</td>
+                                    <td class="p-3 text-blue-400">8th</td>
+                                    <td class="p-3 text-f1-red font-bold">290+ km/h</td>
+                                    <td class="p-3"><span
+                                            class="px-2 py-1 bg-blue-900/50 text-blue-300 rounded font-sans text-xs border border-blue-500/30">Straight
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-white font-sans">Turn 9</td>
+                                    <td class="p-3">Left</td>
+                                    <td class="p-3 text-blue-400">8th</td>
+                                    <td class="p-3 text-f1-red">290+ km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group border-b-2 border-gray-700">
+                                    <td class="p-3 text-white font-sans">Turn 10</td>
+                                    <td class="p-3">Right</td>
+                                    <td class="p-3 text-blue-400">8th</td>
+                                    <td class="p-3 text-f1-red">290+ km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+
+                                <!-- Sector 3 -->
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-center border-r border-gray-800 text-f1-red" rowspan="4">3</td>
+                                    <td class="p-3 text-white font-sans">Turn 11</td>
+                                    <td class="p-3">Left</td>
+                                    <td class="p-3 text-blue-400">5th</td>
+                                    <td class="p-3 text-f1-red">225+ km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-white font-sans">Turn 12</td>
+                                    <td class="p-3">Right</td>
+                                    <td class="p-3 text-blue-400">6th</td>
+                                    <td class="p-3 text-f1-red">235+ km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-white font-sans">Turn 13</td>
+                                    <td class="p-3">Right</td>
+                                    <td class="p-3 text-blue-400">3rd/4th</td>
+                                    <td class="p-3 text-f1-red font-bold">105 km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors group">
+                                    <td class="p-3 text-white font-sans">Turn 14</td>
+                                    <td class="p-3">Right</td>
+                                    <td class="p-3 text-blue-400">4th</td>
+                                    <td class="p-3 text-f1-red">130 km/h</td>
+                                    <td class="p-3"><span class="px-2 py-1 bg-gray-800 rounded font-sans text-xs">Corner
+                                            Mode</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-400">
+                        <div class="glass-panel p-5 rounded-lg">
+                            <h5 class="text-white font-bold mb-2 uppercase tracking-wider">Sector 1: Brabham-Jones</h5>
+                            <p>Heavy compression damping required at T1. T3 represents a primary overtaking theater with
+                                massive deceleration to 110km/h and frequent front-right lockups.</p>
+                        </div>
+                        <div class="glass-panel p-5 rounded-lg border-t-2 border-blue-500">
+                            <h5 class="text-white font-bold mb-2 uppercase tracking-wider">Sector 2: Lakeside Run</h5>
+                            <p>Widened T6 now taken at 219km/h. Straight Mode Zone 4 forces the highest risk of
+                                "super-clipping". T9/T10 switchback produces extreme 5.1G lateral loads.</p>
+                        </div>
+                        <div class="glass-panel p-5 rounded-lg border-t-2 border-f1-red">
+                            <h5 class="text-white font-bold mb-2 uppercase tracking-wider">Sector 3: The Finale</h5>
+                            <p>T11/12 kerbs unsettle the ground-effect floor. Overtake Mode detection point located
+                                post-T13, setting up a 750+ kW combined assault onto the pit straight.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Strategy & Tires -->
+            <section id="strategy" class="py-20 relative bg-[#131822]">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-10 uppercase text-center">Tire
+                        Thermodynamics & <span class="text-f1-red">Strategy</span></h2>
+
+                    <!-- The Cadillac Effect Alert -->
+                    <div
+                        class="bg-red-900/20 border border-f1-red/50 rounded-2xl p-6 md:p-8 mb-12 flex flex-col md:flex-row gap-6 items-center">
+                        <div class="flex-shrink-0 text-f1-red">
+                            <i class="fa-solid fa-triangle-exclamation text-6xl shadow-red-500/50"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">The Cadillac Effect:
+                                Grid Expansion Constraint</h3>
+                            <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                                The arrival of the 11th constructor (Cadillac/Andretti) expands the grid to 22 cars. Due
+                                to Albert Park's compact 280-meter pit lane, the FIA mandated a speed limit reduction
+                                from 80 km/h to <span class="font-bold text-white bg-red-900/50 px-2 py-0.5 rounded">60
+                                    km/h</span>. This dramatically escalates total pit stop time loss to an untenable
+                                <strong>24-25 seconds</strong>, virtually eradicating the mathematical viability of
+                                multi-stop strategies under green flags.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                        <!-- Graining Explanation -->
+                        <div class="lg:col-span-4">
+                            <div class="glass-panel p-6 rounded-xl h-full">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <i class="fa-solid fa-fire text-orange-500 text-2xl"></i>
+                                    <h3 class="font-display text-xl font-bold text-white uppercase">Front-Left Graining
+                                    </h3>
+                                </div>
+                                <p class="text-gray-400 text-sm mb-4">
+                                    Albert Park's "green" track evolution makes it an extreme outlier for tire graining.
+                                    Surface rubber tears and rolls into nodules, blocking healthy rubber from the
+                                    asphalt.
+                                </p>
+                                <p class="text-gray-400 text-sm mb-6">
+                                    The C5 (Soft) compound is highly susceptible to premature failure during heavy-fuel
+                                    phases. Strategies pivot around the thermal resilience of the C3 (Hard) and C4
+                                    (Medium).
+                                </p>
+
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-white font-bold flex items-center gap-2">
+                                            <div class="w-3 h-3 rounded-full bg-red-500"></div> C5 Soft
+                                        </span>
+                                        <span class="text-red-400 text-xs uppercase">High Risk</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-white font-bold flex items-center gap-2">
+                                            <div class="w-3 h-3 rounded-full bg-yellow-400"></div> C4 Medium
+                                        </span>
+                                        <span class="text-yellow-400 text-xs uppercase">Target Stint: Lap 23</span>
+                                    </div>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <span class="text-white font-bold flex items-center gap-2">
+                                            <div class="w-3 h-3 rounded-full bg-white"></div> C3 Hard
+                                        </span>
+                                        <span class="text-gray-400 text-xs uppercase">Primary Race Tire</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Strategy Matrix Table -->
+                        <div class="lg:col-span-8">
+                            <div
+                                class="overflow-x-auto rounded-xl border border-gray-800 shadow-xl bg-[#0B0E14] h-full">
+                                <table class="min-w-full text-left border-collapse h-full">
+                                    <thead>
+                                        <tr
+                                            class="bg-gray-800/80 text-gray-300 text-xs uppercase tracking-wider font-semibold">
+                                            <th class="p-4 border-b border-gray-700">Strategy Route</th>
+                                            <th class="p-4 border-b border-gray-700">Start</th>
+                                            <th class="p-4 border-b border-gray-700">Target Pit</th>
+                                            <th class="p-4 border-b border-gray-700">Finish</th>
+                                            <th class="p-4 border-b border-gray-700 w-1/3">Operational Viability</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-sm divide-y divide-gray-800">
+                                        <tr class="bg-green-900/10 border-l-4 border-green-500">
+                                            <td class="p-4 font-bold text-white">One-Stop (Optimum)</td>
+                                            <td class="p-4 text-yellow-400 font-medium">Medium (C4)</td>
+                                            <td class="p-4 text-white">Lap 23</td>
+                                            <td class="p-4 text-gray-300 font-medium">Hard (C3)</td>
+                                            <td class="p-4 text-gray-400 text-xs">High. Balances stint length and
+                                                entirely mitigates secondary pit lane time loss.</td>
+                                        </tr>
+                                        <tr class="hover:bg-white/5 transition-colors border-l-4 border-transparent">
+                                            <td class="p-4 font-bold text-gray-400">Two-Stop (Standard)</td>
+                                            <td class="p-4 text-yellow-400 font-medium">Medium (C4)</td>
+                                            <td class="p-4 text-white">Lap 16</td>
+                                            <td class="p-4 text-gray-300 font-medium">Hard (C3) x2</td>
+                                            <td class="p-4 text-gray-500 text-xs">Low. Slower overall due to the
+                                                cumulative 48+ seconds of pit lane transit time.</td>
+                                        </tr>
+                                        <tr class="hover:bg-white/5 transition-colors border-l-4 border-transparent">
+                                            <td class="p-4 font-bold text-gray-400">Two-Stop (Aggressive)</td>
+                                            <td class="p-4 text-red-500 font-medium">Soft (C5)</td>
+                                            <td class="p-4 text-white">Lap 9</td>
+                                            <td class="p-4 text-gray-300 font-medium">Hard (C3) x2</td>
+                                            <td class="p-4 text-gray-500 text-xs">Very Low. High risk of catastrophic C5
+                                                graining; viable only for track position off the start.</td>
+                                        </tr>
+                                        <tr
+                                            class="hover:bg-white/5 transition-colors border-l-4 border-f1-red bg-red-900/5">
+                                            <td class="p-4 font-bold text-gray-400">Two-Stop (High Risk)</td>
+                                            <td class="p-4 text-red-500 font-medium">Soft (C5)</td>
+                                            <td class="p-4 text-white">Lap 9 (to C4)</td>
+                                            <td class="p-4 text-gray-300 font-medium">Hard @ L29</td>
+                                            <td class="p-4 text-gray-500 text-xs">Extremely Low. Forces a massive final
+                                                stint on the Hard compound.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rain Hazard & Partial Aero Box -->
+                    <div class="mt-12 glass-panel p-6 border-l-4 border-blue-500 rounded-lg">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fa-solid fa-cloud-showers-water text-blue-400 text-xl"></i>
+                            <h4 class="font-display text-lg font-bold text-white uppercase tracking-wider">
+                                Meteorological Clause: Article B1.5.11 (Rain Hazard)</h4>
+                        </div>
+                        <p class="text-sm text-gray-400 leading-relaxed mb-3">
+                            If Race Control declares a "Rain Hazard," Parc Fermé exemptions permit ride height/aero
+                            adjustments, liberating Saturday setups. Furthermore, wet conditions trigger <strong>Partial
+                                Aero Mode</strong>.
+                        </p>
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Straight Mode is electronically restricted to only 3 zones, or single-flap actuation to
+                            maintain baseline downforce. This increases drag dramatically, draining the 350kW battery
+                            faster and altering energy harvesting calculations entirely.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- PHASE 2: THE REAL PROBLEM                      -->
+        <!-- ============================================== -->
+        <div id="phase-problem" class="phase-content">
+            <!-- Locked View -->
+            <div class="locked-view flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-32">
+                <i class="fa-solid fa-lock text-6xl text-gray-700 mb-6"></i>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">The Real Problem</h2>
+                <div
+                    class="inline-block bg-yellow-500/10 border border-yellow-500/50 text-yellow-500 px-6 py-3 rounded-full font-bold uppercase tracking-wider text-sm mb-6">
+                    Pending Track Data
+                </div>
+                <p class="text-gray-400 max-w-2xl text-lg">
+                    This analysis unlocks automatically <strong>6 hours after the conclusion of Free Practice 2 (or
+                        Sprint Qualifying)</strong>.
+                </p>
+            </div>
+
+            <!-- Unlocked View (Hidden by Default) -->
+            <div class="unlocked-view hidden py-20 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2
+                        class="font-display text-4xl md:text-5xl font-bold text-white mb-6 uppercase border-l-4 border-yellow-500 pl-4">
+                        The Real Problem</h2>
+                    <div class="text-gray-300 text-lg leading-relaxed space-y-6">
+                        <!-- PASTE GEMINI ANALYSIS HERE LATER VIA GITHUB -->
+                        <p class="italic text-gray-500 border border-dashed border-gray-700 p-6 rounded text-center">
+                            [After FP2, paste the Gemini-generated analysis right here in GitHub...]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- PHASE 3: THE SOLUTION                          -->
+        <!-- ============================================== -->
+        <div id="phase-solution" class="phase-content">
+            <!-- Locked View -->
+            <div class="locked-view flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-32">
+                <i class="fa-solid fa-lock text-6xl text-gray-700 mb-6"></i>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">The Solution</h2>
+                <div
+                    class="inline-block bg-blue-500/10 border border-blue-500/50 text-blue-400 px-6 py-3 rounded-full font-bold uppercase tracking-wider text-sm mb-6">
+                    Awaiting Qualifying Results
+                </div>
+                <p class="text-gray-400 max-w-2xl text-lg">
+                    This analysis unlocks <strong>6 hours after the conclusion of Qualifying (or the Sprint
+                        Race)</strong>.
+                </p>
+            </div>
+
+            <!-- Unlocked View (Hidden by Default) -->
+            <div class="unlocked-view hidden py-20 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2
+                        class="font-display text-4xl md:text-5xl font-bold text-white mb-6 uppercase border-l-4 border-blue-500 pl-4">
+                        The Solution</h2>
+                    <div class="text-gray-300 text-lg leading-relaxed space-y-6">
+                        <!-- PASTE GEMINI ANALYSIS HERE LATER VIA GITHUB -->
+                        <p class="italic text-gray-500 border border-dashed border-gray-700 p-6 rounded text-center">
+                            [After Qualifying, paste the Gemini-generated analysis right here in GitHub...]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- PHASE 4: THE END GAME                          -->
+        <!-- ============================================== -->
+        <div id="phase-endgame" class="phase-content">
+            <!-- Locked View -->
+            <div class="locked-view flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-32">
+                <i class="fa-solid fa-lock text-6xl text-gray-700 mb-6"></i>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">The End Game</h2>
+                <div
+                    class="inline-block bg-f1-red/10 border border-f1-red/50 text-f1-red px-6 py-3 rounded-full font-bold uppercase tracking-wider text-sm mb-6">
+                    Awaiting Checkered Flag
+                </div>
+                <p class="text-gray-400 max-w-2xl text-lg">
+                    This analysis unlocks <strong>6 hours after the Main Race concludes</strong>.
+                </p>
+            </div>
+
+            <!-- Unlocked View (Hidden by Default) -->
+            <div class="unlocked-view hidden py-20 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2
+                        class="font-display text-4xl md:text-5xl font-bold text-white mb-6 uppercase border-l-4 border-f1-red pl-4">
+                        The End Game</h2>
+                    <div class="text-gray-300 text-lg leading-relaxed space-y-6">
+                        <!-- PASTE GEMINI ANALYSIS HERE LATER VIA GITHUB -->
+                        <p class="italic text-gray-500 border border-dashed border-gray-700 p-6 rounded text-center">
+                            [After the Race, paste the Gemini-generated analysis right here in GitHub...]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#05070a] py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+            <div class="flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-flag-checkered text-xl f1-red"></i>
+                <span class="font-display font-bold text-lg tracking-wider text-white">AUS<span class="f1-red">GP</span>
+                    '26 STRATEGY</span>
+            </div>
+            <p class="text-gray-500 text-sm text-center max-w-2xl">
+                The driver is no longer merely a pilot; they are a systems architect balancing thermal degradation,
+                electrical energy states, and dynamic aerodynamic profiles at 340 km/h.
+            </p>
+            <div class="mt-8 text-xs text-gray-600">
+                Data synthesized from FIA 2026 Regulations, Pirelli Motorsport Strategy Briefings, and official track
+                reprofiling telemetry.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll behavior script -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-[#0B0E14]', 'shadow-lg');
+                nav.classList.remove('border-white/10');
+            } else {
+                nav.classList.remove('bg-[#0B0E14]', 'shadow-lg');
+                nav.classList.add('border-white/10');
+            }
+        });
+
+        // Phase switching logic
+        function switchPhase(phaseName) {
+            // Update buttons
+            document.querySelectorAll('.timeline-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('btn-' + phaseName).classList.add('active');
+
+            // Update content sections
+            document.querySelectorAll('.phase-content').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('phase-' + phaseName).classList.add('active');
+
+            // Scroll to timeline anchor smoothly
+            document.getElementById('weekend-timeline').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ==========================================
+        // OPTION B: DYNAMIC JSON LOCK CHECKER
+        // ==========================================
+        async function checkPhaseStatuses() {
+            try {
+                // Prevent URL parsing errors when viewing in the Canvas preview (which uses blob: URLs)
+                if (window.location.protocol === 'blob:' || window.location.protocol === 'data:') {
+                    console.log("Canvas preview detected. Skipping dynamic status.json fetch. (Deploy to Vercel/GitHub to test dynamic unlocks)");
+                    return;
+                }
+
+                // Add timestamp to prevent browser from caching old json
+                const response = await fetch('./status.json?v=' + new Date().getTime());
+                const statuses = await response.json();
+
+                // Array of our future phases
+                const futurePhases = ['problem', 'solution', 'endgame'];
+
+                futurePhases.forEach(phase => {
+                    // Check if the JSON says this phase is UNLOCKED (locked: false)
+                    if (statuses[phase] && statuses[phase].locked === false) {
+
+                        const phaseDiv = document.getElementById(`phase-${phase}`);
+                        if (phaseDiv) {
+                            // Hide the lock icon screen
+                            const lockedView = phaseDiv.querySelector('.locked-view');
+                            if (lockedView) lockedView.style.display = 'none';
+
+                            // Show the actual text content that you pasted via GitHub
+                            const unlockedView = phaseDiv.querySelector('.unlocked-view');
+                            if (unlockedView) unlockedView.classList.remove('hidden');
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error("Failed to load status.json. Ensure it exists in the same folder.", error);
+            }
+        }
+
+        // Run the lock check as soon as the page loads
+        document.addEventListener('DOMContentLoaded', checkPhaseStatuses);
+    </script>
+</body>
+
+</html>
