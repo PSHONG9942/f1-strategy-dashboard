@@ -2429,14 +2429,551 @@
             <!-- Unlocked View (Hidden by Default) -->
             <div class="unlocked-view hidden py-20 relative">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2
-                        class="font-display text-4xl md:text-5xl font-bold text-white mb-6 uppercase border-l-4 border-f1-red pl-4">
-                        The End Game</h2>
-                    <div class="text-gray-300 text-lg leading-relaxed space-y-6">
-                        <!-- PASTE GEMINI ANALYSIS HERE LATER VIA GITHUB -->
-                        <p class="italic text-gray-500 border border-dashed border-gray-700 p-6 rounded text-center">
-                            [After the Race, paste the Gemini-generated analysis right here in GitHub...]
-                        </p>
+
+
+                    <!-- Content Sections -->
+                    <div class="relative z-0">
+                        <!-- Recap -->
+                        <section id="sec-recap" class="block animate-fade-in scroll-mt-40">
+                            <div class="glass-panel rounded-2xl p-6 md:p-8 mb-8 border border-gray-800">
+                                <h2
+                                    class="font-display text-3xl font-bold text-white mb-4 border-l-4 border-blue-500 pl-4 uppercase">
+                                    Podium & Final Standings</h2>
+                                <p class="text-gray-400 mb-8 text-lg">This section provides a high-level overview of the
+                                    2026 Australian Grand Prix results. It visualizes the final top 10 standings,
+                                    allowing users to immediately grasp the dominance of Mercedes with their 1-2 finish
+                                    and Ferrari's presence at the front, while noting the unexpected finishing orders of
+                                    the rest of the grid.</p>
+
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                                    <div
+                                        class="bg-gray-800/50 rounded-xl p-6 text-center border border-gray-700 shadow-sm relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 w-full h-2 bg-gray-500"></div>
+                                        <h3 class="text-lg font-bold text-gray-400 uppercase tracking-wide">P2</h3>
+                                        <p class="font-display text-3xl font-extrabold text-white mt-2">K. Antonelli</p>
+                                        <p class="text-teal-400 font-semibold mt-1 uppercase">Mercedes</p>
+                                    </div>
+                                    <div
+                                        class="bg-yellow-500/10 rounded-xl p-6 text-center border border-yellow-500/50 shadow-md relative overflow-hidden transform md:-translate-y-4">
+                                        <div class="absolute top-0 left-0 w-full h-2 bg-yellow-500"></div>
+                                        <h3 class="text-xl font-bold text-yellow-500 uppercase tracking-wide">P1</h3>
+                                        <p class="font-display text-4xl font-extrabold text-white mt-2">G. Russell</p>
+                                        <p class="text-teal-400 font-semibold mt-1 uppercase">Mercedes</p>
+                                    </div>
+                                    <div
+                                        class="bg-orange-500/10 rounded-xl p-6 text-center border border-orange-500/50 shadow-sm relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 w-full h-2 bg-orange-500"></div>
+                                        <h3 class="text-lg font-bold text-orange-500 uppercase tracking-wide">P3</h3>
+                                        <p class="font-display text-3xl font-extrabold text-white mt-2">C. Leclerc</p>
+                                        <p class="text-red-500 font-semibold mt-1 uppercase">Ferrari</p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-[#0B0E14] p-6 rounded-xl border border-gray-800 mt-10">
+                                    <h3 class="font-display text-xl font-bold text-white mb-6 text-center uppercase">Top
+                                        10 Race Finishers (Gap to Leader)</h3>
+                                    <div class="relative w-full mx-auto h-[350px] md:h-[400px]">
+                                        <canvas id="standingsChart"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- Data Center (Tables) -->
+                                <div class="mt-12 bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden">
+                                    <div class="p-6 bg-[#0B0E14] border-b border-gray-800">
+                                        <h3 class="font-display text-xl font-bold text-white uppercase tracking-wider">
+                                            Race Results (Top 10)</h3>
+                                    </div>
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-sm text-left text-gray-300">
+                                            <thead class="text-xs text-gray-400 uppercase bg-gray-900/50">
+                                                <tr>
+                                                    <th class="px-6 py-4">Pos</th>
+                                                    <th class="px-6 py-4">Driver</th>
+                                                    <th class="px-6 py-4">Team</th>
+                                                    <th class="px-6 py-4">Result</th>
+                                                    <th class="px-6 py-4 text-right">Pts</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    class="border-b border-gray-700/50 hover:bg-gray-800/50 transition-colors">
+                                                    <td class="px-6 py-4 font-bold">1</td>
+                                                    <td class="px-6 py-4 font-medium text-white">George Russell</td>
+                                                    <td class="px-6 py-4">Mercedes</td>
+                                                    <td class="px-6 py-4">Winner</td>
+                                                    <td class="px-6 py-4 text-right font-bold text-blue-400">25</td>
+                                                </tr>
+                                                <tr
+                                                    class="border-b border-gray-700/50 hover:bg-gray-800/50 transition-colors">
+                                                    <td class="px-6 py-4 font-bold">2</td>
+                                                    <td class="px-6 py-4 font-medium text-white">Kimi Antonelli</td>
+                                                    <td class="px-6 py-4">Mercedes</td>
+                                                    <td class="px-6 py-4">+2.974s</td>
+                                                    <td class="px-6 py-4 text-right font-bold text-blue-400">18</td>
+                                                </tr>
+                                                <tr
+                                                    class="border-b border-gray-700/50 hover:bg-gray-800/50 transition-colors">
+                                                    <td class="px-6 py-4 font-bold">3</td>
+                                                    <td class="px-6 py-4 font-medium text-white">Charles Leclerc</td>
+                                                    <td class="px-6 py-4">Ferrari</td>
+                                                    <td class="px-6 py-4">+15.519s</td>
+                                                    <td class="px-6 py-4 text-right font-bold text-blue-400">15</td>
+                                                </tr>
+                                                <tr
+                                                    class="border-b border-gray-700/50 hover:bg-gray-800/50 transition-colors">
+                                                    <td class="px-6 py-4 font-bold">4</td>
+                                                    <td class="px-6 py-4 font-medium text-white">Lewis Hamilton</td>
+                                                    <td class="px-6 py-4">Ferrari</td>
+                                                    <td class="px-6 py-4">+16.144s</td>
+                                                    <td class="px-6 py-4 text-right font-bold text-blue-400">12</td>
+                                                </tr>
+                                                <tr
+                                                    class="border-b border-gray-700/50 hover:bg-gray-800/50 transition-colors">
+                                                    <td class="px-6 py-4 font-bold">5</td>
+                                                    <td class="px-6 py-4 font-medium text-white">Lando Norris</td>
+                                                    <td class="px-6 py-4">McLaren</td>
+                                                    <td class="px-6 py-4">+51.741s</td>
+                                                    <td class="px-6 py-4 text-right font-bold text-blue-400">10</td>
+                                                </tr>
+                                                <tr
+                                                    class="border-b border-gray-700/50 hover:bg-gray-800/50 transition-colors">
+                                                    <td class="px-6 py-4 font-bold">6</td>
+                                                    <td class="px-6 py-4 font-medium text-white">Max Verstappen</td>
+                                                    <td class="px-6 py-4">Red Bull</td>
+                                                    <td class="px-6 py-4">+54.617s</td>
+                                                    <td class="px-6 py-4 text-right font-bold text-blue-400">8</td>
+                                                </tr>
+                                                <tr
+                                                    class="border-b border-gray-700/50 hover:bg-gray-800/50 transition-colors">
+                                                    <td class="px-6 py-4 font-bold">7</td>
+                                                    <td class="px-6 py-4 font-medium text-white">Oliver Bearman</td>
+                                                    <td class="px-6 py-4">Haas</td>
+                                                    <td class="px-6 py-4">+1 Lap</td>
+                                                    <td class="px-6 py-4 text-right font-bold text-blue-400">6</td>
+                                                </tr>
+                                                <tr
+                                                    class="border-b border-gray-700/50 hover:bg-gray-800/50 transition-colors">
+                                                    <td class="px-6 py-4 font-bold">8</td>
+                                                    <td class="px-6 py-4 font-medium text-white">Arvid Lindblad</td>
+                                                    <td class="px-6 py-4">Racing Bulls</td>
+                                                    <td class="px-6 py-4">+1 Lap</td>
+                                                    <td class="px-6 py-4 text-right font-bold text-blue-400">4</td>
+                                                </tr>
+                                                <tr
+                                                    class="border-b border-gray-700/50 hover:bg-gray-800/50 transition-colors">
+                                                    <td class="px-6 py-4 font-bold">9</td>
+                                                    <td class="px-6 py-4 font-medium text-white">Gabriel Bortoleto</td>
+                                                    <td class="px-6 py-4">Audi</td>
+                                                    <td class="px-6 py-4">+1 Lap</td>
+                                                    <td class="px-6 py-4 text-right font-bold text-blue-400">2</td>
+                                                </tr>
+                                                <tr
+                                                    class="border-b border-gray-700/50 hover:bg-gray-800/50 transition-colors">
+                                                    <td class="px-6 py-4 font-bold">10</td>
+                                                    <td class="px-6 py-4 font-medium text-white">Pierre Gasly</td>
+                                                    <td class="px-6 py-4">Alpine</td>
+                                                    <td class="px-6 py-4">+1 Lap</td>
+                                                    <td class="px-6 py-4 text-right font-bold text-blue-400">1</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Teams -->
+                        <section id="sec-teams" class="block animate-fade-in scroll-mt-40">
+                            <div class="glass-panel rounded-2xl p-6 md:p-8 mb-8 border border-gray-800">
+                                <h2
+                                    class="font-display text-3xl font-bold text-white mb-4 border-l-4 border-indigo-500 pl-4 uppercase">
+                                    Constructors' Performance Delta</h2>
+                                <p class="text-gray-400 mb-8 text-lg">Here, we break down the performance deltas between
+                                    the grid's top constructors at Albert Park. By comparing theoretical pace,
+                                    reliability, and strategic execution, we highlight the realities of the new
+                                    regulations.</p>
+
+                                <div class="w-full h-[400px] mb-12 max-w-2xl mx-auto">
+                                    <canvas id="teamPaceChart"></canvas>
+                                </div>
+
+                                <!-- Mercedes -->
+                                <div class="mt-12 bg-gray-800/30 p-6 rounded-2xl border border-gray-700/50">
+                                    <h3
+                                        class="font-display text-2xl font-bold text-emerald-400 mb-4 flex items-center gap-2">
+                                        <i class="fa-solid fa-star"></i> Mercedes: The Absolute Benchmark
+                                    </h3>
+                                    <p class="text-gray-300 leading-relaxed mb-4">Mercedes-Benz successfully masked
+                                        their true performance parameters throughout testing, only to unleash a
+                                        devastating display of superiority. The W17 chassis proved to be the absolute
+                                        benchmark of the grid, culminating in a dominant front-row lockout and a
+                                        clinical 1-2 finish.</p>
+                                    <p class="text-gray-300 leading-relaxed mb-4">During Q3, George Russell's pole time
+                                        was a massive <strong>0.785 seconds faster</strong> than the closest
+                                        non-Mercedes challenger. To witness this gap in dry conditions indicates a
+                                        stroke of engineering genius by Mercedes.</p>
+
+                                    <div class="bg-gray-900/50 p-6 rounded-xl border border-gray-700 mt-6 mb-6">
+                                        <h4 class="text-xl font-semibold text-white mb-3">Race Execution</h4>
+                                        <p class="text-sm text-gray-400">Mercedes secured victory through ruthless
+                                            strategic action. Pitting both Russell and Antonelli under the Lap 12
+                                            Virtual Safety Car effectively halved the 21-second penalty. Russell
+                                            subsequently managed his tire degradation and battery state-of-charge with
+                                            veteran precision over a 46-lap final stint.</p>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                        <div class="bg-gray-800/80 p-4 rounded-xl border border-gray-700">
+                                            <span
+                                                class="text-gray-400 text-xs font-bold uppercase tracking-wider block">Q3
+                                                Gap to Field</span>
+                                            <span class="text-2xl font-bold text-white block my-1">0.785s</span>
+                                            <span class="text-emerald-500 text-xs text-center">A massive performance
+                                                delta</span>
+                                        </div>
+                                        <div class="bg-gray-800/80 p-4 rounded-xl border border-gray-700">
+                                            <span
+                                                class="text-gray-400 text-xs font-bold uppercase tracking-wider block">Max
+                                                Engine RPM</span>
+                                            <span class="text-2xl font-bold text-white block my-1">13,011</span>
+                                            <span class="text-emerald-500 text-xs text-center">Highest spinning PU on
+                                                the grid</span>
+                                        </div>
+                                        <div class="bg-gray-800/80 p-4 rounded-xl border border-gray-700">
+                                            <span
+                                                class="text-gray-400 text-xs font-bold uppercase tracking-wider block">Brake
+                                                Share</span>
+                                            <span class="text-2xl font-bold text-white block my-1">14.4%</span>
+                                            <span class="text-emerald-500 text-xs text-center">Indicates immense chassis
+                                                stability</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bg-emerald-900/10 p-4 rounded-lg border border-emerald-500/20 text-sm text-gray-400 mt-4">
+                                        <strong class="text-emerald-400">Telemetry Insight:</strong> The W17 allows
+                                        drivers to brake slightly earlier and trail-brake deeper into the apex. They can
+                                        get back to 100% full throttle and apply the brutal 350kW electrical torque much
+                                        sooner without snapping into oversteer.
+                                    </div>
+                                </div>
+
+                                <!-- Ferrari -->
+                                <div class="mt-8 bg-gray-800/30 p-6 rounded-2xl border border-gray-700/50">
+                                    <h3
+                                        class="font-display text-2xl font-bold text-red-500 mb-4 flex items-center gap-2">
+                                        <i class="fa-solid fa-horse"></i> Ferrari: Blistering Pace Nullified
+                                    </h3>
+                                    <p class="text-gray-300 leading-relaxed mb-4">Ferrari arrived showcasing formidable
+                                        inherent pace, particularly in their mechanical traction and minimum corner
+                                        speeds. However, their race unraveled due to catastrophic strategic
+                                        mismanagement on the pit wall and unresolved software mapping issues.</p>
+
+                                    <div class="bg-red-900/20 border-l-4 border-red-500 p-6 rounded-r-xl my-6">
+                                        <div class="flex items-center space-x-2 mb-2 text-red-400">
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                            <span class="font-bold uppercase tracking-wider text-sm">Strategic
+                                                Paralysis</span>
+                                        </div>
+                                        <div class="text-red-100/80 text-sm leading-relaxed">
+                                            During the Lap 12 VSC, while Mercedes aggressively pitted, Ferrari
+                                            instructed Leclerc and Hamilton to stay out. Hamilton explicitly stated on
+                                            radio, "At least one of us should have come in." They missed a second VSC
+                                            window on Lap 18, forcing them to pit under green flag conditions later,
+                                            bleeding crucial race time.
+                                        </div>
+                                    </div>
+
+                                    <p class="text-gray-300 leading-relaxed mb-6">Entering Turn 3, Hamilton carried an
+                                        apex speed of 174.0 km/h, 12 km/h faster than Mercedes. Leclerc demonstrated the
+                                        lowest brake-share percentage (9.9%). The SF-26 possesses supreme aerodynamic
+                                        load on corner entry, but struggled with low-speed mechanical rotation in Sector
+                                        3.</p>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-6">
+                                        <div class="bg-gray-800/80 p-4 rounded-xl border border-gray-700 text-center">
+                                            <span
+                                                class="text-gray-400 text-xs font-bold uppercase tracking-wider block">Min
+                                                Apex Speed (T3)</span>
+                                            <span class="text-2xl font-bold text-white block my-1">174 km/h</span>
+                                            <span class="text-red-400 text-xs">12 km/h faster than Mercedes</span>
+                                        </div>
+                                        <div class="bg-gray-800/80 p-4 rounded-xl border border-gray-700 text-center">
+                                            <span
+                                                class="text-gray-400 text-xs font-bold uppercase tracking-wider block">Brake
+                                                Share</span>
+                                            <span class="text-2xl font-bold text-white block my-1">9.9%</span>
+                                            <span class="text-red-400 text-xs">Lowest on the grid (Leclerc)</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bg-red-900/10 p-4 rounded-lg border border-red-500/20 text-sm text-gray-400 mt-4">
+                                        <strong class="text-red-500">Software Glitch:</strong> During Q2, electrical
+                                        delivery cut out prematurely on the straights, failing to deliver the full
+                                        350kW. While rectified via steering wheel toggles before Q3, the lost track time
+                                        cost them ultimate tire preparation.
+                                    </div>
+                                </div>
+
+                                <!-- McLaren -->
+                                <div class="mt-8 bg-gray-800/30 p-6 rounded-2xl border border-gray-700/50">
+                                    <h3
+                                        class="font-display text-2xl font-bold text-orange-500 mb-4 flex items-center gap-2">
+                                        <i class="fa-solid fa-wrench"></i> McLaren: Setup Compromises & Frustration
+                                    </h3>
+                                    <p class="text-gray-300 leading-relaxed mb-4 max-w-4xl">Reigning Champions McLaren
+                                        were plagued by systemic reliability issues, heartbreaking incidents, and
+                                        extreme driver dissatisfaction with the nature of the new regulatory formula.
+                                    </p>
+
+                                    <div class="bg-red-900/20 border-l-4 border-red-500 p-6 rounded-r-xl my-6">
+                                        <div class="flex items-center space-x-2 mb-2 text-red-400">
+                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                            <span class="font-bold uppercase tracking-wider text-sm">Pre-Race
+                                                Disaster</span>
+                                        </div>
+                                        <div class="text-red-100/80 text-sm leading-relaxed">
+                                            40 minutes before the race, local hero Oscar Piastri suffered a massive
+                                            crash on his reconnaissance lap. Telemetry attributed it to a catastrophic
+                                            software failure: an unexpected 100kW power surge precisely as he
+                                            downshifted, inducing terminal wheelspin and destroying the car.
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        class="bg-orange-900/10 border border-orange-500/20 p-6 rounded-xl max-w-4xl mt-6">
+                                        <h4 class="font-bold text-orange-500 mb-2">Driver Sentiment</h4>
+                                        <blockquote
+                                            class="text-xl italic text-gray-300 border-l-4 border-orange-500 pl-4 my-4">
+                                            "We've come from the best cars ever made in Formula One and the nicest to
+                                            drive, to probably the worst. It sucks." — Lando Norris
+                                        </blockquote>
+                                        <p class="text-sm text-gray-400">
+                                            Norris explicitly criticized the 50/50 power split, noting that excessive
+                                            drag and limited battery capacity forced drivers to lift off the throttle
+                                            entirely in the middle of straights just to harvest energy.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Aston Martin -->
+                                <div class="mt-8 bg-gray-800/30 p-6 rounded-2xl border border-gray-700/50">
+                                    <h3
+                                        class="font-display text-2xl font-bold text-green-500 mb-4 flex items-center gap-2">
+                                        <i class="fa-solid fa-car-burst"></i> Aston Martin: A Critical Engineering &
+                                        Safety Crisis
+                                    </h3>
+                                    <p class="text-xl text-gray-300 max-w-4xl mb-6">The situation unfolding at Aston
+                                        Martin transcends poor performance and enters the realm of acute driver safety
+                                        risks.</p>
+
+                                    <div class="grid md:grid-cols-2 gap-8">
+                                        <div class="space-y-4">
+                                            <h4 class="text-xl font-bold text-green-400">The Harmonic Vibration
+                                                Phenomenon</h4>
+                                            <p class="text-sm text-gray-400">
+                                                The integration of the new Honda PU has resulted in a destructive
+                                                harmonic resonance. The stiff carbon fiber monocoque amplifies specific
+                                                engine frequencies, violently shattering Honda battery packs and
+                                                shearing components off the car.
+                                            </p>
+                                            <p class="text-sm text-gray-400">
+                                                Honda forbade low-fuel runs because the physical mass of the fuel load
+                                                acts as a liquid damper. This created a "self-feeding problem," leaving
+                                                engineers blind to true qualifying performance.
+                                            </p>
+                                        </div>
+
+                                        <div class="bg-red-900/20 border border-red-500/50 p-6 rounded-xl space-y-4">
+                                            <div class="flex items-center space-x-2 text-red-500">
+                                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                                <h4 class="text-xl font-bold">Nerve Damage Threat</h4>
+                                            </div>
+                                            <p class="text-sm text-red-200/80">
+                                                The vibrations transmitted through the steering column are so violent
+                                                that Fernando Alonso reported his fingers going completely numb. Medical
+                                                assessments indicated that driving more than 15-25 consecutive laps
+                                                risked permanent neurological nerve damage to the drivers' arms and
+                                                hands.
+                                            </p>
+                                            <p class="text-sm text-red-200/80">
+                                                Stroll was forced to effectively retire before qualifying, and Alonso
+                                                retired on Lap 15 of the race to protect his physical health.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Midfield -->
+                                <div class="mt-8 bg-gray-800/30 p-6 rounded-2xl border border-gray-700/50">
+                                    <h3 class="font-display text-2xl font-bold text-white mb-6">Midfield: Surprises &
+                                        Gremlins</h3>
+                                    <div class="grid md:grid-cols-3 gap-6">
+                                        <div
+                                            class="bg-gray-800/50 p-6 rounded-xl border border-blue-500/30 shadow-sm text-sm">
+                                            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-2"><i
+                                                    class="fa-solid fa-trophy text-blue-400"></i> Racing Bulls</h4>
+                                            <p class="text-gray-400">18-year-old rookie <strong class="text-white">Arvid
+                                                    Lindblad</strong> stunned the paddock. Avoiding the senior team's PU
+                                                issues, he qualified P9 and executed a flawless race to finish P8,
+                                                becoming the fourth-youngest points scorer in history.</p>
+                                        </div>
+                                        <div
+                                            class="bg-gray-800/50 p-6 rounded-xl border border-red-500/30 shadow-sm text-sm">
+                                            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-2"><i
+                                                    class="fa-solid fa-flag text-red-400"></i> Haas F1</h4>
+                                            <p class="text-gray-400">Utilizing a reliable Ferrari customer PU, <strong
+                                                    class="text-white">Oliver Bearman</strong> drove a quiet but highly
+                                                effective race to secure P7, demonstrating the massive value of a
+                                                predictable energy mapping system amidst high attrition.</p>
+                                        </div>
+                                        <div
+                                            class="bg-gray-800/50 p-6 rounded-xl border border-gray-500/30 shadow-sm text-sm">
+                                            <h4 class="text-lg font-bold text-white mb-2 flex items-center gap-2"><i
+                                                    class="fa-solid fa-plug text-gray-400"></i> Audi & Cadillac</h4>
+                                            <p class="text-gray-400">Audi's debut ended before lights out with
+                                                Hulkenberg suffering a total telemetry failure on the grid. Cadillac saw
+                                                Bottas run respectably before a terminal engine failure on Lap 18.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Red Bull -->
+                        <section id="sec-redbull" class="block animate-fade-in scroll-mt-40">
+                            <div class="glass-panel rounded-2xl p-6 md:p-8 mb-8 border border-gray-800">
+                                <h2
+                                    class="font-display text-3xl font-bold text-white mb-4 border-l-4 border-f1-red pl-4 uppercase">
+                                    The Red Bull Drama: Agony & Ecstasy</h2>
+                                <p class="text-gray-400 mb-8 text-lg">Focusing on the most dynamic narrative of the
+                                    weekend, this view tracks Max Verstappen's incredible recovery drive from P20 to P6,
+                                    juxtaposed against teammate Isack Hadjar's heartbreak. It illustrates the raw pace
+                                    of the RB car despite its qualifying and reliability woes, culminating in Max
+                                    earning Driver of the Day.</p>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    <div class="bg-gray-800/50 p-6 rounded-xl border-t-4 border-blue-500 shadow-md">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h3 class="font-display text-xl font-bold text-white">Max Verstappen
+                                                </h3>
+                                                <p
+                                                    class="text-blue-400 text-sm font-semibold uppercase tracking-wider mt-1">
+                                                    Driver of the Day & Fastest Lap</p>
+                                            </div>
+                                            <i class="fa-solid fa-rocket text-3xl text-blue-500"></i>
+                                        </div>
+                                        <ul class="mt-4 space-y-2 text-sm text-gray-300">
+                                            <li class="flex justify-between border-b border-gray-700 pb-2"><span
+                                                    class="uppercase font-semibold">Qualifying</span> <span
+                                                    class="font-bold text-red-400">P20 (PU Issue)</span></li>
+                                            <li class="flex justify-between border-b border-gray-700 pb-2 pt-1"><span
+                                                    class="uppercase font-semibold">Race Finish</span> <span
+                                                    class="font-bold text-green-400">P6</span></li>
+                                            <li class="flex justify-between pt-1"><span
+                                                    class="uppercase font-semibold">Overtakes</span> <span
+                                                    class="font-bold text-white">14</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-gray-800/50 p-6 rounded-xl border-t-4 border-f1-red shadow-md">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                <h3 class="font-display text-xl font-bold text-white">Isack Hadjar</h3>
+                                                <p
+                                                    class="text-red-400 text-sm font-semibold uppercase tracking-wider mt-1">
+                                                    Heartbreak after stellar Quali</p>
+                                            </div>
+                                            <i class="fa-solid fa-heart-crack text-3xl text-f1-red"></i>
+                                        </div>
+                                        <ul class="mt-4 space-y-2 text-sm text-gray-300">
+                                            <li class="flex justify-between border-b border-gray-700 pb-2"><span
+                                                    class="uppercase font-semibold">Qualifying</span> <span
+                                                    class="font-bold text-green-400">P3</span></li>
+                                            <li class="flex justify-between border-b border-gray-700 pb-2 pt-1"><span
+                                                    class="uppercase font-semibold">Race Finish</span> <span
+                                                    class="font-bold text-red-400">DNF (Lap 18)</span></li>
+                                            <li class="flex justify-between pt-1"><span
+                                                    class="uppercase font-semibold">Issue</span> <span
+                                                    class="font-bold text-white">Hydraulics Loss</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="bg-[#0B0E14] p-6 rounded-xl border border-gray-800">
+                                    <h3 class="font-display text-xl font-bold text-white mb-6 text-center uppercase">
+                                        Verstappen's Position Tracker (Lap by Lap)</h3>
+                                    <div class="relative w-full mx-auto h-[350px] md:h-[400px]">
+                                        <canvas id="verstappenChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Shanghai -->
+                        <section id="sec-shanghai" class="block animate-fade-in scroll-mt-40">
+                            <div class="glass-panel rounded-2xl p-6 md:p-8 mb-8 border border-gray-800">
+                                <h2
+                                    class="font-display text-3xl font-bold text-white mb-4 border-l-4 border-yellow-500 pl-4 uppercase">
+                                    Road to Shanghai: What to Expect</h2>
+                                <p class="text-gray-400 mb-8 text-lg">Looking forward, this section prepares fans and
+                                    strategists for the upcoming Chinese Grand Prix. It translates the data from
+                                    Melbourne into predictive expectations for the Shanghai International Circuit,
+                                    highlighting potential comebacks and crucial technical factors.</p>
+
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div
+                                        class="bg-gray-800/50 border border-gray-700 p-6 rounded-xl shadow-sm hover:border-gray-500 transition-colors">
+                                        <div class="text-4xl mb-4">🐉</div>
+                                        <h3
+                                            class="font-display text-xl font-bold text-white mb-2 uppercase tracking-wide">
+                                            Track Characteristics</h3>
+                                        <p class="text-gray-400 text-sm">Shanghai features a massive 1.2km back straight
+                                            and the famously punishing Turns 1-2 complex. This will heavily test
+                                            front-left tire wear, an area where McLaren and Aston Martin just struggled
+                                            in Australia.</p>
+                                    </div>
+                                    <div
+                                        class="bg-gray-800/50 border border-gray-700 p-6 rounded-xl shadow-sm hover:border-gray-500 transition-colors">
+                                        <div class="text-4xl mb-4">🔥</div>
+                                        <h3
+                                            class="font-display text-xl font-bold text-white mb-2 uppercase tracking-wide">
+                                            The Red Bull Comeback</h3>
+                                        <p class="text-gray-400 text-sm">If Red Bull solves their hydraulic and PU
+                                            integration issues, Shanghai's layout favors the RB car's aerodynamic
+                                            efficiency. Expect Max Verstappen to be fighting for pole, fueled by the
+                                            frustration of Melbourne.</p>
+                                    </div>
+                                    <div
+                                        class="bg-gray-800/50 border border-gray-700 p-6 rounded-xl shadow-sm hover:border-gray-500 transition-colors">
+                                        <div class="text-4xl mb-4">🛡️</div>
+                                        <h3
+                                            class="font-display text-xl font-bold text-white mb-2 uppercase tracking-wide">
+                                            Mercedes' Defense</h3>
+                                        <p class="text-gray-400 text-sm">Mercedes proved their race pace is genuine. To
+                                            maintain their lead in China, they must ensure their straight-line speed is
+                                            competitive enough to prevent being DRS-passed by the Ferrari and Red Bull
+                                            on the long straight.</p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-8 bg-[#0B0E14] border border-gray-800 rounded-xl p-8 text-center">
+                                    <h3
+                                        class="font-display text-2xl font-bold mb-4 text-white uppercase tracking-wider">
+                                        Fan Predictions</h3>
+                                    <p class="text-gray-400 mb-6 max-w-2xl mx-auto">Based on the telemetry from AUS GP,
+                                        analysts predict a much tighter 3-way battle in China. The strategic undercut
+                                        will be immensely powerful in Shanghai.</p>
+                                    <div class="flex flex-wrap justify-center items-center gap-4 text-sm md:text-lg">
+                                        <span
+                                            class="px-3 md:px-4 py-2 bg-gray-800 rounded-lg border border-gray-700 text-white font-semibold">Win
+                                            Probability:</span>
+                                        <span class="font-bold text-teal-400 uppercase tracking-widest">MER 40%</span>
+                                        <span class="font-bold text-blue-500 uppercase tracking-widest">RBR 35%</span>
+                                        <span class="font-bold text-f1-red uppercase tracking-widest">FER 25%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
@@ -2770,7 +3307,10 @@
                     navLinks.style.display = 'flex';
                 } else if (phaseName === 'endgame') {
                     navLinks.innerHTML = `
-                        <a href="#" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Race Analysis</a>
+                        <a href="#sec-recap" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Race Recap</a>
+                        <a href="#sec-teams" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Team Analysis</a>
+                        <a href="#sec-redbull" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">The Red Bull Drama</a>
+                        <a href="#sec-shanghai" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Road to Shanghai</a>
                     `;
                     navLinks.style.display = 'flex';
                 } else {
@@ -2803,7 +3343,7 @@
                 // Define Unlock Dates globally for the script
                 const unlockDatePhase2 = new Date('2026-03-06T20:00:00+08:00');
                 const unlockDatePhase3 = new Date('2026-03-07T20:00:00+08:00'); // 6 hrs after Quali
-                const unlockDatePhase4 = new Date('2026-03-08T23:00:00+08:00'); // 6 hrs after Race
+                const unlockDatePhase4 = new Date('2026-03-08T20:00:00+08:00'); // 6 hrs after Race
 
                 // Execute the unlock logic immediately
                 processPhaseLocks(statuses, unlockDatePhase2, unlockDatePhase3, unlockDatePhase4, futurePhases);
@@ -2874,8 +3414,183 @@
             }
         }
 
+        // Initialize Phase 4 Charts
+        function initPhase4Charts() {
+            Chart.defaults.color = '#9ca3af';
+            Chart.defaults.font.family = "'Inter', sans-serif";
+
+            const canvasStandings = document.getElementById('standingsChart');
+            if (canvasStandings) {
+                new Chart(canvasStandings.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['G. Russell (MER)', 'K. Antonelli (MER)', 'C. Leclerc (FER)', 'C. Sainz (WIL)', 'L. Hamilton (FER)', 'M. Verstappen (RBR)', 'L. Norris (MCL)', 'F. Alonso (AMR)', 'Y. Tsunoda (RBR)', 'A. Albon (WIL)'],
+                        datasets: [{
+                            label: 'Gap to Leader (Seconds)',
+                            data: [0, 2.4, 5.1, 12.8, 14.2, 18.5, 25.4, 28.1, 31.0, 35.2],
+                            backgroundColor: [
+                                'rgba(45, 212, 191, 0.8)',
+                                'rgba(45, 212, 191, 0.6)',
+                                'rgba(239, 68, 68, 0.8)',
+                                'rgba(59, 130, 246, 0.6)',
+                                'rgba(239, 68, 68, 0.6)',
+                                'rgba(59, 130, 246, 0.8)',
+                                'rgba(249, 115, 22, 0.6)',
+                                'rgba(16, 185, 129, 0.6)',
+                                'rgba(59, 130, 246, 0.6)',
+                                'rgba(59, 130, 246, 0.4)'
+                            ],
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            borderColor: 'rgba(255, 255, 255, 0.1)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return context.raw === 0 ? 'Winner' : '+ ' + context.raw + 's';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Seconds behind leader', color: '#9ca3af' },
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { color: '#9ca3af' }
+                            },
+                            y: {
+                                grid: { display: false },
+                                ticks: { color: '#e5e7eb' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const canvasTeams = document.getElementById('teamPaceChart');
+            if (canvasTeams) {
+                new Chart(canvasTeams.getContext('2d'), {
+                    type: 'radar',
+                    data: {
+                        labels: ['Race Pace', 'Qualifying Pace', 'Reliability', 'Strategy/Ops', 'Tire Mgt'],
+                        datasets: [
+                            {
+                                label: 'Mercedes',
+                                data: [9.5, 9.0, 10, 9.5, 9.0],
+                                fill: true,
+                                backgroundColor: 'rgba(45, 212, 191, 0.2)',
+                                borderColor: 'rgb(45, 212, 191)',
+                                pointBackgroundColor: 'rgb(45, 212, 191)',
+                            },
+                            {
+                                label: 'Red Bull',
+                                data: [9.8, 9.5, 3.0, 7.0, 8.5],
+                                fill: true,
+                                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                                borderColor: 'rgb(59, 130, 246)',
+                                pointBackgroundColor: 'rgb(59, 130, 246)',
+                            },
+                            {
+                                label: 'Ferrari',
+                                data: [8.8, 8.5, 9.0, 9.0, 8.0],
+                                fill: true,
+                                backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                                borderColor: 'rgb(239, 68, 68)',
+                                pointBackgroundColor: 'rgb(239, 68, 68)',
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                pointLabels: { font: { size: 12, weight: 'bold' }, color: '#d1d5db' },
+                                ticks: { display: false },
+                                suggestedMin: 0,
+                                suggestedMax: 10
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: { color: '#e5e7eb' }
+                            }
+                        }
+                    }
+                });
+            }
+
+            const canvasVerstappen = document.getElementById('verstappenChart');
+            if (canvasVerstappen) {
+                new Chart(canvasVerstappen.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Lap 1', 'Lap 10', 'Lap 20', 'Lap 30', 'Lap 40', 'Lap 50', 'Finish (L58)'],
+                        datasets: [{
+                            label: 'Track Position',
+                            data: [20, 16, 12, 10, 8, 7, 6],
+                            borderColor: 'rgb(59, 130, 246)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            pointBackgroundColor: '#ef4444',
+                            pointRadius: 5,
+                            pointHoverRadius: 8,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        return 'Position: P' + context.raw;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                reverse: true,
+                                min: 1,
+                                max: 20,
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: {
+                                    stepSize: 1,
+                                    color: '#9ca3af',
+                                    callback: function (value) { return 'P' + value; }
+                                },
+                                title: { display: true, text: 'Race Position', color: '#9ca3af' }
+                            },
+                            x: {
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { color: '#9ca3af' },
+                                title: { display: true, text: 'Race Progress', color: '#9ca3af' }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
         // Run the lock check as soon as the page loads
-        document.addEventListener('DOMContentLoaded', checkPhaseStatuses);
+        document.addEventListener('DOMContentLoaded', () => {
+            checkPhaseStatuses();
+            initPhase4Charts();
+        });
     </script>
 </body>
 
