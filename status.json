@@ -1,14 +1,11 @@
 {
-    "overview": {
-        "locked": false
-    },
-    "problem": {
-        "locked": false
-    },
-    "solution": {
-        "locked": true
-    },
-    "endgame": {
-        "locked": true
-    }
+  "problem": {
+    "locked": true
+  },
+  "solution": {
+    "locked": true
+  },
+  "endgame": {
+    "locked": true
+  }
 }

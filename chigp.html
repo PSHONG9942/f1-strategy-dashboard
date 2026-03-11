@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026 F1 Chinese Grand Prix - Strategy Deep Dive</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Rajdhani:wght@500;600;700&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0B0E14;
+      color: #E2E8F0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .font-display {
+      font-family: 'Rajdhani', sans-serif;
+    }
+
+    .f1-red {
+      color: #E10600;
+    }
+
+    .bg-f1-red {
+      background-color: #E10600;
+    }
+
+    .border-f1-red {
+      border-color: #E10600;
+    }
+
+    .glass-panel {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gradient-text {
+      background: linear-gradient(to right, #ffffff, #9ca3af);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0B0E14;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #E10600;
+    }
+
+    /* Phase Transition Animations (match ausgp.html) */
+    .phase-content {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .phase-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Timeline styling (match ausgp.html) */
+    .timeline-btn.active {
+      background-color: #E10600;
+      color: white;
+      border-color: #E10600;
+      box-shadow: 0 0 15px rgba(225, 6, 0, 0.4);
+    }
+
+    .timeline-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-red-600 selection:text-white">
+  <nav class="fixed w-full z-50 glass-panel border-b-0 border-white/10 transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-4">
+          <a href="index.html"
+            class="text-gray-400 hover:text-white transition-colors flex items-center justify-center w-8 h-8 rounded-full bg-white/5 hover:bg-white/10"
+            title="Back to Home">
+            <i class="fa-solid fa-arrow-left"></i>
+          </a>
+          <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+            <img src="logo.png" alt="Speed Circuit Logo"
+              class="h-8 w-auto object-contain drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]" />
+            <span class="font-display font-bold text-xl tracking-wider text-white">CHN<span class="f1-red">'26</span>
+              STRATEGY</span>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <div id="nav-links" class="ml-10 flex items-baseline space-x-8">
+            <a href="#epoch"
+              class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">The 2026
+              Paradigm</a>
+            <a href="#aero"
+              class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Active Aero</a>
+            <a href="#track"
+              class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Shanghai
+              Topology</a>
+            <a href="#tyres"
+              class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Tyres &
+              Strategy</a>
+            <a href="#energy"
+              class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Energy
+              Management</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section (match ausgp.html layout) -->
+  <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center border-b border-f1-red/20 shadow-xl shadow-f1-red/5">
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+        alt="Shanghai at night" class="w-full h-full object-cover opacity-20"
+        onerror="this.src='https://images.unsplash.com/photo-1520975682031-ae4f8d5b0391?auto=format&fit=crop&w=2000&q=80'" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0B0E14] via-[#0B0E14]/80 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0B0E14] via-transparent to-[#0B0E14]"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/20 mb-6 text-sm font-medium uppercase tracking-widest text-gray-300">
+        <span class="w-2 h-2 rounded-full bg-f1-red animate-pulse"></span>
+        Shanghai International Circuit • 56 Laps • Sprint Weekend
+      </div>
+      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 uppercase">
+        The Shanghai <span class="f1-red">Equation</span>
+      </h1>
+      <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-400 font-light leading-relaxed">
+        Strategic and technical analysis of the 2026 Formula 1 Chinese Grand Prix. Active aero switching, front-axle
+        tyre thermodynamics, and the evolving energy management framework under the new 50/50 paradigm.
+      </p>
+      <div class="mt-10 flex justify-center gap-4">
+        <a href="#weekend-timeline"
+          class="px-8 py-4 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(225,6,0,0.4)]">
+          EXPLORE ANALYSIS
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dynamic Weekend Progression Navigator (4 phases) -->
+  <div id="weekend-timeline"
+    class="sticky top-16 z-40 bg-[#0B0E14]/90 backdrop-blur-md border-y border-gray-800 py-4 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div
+          class="text-sm font-bold uppercase tracking-widest text-gray-400 w-full md:w-auto text-center md:text-left">
+          Weekend Progression
+        </div>
+        <div class="flex flex-wrap justify-center gap-2 w-full md:w-auto">
+          <button onclick="switchPhase('overview')" id="btn-overview" data-label="Overview" data-icon="fa-book-open"
+            class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+            <i class="fa-solid fa-book-open mr-2"></i> Overview
+          </button>
+          <button onclick="switchPhase('problem')" id="btn-problem" data-label="The Problems" data-icon="fa-magnifying-glass-chart"
+            class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+            <i class="fa-solid fa-magnifying-glass-chart mr-2"></i> The Problems
+          </button>
+          <button onclick="switchPhase('solution')" id="btn-solution" data-label="The Solutions" data-icon="fa-lightbulb"
+            class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+            <i class="fa-solid fa-lightbulb mr-2"></i> The Solutions
+          </button>
+          <button onclick="switchPhase('endgame')" id="btn-endgame" data-label="The End Game" data-icon="fa-flag-checkered"
+            class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+            <i class="fa-solid fa-flag-checkered mr-2"></i> The End Game
+          </button>
+          <button onclick="resetProgress()" id="btn-reset"
+            class="px-4 py-2 rounded border border-gray-800 text-gray-500 text-xs font-bold uppercase tracking-wider hover:bg-white/5 hover:text-gray-300 transition-all">
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="min-h-screen">
+    <!-- ========================= -->
+    <!-- PHASE 1: OVERVIEW         -->
+    <!-- ========================= -->
+    <div id="phase-overview" class="phase-content active">
+      <section id="epoch" class="scroll-mt-40 py-20 relative border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
+            <div class="max-w-3xl">
+              <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">
+                The 2026 <span class="gradient-text">Paradigm</span> Meets Shanghai
+                <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white ml-2 inline-flex items-center gap-1 transition-colors" title="View Source PDF">
+                  <i class="fa-solid fa-file-pdf"></i> PDF Source
+                </a>
+              </h2>
+              <p class="text-gray-400 text-lg leading-relaxed">
+                The detailed report view. Use the top navigation to jump across the key pillars: active aero switching,
+                Shanghai topology, tyre thermodynamics and strategy windows, and the evolving energy management framework.
+              </p>
+            </div>
+            <div class="glass-panel p-4 rounded-xl border border-white/10 flex items-center gap-3">
+              <div class="text-xs tracking-widest uppercase text-gray-400">Forecast</div>
+              <div class="font-display text-3xl font-bold text-white">15°C</div>
+              <div class="text-xs text-gray-400 uppercase tracking-widest">Sunny • ~16 km/h wind</div>
+            </div>
+          </div>
+
+          <!-- Key stat cards (reused across phases like ausgp) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
+            <div class="glass-panel p-6 rounded-xl border-l-4 border-f1-red hover:bg-white/5 transition duration-300 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-32 h-32 bg-f1-red/10 rounded-full blur-3xl"></div>
+              <i class="fa-solid fa-road text-2xl text-gray-500 mb-4"></i>
+              <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Back Straight</div>
+              <div class="font-display text-4xl font-bold text-white">1.2<span class="text-xl text-gray-500 ml-1">km</span></div>
+              <div class="text-xs text-gray-400 mt-2">Straight Mode stress test + high deployment demand.</div>
+            </div>
+            <div class="glass-panel p-6 rounded-xl border-l-4 border-f1-red hover:bg-white/5 transition duration-300">
+              <i class="fa-solid fa-circle-nodes text-2xl text-gray-500 mb-4"></i>
+              <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Compounds</div>
+              <div class="font-display text-4xl font-bold text-white">C2<span class="text-xl text-gray-500 mx-1">/</span>C3<span class="text-xl text-gray-500 mx-1">/</span>C4</div>
+              <div class="text-xs text-gray-400 mt-2">Front-left graining is the limiter if temps spike.</div>
+            </div>
+            <div class="glass-panel p-6 rounded-xl border-l-4 border-blue-500 hover:bg-white/5 transition duration-300">
+              <i class="fa-solid fa-gauge-high text-2xl text-gray-500 mb-4"></i>
+              <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Min Pressures</div>
+              <div class="font-display text-4xl font-bold text-white">26.0<span class="text-xl text-gray-500 ml-1">F</span></div>
+              <div class="text-xs text-gray-400 mt-2">22.0 psi rear • camber -3.00° / -1.75°.</div>
+            </div>
+            <div class="glass-panel p-6 rounded-xl border-l-4 border-blue-500 hover:bg-white/5 transition duration-300">
+              <i class="fa-solid fa-bolt text-2xl text-yellow-500 mb-4"></i>
+              <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Energy Headline</div>
+              <div class="font-display text-4xl font-bold text-white">9<span class="text-xl text-gray-500 ml-1">MJ</span></div>
+              <div class="text-xs text-gray-400 mt-2">Recover ceiling per lap • up to 4MJ burst deploy.</div>
+            </div>
+          </div>
+
+          <section id="aero" class="scroll-mt-40">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 class="font-display text-2xl font-bold text-white mb-4 uppercase tracking-wider flex items-center gap-2">
+                Active Aero Modes
+                <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white transition-colors">
+                  <i class="fa-solid fa-file-pdf"></i>
+                </a>
+              </h3>
+              <p class="text-gray-400 leading-relaxed">
+                Shanghai demands a stable platform through the snail sections while maximizing terminal velocity on the defining straight. The 2026 active aero system makes these trade-offs explicit.
+              </p>
+              <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+                  <div class="absolute top-0 right-0 w-32 h-32 bg-f1-red/10 rounded-full blur-3xl group-hover:bg-f1-red/20 transition-all"></div>
+                  <h4 class="font-display text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-compress text-f1-red"></i> Corner Mode
+                  </h4>
+                  <p class="text-gray-400 leading-relaxed">
+                    Flaps closed for maximum downforce and stability through sustained lateral loadings.
+                  </p>
+                </div>
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+                  <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all"></div>
+                  <h4 class="font-display text-2xl font-bold text-white mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-wind text-blue-500"></i> Straight Mode
+                  </h4>
+                  <p class="text-gray-400 leading-relaxed">
+                    Automated drag reduction in straight-line zones to preserve battery and boost top speed.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-6 p-6 rounded-2xl bg-white/5 border border-white/10">
+                <div class="text-xs tracking-widest uppercase text-gray-400">Friday target</div>
+                <div class="mt-2 text-sm text-gray-300">
+                  Validate actuator transition timing into heavy braking for Turn 14 and quantify front-left graining sensitivity as the surface evolves.
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-panel p-8 rounded-2xl relative overflow-hidden">
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">2026 car delta (headline)</div>
+                  <div class="font-display text-2xl font-bold text-white uppercase flex items-center gap-2">
+                    Smaller, lighter, more electric
+                    <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white transition-colors">
+                      <i class="fa-solid fa-file-pdf"></i>
+                    </a>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold bg-f1-red/20 text-f1-red px-3 py-1 rounded-full border border-f1-red/50 tracking-wider uppercase">Rules shift</span>
+              </div>
+              <canvas id="regBar" height="140"></canvas>
+              <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Minimum weight</div>
+                  <div class="mt-1 font-display text-3xl font-bold text-white">768<span class="text-xl text-gray-500 ml-1">kg</span></div>
+                  <div class="mt-1 text-xs text-gray-400">30 kg reduction.</div>
+                </div>
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Tyre width cut</div>
+                  <div class="mt-1 font-display text-3xl font-bold text-white">−25<span class="text-xl text-gray-500 mx-1">/</span>−30<span class="text-xl text-gray-500 ml-1">mm</span></div>
+                  <div class="mt-1 text-xs text-gray-400">Front / rear.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </section>
+
+          <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+            <button id="complete-overview" onclick="completePhase('overview')"
+              class="px-8 py-4 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(225,6,0,0.35)]">
+              <i class="fa-solid fa-flag-checkered mr-2"></i> Checkered Flag: Unlock Sprint View
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shanghai Topology -->
+      <section id="track" class="scroll-mt-40 py-20 relative bg-[#131822] border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">
+              Shanghai Topology & <span class="text-blue-500">Harvest Zones</span>
+              <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white ml-2 transition-colors">
+                <i class="fa-solid fa-file-pdf"></i>
+              </a>
+            </h2>
+            <p class="max-w-2xl mx-auto text-gray-400">
+              Shanghai’s long snails demand stability, while the heavy braking into Turn 6 and Turn 14 improves organic
+              harvesting compared to Melbourne.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-panel p-6 rounded-xl border border-white/10">
+              <div class="text-xs tracking-widest uppercase text-gray-400">Defining straight</div>
+              <div class="mt-2 font-display text-3xl font-bold text-white">1.2<span class="text-xl text-gray-500 ml-1">km</span></div>
+              <div class="mt-2 text-sm text-gray-400">Sustained deployment demand.</div>
+            </div>
+            <div class="glass-panel p-6 rounded-xl border border-white/10">
+              <div class="text-xs tracking-widest uppercase text-gray-400">Primary braking</div>
+              <div class="mt-2 font-display text-3xl font-bold text-white">T6 / T14</div>
+              <div class="mt-2 text-sm text-gray-400">Key harvest + overtaking setup points.</div>
+            </div>
+            <div class="glass-panel p-6 rounded-xl border border-white/10">
+              <div class="text-xs tracking-widest uppercase text-gray-400">Snail load</div>
+              <div class="mt-2 font-display text-3xl font-bold text-white">T1–4</div>
+              <div class="mt-2 text-sm text-gray-400">Front-left graining risk anchor.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tyres & Strategy (moved here) -->
+      <section id="tyres" class="scroll-mt-40 py-20 relative border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">
+              Tyres & <span class="text-f1-red">Strategy</span>
+              <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white ml-2 transition-colors">
+                <i class="fa-solid fa-file-pdf"></i>
+              </a>
+            </h2>
+            <p class="max-w-2xl mx-auto text-gray-400">
+              Pirelli brings C2/C3/C4 with high minimum pressures. The 2026 projection shifts the one-stop window later (L17–L20) if surface ageing reduces 2025 graining.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <h3 class="font-display text-2xl font-bold text-white mb-6 uppercase tracking-wider">Constraints</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Min pressures</div>
+                  <div class="mt-3 flex items-baseline justify-between">
+                    <div class="font-display text-4xl font-bold text-white">26.0</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-widest">psi front</div>
+                  </div>
+                  <div class="mt-2 flex items-baseline justify-between">
+                    <div class="font-display text-4xl font-bold text-white">22.0</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-widest">psi rear</div>
+                  </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Camber limits</div>
+                  <div class="mt-3 flex items-baseline justify-between">
+                    <div class="font-display text-4xl font-bold text-white">−3.00°</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-widest">front</div>
+                  </div>
+                  <div class="mt-2 flex items-baseline justify-between">
+                    <div class="font-display text-4xl font-bold text-white">−1.75°</div>
+                    <div class="text-xs text-gray-400 uppercase tracking-widest">rear</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-6 p-6 rounded-2xl bg-white/5 border border-white/10">
+                <div class="flex items-center justify-between gap-4 flex-wrap">
+                  <div>
+                    <div class="text-xs tracking-widest uppercase text-gray-400">Pit window explorer</div>
+                    <div class="mt-1 font-display text-2xl font-bold text-white uppercase">Modelled one‑stop timing</div>
+                  </div>
+                  <div class="flex items-center gap-2 text-xs text-gray-400">
+                    <span>2025</span>
+                    <button id="yearToggle"
+                      class="px-3 py-1 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition text-white"
+                      aria-pressed="true" title="Toggle 2025 vs 2026 model">2026</button>
+                    <span>2026</span>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <div class="flex items-center justify-between text-xs text-gray-400">
+                    <span>Lap 1</span>
+                    <span>Lap 56</span>
+                  </div>
+                  <div class="mt-2 h-3 rounded-full bg-white/5 border border-white/10 overflow-hidden">
+                    <div id="pitWindowBar" class="h-full bg-f1-red"></div>
+                  </div>
+                  <div class="mt-3 text-sm text-gray-300">
+                    Suggested stop: <span class="font-bold text-white" id="pitWindowLabel">L17–L20</span>
+                    <span class="text-gray-500"> (Medium → Hard baseline)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="glass-panel p-8 rounded-2xl">
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Tyre story</div>
+                  <div class="font-display text-2xl font-bold text-white uppercase">Front‑left thermal risk</div>
+                </div>
+              </div>
+              <canvas id="tyreRadar" height="170"></canvas>
+              <div class="mt-4 text-sm text-gray-400">
+                Qualitative stress map of Shanghai’s sustained right-hand loading.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Energy (moved here) -->
+      <section id="energy" class="scroll-mt-40 py-20 relative bg-[#131822] border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase flex items-center justify-center gap-2">
+              Energy Management
+              <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white transition-colors">
+                <i class="fa-solid fa-file-pdf"></i>
+              </a>
+            </h2>
+            <p class="max-w-2xl mx-auto text-gray-400">
+              A 50/50 philosophy makes deployment and harvesting strategy decisive. Shanghai’s topology allows more “traditional” driving than Melbourne, but still punishes poor banking for the back straight.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="glass-panel rounded-2xl p-8">
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Power split</div>
+                  <div class="font-display text-2xl font-bold text-white uppercase">ICE vs MGU‑K</div>
+                </div>
+                <span class="text-[10px] font-bold bg-f1-red/20 text-f1-red px-3 py-1 rounded-full border border-f1-red/50 tracking-wider uppercase">
+                  2026 PU
+                </span>
+              </div>
+              <canvas id="powerDonut" height="170"></canvas>
+              <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <div class="text-xs tracking-widest uppercase text-gray-400">ICE output</div>
+                  <div class="mt-1 font-display text-3xl font-bold text-white">400<span class="text-xl text-gray-500 ml-1">kW</span></div>
+                </div>
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <div class="text-xs tracking-widest uppercase text-gray-400">MGU‑K output</div>
+                  <div class="mt-1 font-display text-3xl font-bold text-white">350<span class="text-xl text-gray-500 ml-1">kW</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="glass-panel rounded-2xl p-8">
+              <div class="text-xs tracking-widest uppercase text-gray-400">Delta explorer</div>
+              <div class="mt-2 font-display text-2xl font-bold text-white uppercase">Speed delta vs stability</div>
+              <div class="mt-5">
+                <p class="text-gray-400 text-sm mb-4">The 2026 regulations introduce a critical trade-off: teams can configure their cars for higher top speeds (low drag) or greater stability in corners (high downforce). This interactive tool demonstrates the impact of that choice on lap time and race strategy.</p>
+                <input id="deltaSlider" type="range" min="1" max="10" value="6" class="w-full accent-red-600" />
+                <div class="mt-2 flex items-center justify-between text-xs text-gray-400">
+                  <span>More Stability (High Downforce)</span>
+                  <span>Higher Speed (Low Drag)</span>
+                </div>
+                <div class="mt-4 p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Live readout</div>
+                  <div class="mt-2 text-sm text-gray-200" id="deltaReadout"></div>
+                </div>
+                <div class="mt-4 p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Strategy Impact</div>
+                  <div class="mt-2 text-sm text-gray-200" id="strategyImpact"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Weather + Outlook -->
+      <section id="weather" class="scroll-mt-40 py-20 relative border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase flex items-center justify-center gap-2">
+              Weather & Outlook
+              <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white transition-colors">
+                <i class="fa-solid fa-file-pdf"></i>
+              </a>
+            </h2>
+            <p class="max-w-2xl mx-auto text-gray-400">
+              Sprint day can push track temperature to ~33°C; Sunday cloud cover adds a C2 warm-up risk after a stop.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+            <div class="glass-panel rounded-2xl p-8">
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Weekend forecast</div>
+                  <div class="font-display text-2xl font-bold text-white uppercase">Ambient vs track peak</div>
+                </div>
+                <span class="text-[10px] font-bold bg-white/5 text-gray-300 px-3 py-1 rounded-full border border-white/10 tracking-wider uppercase">Mar 13–15</span>
+              </div>
+              <canvas id="weatherLine" height="180"></canvas>
+            </div>
+            <div class="glass-panel rounded-2xl p-8">
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">China wins (history)</div>
+                  <div class="font-display text-2xl font-bold text-white uppercase flex items-center gap-2">
+                    Top constructors
+                    <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white transition-colors">
+                      <i class="fa-solid fa-file-pdf"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <canvas id="chinaWins" height="220"></canvas>
+              <div class="mt-4 text-xs text-gray-500">Historical China win counts cited in the PDF.</div>
+            </div>
+          </div>
+          <div class="glass-panel rounded-2xl p-8">
+            <h3 class="font-display text-2xl font-bold text-white mb-4 uppercase tracking-wider flex items-center gap-2">
+              Strategic headline
+              <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white transition-colors">
+                <i class="fa-solid fa-file-pdf"></i>
+              </a>
+            </h3>
+            <p class="text-gray-300 leading-relaxed">
+              Shanghai is a validation weekend before potential calendar disruption: clean data on active aero switching, front-axle graining and energy stability is the bedrock for early-season development direction.
+            </p>
+          </div>
+          <div class="mt-10 text-center text-xs text-gray-600">
+            Data + narrative sourced from <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-f1-red hover:text-white underline transition-colors">F1 2026 Chinese GP Deep Dive.pdf</a> in this workspace.
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================= -->
+    <!-- PHASE 2: THE PROBLEM      -->
+    <!-- ========================= -->
+    <div id="phase-problem" class="phase-content">
+      <section class="scroll-mt-40 py-20 relative bg-[#131822] border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="locked-view text-center">
+            <i class="fa-solid fa-lock text-4xl text-gray-600 mb-4"></i>
+            <h2 class="font-display text-3xl font-bold text-white mb-2 uppercase">The Problems</h2>
+            <p class="text-gray-400 mb-4">This section unlocks after Friday's sessions.</p>
+            <div id="countdown-problem" class="font-mono text-2xl text-f1-red">Initializing...</div>
+          </div>
+          <div class="unlocked-view hidden">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase text-center">The Problems</h2>
+            <!-- Add content for The Problems here -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================= -->
+    <!-- PHASE 3: THE SOLUTION   -->
+    <!-- ========================= -->
+    <div id="phase-solution" class="phase-content">
+      <section class="scroll-mt-40 py-20 relative border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="locked-view text-center">
+            <i class="fa-solid fa-lock text-4xl text-gray-600 mb-4"></i>
+            <h2 class="font-display text-3xl font-bold text-white mb-2 uppercase">The Solutions</h2>
+            <p class="text-gray-400 mb-4">This section unlocks after Saturday's events.</p>
+            <div id="countdown-solution" class="font-mono text-2xl text-f1-red">Initializing...</div>
+          </div>
+          <div class="unlocked-view hidden">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase text-center">The Solutions</h2>
+            <!-- Add content for The Solutions here -->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================= -->
+    <!-- PHASE 4: THE END GAME     -->
+    <!-- ========================= -->
+    <div id="phase-endgame" class="phase-content">
+      <section class="scroll-mt-40 py-20 relative bg-[#131822] border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="locked-view text-center">
+            <i class="fa-solid fa-lock text-4xl text-gray-600 mb-4"></i>
+            <h2 class="font-display text-3xl font-bold text-white mb-2 uppercase">The End Game</h2>
+            <p class="text-gray-400 mb-4">This section unlocks after the Grand Prix.</p>
+            <div id="countdown-endgame" class="font-mono text-2xl text-f1-red">Initializing...</div>
+          </div>
+          <div class="unlocked-view hidden">
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase text-center">The End Game</h2>
+            <!-- Add content for The End Game here -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-[#05070a] py-10 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+      <div class="flex items-center gap-2 mb-5">
+        <img src="logo.png" alt="Speed Circuit Logo"
+          class="h-6 w-auto object-contain drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]" />
+        <span class="font-display font-bold text-lg tracking-wider text-white">F1 STRATEGY HUB '26</span>
+      </div>
+      <p class="text-gray-500 text-sm text-center max-w-2xl">
+        The driver is no longer merely a pilot; they are a systems architect balancing thermal degradation,
+        electrical energy states, and dynamic aerodynamic profiles at 340 km/h.
+      </p>
+      <div class="mt-4 text-gray-400 text-sm text-center">
+        Got feedback or suggestions? <a href="mailto:pangsh0402@proton.me"
+            class="text-f1-red hover:text-white transition-colors border-b border-f1-red hover:border-white pb-0.5">Contact
+            me at pangsh0402@proton.me</a>
+      </div>
+      <div class="mt-8 text-xs text-gray-600">
+        Data synthesized from <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="hover:text-gray-400 underline">FIA 2026 Regulations</a>, Pirelli Motorsport Strategy Briefings, and official track
+        reprofiling telemetry.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll behavior
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        nav.classList.add('bg-[#0B0E14]', 'shadow-lg');
+        nav.classList.remove('border-white/10');
+      } else {
+        nav.classList.remove('bg-[#0B0E14]', 'shadow-lg');
+        nav.classList.add('border-white/10');
+      }
+    });
+
+    // Weekend progression lock/unlock (localStorage)
+    const PHASES = ['overview', 'problem', 'solution', 'endgame'];
+    const STORAGE_KEY = 'chn26_weekend_progress_v1'; // stores highest unlocked index (0..3)
+    let unlockedIndex = Math.max(0, Math.min(3, Number(localStorage.getItem(STORAGE_KEY) ?? '0')));
+    let currentPhaseStatuses = {
+        "problem": { "locked": true },
+        "solution": { "locked": true },
+        "endgame": { "locked": true }
+    };
+
+    function phaseIdx(phase) {
+      return PHASES.indexOf(phase);
+    }
+
+    function updateProgressUI(activePhase) {
+      PHASES.forEach((p, i) => {
+        const btn = document.getElementById(`btn-${p}`);
+        const panel = document.getElementById(`phase-${p}`);
+        const completeBtn = document.getElementById(`complete-${p}`);
+
+        // All buttons are always enabled per user request
+        btn.disabled = false;
+
+        btn.classList.toggle('active', p === activePhase);
+        if (panel) panel.classList.toggle('active', p === activePhase);
+
+        const label = btn.getAttribute('data-label') || p;
+        const baseIcon = btn.getAttribute('data-icon') || 'fa-circle';
+        
+        // We'll update icons in checkPhaseStatuses to reflect real-time lock status
+        btn.innerHTML = `<i class="fa-solid ${baseIcon} mr-2"></i> ${label}`;
+
+        if (completeBtn) {
+          const canComplete = i === unlockedIndex && i < PHASES.length - 1;
+          completeBtn.style.display = canComplete ? '' : 'none';
+        }
+      });
+    }
+
+    window.switchPhase = (phase) => {
+      const i = phaseIdx(phase);
+      if (i === -1) return;
+      // Allow switching to any phase even if locked
+      updateProgressUI(phase);
+      document.getElementById('weekend-timeline').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.completePhase = (phase) => {
+      const i = phaseIdx(phase);
+      if (i === -1) return;
+      if (i !== unlockedIndex) return;
+      if (i >= PHASES.length - 1) return;
+      unlockedIndex = i + 1;
+      localStorage.setItem(STORAGE_KEY, String(unlockedIndex));
+      const next = PHASES[unlockedIndex];
+      updateProgressUI(next);
+      document.getElementById(`phase-${next}`).scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.resetProgress = () => {
+      unlockedIndex = 0;
+      localStorage.setItem(STORAGE_KEY, '0');
+      updateProgressUI('overview');
+      document.getElementById('weekend-timeline').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Pit window toggle (2025 vs 2026 projection)
+    const pitModels = {
+      '2025': { from: 14, to: 15 },
+      '2026': { from: 17, to: 20 }
+    };
+    const yearToggle = document.getElementById('yearToggle');
+    const pitWindowBar = document.getElementById('pitWindowBar');
+    const pitWindowLabel = document.getElementById('pitWindowLabel');
+
+    function setPitWindow(year) {
+      const { from, to } = pitModels[year];
+      pitWindowLabel.textContent = `L${from}–L${to}`;
+      // Scale to 56 laps: left margin and width percentages.
+      const left = ((from - 1) / 56) * 100;
+      const width = ((to - from + 1) / 56) * 100;
+      pitWindowBar.style.marginLeft = `${left}%`;
+      pitWindowBar.style.width = `${Math.max(width, 1.8)}%`;
+      yearToggle.textContent = year;
+      yearToggle.setAttribute('aria-pressed', year === '2026' ? 'true' : 'false');
+    }
+
+    yearToggle.addEventListener('click', () => {
+      const next = yearToggle.textContent.trim() === '2026' ? '2025' : '2026';
+      setPitWindow(next);
+    });
+    setPitWindow('2026');
+
+    // Delta slider
+    const deltaSlider = document.getElementById('deltaSlider');
+    const deltaReadout = document.getElementById('deltaReadout');
+    const strategyImpact = document.getElementById('strategyImpact');
+
+    function renderDelta() {
+      const v = Number(deltaSlider.value);
+      let label, impact;
+
+      if (v <= 3) {
+        label = 'Low Risk: Prioritizing stability over raw speed. Expect better tyre life and driver confidence in high-speed corners.';
+        impact = 'Ideal for races where tyre degradation is high and overtaking is difficult. A stable car allows for more consistent lap times throughout a stint.';
+      } else if (v <= 7) {
+        label = 'Balanced: A compromise between straight-line speed and cornering grip. This is the typical setup for most circuits.';
+        impact = 'A versatile setup that allows for both attacking and defending. However, it may not be the fastest in a straight line or the most stable in the corners.';
+      } else {
+        label = 'High Risk: Sacrificing stability for maximum straight-line speed. This setup is common at low-downforce tracks like Monza.';
+        impact = 'A high-risk, high-reward strategy. It makes overtaking easier but can lead to higher tyre degradation and a less predictable car in the corners.';
+      }
+
+      deltaReadout.textContent = `Delta risk: ${v}/10 — ${label}`;
+      strategyImpact.textContent = impact;
+    }
+    deltaSlider.addEventListener('input', renderDelta);
+    renderDelta();
+
+    // Chart.js theme helpers
+    const gridColor = 'rgba(148, 163, 184, 0.18)';
+    const tickColor = 'rgba(226, 232, 240, 0.7)';
+    Chart.defaults.color = tickColor;
+    Chart.defaults.font.family = 'Inter, ui-sans-serif, system-ui';
+
+    // Regulations / car delta bar
+    new Chart(document.getElementById('regBar'), {
+      type: 'bar',
+      data: {
+        labels: ['Min weight (kg)', 'Wheelbase (mm)', 'Track width (mm)', 'Front tyre (mm)', 'Rear tyre (mm)'],
+        datasets: [
+          {
+            label: '2026 change (relative)',
+            data: [-30, -200, -100, -25, -30],
+            backgroundColor: ['rgba(225, 6, 0, 0.65)'],
+            borderColor: ['rgba(225, 6, 0, 1)'],
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.y}` } } },
+        scales: {
+          x: { grid: { color: 'transparent' }, ticks: { color: tickColor } },
+          y: { grid: { color: gridColor }, ticks: { color: tickColor } }
+        }
+      }
+    });
+
+    // Power donut
+    new Chart(document.getElementById('powerDonut'), {
+      type: 'doughnut',
+      data: {
+        labels: ['ICE (400kW)', 'MGU‑K (350kW)'],
+        datasets: [{
+          data: [400, 350],
+          backgroundColor: ['rgba(225, 6, 0, 0.75)', 'rgba(59, 130, 246, 0.55)'],
+          borderColor: ['rgba(225, 6, 0, 1)', 'rgba(59, 130, 246, 1)'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        cutout: '62%',
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 10, color: tickColor } }
+        }
+      }
+    });
+
+    // Weather line
+    new Chart(document.getElementById('weatherLine'), {
+      type: 'line',
+      data: {
+        labels: ['Fri', 'Sat', 'Sun'],
+        datasets: [
+          {
+            label: 'Peak ambient (°C)',
+            data: [15, 17, 16],
+            borderColor: 'rgba(225, 6, 0, 1)',
+            backgroundColor: 'rgba(225, 6, 0, 0.15)',
+            tension: 0.35,
+            fill: true
+          },
+          {
+            label: 'Peak track (°C)',
+            data: [null, 33, null],
+            borderColor: 'rgba(251, 146, 60, 1)',
+            backgroundColor: 'rgba(251, 146, 60, 0.10)',
+            tension: 0.35,
+            fill: false,
+            spanGaps: true
+          }
+        ]
+      },
+      options: {
+        plugins: {
+          legend: { position: 'bottom', labels: { boxWidth: 10, color: tickColor } }
+        },
+        scales: {
+          x: { grid: { color: 'transparent' } },
+          y: { grid: { color: gridColor }, suggestedMin: 10, suggestedMax: 35 }
+        }
+      }
+    });
+
+    // Tyre radar (qualitative stress map)
+    new Chart(document.getElementById('tyreRadar'), {
+      type: 'radar',
+      data: {
+        labels: ['Front‑left load', 'Sustained lateral', 'Traction zones', 'Braking energy', 'Surface evolution'],
+        datasets: [{
+          label: 'Shanghai stress profile',
+          data: [9, 8, 7, 7, 6],
+          borderColor: 'rgba(225, 6, 0, 1)',
+          backgroundColor: 'rgba(225, 6, 0, 0.18)',
+          pointBackgroundColor: 'rgba(225, 6, 0, 1)'
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          r: {
+            grid: { color: gridColor },
+            angleLines: { color: gridColor },
+            ticks: { display: false },
+            suggestedMin: 0,
+            suggestedMax: 10
+          }
+        }
+      }
+    });
+
+    // China wins (history)
+    new Chart(document.getElementById('chinaWins'), {
+      type: 'bar',
+      data: {
+        labels: ['Mercedes', 'Ferrari', 'McLaren', 'Red Bull'],
+        datasets: [{
+          label: 'Wins in China',
+          data: [6, 4, 4, 3],
+          backgroundColor: [
+            'rgba(59, 130, 246, 0.55)',
+            'rgba(225, 6, 0, 0.75)',
+            'rgba(148, 163, 184, 0.45)',
+            'rgba(34, 197, 94, 0.35)'
+          ],
+          borderColor: [
+            'rgba(59, 130, 246, 1)',
+            'rgba(225, 6, 0, 1)',
+            'rgba(148, 163, 184, 1)',
+            'rgba(34, 197, 94, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: gridColor }, ticks: { precision: 0 } },
+          y: { grid: { color: 'transparent' } }
+        }
+      }
+    });
+
+    // Initialize progression state after DOM is ready.
+    updateProgressUI(PHASES[Math.min(unlockedIndex, PHASES.length - 1)]);
+
+    // ==========================================
+    // DYNAMIC JSON LOCK CHECKER
+    // ==========================================
+    async function checkPhaseStatuses() {
+        console.log("Checking phase statuses...");
+        const futurePhases = ['problem', 'solution', 'endgame'];
+        const unlockDatePhase2 = new Date('2026-03-13T22:00:00+08:00'); // Fri after FP and Sprint Quali
+        const unlockDatePhase3 = new Date('2026-03-14T22:00:00+08:00'); // Sat after Sprint and Quali
+        const unlockDatePhase4 = new Date('2026-03-15T22:00:00+08:00'); // Sun after Race
+
+        try {
+            if (window.location.protocol !== 'blob:' && window.location.protocol !== 'data:') {
+                const response = await fetch('./status.json?v=' + new Date().getTime());
+                if (response.ok) {
+                    const fetchedStatuses = await response.json();
+                    currentPhaseStatuses = { ...currentPhaseStatuses, ...fetchedStatuses };
+                }
+            }
+        } catch (error) {
+            console.warn("Failed to load status.json. Using default time-based unlocks.", error);
+        }
+
+        function processPhaseLocks(d2, d3, d4, phases) {
+            const now = new Date();
+
+            // Override based on absolute time
+            if (currentPhaseStatuses['problem']) currentPhaseStatuses['problem'].locked = (now < d2);
+            if (currentPhaseStatuses['solution']) currentPhaseStatuses['solution'].locked = (now < d3);
+            if (currentPhaseStatuses['endgame']) currentPhaseStatuses['endgame'].locked = (now < d4);
+
+            phases.forEach(phase => {
+                const btn = document.getElementById(`btn-${phase}`);
+                const isLocked = currentPhaseStatuses[phase] && currentPhaseStatuses[phase].locked !== false;
+
+                if (btn) {
+                    const baseIcon = btn.getAttribute('data-icon') || 'fa-circle';
+                    const label = btn.getAttribute('data-label') || phase;
+                    const iconClass = isLocked ? 'fa-lock' : baseIcon;
+                    btn.innerHTML = `<i class="fa-solid ${iconClass} mr-2"></i> ${label}`;
+                }
+
+                const phaseDiv = document.getElementById(`phase-${phase}`);
+                if (phaseDiv) {
+                    const lockedView = phaseDiv.querySelector('.locked-view');
+                    const unlockedView = phaseDiv.querySelector('.unlocked-view');
+                    
+                    if (!isLocked) {
+                        if (lockedView) lockedView.style.display = 'none';
+                        if (unlockedView) unlockedView.classList.remove('hidden');
+                    } else {
+                        if (lockedView) lockedView.style.display = 'block';
+                        if (unlockedView) unlockedView.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        function startLiveCountdowns(d2, d3, d4, phases) {
+            console.log("Starting live countdowns...");
+            const updateTimer = () => {
+                const now = new Date().getTime();
+                processPhaseLocks(d2, d3, d4, phases);
+
+                const renderTime = (targetDateString, elementId) => {
+                    const target = new Date(targetDateString).getTime();
+                    const distance = target - now;
+                    const el = document.getElementById(elementId);
+                    if (!el) return;
+
+                    if (distance < 0) {
+                        el.innerHTML = "UNLOCKED";
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    const pad = (num) => num.toString().padStart(2, '0');
+                    el.innerHTML = `${days > 0 ? days + 'd ' : ''}${pad(hours)}h ${pad(minutes)}m ${pad(seconds)}s`;
+                };
+                renderTime(d2, 'countdown-problem');
+                renderTime(d3, 'countdown-solution');
+                renderTime(d4, 'countdown-endgame');
+            };
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+
+        processPhaseLocks(unlockDatePhase2, unlockDatePhase3, unlockDatePhase4, futurePhases);
+        startLiveCountdowns(unlockDatePhase2, unlockDatePhase3, unlockDatePhase4, futurePhases);
+    }
+
+    // Run the lock check as soon as the page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        checkPhaseStatuses();
+    });
+  </script>
+</body>
+
+</html>
+
