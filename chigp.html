@@ -43,6 +43,12 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-panel:hover {
+      border-color: rgba(225, 6, 0, 0.3);
+      box-shadow: 0 8px 32px rgba(225, 6, 0, 0.12);
     }
 
     .gradient-text {
@@ -126,18 +132,18 @@
         </div>
         <div class="hidden md:block">
           <div id="nav-links" class="ml-10 flex items-baseline space-x-8">
-            <a href="#epoch"
+            <a href="#" onclick="scrollToSection(event, 'epoch')"
               class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">The 2026
               Paradigm</a>
-            <a href="#aero"
+            <a href="#" onclick="scrollToSection(event, 'aero')"
               class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Active Aero</a>
-            <a href="#track"
+            <a href="#" onclick="scrollToSection(event, 'track')"
               class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Shanghai
               Topology</a>
-            <a href="#tyres"
+            <a href="#" onclick="scrollToSection(event, 'tyres')"
               class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Tyres &
               Strategy</a>
-            <a href="#energy"
+            <a href="#" onclick="scrollToSection(event, 'energy')"
               class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Energy
               Management</a>
           </div>
@@ -163,8 +169,8 @@
         <span class="w-2 h-2 rounded-full bg-f1-red animate-pulse"></span>
         Shanghai International Circuit • 56 Laps • Sprint Weekend
       </div>
-      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 uppercase">
-        The Shanghai <span class="f1-red">Equation</span>
+      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 uppercase inline-block relative group">
+        The Shanghai <span class="f1-red drop-shadow-[0_0_15px_rgba(225,6,0,0.5)]">Equation</span>
       </h1>
       <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-400 font-light leading-relaxed">
         Strategic and technical analysis of the 2026 Formula 1 Chinese Grand Prix. Active aero switching, front-axle
@@ -219,12 +225,12 @@
     <!-- PHASE 1: OVERVIEW         -->
     <!-- ========================= -->
     <div id="phase-overview" class="phase-content active">
-      <section id="epoch" class="scroll-mt-40 py-20 relative border-t border-white/10">
+      <section id="p1-epoch" class="scroll-mt-40 py-20 relative border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
             <div class="max-w-3xl">
-              <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">
-                The 2026 <span class="gradient-text">Paradigm</span> Meets Shanghai
+              <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase inline-block group">
+                The 2026 <span class="gradient-text drop-shadow-[0_0_10px_rgba(255,255,255,0.3)]">Paradigm</span> Meets Shanghai
                 <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white ml-2 inline-flex items-center gap-1 transition-colors" title="View Source PDF">
                   <i class="fa-solid fa-file-pdf"></i> PDF Source
                 </a>
@@ -270,7 +276,7 @@
             </div>
           </div>
 
-          <section id="aero" class="scroll-mt-40">
+          <section id="p1-aero" class="scroll-mt-40">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div>
               <h3 class="font-display text-2xl font-bold text-white mb-4 uppercase tracking-wider flex items-center gap-2">
@@ -350,11 +356,11 @@
       </section>
 
       <!-- Shanghai Topology -->
-      <section id="track" class="scroll-mt-40 py-20 relative bg-[#131822] border-t border-white/10">
+      <section id="p1-track" class="scroll-mt-40 py-20 relative bg-[#131822] border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
-            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">
-              Shanghai Topology & <span class="text-blue-500">Harvest Zones</span>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase inline-block group">
+              Shanghai Topology & <span class="text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.4)]">Harvest Zones</span>
               <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white ml-2 transition-colors">
                 <i class="fa-solid fa-file-pdf"></i>
               </a>
@@ -385,11 +391,11 @@
       </section>
 
       <!-- Tyres & Strategy (moved here) -->
-      <section id="tyres" class="scroll-mt-40 py-20 relative border-t border-white/10">
+      <section id="p1-tyres" class="scroll-mt-40 py-20 relative border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
-            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">
-              Tyres & <span class="text-f1-red">Strategy</span>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase inline-block group">
+              Tyres & <span class="text-f1-red drop-shadow-[0_0_10px_rgba(225,6,0,0.5)]">Strategy</span>
               <a href="F1 2026 Chinese GP Deep Dive.pdf" target="_blank" class="text-xs text-f1-red hover:text-white ml-2 transition-colors">
                 <i class="fa-solid fa-file-pdf"></i>
               </a>
@@ -471,7 +477,7 @@
       </section>
 
       <!-- Energy (moved here) -->
-      <section id="energy" class="scroll-mt-40 py-20 relative bg-[#131822] border-t border-white/10">
+      <section id="p1-energy" class="scroll-mt-40 py-20 relative bg-[#131822] border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
             <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase flex items-center justify-center gap-2">
@@ -603,8 +609,665 @@
             <div id="countdown-problem" class="font-mono text-2xl text-f1-red">Initializing...</div>
           </div>
           <div class="unlocked-view hidden">
-            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase text-center">The Problems</h2>
-            <!-- Add content for The Problems here -->
+            <div class="text-center mb-16 relative">
+              <div class="absolute inset-0 bg-f1-red/10 blur-[80px] rounded-full pointer-events-none"></div>
+              <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase inline-block relative group">
+                The Problems: <span class="text-f1-red drop-shadow-[0_0_10px_rgba(225,6,0,0.6)]">Systems Under Stress</span>
+                <div class="absolute -bottom-2 left-0 w-full h-[2px] bg-f1-red/50 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                <a href="F1 Sprint Race Analysis Request.pdf" target="_blank" class="text-xs text-f1-red hover:text-white ml-2 transition-colors relative z-10">
+                  <i class="fa-solid fa-file-pdf"></i>
+                </a>
+              </h2>
+              <p class="max-w-2xl mx-auto text-gray-300 font-medium tracking-wide">
+                Behind the dominant Mercedes 1-2, the grid is fractured. Teams are grappling with severe kinetic recovery failures, software-induced brake migration, and immense aerodynamic drag penalties.
+              </p>
+            </div>
+
+            <!-- The 2026 Paradigm (Phase 2) -->
+            <section id="p2-epoch" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">The 2026 Paradigm</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">Mercedes Heavy Fuel Hegemony</div>
+                </div>
+                <i class="fa-solid fa-chart-line text-3xl text-gray-400"></i>
+              </div>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Analyzing long-run simulations mapped to China's tyre progression reveals Mercedes' devastating advantage. Their integrated ICE and MGU-K algorithms allow them to avoid the extreme lift-and-coast driving afflicting rivals.
+              </p>
+
+              <!-- 50/50 Power Split Dual-Gauge -->
+              <div class="mb-8 p-6 rounded-2xl bg-[#0B0E14] border border-white/5 relative overflow-hidden group">
+                <div class="text-xs tracking-widest uppercase text-gray-400 mb-4 flex items-center justify-between">
+                  <span>2026 Power Unit Mandate</span>
+                  <span class="text-white font-display text-lg font-bold">~50/50 Split</span>
+                </div>
+                
+                <div class="flex h-8 rounded-full overflow-hidden shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)] border border-white/10 relative">
+                  <!-- Center divider -->
+                  <div class="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/20 z-10 -translate-x-1/2 pointer-events-none"></div>
+                  
+                  <!-- ICE Bar -->
+                  <div class="w-[53.3%] bg-gradient-to-r from-red-900 to-red-600 group-hover:from-red-800 group-hover:to-red-500 relative flex items-center px-4 transition-all duration-300 pointer-events-none">
+                    <span class="text-[10px] font-bold text-white uppercase tracking-wider">ICE <span class="opacity-70 font-mono ml-1">400kW</span></span>
+                  </div>
+                  
+                  <!-- MGU-K Bar -->
+                  <div class="w-[46.7%] bg-gradient-to-l from-blue-900 to-blue-600 group-hover:from-blue-800 group-hover:to-blue-500 relative flex items-center justify-end px-4 transition-all duration-300 pointer-events-none">
+                    <span class="text-[10px] font-bold text-white uppercase tracking-wider"><span class="opacity-70 font-mono mr-1">350kW</span> MGU-K</span>
+                  </div>
+                </div>
+                <div class="mt-3 text-xs text-gray-500 flex justify-between px-1">
+                  <span>Combustion Output</span>
+                  <span>Electrical Output</span>
+                </div>
+              </div>
+              
+              <!-- Nerd Detail Box -->
+              <div class="mb-8 p-6 rounded-2xl bg-[#131822]/90 backdrop-blur-md border border-f1-red/20 shadow-[0_8px_30px_rgba(225,6,0,0.1)] relative overflow-hidden group hover:border-f1-red/40 transition-colors">
+                <div class="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-f1-red/50 to-transparent group-hover:from-f1-red transition-colors duration-500"></div>
+                
+                <div class="flex items-center gap-2 text-white tracking-widest text-xs uppercase font-bold mb-3 border-b border-white/10 pb-3 relative z-10">
+                  <i class="fa-solid fa-microchip text-f1-red drop-shadow-[0_0_5px_rgba(225,6,0,0.5)]"></i> Engineering Briefing: W17 Hybrid Synergy
+                </div>
+                <ul class="space-y-2 text-sm text-gray-300 relative z-10">
+                  <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">REG_SHIFT:</strong> 50/50 ICE-to-Electric Power Split Mandate</span></li>
+                  <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">ICE_LIMIT:</strong> 75kg/h Fuel Flow constraint neutralized by proprietary algorithm.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">MGU_K_OUT:</strong> 350kW continuous torque delivery out of T14 hairpin.</span></li>
+                  <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">AERO_HACK:</strong> "Mouse hole" slot routes high-energy air to diffuser wall, preventing boundary separation on steeper 2026 ramps.</span></li>
+                </ul>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 rounded-2xl bg-[#131822] border-l-4 border-f1-red hover:bg-white/5 transition duration-300">
+                  <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">Delta vs Teammate (Antonelli)</div>
+                  <div class="font-display text-4xl font-bold text-white">-0.48<span class="text-xl text-gray-500 ml-1">s / lap</span></div>
+                  <div class="text-xs text-gray-400 mt-2">Russell's advantage over the rookie in continuous race stints.</div>
+                </div>
+                <div class="p-6 rounded-2xl bg-[#131822] border-l-4 border-f1-red hover:bg-white/5 transition duration-300">
+                  <div class="text-xs text-gray-400 uppercase tracking-wider mb-1">Delta vs McLaren/Ferrari</div>
+                  <div class="font-display text-4xl font-bold text-white">-0.6 ~ 1.2<span class="text-xl text-gray-500 ml-1">s / lap</span></div>
+                  <div class="text-xs text-gray-400 mt-2">The pure kinetic efficiency gap under heavy fuel loads.</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Active Aero (Phase 2) -->
+            <section id="p2-aero" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Active Aero Innovation</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">Ferrari's 'Macarena' Wing</div>
+                </div>
+                <i class="fa-solid fa-wind text-3xl text-f1-red drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]"></i>
+              </div>
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                  <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                    A semantic loophole in the FIA ruleset allows the SF-26 top flap to not just reduce its angle in X-Mode, but violently rotate <strong>180 to 225 degrees</strong> on its central axis. By flipping entirely upside down, it abandons the 4:1 downforce layout and intentionally spawns localized aerodynamic lift.
+                  </p>
+                  
+                  <!-- Nerd Detail Box -->
+                  <div class="mb-6 p-6 rounded-2xl bg-[#131822]/90 backdrop-blur-md border border-f1-red/20 shadow-[0_8px_30px_rgba(225,6,0,0.1)] group relative overflow-hidden hover:border-f1-red/40 transition-colors">
+                    <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-f1-red/10 to-transparent pointer-events-none"></div>
+
+                    <div class="text-white tracking-widest text-xs uppercase font-bold mb-3 border-b border-white/10 pb-3 flex items-center gap-2 relative z-10">
+                       <i class="fa-solid fa-wind text-f1-red drop-shadow-[0_0_5px_rgba(225,6,0,0.5)]"></i> Telemetry: SF-26 X-Mode Actuation
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-300 relative z-10">
+                      <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">REG_SHIFT:</strong> Passive DRS abandoned for permanent Z-Mode (Corner) & X-Mode (Straight/Drag Shed).</span></li>
+                      <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white text-f1-red mx-1">ACTUATION_THETA:</strong> 180° - 225° central axis rotation.</span></li>
+                      <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">EFFECT_CASCADE:</strong> Flap inversion induces aggressive downward diffuser stall.</span></li>
+                      <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">V_MAX_DELTA:</strong> <span class="text-f1-red font-bold">+5 to +8 km/h</span> terminal velocity advantage secured on 1.2km back straight.</span></li>
+                    </ul>
+                  </div>
+
+                  <ul class="space-y-3 text-sm text-gray-300">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Localized structural lift.</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Total diffuser stall mechanism.</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> Massive terminal velocity gain.</li>
+                  </ul>
+                </div>
+                <div class="glass-panel p-8 rounded-2xl border border-f1-red/30 flex justify-center relative overflow-hidden group">
+                  <div class="absolute inset-0 bg-gradient-to-tr from-f1-red/10 to-transparent pointer-events-none"></div>
+                  <div class="text-center z-10 w-full">
+                    <div class="text-xs uppercase tracking-widest text-f1-red mb-6 drop-shadow-[0_0_5px_rgba(225,6,0,0.5)]">X-Mode Actuation Telemetry</div>
+                    
+                    <div class="relative w-48 h-48 mx-auto flex items-center justify-center cursor-pointer" title="Hover to deploy Macarena X-Mode">
+                      <!-- Angle markers -->
+                      <div class="absolute inset-0 border-[1px] border-dashed border-white/20 rounded-full transition-colors group-hover:border-f1-red/30 duration-700"></div>
+                      <div class="absolute top-0 w-1 h-2 bg-white/30"></div>
+                      <div class="absolute bottom-0 w-1 h-2 bg-white/30"></div>
+                      <div class="absolute left-0 h-1 w-2 bg-white/30"></div>
+                      <div class="absolute right-0 h-1 w-2 bg-white/30"></div>
+                      <div class="absolute top-[20%] left-[8%] w-1.5 h-1.5 bg-f1-red/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-[800ms] delay-100"></div>
+                      
+                      <!-- Flow lines (Laminar -> Stalled) -->
+                      <div class="absolute inset-0 overflow-hidden rounded-full opacity-40 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                        <svg class="w-full h-full text-blue-500 group-hover:text-f1-red transition-colors duration-[800ms]" viewBox="0 0 100 100">
+                           <path d="M 0 30 Q 50 30 100 30" fill="transparent" stroke="currentColor" stroke-width="1" class="group-hover:animate-pulse" />
+                           <path d="M 0 50 Q 50 50 100 50" fill="transparent" stroke="currentColor" stroke-width="1.5" class="group-hover:animate-pulse" style="animation-delay: 0.1s;" />
+                           <path d="M 0 70 Q 50 70 100 70" fill="transparent" stroke="currentColor" stroke-width="1" class="group-hover:animate-pulse" style="animation-delay: 0.2s;" />
+                           
+                           <!-- Turbulent flow (appears on hover) -->
+                           <path d="M 50 50 C 70 10, 80 90, 100 50" fill="transparent" stroke="currentColor" stroke-width="2" class="opacity-0 group-hover:opacity-100 transition-opacity duration-[800ms]" stroke-dasharray="4 4" />
+                        </svg>
+                      </div>
+
+                      <!-- Center Pivot Axis -->
+                      <div class="absolute w-3 h-3 bg-white rounded-full z-20 shadow-[0_0_10px_rgba(255,255,255,0.8)] border border-gray-400 pointer-events-none"></div>
+                      
+                      <!-- Rotating flap proxy -->
+                      <div class="absolute w-[80%] h-2 bg-gradient-to-r from-f1-red to-white/90 rounded-full origin-center transition-transform duration-[800ms] cubic-bezier(0.34, 1.56, 0.64, 1) group-hover:rotate-[210deg] shadow-[0_0_15px_rgba(225,6,0,0.6)] z-10 pointer-events-none"></div>
+                      
+                      <!-- Readout overlay -->
+                      <div class="absolute -bottom-6 bg-[#0B0E14] px-3 py-1 rounded border border-white/20 font-mono text-xs text-white opacity-0 group-hover:opacity-100 transition-all duration-300 delay-300 shadow-[0_0_10px_rgba(225,6,0,0.2)] pointer-events-none">
+                        THETA_ROT: <span class="text-f1-red font-bold animate-pulse">210°</span>
+                      </div>
+                    </div>
+                    
+                    <div class="mt-8 text-xs text-gray-400 opacity-60 pointer-events-none">(Hover diagram to deploy Macarena X-Mode)</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Shanghai Topology (Phase 2) -->
+            <section id="p2-track" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Shanghai Topology Breakdown</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">The 350kW Braking Dilemma</div>
+                </div>
+                <i class="fa-solid fa-route text-3xl text-gray-400"></i>
+              </div>
+
+              <!-- Nerd Detail Box -->
+              <div class="mb-8 p-6 rounded-2xl bg-[#131822]/90 backdrop-blur-md border border-f1-red/20 shadow-[0_8px_30px_rgba(225,6,0,0.1)] group w-full relative overflow-hidden hover:border-f1-red/40 transition-colors">
+                <div class="absolute bottom-0 inset-x-0 h-1/3 bg-gradient-to-t from-f1-red/10 to-transparent pointer-events-none"></div>
+
+                <div class="text-white tracking-widest text-xs uppercase font-bold mb-4 border-b border-white/10 pb-3 flex items-center gap-2 relative z-10">
+                   <i class="fa-solid fa-database text-f1-red drop-shadow-[0_0_5px_rgba(225,6,0,0.5)]"></i> Environment Metrics: Circuit vs System
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                  <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">TRACK_CONFIG:</strong> 5.451km / 16 Corners / 1.2km Back Straight.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">SECTOR_1_LOAD:</strong> T1/T2 360-degree tightening radius heavily loads Z-Mode seal.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">THROTTLE_TIME:</strong> -400m absolute full throttle compared to Albert Park.</span></li>
+                  </ul>
+                  <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">KINETIC_PROFILE:</strong> 'Recovery Utopia' via T6 / T14 heavy deceleration zones.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white text-f1-red">CUSTOMER_RISK:</strong> McLaren (+0.8s/lap kinetic loss) crippled by locked Mercedes PU mapping vs bespoke chassis dynamics.</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Insight 3: Brake Migration -->
+                <div class="glass-panel p-8 rounded-2xl border border-white/10 relative overflow-hidden group flex flex-col justify-between">
+                  <div class="absolute inset-0 bg-gradient-to-b from-yellow-500/5 to-transparent pointer-events-none"></div>
+                  
+                  <div>
+                    <div class="text-sm text-gray-400 uppercase tracking-wider mb-2">Brake Migration Anomalies</div>
+                    <div class="font-display text-3xl font-bold text-white mb-3">Software-Induced Spinning</div>
+                    <p class="text-sm text-gray-400 leading-relaxed max-w-[90%] mb-10 z-10 relative">
+                      Balancing hydraulic braking with aggressive 350kW reverse-torque regeneration proves difficult, causing sudden rear-axle locking.
+                    </p>
+                  </div>
+                  
+                  <!-- HUD Graphic -->
+                  <div class="relative w-full h-40 flex items-center justify-center mt-auto pb-4">
+                    <!-- Base ring -->
+                    <div class="absolute w-32 h-32 rounded-full border-[3px] border-white/10 pointer-events-none"></div>
+                    <!-- Front Bias (Hydraulic) -->
+                    <div class="absolute w-32 h-32 rounded-full border-4 border-transparent border-t-white border-r-white border-l-white rotate-[-45deg] opacity-40 pointer-events-none"></div>
+                    <!-- Rear Lockup Overlay (MGU-K) -->
+                    <div class="absolute w-32 h-32 rounded-full border-4 border-transparent border-b-yellow-500 group-hover:border-b-f1-red transition-all duration-[600ms] shadow-[0_4px_15px_rgba(234,179,8,0.2)] group-hover:shadow-[0_4px_25px_rgba(225,6,0,0.7)] pb-2 pointer-events-none"></div>
+                    
+                    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                      <i class="fa-solid fa-car-burst text-3xl text-yellow-500 group-hover:text-f1-red transition-colors duration-[600ms] drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]"></i>
+                      <span class="text-[10px] font-mono text-f1-red font-bold mt-1 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest bg-[#0B0E14] px-1 rounded absolute top-[65%]">Lockup</span>
+                    </div>
+                    
+                    <div class="absolute -bottom-2 w-full flex justify-between px-2 text-[10px] text-gray-500 font-mono tracking-widest pointer-events-none">
+                      <span>FRONT: 48%</span>
+                      <span class="text-yellow-500 group-hover:text-f1-red transition-colors duration-[600ms]">REAR: 52% [OVLD]</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Insight 2: McLaren -->
+                <div class="glass-panel p-8 rounded-2xl border border-white/10 relative overflow-hidden group">
+                  <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all"></div>
+                  <i class="fa-solid fa-wind text-3xl text-blue-500 mb-4 drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"></i>
+                  <div class="text-sm text-gray-400 uppercase tracking-wider mb-2">The Customer Team Paradox</div>
+                  <div class="font-display text-3xl font-bold text-white mb-3">McLaren (MCL40) Aero Drag</div>
+                  <p class="text-sm text-gray-400 leading-relaxed mb-4">
+                    Despite generating immense base downforce for the snails, the MCL40 suffers a severe straight-line drag penalty when 'X-Mode' active aero engages.
+                  </p>
+                  <div class="mt-4">
+                    <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+                      <span>McLaren Speed Trap</span>
+                      <span class="text-white font-bold">315 km/h</span>
+                    </div>
+                    <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="h-full bg-orange-500 w-[90%]"></div></div>
+                  </div>
+                  <div class="mt-2">
+                    <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+                      <span>Red Bull Speed Trap</span>
+                      <span class="text-white font-bold">321 km/h</span>
+                    </div>
+                    <div class="h-2 rounded-full bg-white/10 overflow-hidden"><div class="h-full bg-blue-500 w-[98%]"></div></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Tyres & Strategy (Phase 2) -->
+            <section id="p2-tyres" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Tyres & Strategy</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">Tribology & Cold Tearing</div>
+                </div>
+                <i class="fa-solid fa-snowflake text-3xl text-blue-300"></i>
+              </div>
+              <div class="glass-panel p-8 rounded-2xl border border-white/10">
+                <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                  The track was entirely resurfaced in August 2024. A year later, the bitumen binder has worn away, exposing the aggregate stones. With track ambients at a chilling 15°C, failure to generate core bulk temperature in the C3 Mediums forces the rubber to slide over the stones rather than grip them. This physical tearing strips chunks of polymer from the tread—a catastrophic destruction of lap time.
+                </p>
+
+                <!-- Nerd Detail Box -->
+                <div class="mb-8 p-6 rounded-2xl bg-[#131822]/90 backdrop-blur-md border border-f1-red/20 shadow-[0_8px_30px_rgba(225,6,0,0.1)] group max-w-3xl mx-auto relative overflow-hidden hover:border-f1-red/40 transition-colors">
+                  <div class="text-white tracking-widest text-xs uppercase font-bold mb-4 border-b border-white/10 pb-3 flex items-center gap-2 relative z-10">
+                     <i class="fa-solid fa-vial text-f1-red drop-shadow-[0_0_5px_rgba(225,6,0,0.5)]"></i> Compound Constraint Analysis
+                  </div>
+                  <ul class="space-y-2 text-sm text-gray-300 relative z-10">
+                    <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">ALLOCATION_PENALTY:</strong> Sprint weekend limits reduced to 12 sets total.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">INVENTORY:</strong> 2x C2 (Hard) | 4x C3 (Medium) | 6x C4 (Soft).</span></li>
+                    <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white text-f1-red">DEGRADATION_MODEL:</strong> C4 Soft structural failure via deep-tread graining calculated within 5 laps of heavy fuel running.</span></li>
+                    <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">STRAT_MANDATE:</strong> Universal C3 Medium start projected. High-load lateral wake (dirty air) in T7-T8 will violently accelerate sliding friction for following cars.</span></li>
+                  </ul>
+                </div>
+                
+                <!-- Interactive Graining Flowchart -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-between items-stretch p-6 bg-[#0B0E14] rounded-2xl border border-white/5 group/flowchart relative overflow-hidden shadow-inner mt-4">
+                  <!-- Connection Lines (desktop only) -->
+                  <div class="hidden sm:block absolute top-[40%] left-[5%] w-[90%] h-0.5 bg-white/10 pointer-events-none z-0"></div>
+                  <!-- Active glowing line -->
+                  <div class="hidden sm:block absolute top-[40%] left-[5%] h-0.5 w-0 bg-gradient-to-r from-blue-500 via-orange-500 to-f1-red transition-all duration-[1200ms] group-hover/flowchart:w-[90%] pointer-events-none drop-shadow-[0_0_8px_rgba(255,165,0,0.8)] z-0"></div>
+
+                  <div class="text-center flex-1 p-5 rounded-xl border border-transparent hover:border-blue-500/30 hover:bg-white/5 transition-all group/step cursor-default relative z-10 bg-[#131822]">
+                    <div class="absolute inset-x-0 bottom-0 h-1 bg-blue-500/0 group-hover/step:bg-blue-500 transition-colors"></div>
+                    <div class="text-blue-400 font-bold text-2xl mb-2 group-hover/step:translate-y-[-4px] transition-transform bg-[#131822] inline-block px-3 rounded-full relative z-10"><i class="fa-solid fa-temperature-arrow-down"></i> < 80°C</div>
+                    <div class="font-display text-sm tracking-widest text-white uppercase mt-1 relative z-10">Cold Bulk Temp</div>
+                    <div class="text-[10px] text-gray-500 mt-2 uppercase flex justify-center w-full"><span class="bg-[#131822] px-2 z-10">Target window missed</span></div>
+                  </div>
+                  
+                  <div class="flex items-center justify-center text-gray-600 sm:rotate-0 rotate-90 relative z-10 bg-[#0B0E14] px-1"><i class="fa-solid fa-chevron-right text-lg"></i></div>
+                  
+                  <div class="text-center flex-1 p-5 rounded-xl border border-transparent hover:border-orange-500/30 hover:bg-white/5 transition-all group/step cursor-default relative z-10 bg-[#131822]">
+                    <div class="absolute inset-x-0 bottom-0 h-1 bg-orange-500/0 group-hover/step:bg-orange-500 transition-colors"></div>
+                    <div class="text-orange-400 font-bold text-2xl mb-2 group-hover/step:translate-y-[-4px] transition-transform bg-[#131822] inline-block px-3 rounded-full relative z-10"><i class="fa-solid fa-repeat"></i> Sliding</div>
+                    <div class="font-display text-sm tracking-widest text-white uppercase mt-1 relative z-10">Surface Friction</div>
+                    <div class="text-[10px] text-gray-500 mt-2 uppercase flex justify-center w-full"><span class="bg-[#131822] px-2 z-10">Rubber scraping stone</span></div>
+                  </div>
+                  
+                  <div class="flex items-center justify-center text-gray-600 sm:rotate-0 rotate-90 relative z-10 bg-[#0B0E14] px-1"><i class="fa-solid fa-chevron-right text-lg"></i></div>
+                  
+                  <div class="text-center flex-1 p-5 rounded-xl border border-transparent hover:border-f1-red/40 hover:bg-f1-red/10 transition-all group/step cursor-pointer relative z-10 bg-[#131822] shadow-[0_0_15px_rgba(225,6,0,0.1)] hover:shadow-[0_0_20px_rgba(225,6,0,0.25)]">
+                    <div class="absolute inset-x-0 bottom-0 h-1 bg-f1-red/20 group-hover/step:bg-f1-red transition-colors animate-pulse"></div>
+                    <div class="text-f1-red font-bold text-2xl mb-2 group-hover/step:scale-110 transition-transform inline-block px-3 rounded-full drop-shadow-[0_0_8px_rgba(225,6,0,0.5)] relative z-10"><i class="fa-solid fa-bolt-lightning text-white"></i> Tearing</div>
+                    <div class="font-display text-sm tracking-widest text-white uppercase mt-1 relative z-10">Graining</div>
+                    
+                    <!-- Dynamic Tread Depth Bar -->
+                    <div class="mt-4 w-full h-1.5 bg-gray-800 rounded-full overflow-hidden relative shadow-inner z-10" title="Tread Depth Indicator">
+                       <div class="h-full bg-green-500 w-full transition-all duration-[1500ms] group-hover/step:w-[15%] group-hover/step:bg-f1-red relative overflow-hidden">
+                         <div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+                       </div>
+                    </div>
+                    <div class="text-[10px] text-gray-500 mt-1 uppercase flex justify-between z-10 relative">
+                       <span>Tread</span>
+                       <span class="opacity-0 group-hover/step:opacity-100 group-hover/step:text-f1-red text-[9px] font-bold transition-opacity delay-300 animate-pulse">CRITICAL LOSS</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Energy Management (Phase 2) -->
+            <section id="p2-energy" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Energy Management Crisis</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">Red Bull's 9.0 MJ Ceiling</div>
+                </div>
+                <i class="fa-solid fa-battery-empty text-3xl text-f1-red drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]"></i>
+              </div>
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                  <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                    Red Bull's proprietary powertrain software incorrectly interprets standard tire-warming burnouts on the out-lap as maximum-yield regenerative braking events. The internal battery fills to the strict FIA 9.0 MJ limit before the timed lap even starts. Drag the slider to simulate Verstappen's out-lap and observe the software error compounding.
+                  </p>
+
+                  <!-- Nerd Detail Box -->
+                  <div class="p-6 rounded-2xl bg-[#131822]/90 backdrop-blur-md border border-f1-red/20 shadow-[0_8px_30px_rgba(225,6,0,0.1)] group relative overflow-hidden hover:border-f1-red/40 transition-colors">
+                    <div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-f1-red/10 to-transparent pointer-events-none"></div>
+
+                    <div class="text-white tracking-widest text-xs uppercase font-bold mb-4 border-b border-white/10 pb-3 flex items-center gap-2 relative z-10">
+                       <i class="fa-solid fa-circle-exclamation text-f1-red drop-shadow-[0_0_5px_rgba(225,6,0,0.5)]"></i> Energy Deployment Failure Log
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-300 relative z-10">
+                      <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">LIMIT_OVT:</strong> 9.0 MJ / lap <span class="text-gray-500 text-xs">(Active Overtake Mode)</span></span></li>
+                      <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">LIMIT_STD:</strong> 8.5 MJ / lap <span class="text-gray-500 text-xs">(Passive Race Condition)</span></span></li>
+                      <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">LIMIT_HARVEST:</strong> 9.0 MJ / lap <span class="text-gray-500 text-xs">(Absolute Qualifying Cap)</span></span></li>
+                      <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white text-yellow-500">OVER_YIELD_EVENT:</strong> Brake-warming mistaken for absolute harvest -> Pre-lap buffer 100% full.</span></li>
+                      <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white text-f1-red drop-shadow-[0_0_5px_rgba(225,6,0,0.5)]">ECU_INTERVENTION:</strong> Hard battery cutoff ("Clipping") midway down back straight.</span></li>
+                      <li class="flex items-start gap-2"><span class="text-f1-red mt-0.5 text-[10px]"><i class="fa-solid fa-chevron-right"></i></span> <span><strong class="text-white">DRIVER_FEEDBACK:</strong> (Verstappen): <span class="font-mono text-xs text-orange-300">"Mathematical incapacity to fight; current era is a jungle of battery algorithms."</span></span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="p-6 rounded-2xl bg-[#0B0E14] border border-white/10 relative overflow-hidden flex flex-col justify-center shadow-inner group/dash">
+                  <div id="battery-clip-warning" class="absolute inset-0 bg-f1-red/20 opacity-0 transition-opacity duration-300 pointer-events-none flex items-center justify-center z-20">
+                    <div class="text-f1-red font-display text-5xl font-bold uppercase tracking-widest rotate-[-15deg] mix-blend-screen scale-150 animate-pulse border-4 border-f1-red px-6 py-2 bg-black/80 shadow-[0_0_30px_rgba(225,6,0,0.8)]">CLIPPED</div>
+                  </div>
+                  
+                  <!-- Steering Wheel Dash Style -->
+                  <div class="bg-[#131822] border-t-4 border-white/20 rounded-t-xl rounded-b-md p-4 mb-6 relative z-10 shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
+                    <div class="flex justify-between items-end mb-4 text-xs tracking-widest uppercase border-b border-white/10 pb-2">
+                      <div class="text-gray-400 flex flex-col">
+                        <span id="simulator-location" class="font-bold text-white mb-1 tracking-widest flex items-center"><i class="fa-solid fa-location-dot text-f1-red mr-2"></i> PIT EXIT</span>
+                        <span class="text-[9px]">Out-Lap Progress</span>
+                      </div>
+                      <div class="text-right flex flex-col">
+                        <span id="battery-value" class="text-3xl font-mono text-green-400 font-bold mb-1 drop-shadow-[0_0_8px_currentColor] transition-colors leading-none">0.00</span>
+                        <span class="text-gray-500 text-[9px]">SOE (MJ) / 9.0 LIMIT</span>
+                      </div>
+                    </div>
+                    
+                    <!-- SVG Deployment Curve Chart (Background) -->
+                    <div class="absolute inset-0 top-[60px] bottom-6 opacity-20 pointer-events-none overflow-hidden">
+                       <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 40">
+                          <polyline points="0,40 20,35 40,25 60,10 80,5 100,0" fill="none" stroke="currentColor" stroke-width="2" class="text-green-500" stroke-dasharray="4 2" />
+                       </svg>
+                    </div>
+
+                    <!-- Redline Marker at 9.0 -->
+                    <div class="relative w-full h-8 bg-[#0B0E14] rounded overflow-hidden border border-white/10 shadow-inner mb-2">
+                       <div class="absolute right-0 top-0 bottom-0 w-[5%] bg-f1-red/20 border-l border-f1-red z-10 flex items-center justify-center opacity-80 pointer-events-none">
+                         <span class="text-[7px] font-bold text-f1-red -rotate-90 tracking-widest absolute">LMT</span>
+                       </div>
+                       
+                       <div id="battery-fill" class="h-full bg-gradient-to-r from-green-600 to-green-400 transition-all duration-300 w-[0%] relative shadow-[inset_0_-2px_6px_rgba(0,0,0,0.6)]">
+                         <div class="absolute inset-0 mix-blend-overlay opacity-30" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 4px 4px;"></div>
+                       </div>
+                    </div>
+                  </div>
+
+                  <input id="outlap-slider" type="range" min="0" max="100" value="0" class="w-full h-3 rounded-lg appearance-none cursor-pointer font-mono outline-none mb-4 relative z-10 shadow-inner transition-colors focus:ring-2 focus:ring-f1-red/50" style="background: linear-gradient(to right, #4b5563 0%, #4b5563 100%);">
+                  <div class="flex justify-between w-full text-[10px] text-gray-500 font-mono tracking-widest px-1 mb-4 relative z-10 pointer-events-none">
+                     <span>SIMULATION TIMELINE</span>
+                     <span>&#10095;&#10095;&#10095;</span>
+                  </div>
+
+                  <div class="text-[11px] text-gray-300 flex items-start gap-3 relative z-10 p-3 bg-white/5 rounded border border-white/10 shadow-inner">
+                    <i id="battery-icon" class="fa-solid fa-microchip text-green-400 mt-0.5 transition-colors text-sm drop-shadow-[0_0_5px_currentColor]"></i> 
+                    <span id="battery-narrative" class="font-mono tracking-wide leading-relaxed">System initialized. Awaiting out-lap telemetry.</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Sprint Qualifying Interactive Dashboard -->
+            <div class="glass-panel rounded-2xl p-8 mb-12 border border-white/10 overflow-hidden relative mt-12">
+              <div class="absolute top-0 right-0 w-64 h-64 bg-f1-red/5 rounded-full blur-3xl pointer-events-none"></div>
+              
+              <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400 mb-1">Sprint Qualifying Overview</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase drop-shadow-[0_0_12px_rgba(255,255,255,0.3)]">Session Classification</div>
+                </div>
+              </div>
+
+              <!-- Consolidated SQ Table -->
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr class="text-xs uppercase tracking-widest text-gray-500 border-b border-white/10">
+                      <th class="pb-4 px-4 font-semibold">Pos</th>
+                      <th class="pb-4 px-4 font-semibold">No</th>
+                      <th class="pb-4 px-4 font-semibold">Driver</th>
+                      <th class="pb-4 px-4 font-semibold">Team</th>
+                      <th class="pb-4 px-4 font-semibold">Q1</th>
+                      <th class="pb-4 px-4 font-semibold">Q2</th>
+                      <th class="pb-4 px-4 font-semibold">Q3</th>
+                      <th class="pb-4 px-4 font-semibold text-right">Laps</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-sm">
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-white">1</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">63</td>
+                        <td class="py-3 px-4 text-gray-200 font-semibold">George Russell</td>
+                        <td class="py-3 px-4 text-gray-400"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#27F4D2]"></span>Mercedes</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.030</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:32.241</td>
+                        <td class="py-3 px-4 text-f1-red font-mono font-bold">1:31.520</td>
+                        <td class="py-3 px-4 text-right text-gray-400 font-mono">13</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-white">2</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">12</td>
+                        <td class="py-3 px-4 text-gray-200">Kimi Antonelli</td>
+                        <td class="py-3 px-4 text-gray-400"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#27F4D2]"></span>Mercedes</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.455</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:32.291</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:31.809</td>
+                        <td class="py-3 px-4 text-right text-gray-400 font-mono">13</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-white">3</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">4</td>
+                        <td class="py-3 px-4 text-gray-200">Lando Norris</td>
+                        <td class="py-3 px-4 text-gray-400"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#FF8000]"></span>McLaren</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.783</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.086</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:32.141</td>
+                        <td class="py-3 px-4 text-right text-gray-400 font-mono">13</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-white">4</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">44</td>
+                        <td class="py-3 px-4 text-gray-200">Lewis Hamilton</td>
+                        <td class="py-3 px-4 text-gray-400"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#E80020]"></span>Ferrari</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.148</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.042</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:32.161</td>
+                        <td class="py-3 px-4 text-right text-gray-400 font-mono">15</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-white">5</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">81</td>
+                        <td class="py-3 px-4 text-gray-200">Oscar Piastri</td>
+                        <td class="py-3 px-4 text-gray-400"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#FF8000]"></span>McLaren</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.813</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.038</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:32.224</td>
+                        <td class="py-3 px-4 text-right text-gray-400 font-mono">13</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-white">6</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">16</td>
+                        <td class="py-3 px-4 text-gray-200">Charles Leclerc</td>
+                        <td class="py-3 px-4 text-gray-400"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#E80020]"></span>Ferrari</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.194</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:32.602</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:32.528</td>
+                        <td class="py-3 px-4 text-right text-gray-400 font-mono">16</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-white">7</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">10</td>
+                        <td class="py-3 px-4 text-gray-200">Pierre Gasly</td>
+                        <td class="py-3 px-4 text-gray-400"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#0090FF]"></span>Alpine</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.970</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.405</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:32.888</td>
+                        <td class="py-3 px-4 text-right text-gray-400 font-mono">15</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-white">8</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1</td>
+                        <td class="py-3 px-4 text-gray-200">Max Verstappen</td>
+                        <td class="py-3 px-4 text-gray-400"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#3671C6]"></span>Red Bull Racing</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:34.170</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.564</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.254</td>
+                        <td class="py-3 px-4 text-right text-gray-400 font-mono">17</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-white">9</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">87</td>
+                        <td class="py-3 px-4 text-gray-200">Oliver Bearman</td>
+                        <td class="py-3 px-4 text-gray-400"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#FFFFFF]"></span>Haas F1 Team</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:34.280</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.501</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.409</td>
+                        <td class="py-3 px-4 text-right text-gray-400 font-mono">16</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-white">10</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">6</td>
+                        <td class="py-3 px-4 text-gray-200">Isack Hadjar</td>
+                        <td class="py-3 px-4 text-gray-400"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#3671C6]"></span>Red Bull Racing</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:34.447</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.620</td>
+                        <td class="py-3 px-4 text-gray-300 font-mono">1:33.723</td>
+                        <td class="py-3 px-4 text-right text-gray-400 font-mono">15</td>
+                      </tr>
+                      <!-- Q2 Eliminations -->
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-400">11</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">27</td>
+                        <td class="py-3 px-4 text-gray-400">Nico Hulkenberg</td>
+                        <td class="py-3 px-4 text-gray-500"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#F50537]"></span>Audi</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:33.997</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:33.635</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-500 font-mono">14</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-400">12</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">31</td>
+                        <td class="py-3 px-4 text-gray-400">Esteban Ocon</td>
+                        <td class="py-3 px-4 text-gray-500"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#FFFFFF]"></span>Haas F1 Team</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:34.087</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:33.639</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-500 font-mono">13</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-400">13</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">30</td>
+                        <td class="py-3 px-4 text-gray-400">Liam Lawson</td>
+                        <td class="py-3 px-4 text-gray-500"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#6692FF]"></span>Racing Bulls</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:34.110</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:33.714</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-500 font-mono">13</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-400">14</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">5</td>
+                        <td class="py-3 px-4 text-gray-400">Gabriel Bortoleto</td>
+                        <td class="py-3 px-4 text-gray-500"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#F50537]"></span>Audi</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:34.291</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:33.774</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-500 font-mono">14</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-400">15</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">41</td>
+                        <td class="py-3 px-4 text-gray-400">Arvid Lindblad</td>
+                        <td class="py-3 px-4 text-gray-500"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#6692FF]"></span>Racing Bulls</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:34.495</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:34.048</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-500 font-mono">13</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-400">16</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">43</td>
+                        <td class="py-3 px-4 text-gray-400">Franco Colapinto</td>
+                        <td class="py-3 px-4 text-gray-500"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#0090FF]"></span>Alpine</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:34.592</td>
+                        <td class="py-3 px-4 text-gray-400 font-mono">1:34.327</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-500 font-mono">12</td>
+                      </tr>
+                      <!-- Q1 Eliminations -->
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-500">17</td>
+                        <td class="py-3 px-4 text-gray-600 font-mono">55</td>
+                        <td class="py-3 px-4 text-gray-500">Carlos Sainz</td>
+                        <td class="py-3 px-4 text-gray-600"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#005AFF]"></span>Williams</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">1:34.761</td>
+                        <td class="py-3 px-4 text-gray-600 font-mono"></td>
+                        <td class="py-3 px-4 text-gray-600 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-600 font-mono">6</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-500">18</td>
+                        <td class="py-3 px-4 text-gray-600 font-mono">23</td>
+                        <td class="py-3 px-4 text-gray-500">Alexander Albon</td>
+                        <td class="py-3 px-4 text-gray-600"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#005AFF]"></span>Williams</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">1:35.305</td>
+                        <td class="py-3 px-4 text-gray-600 font-mono"></td>
+                        <td class="py-3 px-4 text-gray-600 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-600 font-mono">6</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-500">19</td>
+                        <td class="py-3 px-4 text-gray-600 font-mono">14</td>
+                        <td class="py-3 px-4 text-gray-500">Fernando Alonso</td>
+                        <td class="py-3 px-4 text-gray-600"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#229971]"></span>Aston Martin</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">1:35.581</td>
+                        <td class="py-3 px-4 text-gray-600 font-mono"></td>
+                        <td class="py-3 px-4 text-gray-600 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-600 font-mono">5</td>
+                      </tr>
+                      <tr class="border-b border-white/5 hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-500">20</td>
+                        <td class="py-3 px-4 text-gray-600 font-mono">18</td>
+                        <td class="py-3 px-4 text-gray-500">Lance Stroll</td>
+                        <td class="py-3 px-4 text-gray-600"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#229971]"></span>Aston Martin</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">1:36.151</td>
+                        <td class="py-3 px-4 text-gray-600 font-mono"></td>
+                        <td class="py-3 px-4 text-gray-600 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-600 font-mono">7</td>
+                      </tr>
+                      <tr class="hover:bg-white/5 transition-colors group">
+                        <td class="py-3 px-4 font-display font-bold text-gray-500">21</td>
+                        <td class="py-3 px-4 text-gray-600 font-mono">77</td>
+                        <td class="py-3 px-4 text-gray-500">Valtteri Bottas</td>
+                        <td class="py-3 px-4 text-gray-600"><span class="inline-block w-2 h-2 rounded-full mr-2 bg-[#A6A6A6]"></span>Cadillac</td>
+                        <td class="py-3 px-4 text-gray-500 font-mono">1:37.378</td>
+                        <td class="py-3 px-4 text-gray-600 font-mono"></td>
+                        <td class="py-3 px-4 text-gray-600 font-mono"></td>
+                        <td class="py-3 px-4 text-right text-gray-600 font-mono">8</td>
+                      </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+              <button id="complete-problem" onclick="completePhase('problem')"
+                class="px-8 py-4 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(225,6,0,0.35)]">
+                <i class="fa-solid fa-flag-checkered mr-2"></i> Checkered Flag: Unlock Solutions View
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -623,8 +1286,209 @@
             <div id="countdown-solution" class="font-mono text-2xl text-f1-red">Initializing...</div>
           </div>
           <div class="unlocked-view hidden">
-            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase text-center">The Solutions</h2>
-            <!-- Add content for The Solutions here -->
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase text-center drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">The Solutions</h2>
+            <p class="text-gray-400 text-center max-w-3xl mx-auto mb-16 text-lg">As the grid fractures behind Mercedes, teams are frantically deploying mechanical and aerodynamic countermeasures to overcome crippling energy deficits and aerodynamic drag.</p>
+            
+            <div class="space-y-12 mb-12">
+              
+              <!-- 1. Scuderia Ferrari -->
+              <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group border-l-[3px] border-l-[#E10600]">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#E10600]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row gap-8 relative z-10">
+                  <div class="md:w-5/12">
+                    <div class="flex items-center gap-3 mb-4">
+                      <div class="w-10 h-10 rounded bg-[#E10600] flex items-center justify-center shadow-[0_0_15px_rgba(225,6,0,0.5)]">
+                        <i class="fa-solid fa-horse-head text-white text-lg"></i>
+                      </div>
+                      <h3 class="font-display text-2xl font-bold text-white uppercase tracking-wider drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]">Scuderia Ferrari</h3>
+                    </div>
+                    <div class="text-xl text-white font-semibold mb-3">The <span class="text-[#E10600]">"Macarena" Active Aero</span> Revolution</div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                      To counter Mercedes' straight-line supremacy, Maranello has fast-tracked a visually radical rear wing upgrade. By physically rotating the entire upper element upside down in X-Mode, they convert drag into localized aerodynamic lift, synergizing perfectly with Lewis Hamilton's aggressive braking style.
+                    </p>
+                  </div>
+                  <div class="md:w-7/12">
+                    <div class="h-full p-5 rounded-xl bg-[#0B0E14] border border-[#E10600]/20 shadow-[0_4px_20px_rgba(225,6,0,0.05)] relative overflow-hidden group-hover:border-[#E10600]/40 transition-colors">
+                      <div class="flex items-center gap-2 text-white tracking-widest text-[10px] uppercase font-bold mb-4 border-b border-white/10 pb-2">
+                        <i class="fa-solid fa-satellite-dish text-[#E10600]"></i> Telemetry Terminal: SF-26 Upgrade
+                      </div>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <ul class="space-y-3 text-xs text-gray-300 font-mono">
+                            <li class="flex items-start gap-2"><span class="text-[#E10600] mt-0.5"><i class="fa-solid fa-angle-right"></i></span> <span><span class="text-gray-500">MECHANISM:</span> Flip-flop rear wing rotates 180-225 deg entirely in X-Mode.</span></li>
+                            <li class="flex items-start gap-2"><span class="text-[#E10600] mt-0.5"><i class="fa-solid fa-angle-right"></i></span> <span><span class="text-gray-500">CORRELATION:</span> Withheld in Melbourne; aggressively fast-tracked for China.</span></li>
+                          </ul>
+                        </div>
+                        <div class="bg-[#131822] p-4 rounded border border-[#E10600]/10 flex flex-col justify-center items-center text-center shadow-inner">
+                          <div class="text-gray-500 text-[10px] uppercase tracking-wider mb-2">Terminal Velocity Delta</div>
+                          <div class="text-3xl font-display font-bold text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">+5 to 8 <span class="text-sm text-[#E10600]">km/h</span></div>
+                          <div class="text-[9px] text-[#E10600] mt-2 uppercase tracking-wide">Stalls diffuser to amplify top speed</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. McLaren -->
+              <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group border-l-[3px] border-l-[#FF8700]">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#FF8700]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row gap-8 relative z-10">
+                  <div class="md:w-5/12">
+                    <div class="flex items-center gap-3 mb-4">
+                      <div class="w-10 h-10 rounded bg-[#FF8700] flex items-center justify-center shadow-[0_0_15px_rgba(255,135,0,0.5)]">
+                        <i class="fa-solid fa-rocket text-white text-lg"></i>
+                      </div>
+                      <h3 class="font-display text-2xl font-bold text-white uppercase tracking-wider drop-shadow-[0_0_8px_rgba(255,135,0,0.5)]">McLaren</h3>
+                    </div>
+                    <div class="text-xl text-white font-semibold mb-3">The <span class="text-[#FF8700]">Customer Team Paradox</span></div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                      While aerodynamically superb in high-speed corners, the MCL40 suffers a severe straight-line drag penalty. Despite bolting the identical Mercedes PU hardware into the rear of the car, systemic locked proprietary software leaves them unable to efficiently deploy energy over a stint.
+                    </p>
+                  </div>
+                  <div class="md:w-7/12">
+                    <div class="h-full p-5 rounded-xl bg-[#0B0E14] border border-[#FF8700]/20 shadow-[0_4px_20px_rgba(255,135,0,0.05)] relative overflow-hidden group-hover:border-[#FF8700]/40 transition-colors">
+                      <div class="flex items-center gap-2 text-white tracking-widest text-[10px] uppercase font-bold mb-4 border-b border-white/10 pb-2">
+                        <i class="fa-solid fa-server text-[#FF8700]"></i> Telemetry Terminal: MCL40 Deficit
+                      </div>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <ul class="space-y-3 text-xs text-gray-300 font-mono">
+                            <li class="flex items-start gap-2"><span class="text-[#FF8700] mt-0.5"><i class="fa-solid fa-angle-right"></i></span> <span><span class="text-gray-500">AERO_LOAD:</span> Steeper static rear wing angle maximizes Z-Mode grip but costs X-Mode aero efficiency.</span></li>
+                            <li class="flex items-start gap-2"><span class="text-[#FF8700] mt-0.5"><i class="fa-solid fa-angle-right"></i></span> <span><span class="text-gray-500">SYS_LOCK:</span> Lack of internal software calibrations & proprietary battery algorithms vs Works Mercedes.</span></li>
+                          </ul>
+                        </div>
+                        <div class="grid grid-rows-2 gap-3">
+                            <div class="bg-[#131822] p-3 rounded border border-white/5 flex justify-between items-center px-4 shadow-inner">
+                                <span class="text-gray-500 text-[10px] uppercase tracking-wider">Speed Trap (X-Mode)</span>
+                                <span class="text-white font-mono text-base font-bold">315 <span class="text-gray-600 text-[10px] ml-1">vs RB 321 km/h</span></span>
+                            </div>
+                            <div class="bg-[#131822] p-3 rounded border border-[#FF8700]/20 flex justify-between items-center px-4 shadow-inner">
+                                <span class="text-[#FF8700] text-[10px] uppercase tracking-wider">Race Stint Delta</span>
+                                <span class="text-[#FF8700] font-mono text-base font-bold">-0.800s <span class="text-[#FF8700]/50 text-[10px] ml-1">vs Mercedes Works</span></span>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3. Haas F1 Team -->
+              <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group border-l-[3px] border-l-white">
+                <div class="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row gap-8 relative z-10">
+                  <div class="md:w-5/12">
+                    <div class="flex items-center gap-3 mb-4">
+                      <div class="w-10 h-10 rounded bg-white flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+                        <i class="fa-solid fa-fighter-jet text-black text-lg"></i>
+                      </div>
+                      <h3 class="font-display text-2xl font-bold text-white uppercase tracking-wider drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]">Haas F1</h3>
+                    </div>
+                    <div class="text-xl text-white font-semibold mb-3">A <span class="text-gray-300">Collaborative Midfield Threat</span></div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                      Emerging as a surprisingly potent force at the front of the midfield. Through a highly collaborative relationship, Maranello is openly sharing detailed deployment matrices with Haas engineers, allowing them to extract massive efficiency from their Ferrari power units despite a physically slower chassis.
+                    </p>
+                  </div>
+                  <div class="md:w-7/12">
+                     <div class="h-full p-5 rounded-xl bg-[#0B0E14] border border-white/10 shadow-[0_4px_20px_rgba(255,255,255,0.05)] relative overflow-hidden group-hover:border-white/30 transition-colors">
+                      <div class="flex items-center gap-2 text-white tracking-widest text-[10px] uppercase font-bold mb-4 border-b border-white/10 pb-2">
+                        <i class="fa-solid fa-network-wired text-white"></i> Telemetry Terminal: Haas Integration
+                      </div>
+                      <div class="grid grid-cols-1 gap-4">
+                          <ul class="space-y-3 text-xs text-gray-300 font-mono">
+                            <li class="flex items-start gap-2"><span class="text-white mt-0.5"><i class="fa-solid fa-angle-right"></i></span> <span><span class="text-gray-500">MGU-K MAPS:</span> Receiving direct, optimized gear usage matrices and lifting thresholds from Ferrari.</span></li>
+                            <li class="flex items-start gap-2"><span class="text-white mt-0.5"><i class="fa-solid fa-angle-right"></i></span> <span><span class="text-gray-500">RESULT:</span> Allowed rookie Oliver Bearman to safely qualify P9 by maximizing single-lap PU deployment limits.</span></li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4. Alpine -->
+              <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group border-l-[3px] border-l-[#0090FF]">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#0090FF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="flex flex-col md:flex-row gap-8 relative z-10">
+                  <div class="md:w-5/12">
+                    <div class="flex items-center gap-3 mb-4">
+                      <div class="w-10 h-10 rounded bg-[#0090FF] flex items-center justify-center shadow-[0_0_15px_rgba(0,144,255,0.5)]">
+                        <i class="fa-solid fa-wave-square text-white text-lg"></i>
+                      </div>
+                      <h3 class="font-display text-2xl font-bold text-white uppercase tracking-wider drop-shadow-[0_0_8px_rgba(0,144,255,0.5)]">Alpine</h3>
+                    </div>
+                    <div class="text-xl text-white font-semibold mb-3">The <span class="text-[#0090FF]">Pragmatic Recovery</span></div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                      Following a disastrous Melbourne showing, Alpine abandoned panic. They systematically transitioned to an Audi-style rear wing profile and completely altered their aerodynamic slip-angle setup to cover up the inherent deployment deficits crippling the Renault 2026 power unit.
+                    </p>
+                  </div>
+                  <div class="md:w-7/12">
+                    <div class="h-full p-5 rounded-xl bg-[#0B0E14] border border-[#0090FF]/20 shadow-[0_4px_20px_rgba(0,144,255,0.05)] relative overflow-hidden group-hover:border-[#0090FF]/40 transition-colors">
+                      <div class="flex items-center gap-2 text-white tracking-widest text-[10px] uppercase font-bold mb-4 border-b border-white/10 pb-2">
+                        <i class="fa-solid fa-wind text-[#0090FF]"></i> Telemetry Terminal: Renault PU Override
+                      </div>
+                      <div class="grid grid-cols-1 gap-4">
+                          <ul class="space-y-3 text-xs text-gray-300 font-mono">
+                            <li class="flex items-start gap-2"><span class="text-[#0090FF] mt-0.5"><i class="fa-solid fa-angle-right"></i></span> <span><span class="text-gray-500">AERO_SHIFT:</span> Abandoned initial rear wing philosophy in favor of maximizing X-Mode aerodynamic efficiency.</span></li>
+                            <li class="flex items-start gap-2"><span class="text-[#0090FF] mt-0.5"><i class="fa-solid fa-angle-right"></i></span> <span><span class="text-gray-500">RESULT:</span> Systematic structural cover-up for limited Renault PU battery deployment down the 1.2km main straight. Secured P7 in SQ.</span></li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 5. Red Bull Racing -->
+              <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group border-l-[3px] border-l-[#0600EF]">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#0600EF]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div class="absolute inset-0 border-2 border-dashed border-[#FFC72C]/20 pointer-events-none m-2 rounded-xl group-hover:border-[#FFC72C]/40 transition-colors"></div>
+                <div class="flex flex-col md:flex-row gap-8 relative z-10">
+                  <div class="md:w-5/12">
+                    <div class="flex items-center gap-3 mb-4">
+                      <div class="w-10 h-10 rounded bg-[#0600EF] flex items-center justify-center shadow-[0_0_15px_rgba(6,0,239,0.5)] border border-[#FFC72C]">
+                        <i class="fa-solid fa-bolt text-[#FFC72C] text-lg"></i>
+                      </div>
+                      <h3 class="font-display text-2xl font-bold text-white uppercase tracking-wider drop-shadow-[0_0_8px_rgba(6,0,239,0.5)]">Red Bull Racing</h3>
+                    </div>
+                    <div class="text-xl text-white font-semibold mb-3">The <span class="text-[#FFC72C]">Energy Deployment Crisis</span></div>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                      The reigning champions are experiencing a systemic collapse of their internal kinetic cycle. Red Bull Powertrains software incorrectly interprets aggressive out-lap tire warming as max-yield MGU-K harvesting. The battery hits its legal limit before the lap even begins.
+                    </p>
+                  </div>
+                  <div class="md:w-7/12">
+                    <div class="h-full p-5 rounded-xl bg-[#0B0E14] border border-[#FFC72C]/30 shadow-[0_4px_20px_rgba(255,199,44,0.05)] relative overflow-hidden group-hover:border-[#FFC72C]/60 transition-colors">
+                      <div class="absolute top-4 right-4 text-[#FFC72C] animate-pulse">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                      </div>
+                      <div class="flex items-center gap-2 text-[#FFC72C] tracking-widest text-[10px] uppercase font-bold mb-4 border-b border-[#FFC72C]/20 pb-2">
+                        <i class="fa-solid fa-bug"></i> Terminal Error: Calibration Anomalies Detected
+                      </div>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <ul class="space-y-3 text-xs text-gray-300 font-mono">
+                            <li class="flex items-start gap-2"><span class="text-[#FFC72C] mt-0.5"><i class="fa-solid fa-xmark"></i></span> <span><span class="text-gray-500">MGU-K MAPS:</span> Over-harvests on formation burnouts.</span></li>
+                            <li class="flex items-start gap-2"><span class="text-[#E10600] mt-0.5"><i class="fa-solid fa-xmark"></i></span> <span><span class="text-[#E10600]">CRITICAL CLIPPING:</span> 350kW deployment violently ceases midway down back straight as 9.0MJ limit breaches early.</span></li>
+                          </ul>
+                        </div>
+                        <div class="bg-[#131822] p-4 rounded border border-[#FFC72C]/30 flex flex-col justify-center items-center text-center shadow-[inset_0_0_15px_rgba(225,6,0,0.15)]">
+                          <div class="text-gray-400 text-[10px] uppercase tracking-wider mb-2">Verstappen Deficit</div>
+                          <div class="text-3xl font-display font-bold text-[#E10600] drop-shadow-[0_0_8px_rgba(225,6,0,0.3)]">+1.734s <span class="text-sm font-sans text-gray-500">off Pole</span></div>
+                          <div class="text-[9px] text-[#FFC72C] mt-2 uppercase tracking-wide">" Mathematically incapable of fighting "</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            
+            <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+              <button id="complete-solution" onclick="completePhase('solution')"
+                class="px-8 py-4 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(225,6,0,0.35)]">
+                <i class="fa-solid fa-flag-checkered mr-2"></i> Confirm Final Predictions: Unlock The End Game
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -643,7 +1507,7 @@
             <div id="countdown-endgame" class="font-mono text-2xl text-f1-red">Initializing...</div>
           </div>
           <div class="unlocked-view hidden">
-            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase text-center">The End Game</h2>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase text-center drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">The End Game</h2>
             <!-- Add content for The End Game here -->
           </div>
         </div>
@@ -953,6 +1817,37 @@
       }
     });
 
+    // McLaren speed trap bar chart
+    new Chart(document.getElementById('mclarenSpeedChart'), {
+      type: 'bar',
+      data: {
+        labels: ['McLaren', 'Mercedes', 'Red Bull'],
+        datasets: [{
+          label: 'Speed Trap (km/h)',
+          data: [315, 320, 321],
+          backgroundColor: [
+            'rgba(251, 146, 60, 0.55)', // McLaren orange-ish
+            'rgba(148, 163, 184, 0.45)', // Mercedes silver
+            'rgba(59, 130, 246, 0.45)'    // Blue for Red Bull
+          ],
+          borderColor: [
+            'rgba(251, 146, 60, 1)',
+            'rgba(148, 163, 184, 1)',
+            'rgba(59, 130, 246, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.x} km/h` } } },
+        scales: {
+          x: { grid: { color: gridColor }, min: 300, max: 325, ticks: { color: tickColor } },
+          y: { grid: { color: 'transparent' }, ticks: { color: tickColor } }
+        }
+      }
+    });
+
     // Initialize progression state after DOM is ready.
     updateProgressUI(PHASES[Math.min(unlockedIndex, PHASES.length - 1)]);
 
@@ -962,7 +1857,7 @@
     async function checkPhaseStatuses() {
         console.log("Checking phase statuses...");
         const futurePhases = ['problem', 'solution', 'endgame'];
-        const unlockDatePhase2 = new Date('2026-03-13T22:00:00+08:00'); // Fri after FP and Sprint Quali
+        const unlockDatePhase2 = new Date('2025-03-13T22:00:00+08:00'); // Unlocked for review (past date)
         const unlockDatePhase3 = new Date('2026-03-14T22:00:00+08:00'); // Sat after Sprint and Quali
         const unlockDatePhase4 = new Date('2026-03-15T22:00:00+08:00'); // Sun after Race
 
@@ -1047,6 +1942,133 @@
 
         processPhaseLocks(unlockDatePhase2, unlockDatePhase3, unlockDatePhase4, futurePhases);
         startLiveCountdowns(unlockDatePhase2, unlockDatePhase3, unlockDatePhase4, futurePhases);
+    }
+
+    // Dynamic scroller for active phase
+    window.scrollToSection = (event, sectionSuffix) => {
+      event.preventDefault();
+      // Find which phase is active
+      const activePhaseIndex = unlockedIndex; // though it could be a previously viewed one
+      let activePhaseStr = 'overview';
+      document.querySelectorAll('.phase-content').forEach(p => {
+        if(p.classList.contains('active')) {
+          activePhaseStr = p.id.replace('phase-', '');
+        }
+      });
+      
+      const phasePrefix = activePhaseStr === 'overview' ? 'p1' : 
+                          activePhaseStr === 'problem' ? 'p2' : 
+                          activePhaseStr === 'solution' ? 'p3' : 'p4';
+      
+      const targetId = `${phasePrefix}-${sectionSuffix}`;
+      const targetEl = document.getElementById(targetId);
+      
+      if(targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Fallback or ignore if the specific phase hasn't implemented that section yet
+        console.warn(`Section ${targetId} not found in this phase.`);
+      }
+    };
+
+    // Dynamic scroller for active phase
+    window.scrollToSection = (event, sectionSuffix) => {
+      event.preventDefault();
+      // Find which phase is active
+      const activePhaseIndex = unlockedIndex; // though it could be a previously viewed one
+      let activePhaseStr = 'overview';
+      document.querySelectorAll('.phase-content').forEach(p => {
+        if(p.classList.contains('active')) {
+          activePhaseStr = p.id.replace('phase-', '');
+        }
+      });
+      
+      const phasePrefix = activePhaseStr === 'overview' ? 'p1' : 
+                          activePhaseStr === 'problem' ? 'p2' : 
+                          activePhaseStr === 'solution' ? 'p3' : 'p4';
+      
+      const targetId = `${phasePrefix}-${sectionSuffix}`;
+      const targetEl = document.getElementById(targetId);
+      
+      if(targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Fallback or ignore if the specific phase hasn't implemented that section yet
+        console.warn(`Section ${targetId} not found in this phase.`);
+      }
+    };
+
+    // --- NEW: Phase 2 Battery Simulator Logic ---
+    const outlapSlider = document.getElementById('outlap-slider');
+    if(outlapSlider) {
+      // Trigger an initial render to reflect true 0 state
+      const initialValue = document.getElementById('battery-value');
+      const initialFill = document.getElementById('battery-fill');
+      if (initialValue && initialFill) {
+        initialValue.textContent = "4.50";
+        initialFill.style.width = "50%";
+      }
+
+      outlapSlider.addEventListener('input', (e) => {
+        const progress = parseFloat(e.target.value);
+        const warningBg = document.getElementById('battery-clip-warning');
+        const fillBar = document.getElementById('battery-fill');
+        const valueText = document.getElementById('battery-value');
+        const locText = document.getElementById('simulator-location');
+        const narrative = document.getElementById('battery-narrative');
+        const icon = document.getElementById('battery-icon');
+        
+        // Update slider track background
+        e.target.style.background = `linear-gradient(to right, white 0%, white ${progress}%, #4b5563 ${progress}%, #4b5563 100%)`;
+
+        // Calculate MJ based on progress. 
+        // Starts at 4.5, accelerates filling due to the bug.
+        // Formula: 4.5 + (progress/100)*4.5 + (exponential bump if > 70%)
+        let calculatedMj = 4.5 + (progress / 100) * 4.5;
+        if (progress > 70) calculatedMj += ((progress - 70) / 30) * 0.5; // Simulate extreme jump at the end
+        if (calculatedMj > 9.0) calculatedMj = 9.0;
+        
+        const mjStr = calculatedMj.toFixed(2);
+        valueText.textContent = mjStr;
+        fillBar.style.width = `${(Math.min(calculatedMj, 9.0) / 9.0) * 100}%`;
+
+        // Location text logic
+        if (progress < 25) locText.innerHTML = `<i class="fa-solid fa-location-dot text-f1-red mr-2"></i>Turns 1-4 (Snail)`;
+        else if (progress < 50) locText.innerHTML = `<i class="fa-solid fa-location-dot text-f1-red mr-2"></i>Turns 6 & 8`;
+        else if (progress < 80) locText.innerHTML = `<i class="fa-solid fa-location-dot text-f1-red mr-2"></i>Turn 11 (Burnout)`;
+        else if (progress < 95) locText.innerHTML = `<i class="fa-solid fa-location-dot text-f1-red mr-2"></i>Turn 14 Entry`;
+        else locText.innerHTML = `<i class="fa-solid fa-flag-checkered text-green-500 mr-2"></i>Start/Finish Line`;
+
+        // Color and state logic based on calculated MJ using gradients
+        if (calculatedMj >= 9.0) {
+          // CLIPPED STATE (100%)
+          fillBar.classList.remove('from-green-600', 'to-green-400', 'from-orange-500', 'to-orange-400');
+          fillBar.classList.add('from-red-600', 'to-red-500');
+          valueText.classList.remove('text-green-400', 'text-orange-400');
+          valueText.classList.add('text-f1-red');
+          icon.className = 'fa-solid fa-triangle-exclamation text-f1-red mt-0.5 transition-colors animate-bounce text-sm drop-shadow-[0_0_5px_currentColor]';
+          warningBg.classList.replace('opacity-0', 'opacity-100');
+          narrative.innerHTML = `<span class="text-f1-red font-bold">100% capacity triggers absolute deployment shutdown!</span> ECU intervention clips the 350kW MGU-K. Result: +1.734s deficit.`;
+        } else if (calculatedMj > 7.5) {
+          // DANGER STATE
+          fillBar.classList.remove('from-green-600', 'to-green-400', 'from-red-600', 'to-red-500');
+          fillBar.classList.add('from-orange-500', 'to-orange-400');
+          valueText.classList.remove('text-green-400', 'text-f1-red');
+          valueText.classList.add('text-orange-400');
+          icon.className = 'fa-solid fa-battery-three-quarters text-orange-400 mt-0.5 transition-colors text-sm drop-shadow-[0_0_5px_currentColor]';
+          warningBg.classList.replace('opacity-100', 'opacity-0');
+          narrative.innerHTML = `Software erroneously categorizing tire-warming burnouts as heavy regenerative events. Limit approaching.`;
+        } else {
+          // NORMAL STATE
+          fillBar.classList.remove('from-orange-500', 'to-orange-400', 'from-red-600', 'to-red-500');
+          fillBar.classList.add('from-green-600', 'to-green-400');
+          valueText.classList.remove('text-orange-400', 'text-f1-red');
+          valueText.classList.add('text-green-400');
+          icon.className = 'fa-solid fa-microchip text-green-400 mt-0.5 transition-colors text-sm drop-shadow-[0_0_5px_currentColor]';
+          warningBg.classList.replace('opacity-100', 'opacity-0');
+          narrative.innerHTML = `Normal deployment phase. Regenerative systems online. Storage nominal.`;
+        }
+      });
     }
 
     // Run the lock check as soon as the page loads
