@@ -349,7 +349,7 @@
                 </a>
               </h2>
               <p class="text-gray-400 text-lg leading-relaxed">
-                The detailed report view. Use the top navigation to jump across the key pillars: active aero switching,
+                The definitive blueprint for the Japanese Grand Prix. Use the top navigation to jump across the key pillars: active aero switching,
                 Suzuka topology, tyre thermodynamics and strategy windows, and the evolving energy management
                 framework.
               </p>
@@ -449,27 +449,18 @@
               <div class="glass-panel p-8 rounded-2xl relative overflow-hidden">
                 <div class="flex items-center justify-between mb-6">
                   <div>
-                    <div class="text-xs tracking-widest uppercase text-gray-400">2026 car delta (headline)</div>
+                    <div class="text-xs tracking-widest uppercase text-gray-400">Velocity trajectory</div>
                     <div class="font-display text-2xl font-bold text-white uppercase flex items-center gap-2">
-                      Smaller, lighter, more electric
-                      <a href="resources/F1 Japanese GP Deep Dive.pdf" target="_blank"
-                        class="text-xs text-f1-red hover:text-white transition-colors">
-                        <i class="fa-solid fa-file-pdf"></i>
-                      </a>
+                       Z-Mode vs X-Mode
                     </div>
                   </div>
-                  <span
-                    class="text-[10px] font-bold bg-f1-red/20 text-f1-red px-3 py-1 rounded-full border border-f1-red/50 tracking-wider uppercase">Rules
-                    shift</span>
+                  <span class="text-[10px] font-bold bg-blue-500/20 text-blue-500 px-3 py-1 rounded-full border border-blue-500/50 tracking-wider uppercase">Active Aero</span>
                 </div>
-                <canvas id="regBar" height="140"></canvas>
-                <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300">
-                  <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
-                    <div class="text-xs tracking-widest uppercase text-gray-400">Minimum weight</div>
-                    <div class="mt-1 font-display text-3xl font-bold text-white">768<span
-                        class="text-xl text-gray-500 ml-1">kg</span></div>
-                    <div class="mt-1 text-xs text-gray-400">30 kg reduction.</div>
-                  </div>
+                <canvas id="aeroVelocityLine" height="180"></canvas>
+                <div class="mt-6 text-sm text-gray-300 p-4 rounded-xl bg-white/5 border border-white/10">
+                   <span class="text-f1-red font-bold">Observation:</span> X-Mode yields vastly superior straight-line speed, but Z-Mode is strictly required for the S-Curves. 
+                </div>
+              </div>
                   <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
                     <div class="text-xs tracking-widest uppercase text-gray-400">Tyre width cut</div>
                     <div class="mt-1 font-display text-3xl font-bold text-white">−25<span
@@ -530,229 +521,139 @@
         </div>
       </section>
 
-      <!-- Tyres & Strategy (moved here) -->
+      <!-- Tyres & Strategy (Redesigned) -->
       <section id="p1-tyres" class="scroll-mt-40 py-20 relative border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
             <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase inline-block group">
-              Tyres & <span class="text-f1-red drop-shadow-[0_0_10px_rgba(225,6,0,0.5)]">Strategy</span>
-              <a href="resources/F1 Japanese GP Deep Dive.pdf" target="_blank"
-                class="text-xs text-f1-red hover:text-white ml-2 transition-colors">
-                <i class="fa-solid fa-file-pdf"></i>
-              </a>
+              Tyres & <span class="text-f1-red drop-shadow-[0_0_10px_rgba(225,6,0,0.5)]">Thermodynamics</span>
             </h2>
             <p class="max-w-2xl mx-auto text-gray-400">
-              Pirelli brings C2/C3/C4 with high minimum pressures. The 2026 projection shifts the one-stop window later
-              (L17–L20) if surface ageing reduces 2025 graining.
+              Pirelli brings C1/C2/C3 compounds to combat the brutal extended lateral loads through Spoon Curve and the S-Curves.
             </p>
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div>
-              <h3 class="font-display text-2xl font-bold text-white mb-6 uppercase tracking-wider">Constraints</h3>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-                  <div class="text-xs tracking-widest uppercase text-gray-400">Min pressures</div>
-                  <div class="mt-3 flex items-baseline justify-between">
-                    <div class="font-display text-4xl font-bold text-white">26.0</div>
-                    <div class="text-xs text-gray-400 uppercase tracking-widest">psi front</div>
-                  </div>
-                  <div class="mt-2 flex items-baseline justify-between">
-                    <div class="font-display text-4xl font-bold text-white">22.0</div>
-                    <div class="text-xs text-gray-400 uppercase tracking-widest">psi rear</div>
-                  </div>
-                </div>
-                <div class="p-6 rounded-2xl bg-white/5 border border-white/10">
-                  <div class="text-xs tracking-widest uppercase text-gray-400">Camber limits</div>
-                  <div class="mt-3 flex items-baseline justify-between">
-                    <div class="font-display text-4xl font-bold text-white">−3.00°</div>
-                    <div class="text-xs text-gray-400 uppercase tracking-widest">front</div>
-                  </div>
-                  <div class="mt-2 flex items-baseline justify-between">
-                    <div class="font-display text-4xl font-bold text-white">−1.75°</div>
-                    <div class="text-xs text-gray-400 uppercase tracking-widest">rear</div>
-                  </div>
-                </div>
+            <div class="glass-panel p-8 rounded-2xl relative">
+              <h3 class="font-display text-2xl font-bold text-white mb-4 uppercase tracking-wider">Spoon Curve Simulation</h3>
+              <p class="text-gray-400 text-sm mb-6">Adjust corner entry velocity to simulate the thermal load multiplier across the front-left and rear-left tyres.</p>
+              
+              <div class="mb-6 border-l-2 border-f1-red pl-4">
+                 <div class="text-xs uppercase text-gray-500 mb-1">Entry Speed Tracker</div>
+                 <div class="flex items-baseline gap-2">
+                    <span id="spoonSpeedOut" class="font-display text-4xl font-bold text-white">250</span>
+                    <span class="text-gray-400 text-sm">km/h</span>
+                 </div>
+                 <input type="range" id="spoonSlider" min="230" max="270" value="250" class="w-full mt-4 accent-red-600">
               </div>
-              <div class="mt-6 p-6 rounded-2xl bg-white/5 border border-white/10">
-                <div class="flex items-center justify-between gap-4 flex-wrap">
-                  <div>
-                    <div class="text-xs tracking-widest uppercase text-gray-400">Pit window explorer</div>
-                    <div class="mt-1 font-display text-2xl font-bold text-white uppercase">Modelled one‑stop timing
-                    </div>
-                  </div>
-                  <div class="flex items-center gap-2 text-xs text-gray-400">
-                    <span>2025</span>
-                    <button id="yearToggle"
-                      class="px-3 py-1 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition text-white"
-                      aria-pressed="true" title="Toggle 2025 vs 2026 model">2026</button>
-                    <span>2026</span>
-                  </div>
-                </div>
-                <div class="mt-4">
-                  <div class="flex items-center justify-between text-xs text-gray-400">
-                    <span>Lap 1</span>
-                    <span>Lap 56</span>
-                  </div>
-                  <div class="mt-2 h-3 rounded-full bg-white/5 border border-white/10 overflow-hidden">
-                    <div id="pitWindowBar" class="h-full bg-f1-red"></div>
-                  </div>
-                  <div class="mt-3 text-sm text-gray-300">
-                    Suggested stop: <span class="font-bold text-white" id="pitWindowLabel">L17–L20</span>
-                    <span class="text-gray-500"> (Medium → Hard baseline)</span>
-                  </div>
-                </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                 <div class="p-4 bg-white/5 border border-white/10 rounded-xl relative overflow-hidden">
+                    <div id="tempBg1" class="absolute top-0 left-0 w-full h-1 bg-yellow-500 transition-all"></div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-widest mt-2">Surface Temp (FL)</div>
+                    <div id="spoonTempFL" class="text-2xl font-bold text-yellow-500 font-display mt-1">115°C</div>
+                 </div>
+                 <div class="p-4 bg-white/5 border border-white/10 rounded-xl relative overflow-hidden">
+                    <div id="tempBg2" class="absolute top-0 left-0 w-full h-1 bg-orange-500 transition-all"></div>
+                    <div class="text-[10px] text-gray-400 uppercase tracking-widest mt-2">Core Temp (RL)</div>
+                    <div id="spoonTempRL" class="text-2xl font-bold text-orange-500 font-display mt-1">125°C</div>
+                 </div>
               </div>
             </div>
+            
             <div class="glass-panel p-8 rounded-2xl">
               <div class="flex items-center justify-between mb-6">
                 <div>
-                  <div class="text-xs tracking-widest uppercase text-gray-400">Tyre story</div>
-                  <div class="font-display text-2xl font-bold text-white uppercase">Front‑left thermal risk</div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Corner Breakdown</div>
+                  <div class="font-display text-2xl font-bold text-white uppercase">Sector Stress Load</div>
                 </div>
               </div>
-              <canvas id="tyreRadar" height="170"></canvas>
-              <div class="mt-4 text-sm text-gray-400">
-                Qualitative stress map of Suzuka’s sustained right-hand loading.
-              </div>
+              <canvas id="cornerStressBar" height="170"></canvas>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Energy (moved here) -->
+      <!-- Energy (Redesigned) -->
       <section id="p1-energy" class="scroll-mt-40 py-20 relative bg-[#131822] border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
-            <h2
-              class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase flex items-center justify-center gap-2">
-              Energy Management
-              <a href="resources/F1 Japanese GP Deep Dive.pdf" target="_blank"
-                class="text-xs text-f1-red hover:text-white transition-colors">
-                <i class="fa-solid fa-file-pdf"></i>
-              </a>
-            </h2>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">Energy Equilibrium</h2>
             <p class="max-w-2xl mx-auto text-gray-400">
-              A 50/50 philosophy makes deployment and harvesting strategy decisive. Suzuka’s topology allows more
-              “traditional” driving than Melbourne, but still punishes poor banking for the back straight.
+              The 50/50 power split triggers "Super Clipping" on long straights. Teams must optimize harvesting zones at T11 and T16.
             </p>
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div class="glass-panel rounded-2xl p-8">
+            <div class="glass-panel p-8 rounded-2xl">
               <div class="flex items-center justify-between mb-6">
                 <div>
-                  <div class="text-xs tracking-widest uppercase text-gray-400">Power split</div>
-                  <div class="font-display text-2xl font-bold text-white uppercase">ICE vs MGU‑K</div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Deployment Trajectory</div>
+                  <div class="font-display text-2xl font-bold text-white uppercase">Super Clipping Profile</div>
                 </div>
-                <span
-                  class="text-[10px] font-bold bg-f1-red/20 text-f1-red px-3 py-1 rounded-full border border-f1-red/50 tracking-wider uppercase">
-                  2026 PU
-                </span>
+                <span class="text-[10px] bg-red-900/40 text-red-500 px-3 py-1 rounded-full border border-red-500/50 uppercase font-bold">At Limit</span>
               </div>
-              <canvas id="powerDonut" height="170"></canvas>
-              <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
-                  <div class="text-xs tracking-widest uppercase text-gray-400">ICE output</div>
-                  <div class="mt-1 font-display text-3xl font-bold text-white">400<span
-                      class="text-xl text-gray-500 ml-1">kW</span></div>
-                </div>
-                <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
-                  <div class="text-xs tracking-widest uppercase text-gray-400">MGU‑K output</div>
-                  <div class="mt-1 font-display text-3xl font-bold text-white">350<span
-                      class="text-xl text-gray-500 ml-1">kW</span></div>
-                </div>
-              </div>
+              <canvas id="clippingAreaChart" height="200"></canvas>
+              <div class="mt-4 text-xs text-gray-500 text-center">Chart displays battery state-of-charge over the defining straight.</div>
             </div>
-            <div class="glass-panel rounded-2xl p-8">
-              <div class="text-xs tracking-widest uppercase text-gray-400">Delta explorer</div>
-              <div class="mt-2 font-display text-2xl font-bold text-white uppercase">Speed delta vs stability</div>
-              <div class="mt-5">
-                <p class="text-gray-400 text-sm mb-4">The 2026 regulations introduce a critical trade-off: teams can
-                  configure their cars for higher top speeds (low drag) or greater stability in corners (high
-                  downforce). This interactive tool demonstrates the impact of that choice on lap time and race
-                  strategy.</p>
-                <input id="deltaSlider" type="range" min="1" max="10" value="6" class="w-full accent-red-600" />
-                <div class="mt-2 flex items-center justify-between text-xs text-gray-400">
-                  <span>More Stability (High Downforce)</span>
-                  <span>Higher Speed (Low Drag)</span>
-                </div>
-                <div class="mt-4 p-5 rounded-2xl bg-white/5 border border-white/10">
-                  <div class="text-xs tracking-widest uppercase text-gray-400">Live readout</div>
-                  <div class="mt-2 text-sm text-gray-200" id="deltaReadout"></div>
-                </div>
-                <div class="mt-4 p-5 rounded-2xl bg-white/5 border border-white/10">
-                  <div class="text-xs tracking-widest uppercase text-gray-400">Strategy Impact</div>
-                  <div class="mt-2 text-sm text-gray-200" id="strategyImpact"></div>
-                </div>
+            
+            <div class="glass-panel p-8 rounded-2xl">
+              <h3 class="font-display text-2xl font-bold text-white uppercase mb-4">Harvesting Heatmap</h3>
+              <p class="text-sm text-gray-400 mb-6">Unlike traditional braking zones, Suzuka forces unique K-recovery behavior deeply into high speed corners.</p>
+              
+              <div class="space-y-4">
+                 <div class="flex items-center gap-4">
+                    <div class="w-16 font-bold text-gray-300">Turn 11</div>
+                    <div class="flex-1 h-3 rounded-full bg-white/5 overflow-hidden">
+                       <div class="h-full bg-blue-500" style="width: 85%;"></div>
+                    </div>
+                    <div class="w-12 text-right text-xs text-blue-400 font-bold">85%</div>
+                 </div>
+                 <div class="flex items-center gap-4">
+                    <div class="w-16 font-bold text-gray-300">Turn 16</div>
+                    <div class="flex-1 h-3 rounded-full bg-white/5 overflow-hidden">
+                       <div class="h-full bg-blue-500" style="width: 95%;"></div>
+                    </div>
+                    <div class="w-12 text-right text-xs text-blue-400 font-bold">95%</div>
+                 </div>
+                 <div class="flex items-center gap-4 opacity-50">
+                    <div class="w-16 font-bold text-gray-300">Degner</div>
+                    <div class="flex-1 h-3 rounded-full bg-white/5 overflow-hidden">
+                       <div class="h-full bg-blue-500" style="width: 15%;"></div>
+                    </div>
+                    <div class="w-12 text-right text-xs text-gray-400 font-bold">15%</div>
+                 </div>
+              </div>
+              
+              <div class="mt-8 p-5 rounded-xl border border-blue-500/30 bg-blue-500/5">
+                 <div class="text-sm text-blue-300 font-bold mb-1"><i class="fa-solid fa-microchip mr-2"></i> MGU-K Focus</div>
+                 <div class="text-xs text-gray-400">Total reliance on kinetic energy harvesting restricts overtaking flexibility to the Casio Triangle (T16).</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Weather + Outlook -->
+      <!-- Weather + History (Redesigned) -->
       <section id="weather" class="scroll-mt-40 py-20 relative border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-16">
-            <h2
-              class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase flex items-center justify-center gap-2">
-              Weather & Outlook
-              <a href="resources/F1 Japanese GP Deep Dive.pdf" target="_blank"
-                class="text-xs text-f1-red hover:text-white transition-colors">
-                <i class="fa-solid fa-file-pdf"></i>
-              </a>
-            </h2>
-            <p class="max-w-2xl mx-auto text-gray-400">
-              Sprint day can push track temperature to ~33°C; Sunday cloud cover adds a C2 warm-up risk after a stop.
-            </p>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">Meteorological & Historical Context</h2>
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
-            <div class="glass-panel rounded-2xl p-8">
-              <div class="flex items-center justify-between mb-6">
-                <div>
-                  <div class="text-xs tracking-widest uppercase text-gray-400">Weekend forecast</div>
-                  <div class="font-display text-2xl font-bold text-white uppercase">Ambient vs track peak</div>
-                </div>
-                <span
-                  class="text-[10px] font-bold bg-white/5 text-gray-300 px-3 py-1 rounded-full border border-white/10 tracking-wider uppercase">Mar
-                  13–15</span>
+            <div class="glass-panel p-8 rounded-2xl">
+              <div class="mb-6">
+                <div class="text-xs tracking-widest uppercase text-gray-400">Weekend forecast</div>
+                <div class="font-display text-2xl font-bold text-white uppercase">Rain Probability</div>
               </div>
-              <canvas id="weatherLine" height="180"></canvas>
+              <canvas id="suzukaWeatherBar" height="180"></canvas>
             </div>
-            <div class="glass-panel rounded-2xl p-8">
-              <div class="flex items-center justify-between mb-6">
-                <div>
-                  <div class="text-xs tracking-widest uppercase text-gray-400">China wins (history)</div>
-                  <div class="font-display text-2xl font-bold text-white uppercase flex items-center gap-2">
-                    Top constructors
-                    <a href="resources/F1 Japanese GP Deep Dive.pdf" target="_blank"
-                      class="text-xs text-f1-red hover:text-white transition-colors">
-                      <i class="fa-solid fa-file-pdf"></i>
-                    </a>
-                  </div>
-                </div>
+            <div class="glass-panel p-8 rounded-2xl">
+              <div class="mb-6">
+                <div class="text-xs tracking-widest uppercase text-gray-400">Historical Benchmarks</div>
+                <div class="font-display text-2xl font-bold text-white uppercase">Suzuka Pole Progression</div>
               </div>
-              <canvas id="chinaWins" height="220"></canvas>
-              <div class="mt-4 text-xs text-gray-500">Historical China win counts cited in the PDF.</div>
+              <canvas id="suzukaPoles" height="200"></canvas>
+              <div class="mt-4 text-[10px] text-gray-500 text-center uppercase">Estimated 2026 deficit due to chassis changes.</div>
             </div>
-          </div>
-          <div class="glass-panel rounded-2xl p-8">
-            <h3
-              class="font-display text-2xl font-bold text-white mb-4 uppercase tracking-wider flex items-center gap-2">
-              Strategic headline
-              <a href="resources/F1 Japanese GP Deep Dive.pdf" target="_blank"
-                class="text-xs text-f1-red hover:text-white transition-colors">
-                <i class="fa-solid fa-file-pdf"></i>
-              </a>
-            </h3>
-            <p class="text-gray-300 leading-relaxed">
-              Suzuka is a validation weekend before potential calendar disruption: clean data on active aero
-              switching, front-axle graining and energy stability is the bedrock for early-season development direction.
-            </p>
-          </div>
-          <div class="mt-10 text-center text-xs text-gray-600">
-            Data + narrative sourced from <a href="resources/F1 Japanese GP Deep Dive.pdf" target="_blank"
-              class="text-f1-red hover:text-white underline transition-colors">F1 Japanese GP Deep Dive.pdf</a> in
-            this workspace.
           </div>
         </div>
       </section>
@@ -969,58 +870,7 @@
       document.getElementById('weekend-timeline').scrollIntoView({ behavior: 'smooth' });
     };
 
-    // Pit window toggle (2025 vs 2026 projection)
-    const pitModels = {
-      '2025': { from: 14, to: 15 },
-      '2026': { from: 17, to: 20 }
-    };
-    const yearToggle = document.getElementById('yearToggle');
-    const pitWindowBar = document.getElementById('pitWindowBar');
-    const pitWindowLabel = document.getElementById('pitWindowLabel');
 
-    function setPitWindow(year) {
-      const { from, to } = pitModels[year];
-      pitWindowLabel.textContent = `L${from}–L${to}`;
-      // Scale to 56 laps: left margin and width percentages.
-      const left = ((from - 1) / 56) * 100;
-      const width = ((to - from + 1) / 56) * 100;
-      pitWindowBar.style.marginLeft = `${left}%`;
-      pitWindowBar.style.width = `${Math.max(width, 1.8)}%`;
-      yearToggle.textContent = year;
-      yearToggle.setAttribute('aria-pressed', year === '2026' ? 'true' : 'false');
-    }
-
-    yearToggle.addEventListener('click', () => {
-      const next = yearToggle.textContent.trim() === '2026' ? '2025' : '2026';
-      setPitWindow(next);
-    });
-    setPitWindow('2026');
-
-    // Delta slider
-    const deltaSlider = document.getElementById('deltaSlider');
-    const deltaReadout = document.getElementById('deltaReadout');
-    const strategyImpact = document.getElementById('strategyImpact');
-
-    function renderDelta() {
-      const v = Number(deltaSlider.value);
-      let label, impact;
-
-      if (v <= 3) {
-        label = 'Low Risk: Prioritizing stability over raw speed. Expect better tyre life and driver confidence in high-speed corners.';
-        impact = 'Ideal for races where tyre degradation is high and overtaking is difficult. A stable car allows for more consistent lap times throughout a stint.';
-      } else if (v <= 7) {
-        label = 'Balanced: A compromise between straight-line speed and cornering grip. This is the typical setup for most circuits.';
-        impact = 'A versatile setup that allows for both attacking and defending. However, it may not be the fastest in a straight line or the most stable in the corners.';
-      } else {
-        label = 'High Risk: Sacrificing stability for maximum straight-line speed. This setup is common at low-downforce tracks like Monza.';
-        impact = 'A high-risk, high-reward strategy. It makes overtaking easier but can lead to higher tyre degradation and a less predictable car in the corners.';
-      }
-
-      deltaReadout.textContent = `Delta risk: ${v}/10 — ${label}`;
-      strategyImpact.textContent = impact;
-    }
-    deltaSlider.addEventListener('input', renderDelta);
-    renderDelta();
 
     // Chart.js theme helpers
     const gridColor = 'rgba(148, 163, 184, 0.18)';
@@ -1028,177 +878,198 @@
     Chart.defaults.color = tickColor;
     Chart.defaults.font.family = 'Inter, ui-sans-serif, system-ui';
 
-    // Regulations / car delta bar
-    new Chart(document.getElementById('regBar'), {
-      type: 'bar',
-      data: {
-        labels: ['Min weight (kg)', 'Wheelbase (mm)', 'Track width (mm)', 'Front tyre (mm)', 'Rear tyre (mm)'],
-        datasets: [
-          {
-            label: '2026 change (relative)',
-            data: [-30, -200, -100, -25, -30],
-            backgroundColor: ['rgba(225, 6, 0, 0.65)'],
-            borderColor: ['rgba(225, 6, 0, 1)'],
-            borderWidth: 1
+    // 1. Z-Mode vs X-Mode Velocity Trajectory
+    const ctxAero = document.getElementById('aeroVelocityLine');
+    if(ctxAero) {
+      new Chart(ctxAero, {
+        type: 'line',
+        data: {
+          labels: ['Corner Entry', 'Mid-Corner', 'Corner Exit', 'Middle Straight', 'End Straight'],
+          datasets: [
+            {
+              label: 'Z-Mode (High Downforce)',
+              data: [190, 160, 210, 280, 290],
+              borderColor: 'rgba(225, 6, 0, 1)',
+              backgroundColor: 'rgba(225, 6, 0, 0.1)',
+              borderWidth: 3,
+              tension: 0.4,
+              fill: true
+            },
+            {
+              label: 'X-Mode (Low Drag)',
+              data: [190, 110, 180, 310, 335],
+              borderColor: 'rgba(59, 130, 246, 1)',
+              borderDash: [5, 5],
+              borderWidth: 2,
+              tension: 0.4,
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom', labels: { color: tickColor } } },
+          scales: {
+            y: { title: { display: true, text: 'Velocity (km/h)', color: tickColor }, grid: { color: gridColor }, ticks: { color: tickColor } },
+            x: { grid: { color: 'transparent' }, ticks: { color: tickColor } }
           }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.y}` } } },
-        scales: {
-          x: { grid: { color: 'transparent' }, ticks: { color: tickColor } },
-          y: { grid: { color: gridColor }, ticks: { color: tickColor } }
         }
-      }
-    });
+      });
+    }
 
-    // Power donut
-    new Chart(document.getElementById('powerDonut'), {
-      type: 'doughnut',
-      data: {
-        labels: ['ICE (400kW)', 'MGU‑K (350kW)'],
-        datasets: [{
-          data: [400, 350],
-          backgroundColor: ['rgba(225, 6, 0, 0.75)', 'rgba(59, 130, 246, 0.55)'],
-          borderColor: ['rgba(225, 6, 0, 1)', 'rgba(59, 130, 246, 1)'],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        cutout: '62%',
-        plugins: {
-          legend: { position: 'bottom', labels: { boxWidth: 10, color: tickColor } }
+    // 2. Spoon Curve Thermal Simulator (Custom Interactive)
+    const spoonSlider = document.getElementById('spoonSlider');
+    const spoonSpeedOut = document.getElementById('spoonSpeedOut');
+    const spoonTempFL = document.getElementById('spoonTempFL');
+    const spoonTempRL = document.getElementById('spoonTempRL');
+    const tempBg1 = document.getElementById('tempBg1');
+    const tempBg2 = document.getElementById('tempBg2');
+
+    if(spoonSlider) {
+      spoonSlider.addEventListener('input', (e) => {
+        const speed = parseFloat(e.target.value);
+        spoonSpeedOut.textContent = speed;
+        // FL temp calculation: base 100 + (speed-230)*0.75
+        let tempFL = 100 + ((speed - 230) * 0.75);
+        // RL temp calculation: base 110 + (speed-230)*1.1
+        let tempRL = 110 + ((speed - 230) * 1.1);
+        
+        spoonTempFL.textContent = tempFL.toFixed(1) + '°C';
+        spoonTempRL.textContent = tempRL.toFixed(1) + '°C';
+        
+        // Color shifts based on temp limits (FL starts graining at 120, RL ablates at 135)
+        if(tempFL > 120) { spoonTempFL.classList.replace('text-yellow-500', 'text-f1-red'); tempBg1.classList.replace('bg-yellow-500', 'bg-f1-red'); }
+        else { spoonTempFL.classList.replace('text-f1-red', 'text-yellow-500'); tempBg1.classList.replace('bg-f1-red', 'bg-yellow-500'); }
+        
+        if(tempRL > 135) { spoonTempRL.classList.replace('text-orange-500', 'text-f1-red'); tempBg2.classList.replace('bg-orange-500', 'bg-f1-red'); }
+        else { spoonTempRL.classList.replace('text-f1-red', 'text-orange-500'); tempBg2.classList.replace('bg-f1-red', 'bg-orange-500'); }
+      });
+      // Initial trigger
+      spoonSlider.dispatchEvent(new Event('input'));
+    }
+
+    // 3. Sector Stress Bar
+    const ctxStress = document.getElementById('cornerStressBar');
+    if(ctxStress) {
+      new Chart(ctxStress, {
+        type: 'bar',
+        data: {
+          labels: ['S-Curves (S1)', 'Degner (S2)', 'Spoon (S2)', '130R (S3)'],
+          datasets: [
+            { label: 'Lateral G', data: [4.9, 3.8, 4.2, 5.1], backgroundColor: 'rgba(251, 146, 60, 0.7)' },
+            { label: 'Traction Demand', data: [2.1, 4.0, 3.8, 1.5], backgroundColor: 'rgba(59, 130, 246, 0.7)' }
+          ]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          plugins: { legend: { position: 'top', labels: { color: tickColor } } },
+          scales: {
+            x: { stacked: false, title: {display: true, text: 'Stress Factor', color: tickColor}, grid: { color: gridColor }, ticks: { color: tickColor } },
+            y: { stacked: false, grid: { color: 'transparent' }, ticks: { color: tickColor } }
+          }
         }
-      }
-    });
+      });
+    }
 
-    // Weather line
-    new Chart(document.getElementById('weatherLine'), {
-      type: 'line',
-      data: {
-        labels: ['Fri', 'Sat', 'Sun'],
-        datasets: [
-          {
-            label: 'Peak ambient (°C)',
-            data: [15, 17, 16],
+    // 4. Super Clipping Profile
+    const ctxClip = document.getElementById('clippingAreaChart');
+    if(ctxClip) {
+      new Chart(ctxClip, {
+        type: 'line',
+        data: {
+          labels: ['0m', '200m', '400m', '600m', '800m', '1000m (Braking T16)'],
+          datasets: [{
+            label: 'Battery SoC (%)',
+            data: [100, 75, 40, 10, 0, 0],
             borderColor: 'rgba(225, 6, 0, 1)',
             backgroundColor: 'rgba(225, 6, 0, 0.15)',
-            tension: 0.35,
-            fill: true
-          },
-          {
-            label: 'Peak track (°C)',
-            data: [null, 33, null],
-            borderColor: 'rgba(251, 146, 60, 1)',
-            backgroundColor: 'rgba(251, 146, 60, 0.10)',
-            tension: 0.35,
-            fill: false,
-            spanGaps: true
-          }
-        ]
-      },
-      options: {
-        plugins: {
-          legend: { position: 'bottom', labels: { boxWidth: 10, color: tickColor } }
+            borderWidth: 2,
+            tension: 0.3,
+            fill: true,
+            pointBackgroundColor: 'rgba(225, 6, 0, 1)'
+          }]
         },
-        scales: {
-          x: { grid: { color: 'transparent' } },
-          y: { grid: { color: gridColor }, suggestedMin: 10, suggestedMax: 35 }
-        }
-      }
-    });
-
-    // Tyre radar (qualitative stress map)
-    new Chart(document.getElementById('tyreRadar'), {
-      type: 'radar',
-      data: {
-        labels: ['Front‑left load', 'Sustained lateral', 'Traction zones', 'Braking energy', 'Surface evolution'],
-        datasets: [{
-          label: 'Suzuka stress profile',
-          data: [9, 8, 7, 7, 6],
-          borderColor: 'rgba(225, 6, 0, 1)',
-          backgroundColor: 'rgba(225, 6, 0, 0.18)',
-          pointBackgroundColor: 'rgba(225, 6, 0, 1)'
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: {
-          r: {
-            grid: { color: gridColor },
-            angleLines: { color: gridColor },
-            ticks: { display: false },
-            suggestedMin: 0,
-            suggestedMax: 10
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { min: 0, max: 100, grid: { color: gridColor }, ticks: { color: tickColor } },
+            x: { grid: { color: 'transparent' }, ticks: { color: tickColor } }
           }
         }
-      }
-    });
+      });
+    }
 
-    // China wins (history)
-    new Chart(document.getElementById('chinaWins'), {
-      type: 'bar',
-      data: {
-        labels: ['Mercedes', 'Ferrari', 'McLaren', 'Red Bull'],
-        datasets: [{
-          label: 'Wins in China',
-          data: [6, 4, 4, 3],
-          backgroundColor: [
-            'rgba(59, 130, 246, 0.55)',
-            'rgba(225, 6, 0, 0.75)',
-            'rgba(148, 163, 184, 0.45)',
-            'rgba(34, 197, 94, 0.35)'
-          ],
-          borderColor: [
-            'rgba(59, 130, 246, 1)',
-            'rgba(225, 6, 0, 1)',
-            'rgba(148, 163, 184, 1)',
-            'rgba(34, 197, 94, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        indexAxis: 'y',
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { color: gridColor }, ticks: { precision: 0 } },
-          y: { grid: { color: 'transparent' } }
+    // 5. Suzuka Weather Bar
+    const ctxWeather = document.getElementById('suzukaWeatherBar');
+    if(ctxWeather) {
+      new Chart(ctxWeather, {
+        type: 'bar',
+        data: {
+          labels: ['Friday (FP1/2)', 'Saturday (Quali)', 'Sunday (Race)'],
+          datasets: [{
+            label: 'Rain Probability (%)',
+            data: [85, 20, 10],
+            backgroundColor: [
+              'rgba(59, 130, 246, 0.8)',
+              'rgba(148, 163, 184, 0.5)',
+              'rgba(251, 146, 60, 0.5)'
+            ],
+            borderColor: [
+              'rgba(59, 130, 246, 1)',
+              'rgba(148, 163, 184, 1)',
+              'rgba(251, 146, 60, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { min: 0, max: 100, grid: { color: gridColor }, ticks: { color: tickColor } },
+            x: { grid: { color: 'transparent' }, ticks: { color: tickColor } }
+          }
         }
-      }
-    });
+      });
+    }
 
-    // McLaren speed trap bar chart
-    new Chart(document.getElementById('mclarenSpeedChart'), {
-      type: 'bar',
-      data: {
-        labels: ['McLaren', 'Mercedes', 'Red Bull'],
-        datasets: [{
-          label: 'Speed Trap (km/h)',
-          data: [315, 320, 321],
-          backgroundColor: [
-            'rgba(251, 146, 60, 0.55)', // McLaren orange-ish
-            'rgba(148, 163, 184, 0.45)', // Mercedes silver
-            'rgba(59, 130, 246, 0.45)'    // Blue for Red Bull
-          ],
-          borderColor: [
-            'rgba(251, 146, 60, 1)',
-            'rgba(148, 163, 184, 1)',
-            'rgba(59, 130, 246, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        indexAxis: 'y',
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.x} km/h` } } },
-        scales: {
-          x: { grid: { color: gridColor }, min: 300, max: 325, ticks: { color: tickColor } },
-          y: { grid: { color: 'transparent' }, ticks: { color: tickColor } }
+    // 6. Suzuka Poles
+    const ctxPoles = document.getElementById('suzukaPoles');
+    if(ctxPoles) {
+      new Chart(ctxPoles, {
+        type: 'bar',
+        data: {
+          labels: ['2023', '2024', '2025', '2026 (Est)'],
+          datasets: [{
+            label: 'Pole Lap (Seconds)',
+            data: [88.877, 88.197, 87.892, 91.500],
+            backgroundColor: [
+              'rgba(148, 163, 184, 0.3)',
+              'rgba(148, 163, 184, 0.3)',
+              'rgba(148, 163, 184, 0.3)',
+              'rgba(225, 6, 0, 0.7)'
+            ],
+            borderColor: [
+              'rgba(148, 163, 184, 1)',
+              'rgba(148, 163, 184, 1)',
+              'rgba(148, 163, 184, 1)',
+              'rgba(225, 6, 0, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.y}s` } } },
+          scales: {
+            y: { min: 80, grid: { color: gridColor }, ticks: { color: tickColor } },
+            x: { grid: { color: 'transparent' }, ticks: { color: tickColor } }
+          }
         }
-      }
-    });
+      });
+    }
 
     // Initialize progression state after DOM is ready.
     updateProgressUI(PHASES[Math.min(unlockedIndex, PHASES.length - 1)]);
