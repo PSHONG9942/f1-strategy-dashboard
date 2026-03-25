@@ -446,28 +446,29 @@
                 </div>
               </div>
 
-              <div class="glass-panel p-8 rounded-2xl relative overflow-hidden">
-                <div class="flex items-center justify-between mb-6">
-                  <div>
-                    <div class="text-xs tracking-widest uppercase text-gray-400">Velocity trajectory</div>
-                    <div class="font-display text-2xl font-bold text-white uppercase flex items-center gap-2">
-                       Z-Mode vs X-Mode
+              <div class="space-y-6">
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden">
+                  <div class="flex items-center justify-between mb-6">
+                    <div>
+                      <div class="text-xs tracking-widest uppercase text-gray-400">Velocity trajectory</div>
+                      <div class="font-display text-2xl font-bold text-white uppercase flex items-center gap-2">
+                         Z-Mode vs X-Mode
+                      </div>
                     </div>
+                    <span class="text-[10px] font-bold bg-blue-500/20 text-blue-500 px-3 py-1 rounded-full border border-blue-500/50 tracking-wider uppercase">Active Aero</span>
                   </div>
-                  <span class="text-[10px] font-bold bg-blue-500/20 text-blue-500 px-3 py-1 rounded-full border border-blue-500/50 tracking-wider uppercase">Active Aero</span>
-                </div>
-                <canvas id="aeroVelocityLine" height="180"></canvas>
-                <div class="mt-6 text-sm text-gray-300 p-4 rounded-xl bg-white/5 border border-white/10">
-                   <span class="text-f1-red font-bold">Observation:</span> X-Mode yields vastly superior straight-line speed, but Z-Mode is strictly required for the S-Curves. 
-                </div>
-              </div>
-                  <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
-                    <div class="text-xs tracking-widest uppercase text-gray-400">Tyre width cut</div>
-                    <div class="mt-1 font-display text-3xl font-bold text-white">−25<span
-                        class="text-xl text-gray-500 mx-1">/</span>−30<span class="text-xl text-gray-500 ml-1">mm</span>
-                    </div>
-                    <div class="mt-1 text-xs text-gray-400">Front / rear.</div>
+                  <canvas id="aeroVelocityLine" height="180"></canvas>
+                  <div class="mt-6 text-sm text-gray-300 p-4 rounded-xl bg-white/5 border border-white/10">
+                     <span class="text-f1-red font-bold">Observation:</span> X-Mode yields vastly superior straight-line speed, but Z-Mode is strictly required for the S-Curves. 
                   </div>
+                </div>
+                
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Tyre width cut</div>
+                  <div class="mt-1 font-display text-3xl font-bold text-white">−25<span
+                      class="text-xl text-gray-500 mx-1">/</span>−30<span class="text-xl text-gray-500 ml-1">mm</span>
+                  </div>
+                  <div class="mt-1 text-xs text-gray-400">Front / rear.</div>
                 </div>
               </div>
             </div>
@@ -568,6 +569,49 @@
                 </div>
               </div>
               <canvas id="cornerStressBar" height="170"></canvas>
+            </div>
+          </div>
+
+          <!-- VIP Exclusive Insight Panel -->
+          <div class="mt-8 glass-panel p-8 rounded-2xl relative border-l-4 border-yellow-500 overflow-hidden group">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl group-hover:bg-yellow-500/20 transition-all"></div>
+            <div class="flex items-center gap-3 mb-6 relative z-10">
+              <div class="flex items-center justify-center w-10 h-10 rounded-full bg-yellow-500/20 border border-yellow-500/50">
+                <i class="fa-solid fa-crown text-yellow-500 text-lg"></i>
+              </div>
+              <h3 class="font-display text-2xl font-bold text-white uppercase tracking-wider">VIP Exclusive: The 2026 Resurfacing & Tyre Mass Paradox</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
+              <div class="space-y-6">
+                <div>
+                  <h4 class="text-yellow-500 font-bold mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-road"></i> Track Resurfacing & Aero Relief
+                  </h4>
+                  <p class="text-sm text-gray-300 leading-relaxed">Following the high-bitumen resurfacing of Turn 1 and the S-Curves last year, the remaining two sectors have been heavily repaved. Furthermore, the two long Straight Mode (X-Mode) zones release massive downforce loads, preventing cumulative geometric thermal degradation.</p>
+                </div>
+                
+                <div>
+                  <h4 class="text-yellow-500 font-bold mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt"></i> MGU-K Braking Relief
+                  </h4>
+                  <p class="text-sm text-gray-300 leading-relaxed">The 3x more powerful MGU-K means far more engine braking. Rear discs and callipers run much cooler, transferring significantly less heat through the wheelrim to the rear rubber—mitigating historic rear-limited thermal degradation.</p>
+                </div>
+              </div>
+
+              <div class="space-y-6">
+                <div>
+                  <h4 class="text-yellow-500 font-bold mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-temperature-arrow-down"></i> The Tyre Mass Paradox
+                  </h4>
+                  <p class="text-sm text-gray-300 leading-relaxed">Although tyre width is scaled down (280mm front, 375mm rear), this actually <strong>reduces rubber mass</strong>. Consequently, the tyres shed trapped heat significantly faster when not under load, avoiding the sustained core temperatures characteristic of previous eras.</p>
+                </div>
+                
+                <div class="p-4 bg-white/5 border border-white/10 rounded-xl">
+                  <div class="text-xs tracking-widest uppercase text-gray-400 mb-2">Paddock Consensus</div>
+                  <p class="text-sm text-gray-200 italic border-l-2 border-yellow-500 pl-3">"The narrower tyres are actually more tolerant to being pushed hard in high-load corners. We might be looking at an uncharacteristically robust, one-stop Suzuka race devoid of extreme tyre preservation."</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
