@@ -370,7 +370,8 @@
               <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Super Clipping</div>
               <div class="font-display text-4xl font-bold text-white">High<span
                   class="text-xl text-gray-500 ml-1">Risk</span></div>
-              <div class="text-xs text-gray-400 mt-2">Battery depletes before straights end in 'super clipping' mode.</div>
+              <div class="text-xs text-gray-400 mt-2">Battery depletes before straights end in 'super clipping' mode.
+              </div>
             </div>
             <div class="glass-panel p-6 rounded-xl border-l-4 border-f1-red hover:bg-white/5 transition duration-300">
               <i class="fa-solid fa-circle-nodes text-2xl text-gray-500 mb-4"></i>
@@ -384,14 +385,16 @@
               <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Min Pressures</div>
               <div class="font-display text-4xl font-bold text-white">27.0<span
                   class="text-xl text-gray-500 ml-1">F</span></div>
-              <div class="text-xs text-gray-400 mt-2">23.0 psi rear • camber limits strictly enforced for S-Curves.</div>
+              <div class="text-xs text-gray-400 mt-2">23.0 psi rear • camber limits strictly enforced for S-Curves.
+              </div>
             </div>
             <div class="glass-panel p-6 rounded-xl border-l-4 border-blue-500 hover:bg-white/5 transition duration-300">
               <i class="fa-solid fa-bolt text-2xl text-yellow-500 mb-4"></i>
               <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Energy Headline</div>
               <div class="font-display text-4xl font-bold text-white">9<span
                   class="text-xl text-gray-500 ml-1">MJ</span></div>
-              <div class="text-xs text-gray-400 mt-2">No MGU-H means complete dependence on kinetic harvesting at T11 & T16.</div>
+              <div class="text-xs text-gray-400 mt-2">No MGU-H means complete dependence on kinetic harvesting at T11 &
+                T16.</div>
             </div>
           </div>
 
@@ -515,7 +518,8 @@
             <div class="glass-panel p-6 rounded-xl border border-white/10">
               <div class="text-xs tracking-widest uppercase text-gray-400">Primary braking</div>
               <div class="mt-2 font-display text-3xl font-bold text-white">T11 / T16</div>
-              <div class="mt-2 text-sm text-gray-400">Hairpin & Casio Triangle: The only major kinetic recovery zones.</div>
+              <div class="mt-2 text-sm text-gray-400">Hairpin & Casio Triangle: The only major kinetic recovery zones.
+              </div>
             </div>
             <div class="glass-panel p-6 rounded-xl border border-white/10">
               <div class="text-xs tracking-widest uppercase text-gray-400">Lateral Load</div>
@@ -767,7 +771,9 @@
             <div id="countdown-problem" class="font-mono text-2xl text-f1-red">Initializing...</div>
           </div>
           <div class="unlocked-view hidden">
-            <div class="text-center py-20"><h3 class="text-2xl text-gray-500">Locked</h3></div>
+            <div class="text-center py-20">
+              <h3 class="text-2xl text-gray-500">Locked</h3>
+            </div>
           </div>
         </div>
       </section>
@@ -786,7 +792,9 @@
             <div id="countdown-solution" class="font-mono text-2xl text-f1-red">Initializing...</div>
           </div>
           <div class="unlocked-view hidden">
-            <div class="text-center py-20"><h3 class="text-2xl text-gray-500">Locked</h3></div>
+            <div class="text-center py-20">
+              <h3 class="text-2xl text-gray-500">Locked</h3>
+            </div>
           </div>
         </div>
       </section>
@@ -805,7 +813,9 @@
             <div id="countdown-endgame" class="font-mono text-2xl text-f1-red">Initializing...</div>
           </div>
           <div class="unlocked-view hidden">
-            <div class="text-center py-20"><h3 class="text-2xl text-gray-500">Locked</h3></div>
+            <div class="text-center py-20">
+              <h3 class="text-2xl text-gray-500">Locked</h3>
+            </div>
           </div>
         </div>
       </section>
@@ -1199,9 +1209,9 @@
     async function checkPhaseStatuses() {
       console.log("Checking phase statuses...");
       const futurePhases = ['problem', 'solution', 'endgame'];
-      const unlockDatePhase2 = new Date('2026-04-03T22:00:00+08:00'); // Friday after Suzuka FP
-      const unlockDatePhase3 = new Date('2026-04-04T22:00:00+08:00'); // Saturday after Suzuka Quali
-      const unlockDatePhase4 = new Date('2026-04-05T22:00:00+08:00'); // Sun after Race
+      const unlockDatePhase2 = new Date('2026-03-27T22:00:00+08:00'); // Friday after Suzuka FP
+      const unlockDatePhase3 = new Date('2026-03-28T22:00:00+08:00'); // Saturday after Suzuka Quali
+      const unlockDatePhase4 = new Date('2026-03-29T22:00:00+08:00'); // Sun after Race
 
       try {
         if (window.location.protocol !== 'blob:' && window.location.protocol !== 'data:') {
@@ -1480,12 +1490,12 @@
               tooltip: { mode: 'index', intersect: false }
             },
             scales: {
-              y: { 
+              y: {
                 title: { display: true, text: 'Velocity (km/h)', color: '#64748b' },
                 grid: { color: 'rgba(255,255,255,0.05)' },
                 ticks: { color: '#64748b' }
               },
-              x: { 
+              x: {
                 title: { display: true, text: 'Distance to Hairpin (m)', color: '#64748b' },
                 grid: { color: 'transparent' },
                 ticks: { color: '#64748b' }
@@ -1540,8 +1550,8 @@
     document.addEventListener('DOMContentLoaded', () => {
       checkPhaseStatuses();
       setSessionView('sprint'); // Initialize default session view
-      
-      
+
+
     });
   </script>
 </body>
