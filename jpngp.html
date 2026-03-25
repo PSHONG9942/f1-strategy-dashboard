@@ -604,7 +604,7 @@
                   <h4 class="text-yellow-500 font-bold mb-2 flex items-center gap-2">
                     <i class="fa-solid fa-temperature-arrow-down"></i> The Tyre Mass Paradox
                   </h4>
-                  <p class="text-sm text-gray-300 leading-relaxed">Although tyre width is scaled down (280mm front, 375mm rear), this actually <strong>reduces rubber mass</strong>. Consequently, the tyres shed trapped heat significantly faster when not under load, avoiding the sustained core temperatures characteristic of previous eras.</p>
+                  <p class="text-sm text-gray-300 leading-relaxed">Although tyre width is scaled down (280mm front, 375mm rear), this actually <a href="#" onclick="showVIPImage(event)" class="font-bold hover:text-white cursor-text transition-colors" title="View degradation metrics">reduces rubber mass</a>. Consequently, the tyres shed trapped heat significantly faster when not under load, avoiding the sustained core temperatures characteristic of previous eras.</p>
                 </div>
                 
                 <div class="p-4 bg-white/5 border border-white/10 rounded-xl">
@@ -1468,6 +1468,38 @@
 
 
     });
+  </script>
+
+  <!-- VIP Image Modal -->
+  <div id="vip-image-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="hideVIPImage()">
+    <div class="relative max-w-5xl w-full mx-4" onclick="event.stopPropagation()">
+      <button onclick="hideVIPImage()" class="absolute -top-10 right-0 text-white/70 hover:text-white focus:outline-none text-2xl">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img src="resources/03-jp26-preview-en.avif" alt="Pirelli Tyre Data Preview" class="w-full h-auto rounded-xl shadow-2xl border border-white/20">
+    </div>
+  </div>
+
+  <script>
+    function showVIPImage(e) {
+      e.preventDefault();
+      const modal = document.getElementById('vip-image-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      // trigger reflow
+      void modal.offsetWidth;
+      modal.classList.remove('opacity-0');
+      modal.classList.add('opacity-100');
+    }
+    function hideVIPImage() {
+      const modal = document.getElementById('vip-image-modal');
+      modal.classList.remove('opacity-100');
+      modal.classList.add('opacity-0');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }, 300);
+    }
   </script>
 </body>
 
