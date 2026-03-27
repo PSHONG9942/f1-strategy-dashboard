@@ -716,9 +716,262 @@
             <div id="countdown-problem" class="font-mono text-2xl text-f1-red">Initializing...</div>
           </div>
           <div class="unlocked-view hidden">
-            <div class="text-center py-20">
-              <h3 class="text-2xl text-gray-500">Locked</h3>
+            <div class="text-center mb-16 relative">
+              <div class="absolute inset-0 bg-f1-red/10 blur-[80px] rounded-full pointer-events-none"></div>
+              <h2
+                class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase inline-block relative group">
+                The Problems: <span class="text-f1-red drop-shadow-[0_0_10px_rgba(225,6,0,0.6)]">Systems Under
+                  Stress</span>
+                <div
+                  class="absolute -bottom-2 left-0 w-full h-[2px] bg-f1-red/50 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left">
+                </div>
+                <a href="resources/F1 Suzuka FP1_FP2 Analysis.pdf" target="_blank"
+                  class="text-xs text-f1-red hover:text-white ml-2 transition-colors relative z-10">
+                  <i class="fa-solid fa-file-pdf"></i>
+                </a>
+              </h2>
+              <p class="max-w-2xl mx-auto text-gray-300 font-medium tracking-wide">
+                As the 2026 regulations meet Suzuka's relentless high-speed demands, the paddock faces profound engineering crises. From catastrophic correlation failures to aggressive kinetic recovery interventions, the systems are pushed to absolute limits.
+              </p>
             </div>
+
+            <!-- The 8.0 MJ Directive -->
+            <section id="p2-epoch" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Regulatory Shockwave</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">The 8.0 MJ Directive</div>
+                </div>
+                <i class="fa-solid fa-bolt text-3xl text-f1-red drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]"></i>
+              </div>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Following severe "super-clipping" in earlier rounds where drivers were forced to lift aggressively through high-speed sections to meet harvesting targets, the FIA executed an emergency 1.0 MJ reduction in the qualifying energy cap.
+              </p>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="mb-4 p-6 rounded-2xl bg-[#0B0E14] border border-white/5 relative overflow-hidden group">
+                  <div class="text-xs tracking-widest uppercase text-gray-400 mb-4 flex items-center justify-between">
+                    <span>Original Qualifying Target</span>
+                    <span class="text-gray-500 font-mono text-lg font-bold line-through">9.0 MJ</span>
+                  </div>
+                  <div class="h-4 w-full bg-[#131822] rounded-full overflow-hidden shadow-inner flex">
+                     <div class="bg-gradient-to-r from-red-800 to-red-500 w-[100%] transition-all"></div>
+                  </div>
+                  <div class="mt-3 text-[10px] text-gray-500 uppercase tracking-widest">Result: Severe Super-Clipping required</div>
+                </div>
+                <div class="mb-4 p-6 rounded-2xl bg-[#0B0E14] border border-f1-red/30 shadow-[0_0_15px_rgba(225,6,0,0.1)] relative overflow-hidden group">
+                  <div class="text-xs tracking-widest uppercase text-gray-400 mb-4 flex items-center justify-between">
+                    <span class="text-f1-red">Revised Suzuka Target</span>
+                    <span class="text-white font-mono text-lg font-bold">8.0 MJ</span>
+                  </div>
+                  <div class="h-4 w-full bg-[#131822] rounded-full overflow-hidden shadow-inner flex">
+                     <div class="bg-gradient-to-r from-green-600 to-green-400 w-[88.8%] transition-all animate-pulse"></div>
+                  </div>
+                  <div class="mt-3 text-[10px] text-gray-500 uppercase tracking-widest">Result: Drivers take 130R and Spoon flat-out</div>
+                </div>
+              </div>
+              <div class="mt-4 p-4 rounded-xl bg-white/5 border-l-4 border-yellow-500">
+                <p class="text-sm text-gray-300"><i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-2"></i><strong>Strategic Impact:</strong> The directive restores downforce-limited behavior to Sector 1 and the back straight, significantly boosting minimum apex speeds and favoring mechanical stability over pure hybrid efficiency.</p>
+              </div>
+            </section>
+
+            <!-- Active Aero: Mercedes vs Ferrari -->
+            <section id="p2-aero" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Active Aero Divergence</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">Mercedes Mastery vs Ferrari's Failure</div>
+                </div>
+                <i class="fa-solid fa-wind text-3xl text-gray-400"></i>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                <!-- Mercedes W17 -->
+                <div class="glass-panel p-6 rounded-2xl border-t-4 border-t-blue-500 relative group transition-all">
+                  <div class="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent pointer-events-none"></div>
+                  <h3 class="font-display text-2xl font-bold text-white mb-2">Mercedes W17: Synchronized Superiority</h3>
+                  <p class="text-gray-400 text-sm mb-4">Cleared by the FIA, Mercedes confirmed the delayed Shanghai wing deployment was a hydraulic miscalculation. At Suzuka, their X-Mode to Z-Mode transition functions flawlessly within the 400ms legal window.</p>
+                  
+                  <div class="bg-[#0B0E14] p-4 rounded-xl border border-white/10 relative overflow-hidden flex items-center gap-4">
+                     <div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/50 flex items-center justify-center flex-shrink-0">
+                        <i class="fa-solid fa-stopwatch text-blue-400 text-xl"></i>
+                     </div>
+                     <div>
+                        <div class="text-xs text-blue-400 uppercase tracking-widest font-bold">Actuation Speed</div>
+                        <div class="font-mono text-2xl text-white font-bold">&lt;400<span class="text-sm text-gray-500">ms</span></div>
+                     </div>
+                     <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-blue-500/20 to-transparent"></div>
+                  </div>
+                  <ul class="text-sm text-gray-300 mt-4 space-y-2">
+                     <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Flawless baseline integration</li>
+                     <li><i class="fa-solid fa-check text-green-500 mr-2"></i> Immense Sector 1 stability</li>
+                     <li><i class="fa-solid fa-check text-green-500 mr-2"></i> 0.00s Simulation Pace Benchmark</li>
+                  </ul>
+                </div>
+
+                <!-- Ferrari Macarena -->
+                <div class="glass-panel p-6 rounded-2xl border-t-4 border-t-f1-red relative group transition-all">
+                  <div class="absolute inset-0 bg-gradient-to-b from-f1-red/5 to-transparent pointer-events-none"></div>
+                  <h3 class="font-display text-2xl font-bold text-white mb-2">Ferrari SF-26: The 'Macarena' Abandoned</h3>
+                  <p class="text-gray-400 text-sm mb-4">Ferrari's radical 180-degree pivoting rear wing (designed to generate lift and stall the floor) induced violent, unpredictable instability under braking at high speeds and was immediately scrapped.</p>
+
+                  <div class="relative w-full h-24 mb-4 bg-gray-900 rounded-lg flex items-center justify-center overflow-hidden border border-f1-red/30 cursor-crosshair group/wing" title="Hold click to simulate braking instability">
+                     <div class="absolute left-10 w-20 h-2 bg-f1-red rounded-full transition-transform duration-300 ease-in-out origin-center group-active/wing:rotate-0 rotate-180 drop-shadow-[0_0_10px_rgba(225,6,0,0.8)]"></div>
+                     <div class="absolute inset-0 bg-f1-red/20 opacity-0 group-active/wing:opacity-100 transition-opacity flex items-center justify-end px-4 text-white font-bold tracking-widest animate-pulse pointer-events-none text-xl">
+                        AERO STALL!
+                     </div>
+                     <div class="absolute text-[10px] text-gray-500 bottom-1 uppercase tracking-widest pointer-events-none">Click and hold to simulate SLM deactivation</div>
+                  </div>
+                  <ul class="text-sm text-gray-300 space-y-2">
+                     <li><i class="fa-solid fa-xmark text-f1-red mr-2"></i> Catastrophic center-of-pressure shift</li>
+                     <li><i class="fa-solid fa-xmark text-f1-red mr-2"></i> Rear axle snapping oversteer</li>
+                     <li><i class="fa-solid fa-xmark text-f1-red mr-2"></i> +0.28s Qualifying Deficit</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- Red Bull Correlation Crisis -->
+            <section id="p2-track" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Total System Failure</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">Red Bull Correlation Crisis</div>
+                </div>
+                <i class="fa-solid fa-triangle-exclamation text-3xl text-yellow-500 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]"></i>
+              </div>
+
+              <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group border border-yellow-500/20 shadow-[0_4px_30px_rgba(234,179,8,0.05)]">
+                 <div class="absolute right-0 bottom-0 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl group-hover:bg-yellow-500/20 transition-all pointer-events-none"></div>
+                 
+                 <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                    Red Bull arrived at Suzuka with a massive, holistic aerodynamic upgrade. However, trackside correlation has completely broken down. In high-speed corners (>4 degrees of yaw), the new floor edge stalls entirely. Attempts to fix the initial severe understeer resulted in vicious, unpredictable snap oversteer.
+                 </p>
+
+                 <div class="flex flex-col items-center">
+                    <div class="text-xs text-gray-400 uppercase tracking-widest mb-3">RB22 Aerodynamic State Tracker (Hover to simulate yaw)</div>
+                    
+                    <div class="w-full max-w-lg h-32 bg-[#0B0E14] border border-white/10 rounded-xl relative overflow-hidden group/yaw">
+                       <!-- Data Line representing grip -->
+                       <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+                          <!-- Baseline -->
+                          <line x1="0" y1="80%" x2="40%" y2="80%" stroke="#4ade80" stroke-width="3" />
+                          <!-- The Drop -->
+                          <polyline points="40%,80% 50%,20% 100%,20%" fill="none" stroke="#e10600" stroke-width="3" class="hidden group-hover/yaw:block transition-all" />
+                          <line x1="40%" y1="80%" x2="100%" y2="80%" stroke="#4ade80" stroke-width="3" class="group-hover/yaw:hidden transition-all" />
+                       </svg>
+
+                       <!-- Yaw Angle Indicator -->
+                       <div class="absolute top-2 left-4 px-2 py-1 bg-white/10 backdrop-blur rounded text-white font-mono text-xs">
+                          YAW: <span class="text-green-400 group-hover/yaw:text-f1-red font-bold transition-colors">1.2° <span class="group-hover/yaw:hidden">></span><span class="hidden group-hover/yaw:inline-block">5.6°</span></span>
+                       </div>
+                       
+                       <!-- Alert Overlay -->
+                       <div class="absolute inset-y-0 right-0 w-1/2 bg-f1-red/20 opacity-0 group-hover/yaw:opacity-100 transition-opacity flex items-center justify-center border-l-2 border-f1-red">
+                          <span class="text-f1-red font-display text-xl font-bold tracking-widest animate-pulse shadow-f1-red drop-shadow-[0_0_5px_rgba(225,6,0,1)]">FLOOR STALL</span>
+                       </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 w-full max-w-lg mt-4 text-center">
+                       <div class="p-3 bg-red-900/20 border border-red-900 rounded text-xs text-gray-300">
+                          <strong class="text-white block mb-1">Qualifying Deficit</strong>
+                          +0.92 Seconds
+                       </div>
+                       <div class="p-3 bg-red-900/20 border border-red-900 rounded text-xs text-gray-300">
+                          <strong class="text-white block mb-1">Driver Feedback</strong>
+                          "Completely undriveable"
+                       </div>
+                    </div>
+                 </div>
+              </div>
+            </section>
+            
+            <!-- Tyres & Strategy -->
+            <section id="p2-tyres" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Surface Evolution Crisis</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">Cold Tearing & Sector 2</div>
+                </div>
+                <i class="fa-solid fa-snowflake text-3xl text-blue-300 drop-shadow-[0_0_5px_rgba(147,197,253,0.5)]"></i>
+              </div>
+
+              <div class="glass-panel p-6 rounded-2xl relative flex flex-col md:flex-row gap-8 items-center">
+                 <div class="flex-1">
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                       The stark contrast in grip between the abrasive, older asphalt of Sector 1 and the smooth, newly laid asphalt of the West Course (Turns 7 to 17) is compounding setup misery.
+                    </p>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                       Coupled with cool ambient temperatures (~15°C), the soft C3 compounds are failing to hit their optimal working window. The sustained lateral loads, particularly through Spoon Curve, cause the front-left tyre to physically shred across the cold asphalt, resulting in catastrophic graining.
+                    </p>
+                 </div>
+                 
+                 <div class="w-full md:w-1/2 bg-[#0B0E14] p-5 rounded-xl border border-white/10">
+                    <div class="flex justify-between items-center text-xs uppercase tracking-widest text-gray-400 mb-3 border-b border-white/10 pb-2">
+                       <span>C3 Soft Wear Profile</span>
+                       <span class="text-f1-red font-bold">Front-Left Limit</span>
+                    </div>
+                    
+                    <div class="space-y-4 font-mono text-sm">
+                       <div class="flex items-center gap-3">
+                          <div class="w-12 text-gray-500">Lap 1</div>
+                          <div class="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                             <div class="h-full bg-green-500 w-[95%]"></div>
+                          </div>
+                       </div>
+                       <div class="flex items-center gap-3">
+                          <div class="w-12 text-gray-500">Lap 3</div>
+                          <div class="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                             <div class="h-full bg-yellow-400 w-[60%]"></div>
+                          </div>
+                       </div>
+                       <div class="flex items-center gap-3">
+                          <div class="w-12 text-f1-red font-bold">Lap 5</div>
+                          <div class="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                             <div class="h-full bg-f1-red w-[25%] animate-pulse relative shadow-[0_0_8px_rgba(225,6,0,0.8)]"></div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="mt-4 text-[10px] text-zinc-500 uppercase text-center w-full">Deep-Tread Graining Failure Point</div>
+                 </div>
+              </div>
+            </section>
+            
+            <!-- Pace Data Visualization -->
+            <section id="p2-energy" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Telemetry Forecast</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">Qualifying & Race Deltas</div>
+                </div>
+                <i class="fa-solid fa-chart-line text-3xl text-gray-400"></i>
+              </div>
+
+              <div class="glass-panel p-6 rounded-2xl border border-gray-800">
+                <h3 class="font-display text-xl font-medium text-white mb-4 uppercase tracking-wider text-center">Normalized Simulation Pace Gaps (Seconds)</h3>
+                
+                <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 my-6">
+                   <!-- Qualifying Chart -->
+                   <div class="relative w-full h-[350px]">
+                      <h4 class="text-xs text-center text-gray-400 uppercase tracking-widest mb-2">Qualifying Trim</h4>
+                      <canvas id="qualifyingTrimChart"></canvas>
+                   </div>
+                   <!-- Race Chart -->
+                   <div class="relative w-full h-[350px]">
+                      <h4 class="text-xs text-center text-gray-400 uppercase tracking-widest mb-2">Race Trim</h4>
+                      <canvas id="raceTrimChart"></canvas>
+                   </div>
+                </div>
+
+                <div class="mt-6 bg-[#131822] border border-gray-800 rounded-lg p-5">
+                   <h4 class="font-display font-semibold text-white mb-2 text-xl tracking-wider">Predictive Conclusion</h4>
+                   <p class="text-sm text-gray-400 leading-relaxed">
+                      Mercedes holds a definitive foundational advantage. While McLaren engineered immense top speeds through aggressive hybrid deployment, they concede time in harvesting phases down the back straight. Alpine's long-run telemetry (+0.99s) exceptionally positions them as 4th fastest in race trim, whilst Williams (+2.42s) suffers severe fuel load penalties.
+                   </p>
+                </div>
+              </div>
+            </section>
+
           </div>
         </div>
       </section>
@@ -862,11 +1115,11 @@
         { label: 'Energy Management', id: 'energy' }
       ],
       'problem': [
-        { label: 'Mercedes Hegemony', id: 'epoch' },
-        { label: 'Brake Migration', id: 'aero' }, // Note: reused ID from structural layout
-        { label: 'Aero Drag Penalty', id: 'track' }, // Note: reused ID from structural layout
-        { label: 'Cold Tearing', id: 'tyres' },
-        { label: '9.0MJ Crisis', id: 'energy' }
+        { label: '8.0 MJ Directive', id: 'epoch' },
+        { label: 'Active Aero Divergence', id: 'aero' },
+        { label: 'Red Bull Crisis', id: 'track' },
+        { label: 'Surface Evolution', id: 'tyres' },
+        { label: 'Telemetry Forecast', id: 'energy' }
       ],
       'solution': [
         { label: 'Silver Benchmark', id: 'silver' },
@@ -889,7 +1142,7 @@
       const config = NAV_CONFIG[phase] || NAV_CONFIG['overview'];
       navContainer.innerHTML = config.map(link => `
         <a href="#" onclick="scrollToSection(event, '${link.id}')"
-          class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider text-gray-400">
+          class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider text-gray-400 whitespace-nowrap">
           ${link.label}
         </a>
       `).join('');
@@ -1115,8 +1368,85 @@
       });
     }
 
+    // Phase 2: Qualifying Trim Chart
+    const ctxQuali = document.getElementById('qualifyingTrimChart');
+    if(ctxQuali) {
+      new Chart(ctxQuali, {
+        type: 'bar',
+        data: {
+          labels: ['Mercedes', 'McLaren', 'Ferrari', 'Red Bull', 'Audi', 'Haas', 'Alpine', 'Williams', 'Aston Martin', 'Cadillac'],
+          datasets: [{
+            label: 'Qualifying Gap (s)',
+            data: [0.00, 0.10, 0.28, 0.92, 1.33, 1.41, 1.43, 1.97, 2.89, 3.24],
+            backgroundColor: [
+              'rgba(0, 210, 190, 0.7)', // Merc
+              'rgba(255, 128, 0, 0.7)', // McL
+              'rgba(225, 6, 0, 0.7)',   // Fer
+              'rgba(6, 0, 239, 0.7)',   // RB
+              'rgba(204, 0, 0, 0.7)',   // Audi
+              'rgba(255, 255, 255, 0.7)', // Haas
+              'rgba(0, 144, 255, 0.7)', // Alp
+              'rgba(0, 90, 255, 0.7)',  // Wil
+              'rgba(34, 153, 113, 0.7)', // Ast
+              'rgba(255, 215, 0, 0.7)'  // Cad
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => `+${ctx.parsed.y}s` } } },
+          scales: {
+            y: { grid: { color: gridColor }, ticks: { color: tickColor } },
+            x: { grid: { color: 'transparent' }, ticks: { color: tickColor } }
+          }
+        }
+      });
+    }
+
+    // Phase 2: Race Trim Chart
+    const ctxRace = document.getElementById('raceTrimChart');
+    if(ctxRace) {
+      new Chart(ctxRace, {
+        type: 'bar',
+        data: {
+          labels: ['Mercedes', 'McLaren', 'Ferrari', 'Alpine', 'Red Bull', 'Audi', 'Haas', 'Williams', 'Aston Martin', 'Cadillac'],
+          datasets: [{
+            label: 'Race Gap (s/lap)',
+            data: [0.00, 0.24, 0.24, 0.99, 1.03, 1.36, 1.36, 2.42, 2.80, 3.66],
+            backgroundColor: [
+              'rgba(0, 210, 190, 0.7)', // Merc
+              'rgba(255, 128, 0, 0.7)', // McL
+              'rgba(225, 6, 0, 0.7)',   // Fer
+              'rgba(0, 144, 255, 0.7)', // Alp
+              'rgba(6, 0, 239, 0.7)',   // RB
+              'rgba(204, 0, 0, 0.7)',   // Audi
+              'rgba(255, 255, 255, 0.7)', // Haas
+              'rgba(0, 90, 255, 0.7)',  // Wil
+              'rgba(34, 153, 113, 0.7)', // Ast
+              'rgba(255, 215, 0, 0.7)'  // Cad
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false }, tooltip: { callbacks: { label: (ctx) => `+${ctx.parsed.y}s` } } },
+          scales: {
+            y: { grid: { color: gridColor }, ticks: { color: tickColor } },
+            x: { grid: { color: 'transparent' }, ticks: { color: tickColor } }
+          }
+        }
+      });
+    }
+
     // Initialize progression state after DOM is ready.
-    updateProgressUI(PHASES[Math.min(unlockedIndex, PHASES.length - 1)]);
+    updateProgressUI('overview');
+    if (typeof updateNavForPhase === 'function') {
+      updateNavForPhase('overview');
+    }
 
     // ==========================================
     // DYNAMIC JSON LOCK CHECKER
