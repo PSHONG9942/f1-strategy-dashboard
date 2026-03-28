@@ -215,6 +215,88 @@
     .glass-panel {
       transition: border-color 0.4s ease, box-shadow 0.4s ease;
     }
+
+    /* Tactical Console Aesthetics */
+    .tactical-greeble {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      pointer-events: none;
+    }
+
+    .greeble-tl {
+      top: -1px;
+      left: -1px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .greeble-tr {
+      top: -1px;
+      right: -1px;
+      border-left: none;
+      border-bottom: none;
+    }
+
+    .greeble-bl {
+      bottom: -1px;
+      left: -1px;
+      border-right: none;
+      border-top: none;
+    }
+
+    .greeble-br {
+      bottom: -1px;
+      right: -1px;
+      border-left: none;
+      border-top: none;
+    }
+
+    .scanline-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+      background-size: 100% 4px;
+      pointer-events: none;
+      opacity: 0.1;
+    }
+
+    .terminal-refresh-active {
+      animation: terminal-flicker 0.4s ease-in-out;
+    }
+
+    @keyframes terminal-flicker {
+      0% {
+        opacity: 1;
+        filter: brightness(1);
+      }
+
+      20% {
+        opacity: 0.5;
+        filter: brightness(2) contrast(1.5);
+      }
+
+      40% {
+        opacity: 0.8;
+        filter: brightness(1.2);
+      }
+
+      60% {
+        opacity: 0.3;
+        filter: brightness(3);
+      }
+
+      80% {
+        opacity: 0.9;
+        filter: brightness(1.1);
+      }
+
+      100% {
+        opacity: 1;
+        filter: brightness(1);
+      }
+    }
   </style>
 </head>
 
@@ -980,22 +1062,632 @@
     <!-- ========================= -->
     <!-- PHASE 3: THE SOLUTION   -->
     <!-- ========================= -->
+
+
     <div id="phase-solution" class="phase-content">
-      <section class="scroll-mt-40 py-20 relative border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="locked-view text-center">
-            <i class="fa-solid fa-lock text-4xl text-gray-600 mb-4"></i>
-            <h2 class="font-display text-3xl font-bold text-white mb-2 uppercase">The Solutions</h2>
-            <p class="text-gray-400 mb-4">This section unlocks after Saturday's events.</p>
-            <div id="countdown-solution" class="font-mono text-2xl text-f1-red">Initializing...</div>
-          </div>
-          <div class="unlocked-view hidden">
-            <div class="text-center py-20">
-              <h3 class="text-2xl text-gray-500">Locked</h3>
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative border-t border-white/10">
+            <!-- Locked View -->
+            <div class="locked-view flex flex-col items-center justify-center min-h-[60vh] text-center px-4 py-32">
+                <i class="fa-solid fa-lock text-6xl text-gray-700 mb-6"></i>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">The Solutions</h2>
+                <div class="inline-block bg-f1-red/10 border border-f1-red/50 text-f1-red px-6 py-3 rounded-full font-bold uppercase tracking-wider text-sm mb-6">
+                    Awaiting Qualifying Completion
+                </div>
+                <p class="text-gray-400 max-w-2xl text-lg">
+                    This analysis unlocks <strong>1 hour after the Qualifying session concludes</strong>.
+                </p>
+                <!-- Countdown Timer -->
+                <div id="countdown-solution" class="mt-8 font-mono text-3xl font-bold tracking-widest text-f1-red drop-shadow-[0_0_8px_rgba(225,6,0,0.5)] h-10">
+                    --:--:--:--
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
+
+            <!-- Unlocked View -->
+            <div class="unlocked-view hidden relative">
+                <div class="mb-16">
+                    <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-4 uppercase border-l-8 border-f1-red pl-6 tracking-tighter">The Solutions</h2>
+                    <p class="text-xl text-gray-400 max-w-3xl leading-relaxed">
+                        Suzuka's high-speed geometry met the 2026 power units in a violent collision of physics. Following the FIA's emergency 8.0 MJ directive, the grid has bifurcated between those who can manage longitudinal load and those who cannot.
+                    </p>
+                </div>
+
+                <!-- Regulatory Update Alert -->
+                <div class="bg-red-900/10 border border-f1-red/30 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center mb-12">
+                    <div class="flex-shrink-0 text-f1-red text-6xl drop-shadow-[0_0_15px_rgba(225,6,0,0.4)]">
+                        <i class="fa-solid fa-list-ol"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display text-2xl font-bold text-white mb-2 uppercase">Suzuka 2026: The 22-Car Grid</h3>
+                        <p class="text-gray-300 text-sm md:text-base leading-relaxed">
+                            With the field expanded to 22 cars, Suzuka Qualifying follows the aggressive 6-6-10 knockout format.
+                            <strong>Q1 (18 mins)</strong> and <strong>Q2 (15 mins)</strong> eliminate six drivers each. 
+                            Critically, the FIA's emergency <strong>8.0 MJ Protocol</strong> significantly reduced mandatory charging laps, allowing for back-to-back flying attempts that pushed the 350kW MGU-K units to terminal thermal limits.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- WEEKEND CONTEXT -->
+                <div id="p3-context" class="border-l-4 border-indigo-500 pl-4 mt-20 mb-6 scroll-mt-40">
+                    <h3 class="font-display text-3xl font-bold tracking-tight text-white uppercase mt-2">Weekend Context & News Timeline</h3>
+                    <p class="mt-2 text-md text-gray-400">Events leading into the Suzuka Qualifying session.</p>
+                </div>
+                <div class="space-y-6">
+                    <!-- FP1 -->
+                    <div class="glass-panel p-6 rounded-xl border border-gray-800 flex flex-col sm:flex-row gap-6 items-start">
+                        <div class="bg-gray-900 p-3 rounded-lg text-center min-w-[100px] border border-gray-700 flex flex-col items-center justify-center">
+                            <span class="block text-2xl font-black text-white">FP1</span>
+                            <span class="text-[10px] text-gray-500 uppercase">Fri 11:30</span>
+                        </div>
+                        <div>
+                            <span class="inline-block px-2 py-1 bg-red-900/30 text-red-500 border border-red-500/30 text-xs font-bold rounded mb-2 uppercase tracking-widest">Aero Correlation</span>
+                            <h3 class="text-lg font-bold text-white mb-1">Mercedes W17 master Sector 1 as Red Bull stalls</h3>
+                            <p class="text-sm text-gray-400">Under the initial 9.0 MJ harvest cap, Red Bull encountered severe aerodynamic correlation failures in high-yaw corners, while the Mercedes platform demonstrated flawless active-aero synchronization.</p>
+                        </div>
+                    </div>
+                    <!-- FP2 -->
+                    <div class="glass-panel p-6 rounded-xl border border-gray-800 flex flex-col sm:flex-row gap-6 items-start">
+                        <div class="bg-gray-900 p-3 rounded-lg text-center min-w-[100px] border border-gray-700 flex flex-col items-center justify-center">
+                            <span class="block text-2xl font-black text-white">FP2</span>
+                            <span class="text-[10px] text-gray-500 uppercase">Fri 15:00</span>
+                        </div>
+                        <div>
+                            <span class="inline-block px-2 py-1 bg-yellow-900/30 text-yellow-500 border border-yellow-500/30 text-xs font-bold rounded mb-2 uppercase tracking-widest">Regulatory Pivot</span>
+                            <h3 class="text-lg font-bold text-white mb-1">FIA executes TD 042-C: The 8.0 MJ Directive</h3>
+                            <p class="text-sm text-gray-400">Following feedback on "super-clipping" risks at 130R, the FIA reduced the harvest requirement by 1.0 MJ. Teams spent the session recalibrating harvesting maps for the new apex speed thresholds.</p>
+                        </div>
+                    </div>
+                    <!-- FP3 -->
+                    <div class="glass-panel p-6 rounded-xl border border-gray-800 flex flex-col sm:flex-row gap-6 items-start">
+                        <div class="bg-gray-900 p-3 rounded-lg text-center min-w-[100px] border border-gray-700 flex flex-col items-center justify-center">
+                            <span class="block text-2xl font-black text-white">FP3</span>
+                            <span class="text-[10px] text-gray-500 uppercase">Sat 11:30</span>
+                        </div>
+                        <div>
+                            <span class="inline-block px-2 py-1 bg-teal-900/30 text-teal-500 border border-teal-500/30 text-xs font-bold rounded mb-2 uppercase tracking-widest">Antonelli Ascension</span>
+                            <h3 class="text-lg font-bold text-white mb-1">Antonelli breaks Suzuka lap record in final simulation</h3>
+                            <p class="text-sm text-gray-400">The rookie laid down a chilling marker, finding nearly half a second over Verstappen in Sector 2. Red Bull's Paul Monaghan admitted the team is still "fighting the car" in every corner.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRACTICE ANALYSIS -->
+                <div id="p3-practice" class="border-l-4 border-teal-500 pl-4 mt-20 mb-6 scroll-mt-40">
+                    <h3 class="font-display text-3xl font-bold tracking-tight text-white uppercase mt-2">Practice Analysis & Telemetry</h3>
+                    <p class="mt-2 text-md text-gray-400">Race-pace simulations and long-run energy management forecasting.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <div class="glass-panel p-6 rounded-2xl border border-gray-800">
+                        <h3 class="text-2xl font-bold text-white mb-2"><i class="fas fa-chart-bar text-f1-red mr-2"></i> FP2 Long-Run Pace Delta</h3>
+                        <p class="text-sm text-gray-400 mb-6">Tyre-adjusted race simulations on Medium compounds. Gaps to Mercedes (Baseline).</p>
+                        <div class="space-y-6 text-sm">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-bold text-teal-400">K. Antonelli (Mercedes)</span>
+                                    <span class="text-white font-mono bg-gray-900 px-2 rounded font-bold">Baseline</span>
+                                </div>
+                                <div class="w-full bg-gray-800 h-6 rounded-r">
+                                    <div class="bg-teal-500 h-6 rounded-r shadow-[0_0_10px_rgba(20,184,166,0.6)]" style="width: 10%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-bold text-teal-300">G. Russell (Mercedes)</span>
+                                    <span class="text-red-400 font-mono font-bold">+0.12s</span>
+                                </div>
+                                <div class="w-full bg-gray-800 h-6 rounded-r flex">
+                                    <div class="bg-gray-700 h-6" style="width: 10%"></div>
+                                    <div class="bg-red-500 h-6 rounded-r" style="width: 8%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-bold text-red-500">C. Leclerc (Ferrari)</span>
+                                    <span class="text-red-400 font-mono font-bold">+0.26s</span>
+                                </div>
+                                <div class="w-full bg-gray-800 h-6 rounded-r flex">
+                                    <div class="bg-gray-700 h-6" style="width: 10%"></div>
+                                    <div class="bg-red-500 h-6 rounded-r" style="width: 15%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-bold text-blue-600">M. Verstappen (Red Bull)</span>
+                                    <span class="text-red-400 font-mono font-bold">+1.03s</span>
+                                </div>
+                                <div class="w-full bg-gray-800 h-6 rounded-r flex">
+                                    <div class="bg-gray-700 h-6" style="width: 10%"></div>
+                                    <div class="bg-red-500 h-6 rounded-r" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 p-4 bg-teal-900/30 border border-teal-800 rounded-lg">
+                            <p class="text-sm text-gray-300"><i class="fas fa-info-circle text-teal-400 mr-2"></i>
+                                <strong>Analysis:</strong> Mercedes is operating in a different league in race trim. Verstappen's +1.03s deficit is representative of the catastrophic floor-edge stalling issues Red Bull faces when pushed to qualifying yaw angles.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-6 font-sans">
+                        <div class="glass-panel p-6 rounded-2xl border-l-4 border-f1-red bg-gray-900/50">
+                            <h3 class="font-display font-bold text-xl text-white mb-2 uppercase italic tracking-wider">Thermal Saturation Crisis</h3>
+                            <p class="text-sm text-gray-300 italic mb-2 tracking-wide font-medium">Front-Left C3 Destruction</p>
+                            <p class="text-sm text-gray-400">Surface temps on the front-left reached 135°C during FP2 through Spoon Curve. Without the 8.0 MJ directive, clipping would force even more sliding, likely leading to early structural tyre failure.</p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl border-l-4 border-emerald-800 bg-gray-900/50">
+                            <h3 class="font-display font-bold text-xl text-white mb-2 uppercase italic tracking-wider">Aston Martin's Systemic Humiliation</h3>
+                            <p class="text-sm text-gray-300 italic mb-2 tracking-wide font-medium">Worst Friday in Honda's Modern History</p>
+                            <p class="text-sm text-gray-400">The AMR-26 platform proved entirely incompatible with the high-frequency vibration profiles of the Suzuka asphalt. Both drivers managed less than 15 flying laps combined antes de chassis nerve-damage risks were cited.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- THE 8.0 MJ DIRECTIVE CONTROVERSY -->
+                <div id="p3-controversy" class="bg-gray-800/50 rounded-2xl p-6 md:p-10 border border-yellow-900/50 relative overflow-hidden mb-12 scroll-mt-40">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-yellow-500"></div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-500 text-xl mr-4 shadow-[0_0_15px_rgba(234,179,8,0.3)]">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-white uppercase tracking-tighter">The Suzuka 8.0 MJ Technical Revolt</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                        <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-700 -z-10 -translate-y-1/2"></div>
+                        <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 hover:border-yellow-500/50 transition-colors">
+                            <div class="text-yellow-500 font-bold mb-2 uppercase text-[10px] tracking-widest">1. The Crisis</div>
+                            <p class="text-[11px] text-gray-400 leading-relaxed font-sans">FP1 data showed 22 cars "clipping" before 130R and Spoon, causing dangerous closing speeds and aerodynamic instability.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 hover:border-yellow-500/50 transition-colors">
+                            <div class="text-yellow-500 font-bold mb-2 uppercase text-[10px] tracking-widest">2. FIA TD 042-C</div>
+                            <p class="text-[11px] text-gray-400 leading-relaxed font-sans">The FIA emergency-mandated 1.0 MJ reduction in charging, hoping to restore flat-out behavior to high-speed corners.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 hover:border-yellow-500/50 transition-colors">
+                            <div class="text-yellow-500 font-bold mb-2 uppercase text-[10px] tracking-widest">3. The Revolt</div>
+                            <p class="text-[11px] text-gray-400 leading-relaxed font-sans">Ferrari and Red Bull pit walls formally protested, citing unfair advantage to Mercedes' inherently low-drag cooling architecture.</p>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-xl border border-gray-700 hover:border-yellow-500/50 transition-colors">
+                            <div class="text-yellow-500 font-bold mb-2 uppercase text-[10px] tracking-widest">4. Rejection</div>
+                            <p class="text-[11px] text-gray-400 leading-relaxed font-sans">Stewards rejected the protest, citing 'Force Majeure'. The 8.0 MJ directive stood, defining the grid's hierarchy.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FULL SESSION REPORT: Q1 -->
+                <div id="p3-q1" class="border-l-4 border-red-500 pl-4 mt-20 mb-6 scroll-mt-40">
+                    <h3 class="font-display text-3xl font-bold tracking-tight text-white uppercase mt-2">Q1: Systemic Architectures Failing</h3>
+                    <p class="mt-2 text-md text-gray-400 font-serif-text italic">Aston Martin's Systemic Humiliation at Honda's Home</p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-xl border border-gray-800 space-y-6 text-gray-300 text-base mb-12">
+                    <p>
+                        The opening eighteen-minute segment established a brutal baseline. Aston Martin, competing at the home circuit of their engine partner Honda, delivered a performance described as a <span class="text-white font-medium">systemic humiliation</span>. Despite extensive upgrades, both Fernando Alonso and Lance Stroll were firmly rooted to the bottom of the timing sheets.
+                    </p>
+                    <p>
+                        Alonso reported that severe chassis vibrations had returned, completely severing his feel for the car. He was a staggering 1.6 seconds slower than the Haas of Ollie Bearman—the slowest of the established midfield cars.
+                    </p>
+
+                    <!-- Technical Highlight: 8.0 MJ Directive -->
+                    <div class="bg-[#111827] border border-red-500/30 p-5 rounded-lg my-6">
+                        <h4 class="font-bold text-red-500 uppercase text-sm tracking-wider mb-2 flex items-center">
+                            <i class="fa-solid fa-microchip mr-2"></i> Technical Directive 042-C: 8.0 MJ Protocol
+                        </h4>
+                        <p class="text-sm font-mono text-gray-400 leading-relaxed mb-3">
+                            <code>[FIA_TD] RECHARGE_CAP: 8.0MJ (from 9.0MJ)</code><br>
+                            <code>[PARAM] LIFT_COAST_REDUCTION: -12.5%</code>
+                        </p>
+                        <p class="text-sm">
+                            <strong>Context:</strong> By reducing the mandatory harvest to 8.0 MJ, the FIA allowed drivers to spend less time on part-throttle, effectively restoring their ability to brake later and harder. This exponentially rewarded efficient platforms like Mercedes while punishing unstable ones.
+                        </p>
+                        <div class="mt-4 flex flex-col md:flex-row gap-6 items-center bg-black/30 p-4 rounded-lg border border-white/5">
+                            <div class="flex-1">
+                                <h5 class="text-xs font-bold text-gray-500 uppercase mb-2">Braking Load Simulator (Suzuka T11)</h5>
+                                <div class="space-y-4">
+                                    <input type="range" id="energy-toggle" min="0" max="1" step="1" value="1" class="w-full h-2 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-f1-red">
+                                    <div class="flex justify-between text-[10px] font-mono text-gray-500">
+                                        <span>9.0 MJ (STD)</span>
+                                        <span class="text-f1-red">8.0 MJ (TD)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center">
+                                    <div class="text-[8px] text-gray-500 uppercase mb-1">Load Increase</div>
+                                    <div id="brake-dist" class="text-xl font-mono text-white font-bold">+14.2%</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-[8px] text-gray-500 uppercase mb-1">Stability</div>
+                                    <div id="pitch-val" class="text-xl font-mono text-f1-red font-bold">LOW</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  <!-- FULL SESSION REPORT: Q2 -->
+                <div id="p3-q2" class="border-l-4 border-yellow-500 pl-4 mt-12 mb-6 scroll-mt-40">
+                    <h3 class="font-display text-3xl font-bold tracking-tight text-white uppercase mt-2">Q2: The Fall of the Champion</h3>
+                    <p class="mt-2 text-md text-gray-400 font-serif-text italic">Max Verstappen's Shock Elimination</p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-xl border border-gray-800 space-y-6 text-gray-300 text-base mb-12">
+                    <p>
+                        The second segment delivered a seismic shock. Max Verstappen, undisputed master of Suzuka since 2019, was <span class="bg-yellow-900/40 text-yellow-200 px-1.5 py-0.5 rounded font-medium">eliminated on pure pace</span>. He could only manage P11, failing to progress to the Q3 shootout.
+                    </p>
+                    <p>
+                        Telemetry revealed the RB22 was bleeding lap time in every sector. Verstappen told GP Lambiase that the car was "jumping on high speed" and "completely undriveable suddenly," indicating the aerodynamic platforms were fundamentally decoupled.
+                    </p>
+                    <div class="bg-[#111827] border border-yellow-500/30 p-5 rounded-lg my-6">
+                        <h4 class="font-bold text-yellow-500 uppercase text-sm tracking-wider mb-2 flex items-center">
+                            <i class="fa-solid fa-triangle-exclamation mr-2"></i> Red Bull Correlation Failure
+                        </h4>
+                        <p class="text-sm">
+                            Red Bull Chief Engineer Paul Monaghan admitted the team identified fundamental flaws but lacked an immediate remedy. The RB22 was devoid of the aerodynamic load required to attack the sweeping corners, outqualified by rookie Arvid Lindblad and junior teammate Isack Hadjar.
+                        </p>
+                        <div class="mt-3 p-3 bg-red-900/20 border-l-2 border-red-500 text-red-300 text-sm font-mono">
+                            "I'm not even frustrated anymore, I'm beyond that." - Max Verstappen
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FULL SESSION REPORT: Q3 -->
+                <div id="p3-q3" class="border-l-4 border-teal-500 pl-4 mt-12 mb-6 scroll-mt-40">
+                    <h3 class="font-display text-3xl font-bold tracking-tight text-white uppercase mt-2">Q3: The Silver Ascension</h3>
+                    <p class="mt-2 text-md text-gray-400 font-serif-text italic">250th Pole Position for Mercedes Power</p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-xl border border-gray-800 space-y-6 text-gray-300 text-base mb-12">
+                    <p>
+                        The final shootout was an exclusively Mercedes affair. Kimi Antonelli secured his second consecutive pole with a blistering <span class="text-white font-medium">1:28.778</span>. Despite a lock-up at the Hairpin (Turn 11), the W17's low-drag efficiency carried him through to the benchmark.
+                    </p>
+                    <p>
+                        George Russell secured second place, locking out the front row, though he was compromised by a last-minute setup "tweak" that made his car difficult to manage through the high-speed Esses.
+                    </p>
+                    <div class="h-[250px] relative my-8">
+                        <canvas id="qualiGapChart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+                        <div class="bg-purple-900/20 border border-purple-500/30 p-4 rounded-lg">
+                            <div class="text-xs text-purple-400 font-bold uppercase mb-1">Pole Position</div>
+                            <div class="text-3xl font-mono text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.6)] font-bold">1:28.778</div>
+                            <div class="text-sm text-gray-400 mt-1">K. Antonelli (Mercedes W17)</div>
+                        </div>
+                        <div class="bg-[#111827] border border-gray-700 p-4 rounded-lg flex items-center justify-center">
+                            <p class="text-sm text-gray-400 text-center">
+                                This marks the historic <strong>250th Pole Position</strong> for Mercedes power in Formula 1 history.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+          </section>
+
+                <!-- FULL CLASSIFICATION DATA -->
+                <div id="p3-classification" class="border-l-4 border-white pl-4 mt-20 mb-6 scroll-mt-40">
+                    <h3 class="font-display text-4xl font-bold tracking-tight text-white uppercase">Official Qualifying Classification</h3>
+                    <p class="mt-2 text-md text-gray-400">Complete 22-car grid analysis and session times following the 8.0 MJ directive implementation.</p>
+                </div>
+
+                <div class="glass-panel rounded-xl border border-gray-800 overflow-hidden mb-16 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+                    <div class="overflow-x-auto no-scrollbar">
+                        <table class="w-full text-left text-sm text-gray-300">
+                            <thead class="bg-gray-800/90 text-xs uppercase text-gray-300 font-bold border-b border-gray-700">
+                                <tr>
+                                    <th scope="col" class="px-6 py-5">Pos</th>
+                                    <th scope="col" class="px-6 py-5">Driver</th>
+                                    <th scope="col" class="px-6 py-5">Team</th>
+                                    <th scope="col" class="px-6 py-5">Q3 Time</th>
+                                    <th scope="col" class="px-6 py-5">Gap</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-800 bg-[#0a0a0a]">
+                                <!-- Q3 Drivers -->
+                                <tr class="hover:bg-gray-800 transition">
+                                    <td class="px-6 py-4 font-bold text-white"><span class="bg-teal-600/20 text-teal-400 px-2 py-1 rounded">1</span></td>
+                                    <td class="px-6 py-4 font-bold text-white">Kimi Antonelli</td>
+                                    <td class="px-6 py-4 text-teal-500 border-l-2 border-teal-500 ml-4 pl-2">Mercedes</td>
+                                    <td class="px-6 py-4 font-mono font-bold text-purple-400 drop-shadow-[0_0_8px_rgba(192,132,252,0.5)]">1:28.778</td>
+                                    <td class="px-6 py-4 font-mono">-</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition">
+                                    <td class="px-6 py-4 font-bold text-white"><span class="bg-teal-600/20 text-teal-400 px-2 py-1 rounded">2</span></td>
+                                    <td class="px-6 py-4 font-bold text-white">George Russell</td>
+                                    <td class="px-6 py-4 text-teal-500 border-l-2 border-teal-500 ml-4 pl-2">Mercedes</td>
+                                    <td class="px-6 py-4 font-mono">1:29.076</td>
+                                    <td class="px-6 py-4 font-mono text-gray-400">+0.298</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition">
+                                    <td class="px-6 py-4 font-bold text-white">3</td>
+                                    <td class="px-6 py-4 font-bold text-white">Oscar Piastri</td>
+                                    <td class="px-6 py-4 text-orange-500 border-l-2 border-orange-500 ml-4 pl-2">McLaren</td>
+                                    <td class="px-6 py-4 font-mono">1:29.132</td>
+                                    <td class="px-6 py-4 font-mono text-gray-400">+0.354</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition">
+                                    <td class="px-6 py-4 font-bold text-white">4</td>
+                                    <td class="px-6 py-4 font-bold text-white">Charles Leclerc</td>
+                                    <td class="px-6 py-4 text-red-500 border-l-2 border-red-500 ml-4 pl-2">Ferrari</td>
+                                    <td class="px-6 py-4 font-mono">1:29.405</td>
+                                    <td class="px-6 py-4 font-mono text-gray-400">+0.627</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition">
+                                    <td class="px-6 py-4 font-bold text-white">5</td>
+                                    <td class="px-6 py-4 font-bold text-white">Lando Norris</td>
+                                    <td class="px-6 py-4 text-orange-500 border-l-2 border-orange-500 ml-4 pl-2">McLaren</td>
+                                    <td class="px-6 py-4 font-mono">1:29.409</td>
+                                    <td class="px-6 py-4 font-mono text-gray-400">+0.631</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition">
+                                    <td class="px-6 py-4 font-bold text-white">6</td>
+                                    <td class="px-6 py-4 font-bold text-white">Lewis Hamilton</td>
+                                    <td class="px-6 py-4 text-red-500 border-l-2 border-red-500 ml-4 pl-2">Ferrari</td>
+                                    <td class="px-6 py-4 font-mono">1:29.567</td>
+                                    <td class="px-6 py-4 font-mono text-gray-400">+0.789</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition">
+                                    <td class="px-6 py-4 font-bold text-white">7</td>
+                                    <td class="px-6 py-4 font-bold text-white">Pierre Gasly</td>
+                                    <td class="px-6 py-4 text-pink-500 border-l-2 border-pink-500 ml-4 pl-2">Alpine</td>
+                                    <td class="px-6 py-4 font-mono">1:29.691</td>
+                                    <td class="px-6 py-4 font-mono text-gray-400">+0.913</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition">
+                                    <td class="px-6 py-4 font-bold text-white">8</td>
+                                    <td class="px-6 py-4 font-bold text-white">Isack Hadjar</td>
+                                    <td class="px-6 py-4 text-blue-600 border-l-2 border-blue-600 ml-4 pl-2">Red Bull</td>
+                                    <td class="px-6 py-4 font-mono">1:29.978</td>
+                                    <td class="px-6 py-4 font-mono text-gray-400">+1.200</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition">
+                                    <td class="px-6 py-4 font-bold text-white">9</td>
+                                    <td class="px-6 py-4 text-gray-300">Gabriel Bortoleto</td>
+                                    <td class="px-6 py-4 text-green-500 border-l-2 border-green-500 ml-4 pl-2">Audi</td>
+                                    <td class="px-6 py-4 font-mono">1:30.274</td>
+                                    <td class="px-6 py-4 font-mono text-gray-400">+1.496</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition border-b-2 border-gray-600">
+                                    <td class="px-6 py-4 font-bold text-white">10</td>
+                                    <td class="px-6 py-4 text-gray-300">Arvid Lindblad</td>
+                                    <td class="px-6 py-4 text-blue-400 border-l-2 border-blue-400 ml-4 pl-2">Racing Bulls</td>
+                                    <td class="px-6 py-4 font-mono text-blue-400">1:30.319</td>
+                                    <td class="px-6 py-4 font-mono text-gray-400">+1.541</td>
+                                </tr>
+                                <!-- Eliminate Q2 -->
+                                <tr class="bg-gray-900/30 text-gray-500">
+                                    <td colspan="5" class="px-6 py-2 text-xs font-bold uppercase tracking-widest text-center border-y border-gray-700">Eliminated in Q2</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-gray-400">
+                                    <td class="px-6 py-3">11</td>
+                                    <td class="px-6 py-3 font-bold text-f1-red italic">Max Verstappen</td>
+                                    <td class="px-6 py-3 border-l-2 border-blue-600 ml-4 pl-2 text-f1-red/80">Red Bull</td>
+                                    <td class="px-6 py-3 font-mono">1:30.262</td>
+                                    <td class="px-6 py-3 font-mono"></td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-gray-400">
+                                    <td class="px-6 py-3">12</td>
+                                    <td class="px-6 py-3">Esteban Ocon</td>
+                                    <td class="px-6 py-3 border-l-2 border-gray-400 ml-4 pl-2">Haas</td>
+                                    <td class="px-6 py-3 font-mono">1:30.309</td>
+                                    <td class="px-6 py-3 font-mono"></td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-gray-400">
+                                    <td class="px-6 py-3">13</td>
+                                    <td class="px-6 py-3">Nico Hulkenberg</td>
+                                    <td class="px-6 py-3 border-l-2 border-green-500 ml-4 pl-2">Audi</td>
+                                    <td class="px-6 py-3 font-mono">1:30.387</td>
+                                    <td class="px-6 py-3 font-mono"></td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-gray-400">
+                                    <td class="px-6 py-3">14</td>
+                                    <td class="px-6 py-3">Liam Lawson</td>
+                                    <td class="px-6 py-3 border-l-2 border-blue-400 ml-4 pl-2">Racing Bulls</td>
+                                    <td class="px-6 py-3 font-mono">1:30.495</td>
+                                    <td class="px-6 py-3 font-mono"></td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-gray-400">
+                                    <td class="px-6 py-3">15</td>
+                                    <td class="px-6 py-3">Franco Colapinto</td>
+                                    <td class="px-6 py-3 border-l-2 border-pink-500 ml-4 pl-2">Alpine</td>
+                                    <td class="px-6 py-3 font-mono">1:30.627</td>
+                                    <td class="px-6 py-3 font-mono"></td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-gray-400 border-b-2 border-gray-600">
+                                    <td class="px-6 py-3">16</td>
+                                    <td class="px-6 py-3 text-red-400 italic">Carlos Sainz</td>
+                                    <td class="px-6 py-3 border-l-2 border-blue-300 ml-4 pl-2">Williams</td>
+                                    <td class="px-6 py-3 font-mono">1:31.033</td>
+                                    <td class="px-6 py-3 font-mono"></td>
+                                </tr>
+                                <!-- Eliminate Q1 -->
+                                <tr class="bg-gray-900/30 text-gray-500">
+                                    <td colspan="5" class="px-6 py-2 text-xs font-bold uppercase tracking-widest text-center border-y border-gray-700">Eliminated in Q1</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-gray-500">
+                                    <td class="px-6 py-3">17</td>
+                                    <td class="px-6 py-3">Alex Albon</td>
+                                    <td class="px-6 py-3 border-l-2 border-blue-300 ml-4 pl-2">Williams</td>
+                                    <td class="px-6 py-3 font-mono">1:31.088</td>
+                                    <td class="px-6 py-3 font-mono"></td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-gray-500">
+                                    <td class="px-6 py-3">18</td>
+                                    <td class="px-6 py-3">Oliver Bearman</td>
+                                    <td class="px-6 py-3 border-l-2 border-gray-400 ml-4 pl-2">Haas</td>
+                                    <td class="px-6 py-3 font-mono">1:31.090</td>
+                                    <td class="px-6 py-3 font-mono"></td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-gray-500">
+                                    <td class="px-6 py-3">19</td>
+                                    <td class="px-6 py-3">Sergio Perez</td>
+                                    <td class="px-6 py-3 border-l-2 border-blue-600 ml-4 pl-2">Cadillac</td>
+                                    <td class="px-6 py-3 font-mono">1:32.206</td>
+                                    <td class="px-6 py-3 font-mono"></td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-gray-500">
+                                    <td class="px-6 py-3">20</td>
+                                    <td class="px-6 py-3">Valtteri Bottas</td>
+                                    <td class="px-6 py-3 border-l-2 border-blue-400 ml-4 pl-2">Cadillac</td>
+                                    <td class="px-6 py-3 font-mono">1:32.330</td>
+                                    <td class="px-6 py-3 font-mono"></td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-red-500">
+                                    <td class="px-6 py-3 font-bold">21</td>
+                                    <td class="px-6 py-3 font-bold underline decoration-f1-red/30">Fernando Alonso</td>
+                                    <td class="px-6 py-3 border-l-2 border-emerald-600 ml-4 pl-2">Aston Martin</td>
+                                    <td class="px-6 py-3 font-mono">1:32.646</td>
+                                    <td class="px-6 py-3 text-xs italic font-bold">VIBRATIONS</td>
+                                </tr>
+                                <tr class="hover:bg-gray-800 transition text-red-500 border-b-2 border-gray-600">
+                                    <td class="px-6 py-3 font-bold">22</td>
+                                    <td class="px-6 py-3 font-bold text-gray-400">Lance Stroll</td>
+                                    <td class="px-6 py-3 border-l-2 border-emerald-600 ml-4 pl-2">Aston Martin</td>
+                                    <td class="px-6 py-3 font-mono">1:32.920</td>
+                                    <td class="px-6 py-3 font-mono text-gray-400">DNF</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="p3-predictions" class="border-l-4 border-yellow-400 pl-4 mt-20 mb-6 scroll-mt-40">
+                    <h3 class="font-display text-4xl font-bold tracking-tight text-white uppercase">Expert Analyst Predictions</h3>
+                    <p class="mt-2 text-md text-gray-400">Synthesized insights for the 53-lap Japanese Grand Prix based on qualifying telemetry.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <!-- Tactical Strategy -->
+                    <div class="glass-panel p-8 rounded-xl border border-gray-800 hover:border-yellow-500/50 transition duration-300 relative group overflow-hidden">
+                         <div class="absolute top-0 right-0 p-4 text-4xl text-yellow-500/5 group-hover:text-yellow-500/10 transition-colors pointer-events-none">
+                            <i class="fa-solid fa-chess"></i>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-white mb-6 uppercase tracking-tight flex items-center">
+                            <i class="fa-solid fa-route text-yellow-500 mr-3"></i> Strategic Paradigm
+                        </h4>
+                        <ul class="space-y-6 text-gray-300 text-sm leading-relaxed">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-stopwatch mt-1 mr-4 text-gray-500 text-lg"></i>
+                                <div>
+                                    <strong class="text-white block mb-1">One-Stop Optimal (Laps 21-24):</strong> 
+                                    The 22-car density makes track position paramount. Transitioning from Medium (C2) to Hard (C1) is the statistically dominant path, leveraging the 8.0 MJ directive's lower harvesting load.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-fire-flame-curved mt-1 mr-4 text-f1-red text-lg"></i>
+                                <div>
+                                    <strong class="text-white block mb-1">Lateral Thermal Saturation:</strong>
+                                    Degradation is moved from the rear to the front-left due to the Esses and Spoon. Drivers must "under-drive" Sector 1 to preserve the carcass integrity for a 30-lap Hard stint.
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-bolt mt-1 mr-4 text-blue-500 text-lg"></i>
+                                <div>
+                                    <strong class="text-white block mb-1">Verstappen Wildcard (P11):</strong>
+                                    Expect an offset strategy—starting on Hard tyres to overcut the midfield. His 350kW MGU-K delivery will be used exclusively for Sector 3 overtakes at 130R.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Climatology -->
+                    <div class="glass-panel p-8 rounded-xl border border-gray-800 hover:border-blue-500/50 transition duration-300 relative group overflow-hidden">
+                         <div class="absolute top-0 right-0 p-4 text-4xl text-blue-500/5 group-hover:text-blue-500/10 transition-colors pointer-events-none">
+                            <i class="fa-solid fa-cloud-sun"></i>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-white mb-6 uppercase tracking-tight flex items-center">
+                            <i class="fa-solid fa-wind text-blue-500 mr-3"></i> Climatology & Aero
+                        </h4>
+                        <div class="space-y-6">
+                            <div class="bg-gray-800/40 p-4 rounded border-l-2 border-blue-400">
+                                <strong class="text-white text-xs uppercase tracking-widest block mb-2">Resurfaced Grip Index</strong>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    Low-grip "macro-smooth" asphalt in Sectors 2 & 3 will trigger high sliding. Teams with superior active-aero damping (Mercedes) will suffer 15% less structural tyre wear.
+                                </p>
+                            </div>
+                            <div class="bg-gray-800/40 p-4 rounded border-l-2 border-cyan-400">
+                                <strong class="text-white text-xs uppercase tracking-widest block mb-2">Ambient Thermal Suppression</strong>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    Forecast 12°C ambient will make Hard tyre warm-up (C1) the critical differentiator post-pitstop. An "under-cut" may fail due to cold-lap sluggishness.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PREDICTED PODIUM INFOGRAPHIC -->
+                <div class="glass-panel p-8 rounded-2xl text-center relative overflow-hidden mt-12 mb-8 border border-white/5">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none"></div>
+                    <h3 class="font-display text-4xl font-bold mb-10 uppercase tracking-widest text-white/90 drop-shadow-lg">Predicted Podium</h3>
+                    
+                    <div class="flex flex-row justify-center items-end gap-2 md:gap-8 max-w-4xl mx-auto h-[300px] md:h-[350px] pb-4 px-2 md:px-0 relative">
+                        <!-- 2nd Place -->
+                        <div class="w-[30%] md:w-1/3 flex flex-col items-center justify-end h-[65%] order-1 relative group">
+                            <div class="w-16 h-16 rounded-full bg-gray-900 border-4 border-teal-500 mb-4 flex items-center justify-center text-xl font-bold overflow-hidden shadow-[0_0_15px_rgba(20,184,166,0.3)]">
+                                <i class="fas fa-user text-teal-500/50"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-1 text-white">G. Russell</h4>
+                            <span class="text-[10px] text-teal-400 font-black uppercase tracking-[0.2em] mb-3">Mercedes</span>
+                            <div class="w-full h-full bg-gradient-to-t from-gray-900 to-gray-800 rounded-t-2xl border-t-4 border-gray-500 flex items-start justify-center pt-4 shadow-2xl">
+                                <span class="text-5xl font-black text-white/10 italic">2</span>
+                            </div>
+                        </div>
+                        <!-- 1st Place -->
+                        <div class="w-[40%] md:w-1/3 flex flex-col items-center justify-end h-[95%] order-2 relative group scale-105">
+                            <div class="w-24 h-24 rounded-full bg-gray-900 border-4 border-yellow-500 mb-4 flex items-center justify-center text-2xl font-bold overflow-hidden shadow-[0_0_30px_rgba(234,179,8,0.5)]">
+                                <i class="fas fa-crown text-yellow-500"></i>
+                            </div>
+                            <h4 class="font-bold text-2xl mb-1 text-white uppercase tracking-tighter">K. Antonelli</h4>
+                            <span class="text-[10px] text-yellow-500 font-black uppercase tracking-[0.3em] mb-4">Mercedes</span>
+                            <div class="w-full h-full bg-gradient-to-t from-gray-900 to-yellow-600/40 rounded-t-2xl border-t-4 border-yellow-500 flex items-start justify-center pt-6 shadow-[0_-20px_40px_rgba(234,179,8,0.2)]">
+                                <span class="text-7xl font-black text-yellow-500/20 italic">1</span>
+                            </div>
+                        </div>
+                        <!-- 3rd Place -->
+                        <div class="w-[30%] md:w-1/3 flex flex-col items-center justify-end h-[50%] order-3 relative group">
+                            <div class="w-16 h-16 rounded-full bg-gray-900 border-4 border-f1-red mb-4 flex items-center justify-center text-xl font-bold overflow-hidden shadow-[0_0_15px_rgba(225,6,0,0.3)]">
+                                <i class="fas fa-user-tie text-f1-red/50"></i>
+                            </div>
+                            <h4 class="font-bold text-xl mb-1 text-white">C. Leclerc</h4>
+                            <span class="text-[10px] text-f1-red font-black uppercase tracking-[0.2em] mb-3">Ferrari</span>
+                            <div class="w-full h-full bg-gradient-to-t from-gray-900 to-red-900/40 rounded-t-2xl border-t-4 border-red-800 flex items-start justify-center pt-4 shadow-2xl">
+                                <span class="text-4xl font-black text-f1-red/10 italic">3</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PODIUM JUSTIFICATIONS -->
+                    <div class="mt-12 text-left space-y-4 max-w-4xl mx-auto">
+                        <div class="bg-gray-900/60 p-6 rounded-xl border border-white/5 border-l-4 border-yellow-500 transition-all hover:bg-gray-800/80">
+                            <h5 class="font-display font-bold text-white text-lg mb-2 uppercase tracking-tight flex items-center">
+                                <span class="bg-yellow-500 text-black px-2 py-0.5 rounded text-xs mr-3 font-black">1ST</span> Kimi Antonelli (Mercedes)
+                            </h5>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                The W17 chassis showcased an overwhelming race-pace advantage during Friday's simulation runs. Unimpeded by dirty air from Pole, Antonelli can dictate optimal tyre management and leverage the 350kW MGU-K delivery with mathematical precision.
+                            </p>
+                        </div>
+                        <div class="bg-gray-900/60 p-6 rounded-xl border border-white/5 border-l-4 border-teal-500 transition-all hover:bg-gray-800/80">
+                            <h5 class="font-display font-bold text-white text-lg mb-2 uppercase tracking-tight flex items-center">
+                                <span class="bg-teal-500 text-black px-2 py-0.5 rounded text-xs mr-3 font-black">2ND</span> George Russell (Mercedes)
+                            </h5>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Russell's objective is to serve as a high-speed buffer. Mercedes will prioritize the 1-2 finish by using Russell's slipstream to defend against any Ferrari DRS infiltration in Sector 3.
+                            </p>
+                        </div>
+                        <div class="bg-gray-900/60 p-6 rounded-xl border border-white/5 border-l-4 border-f1-red transition-all hover:bg-gray-800/80">
+                            <h5 class="font-display font-bold text-white text-lg mb-2 uppercase tracking-tight flex items-center">
+                                <span class="bg-f1-red text-white px-2 py-0.5 rounded text-xs mr-3 font-black">3RD</span> Charles Leclerc (Ferrari)
+                            </h5>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                Ferrari's superior mechanical rotation through the hairpin and chicane will allow Leclerc to secure the final podium spot. His primary challenge will be defending against a surging McLaren on the long run to 130R.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 flex justify-center">
+                    <button id="complete-solution" onclick="completePhase('solution')" class="group relative px-10 py-5 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-xl tracking-[0.2em] transition-all transform hover:-translate-y-1 shadow-[0_0_30px_rgba(225,6,0,0.4)]">
+                        <span class="relative z-10 flex items-center gap-3">
+                            <i class="fa-solid fa-flag-checkered"></i> 
+                            VALIDATE & UNLOCK PHASE 4
+                        </span>
+                        <div class="absolute inset-0 rounded bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </button>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- ========================= -->
@@ -1122,11 +1814,11 @@
         { label: 'Telemetry Forecast', id: 'energy' }
       ],
       'solution': [
-        { label: 'Silver Benchmark', id: 'silver' },
-        { label: 'Maranello Magic', id: 'maranello' },
-        { label: 'Customer Penalty', id: 'customer' },
-        { label: 'Midfield Strategy', id: 'midfield' },
-        { label: 'Energy Crisis', id: 'energy' }
+        { label: 'Weekend Context', id: 'context' },
+        { label: 'Practice Analysis', id: 'practice' },
+        { label: 'Qualifying Reports', id: 'q1' },
+        { label: 'Classification', id: 'classification' },
+        { label: 'Expert Predictions', id: 'predictions' }
       ],
       'endgame': [
         { label: 'Sprint Outcome', id: 'sprint' },
@@ -1454,8 +2146,8 @@
     async function checkPhaseStatuses() {
       console.log("Checking phase statuses...");
       const futurePhases = ['problem', 'solution', 'endgame'];
-      const unlockDatePhase2 = new Date('2026-03-27T22:00:00+08:00'); // Friday after Suzuka FP
-      const unlockDatePhase3 = new Date('2026-03-28T22:00:00+08:00'); // Saturday after Suzuka Quali
+      const unlockDatePhase2 = new Date('2026-03-01T00:00:00+08:00'); // Permanently Unlocked for Review
+      const unlockDatePhase3 = new Date('2026-03-01T00:00:00+08:00'); // Permanently Unlocked for Phase 3
       const unlockDatePhase4 = new Date('2026-03-29T22:00:00+08:00'); // Sun after Race
 
       try {
@@ -1569,55 +2261,12 @@
     };
 
     // --- NEW: Phase 3 Tactical Console Logic ---
-    window.setSessionView = (session) => {
-      const container = document.querySelector('#phase-solution .unlocked-view');
-      if (container) {
-        container.classList.add('terminal-refresh-active');
-        setTimeout(() => container.classList.remove('terminal-refresh-active'), 400);
-      }
-
-      // Update buttons
-      document.querySelectorAll('.session-btn').forEach(btn => {
-        btn.classList.remove('bg-f1-red', 'text-white', 'shadow-[0_0_15px_rgba(225,6,0,0.4)]');
-        btn.classList.add('text-gray-400');
-        if (btn.id === `session-${session}`) {
-          btn.classList.remove('text-gray-400');
-          btn.classList.add('bg-f1-red', 'text-white', 'shadow-[0_0_15px_rgba(225,6,0,0.4)]');
-        }
-      });
-
-      // Update content
-      document.querySelectorAll('.session-content').forEach(el => {
-        if (el.classList.contains(`${session}-view`)) {
-          el.classList.remove('hidden');
-          el.classList.add('block');
-        } else {
-          el.classList.remove('block');
-          el.classList.add('hidden');
-        }
-      });
-    };
-
+    // scrollToTeam is now deprecated in favor of specific section IDs,
+    // but kept as a wrapper for backward compatibility if needed.
     window.scrollToTeam = (teamId) => {
       const el = document.getElementById(teamId);
       if (el) {
-        const offset = 120; // accounting for sticky header
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = el.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-
-        // Flash effect on the targeted card
-        const card = el.querySelector('.glass-panel');
-        if (card) {
-          card.classList.add('ring-2', 'ring-white/50');
-          setTimeout(() => card.classList.remove('ring-2', 'ring-white/50'), 1500);
-        }
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     };
 
@@ -1791,12 +2440,81 @@
       window.location.reload();
     };
 
+    // --- NEW: Phase 3 Charts & Interactivity ---
+    function initPhase3Charts() {
+      const ctxGap = document.getElementById('qualiGapChart');
+      if (ctxGap) {
+        new Chart(ctxGap, {
+          type: 'bar',
+          data: {
+            labels: ['Antonelli', 'Russell', 'Piastri', 'Leclerc', 'Norris', 'Hamilton', 'Gasly', 'Hadjar', 'Bortoleto', 'Lindblad'],
+            datasets: [{
+              label: 'Gap to Pole (s)',
+              data: [0.000, 0.298, 0.354, 0.627, 0.631, 0.789, 0.913, 1.200, 1.496, 1.541],
+              backgroundColor: [
+                'rgba(39, 244, 210, 0.7)', // Merc
+                'rgba(39, 244, 210, 0.7)', // Merc
+                'rgba(255, 128, 0, 0.7)',  // McL
+                'rgba(232, 0, 32, 0.7)',   // Ferrari
+                'rgba(255, 128, 0, 0.7)',  // McL
+                'rgba(232, 0, 32, 0.7)',   // Ferrari
+                'rgba(0, 144, 255, 0.7)',  // Alpine
+                'rgba(54, 113, 198, 0.7)', // RB
+                'rgba(231, 33, 33, 0.7)',  // Audi
+                'rgba(102, 146, 255, 0.7)' // Racing Bulls
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#94a3b8' }, title: { display: true, text: 'Seconds', color: '#94a3b8' } },
+              y: { grid: { color: 'transparent' }, ticks: { color: '#f8fafc' } }
+            }
+          }
+        });
+      }
+    }
+
+    function initPhase3Interactivity() {
+      const energyToggle = document.getElementById('energy-toggle');
+      if (energyToggle) {
+        energyToggle.addEventListener('input', (e) => {
+          const val = parseInt(e.target.value);
+          const brakeDist = document.getElementById('brake-dist');
+          const pitchVal = document.getElementById('pitch-val');
+          const narrative = document.getElementById('energy-narrative');
+
+          if (val === 1) { // 8.0 MJ Protocols
+            if (brakeDist) brakeDist.textContent = "+14.2%";
+            if (pitchVal) {
+              pitchVal.textContent = "LOW";
+              pitchVal.classList.replace('text-green-400', 'text-f1-red');
+              if (!pitchVal.classList.contains('text-f1-red')) pitchVal.classList.add('text-f1-red');
+            }
+            if (narrative) narrative.textContent = "High-frequency oscillation detected in floor-edge actuators.";
+          } else { // 9.0 MJ Standard
+            if (brakeDist) brakeDist.textContent = "NOMINAL";
+            if (pitchVal) {
+              pitchVal.textContent = "STABLE";
+              pitchVal.classList.replace('text-f1-red', 'text-green-400');
+              if (!pitchVal.classList.contains('text-green-400')) pitchVal.classList.add('text-green-400');
+            }
+            if (narrative) narrative.textContent = "Aerodynamic platform stable. Battery recovery at maximum capacity.";
+          }
+        });
+      }
+    }
+
     // Run the lock check as soon as the page loads
     document.addEventListener('DOMContentLoaded', () => {
       checkPhaseStatuses();
-      setSessionView('sprint'); // Initialize default session view
-
-
+      initPhase3Charts();
+      initPhase3Interactivity();
     });
   </script>
 
