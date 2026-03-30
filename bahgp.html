@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2026 F1 Bahrain Grand Prix - The Sakhir Ghost Analysis</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Rajdhani:wght@500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0E14;
+            color: #E2E8F0;
+        }
+
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .f1-red { color: #E10600; }
+        .bg-f1-red { background-color: #E10600; }
+        .border-f1-red { border-color: #E10600; }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(225, 6, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(225, 6, 0, 0.12);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0B0E14; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #E10600; }
+
+        /* Timeline styling for Cancelled Status */
+        .timeline-btn.active {
+            background-color: #E10600;
+            color: white;
+            border-color: #E10600;
+            box-shadow: 0 0 15px rgba(225, 6, 0, 0.4);
+        }
+        
+        .timeline-btn-cancelled {
+            border-color: #374151;
+            color: #4B5563;
+            cursor: not-allowed;
+            position: relative;
+        }
+        .timeline-btn-cancelled::after {
+            content: 'CANCELLED';
+            position: absolute;
+            top: -10px;
+            right: -5px;
+            font-size: 8px;
+            background: #E10600;
+            color: white;
+            padding: 1px 4px;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .phase-content { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* PDF Modal Styling */
+        #pdf-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+        }
+        #pdf-modal.active { display: flex; }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-red-600 selection:text-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0 border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="text-gray-400 hover:text-white transition-colors flex items-center justify-center w-8 h-8 rounded-full bg-white/5 hover:bg-white/10" title="Back to Home">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                    <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                        <img src="logo.png" alt="Speed Circuit Logo" class="h-8 w-auto object-contain drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]" />
+                        <span class="font-display font-bold text-xl tracking-wider text-white">BAH<span class="f1-red">'26</span> CASE STUDY</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div id="nav-links" class="ml-10 flex items-baseline space-x-8">
+                        <a href="#p1-epoch" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">The Void</a>
+                        <a href="#p1-aero" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">X-Mode Sakhir</a>
+                        <a href="#p1-track" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Shropshire Topology</a>
+                        <a href="#p1-tyres" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Thermal Paradigm</a>
+                        <a href="#p1-testing" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">2026 Testing</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center border-b border-f1-red/20 shadow-xl shadow-f1-red/5">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1541443131876-44b03de101c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Sakhir circuit under lights" class="w-full h-full object-cover opacity-10 grayscale" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0B0E14] via-[#0B0E14]/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0B0E14] via-transparent to-[#0B0E14]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/20 mb-6 text-sm font-medium uppercase tracking-widest text-gray-300">
+                <span class="w-2 h-2 rounded-full bg-f1-red animate-pulse"></span>
+                Event Status: Cancelled (FIA Directive) • Middle East Vacuum
+            </div>
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 uppercase inline-block relative group">
+                The Sakhir <span class="f1-red drop-shadow-[0_0_15px_rgba(225,6,0,0.5)]">Ghost</span>
+            </h1>
+            <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-400 font-light leading-relaxed">
+                Structural disruption in the 2026 calendar. Technical post-mortem of the cancelled Bahrain GP, leveraging 2026 pre-season telemetry and the 33-day operational void.
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <button onclick="openPdfPreview()" class="px-8 py-4 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(225,6,0,0.4)]">
+                    <i class="fa-solid fa-file-pdf mr-2"></i> PREVIEW ANALYSIS
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Phase Navigator (Simplified for Cancellation) -->
+    <div id="weekend-timeline" class="sticky top-16 z-40 bg-[#0B0E14]/90 backdrop-blur-md border-y border-gray-800 py-4 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-sm font-bold uppercase tracking-widest text-gray-400 w-full md:w-auto text-center md:text-left">
+                    Progression Status
+                </div>
+                <div class="flex flex-wrap justify-center gap-2 w-full md:w-auto">
+                    <button class="timeline-btn active px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider transition-all">
+                        <i class="fa-solid fa-book-open mr-2"></i> Overview
+                    </button>
+                    <button class="timeline-btn-cancelled px-4 py-2 rounded border border-gray-800 text-gray-600 text-sm font-bold uppercase tracking-wider" disabled>
+                        <i class="fa-solid fa-lock mr-2"></i> The Problems
+                    </button>
+                    <button class="timeline-btn-cancelled px-4 py-2 rounded border border-gray-800 text-gray-600 text-sm font-bold uppercase tracking-wider" disabled>
+                        <i class="fa-solid fa-lock mr-2"></i> The Solutions
+                    </button>
+                    <button class="timeline-btn-cancelled px-4 py-2 rounded border border-gray-800 text-gray-600 text-sm font-bold uppercase tracking-wider" disabled>
+                        <i class="fa-solid fa-lock mr-2"></i> The End Game
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="min-h-screen">
+        <div id="phase-overview" class="phase-content">
+            <!-- The Void / Paradigm -->
+            <section id="p1-epoch" class="scroll-mt-40 py-20 relative border-t border-white/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
+                        <div class="max-w-3xl">
+                            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">
+                                The 2026 <span class="gradient-text">Operational Vacuum</span>
+                            </h2>
+                            <p class="text-gray-400 text-lg leading-relaxed">
+                                The cancellation establishes a profound 33-day cessation of track action. Deprived of critical early-season data, teams must recalculate their upgrade pipelines originally optimized for Sakhir's extreme abrasiveness.
+                            </p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border border-white/10 text-center">
+                            <div class="text-[10px] tracking-[0.2em] uppercase text-f1-red font-black mb-2">Development Hiatus</div>
+                            <div class="font-display text-4xl font-bold text-white">35 <span class="text-xl text-gray-500">DAYS</span></div>
+                            <div class="text-xs text-gray-500 uppercase tracking-widest mt-1">Japanese GP TO Miami GP</div>
+                        </div>
+                    </div>
+
+                    <!-- Key stat cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-f1-red relative overflow-hidden">
+                            <i class="fa-solid fa-road text-2xl text-gray-500 mb-4"></i>
+                            <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Abrasion Index</div>
+                            <div class="font-display text-4xl font-bold text-white">5<span class="text-xl text-gray-500 ml-1">/5</span></div>
+                            <div class="text-[10px] text-gray-500 mt-2">UK Shropshire Granite Aggregate.</div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-f1-red">
+                            <i class="fa-solid fa-gauge-high text-2xl text-gray-500 mb-4"></i>
+                            <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Full Throttle</div>
+                            <div class="font-display text-4xl font-bold text-white">71<span class="text-xl text-gray-500 ml-1">%</span></div>
+                            <div class="text-[10px] text-gray-500 mt-2">Stop-start longitudinal demand.</div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-blue-500">
+                            <i class="fa-solid fa-bolt text-2xl text-yellow-500 mb-4"></i>
+                            <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Energy Capacity</div>
+                            <div class="font-display text-4xl font-bold text-white">9<span class="text-xl text-gray-500 ml-1">MJ</span></div>
+                            <div class="text-[10px] text-gray-500 mt-2">50/50 Power-to-Kinetic Ratio.</div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-blue-500">
+                            <i class="fa-solid fa-car-burst text-2xl text-red-500 mb-4"></i>
+                            <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Safety Car Prob</div>
+                            <div class="font-display text-4xl font-bold text-white">63<span class="text-xl text-gray-500 ml-1">%</span></div>
+                            <div class="text-[10px] text-gray-500 mt-2">Based on historical 8-event window.</div>
+                        </div>
+                    </div>
+
+                    <!-- Active Aero Section -->
+                    <section id="p1-aero" class="scroll-mt-40 mt-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="font-display text-3xl font-bold text-white mb-6 uppercase tracking-wider flex items-center gap-2">
+                                    X-Mode Dominance at Sakhir
+                                </h3>
+                                <p class="text-gray-400 leading-relaxed mb-6">
+                                    The 4 principal straights at Sakhir mandate maximum X-Mode (Straight Mode) utilization. With 71% of the lap spent at full throttle, the aerodynamic drag coefficient is the primary lever for lap time gains.
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="glass-panel p-5 rounded-xl border border-white/5">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-xs font-bold text-gray-500 uppercase">X-Mode Drag Reduction</span>
+                                            <span class="text-emerald-400 font-bold">-55%</span>
+                                        </div>
+                                        <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                            <div class="h-full bg-emerald-500" style="width: 55%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="glass-panel p-5 rounded-xl border border-white/5">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-xs font-bold text-gray-500 uppercase">Z-Mode Stability (T5-T7)</span>
+                                            <span class="text-blue-400 font-bold">+30% Load</span>
+                                        </div>
+                                        <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                            <div class="h-full bg-blue-500" style="width: 30%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass-panel p-8 rounded-2xl bg-[#0B0E14]/80">
+                                <div class="text-xs tracking-widest uppercase text-gray-500 mb-4">Aero Velocity Delta (Estimated)</div>
+                                <canvas id="sakhirAeroChart" height="200"></canvas>
+                                <div class="mt-4 text-[10px] text-gray-500 text-center uppercase tracking-widest">Calculated across 353m Main Straight</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- Topology & Harvesting -->
+            <section id="p1-track" class="scroll-mt-40 py-20 relative bg-[#131822] border-y border-white/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">Shropshire Granite Archive</h2>
+                        <p class="max-w-2xl mx-auto text-gray-400">
+                            Imported UK granite aggregate creates the harshest macro-roughness on the calendar, physical sandblasting prevents standard track evolution.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+                           <div class="absolute -right-4 -bottom-4 text-white/5 text-6xl group-hover:scale-110 transition-transform">
+                               <i class="fa-solid fa-temperature-arrow-up"></i>
+                           </div>
+                           <h4 class="text-f1-red font-bold text-lg mb-4 uppercase">Turn 1: Michael Schumacher</h4>
+                           <p class="text-sm text-gray-400">Peak decelerating force of 4.5G. 1200°C Disc Thermal Spike. 315km/h to 65km/h in 3 seconds.</p>
+                        </div>
+                        <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group">
+                           <div class="absolute -right-4 -bottom-4 text-white/5 text-6xl group-hover:scale-110 transition-transform">
+                               <i class="fa-solid fa-wind"></i>
+                           </div>
+                           <h4 class="text-blue-500 font-bold text-lg mb-4 uppercase">Turn 11: Yaw Sensitivity</h4>
+                           <p class="text-sm text-gray-400">Exposed desert layout results in erratic crosswinds, inducing snap oversteer via yaw-induced aero stall.</p>
+                        </div>
+                        <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group border-l-4 border-yellow-500">
+                           <div class="absolute -right-4 -bottom-4 text-white/5 text-6xl group-hover:scale-110 transition-transform">
+                               <i class="fa-solid fa-flask"></i>
+                           </div>
+                           <h4 class="text-yellow-500 font-bold text-lg mb-4 uppercase">Silica Interaction</h4>
+                           <p class="text-sm text-gray-400">Desert sand Acts as a microscopic dry lubricant, precipitously dropping mechanical grip coefficients.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Thermal & 2026 Testing Data -->
+            <section id="p1-tyres" class="scroll-mt-40 py-20 border-b border-white/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                         <div>
+                            <h2 class="font-display text-4xl font-bold text-white mb-6 uppercase">The Turn 10 Paradigm</h2>
+                            <p class="text-gray-400 mb-8 leading-relaxed">
+                                Combined lateral and longitudinal loading unloads the front-left tyre completely. Under braking, this creates the highest lock-up probability on the F1 calendar. Once the molecular bond of the rear polymers is thermally annihilated, the loss is irreversible.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white/5 p-5 rounded-xl border border-white/10">
+                                    <div class="text-xs text-f1-red font-black uppercase mb-1">Deceleration Force</div>
+                                    <div class="text-3xl font-display font-bold text-white">4.5 G</div>
+                                </div>
+                                <div class="bg-white/5 p-5 rounded-xl border border-white/10">
+                                    <div class="text-xs text-emerald-400 font-black uppercase mb-1">Fuel Gain</div>
+                                    <div class="text-3xl font-display font-bold text-white">0.03s <span class="text-sm text-gray-500">/KG</span></div>
+                                </div>
+                            </div>
+                         </div>
+                         <div class="glass-panel p-10 rounded-2xl relative">
+                            <div class="absolute top-0 right-10 bg-yellow-500/20 text-yellow-500 px-3 py-1 rounded-b text-[10px] font-black tracking-widest uppercase">Simulation Output</div>
+                            <div class="text-white font-display text-2xl font-bold mb-6">Thermal Load Migration (Rear Axle)</div>
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between text-xs mb-2">
+                                        <span class="text-gray-500">C3 SOFT (HYSTERESIS LIMIT)</span>
+                                        <span class="text-f1-red font-bold">138°C</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-f1-red" style="width: 95%;"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs mb-2">
+                                        <span class="text-gray-500">C1 HARD (STABLE WINDOW)</span>
+                                        <span class="text-emerald-400 font-bold">112°C</span>
+                                    </div>
+                                    <div class="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-emerald-500" style="width: 45%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-8 p-4 bg-yellow-900/10 border border-yellow-500/20 rounded-lg">
+                                <p class="text-[11px] text-yellow-500/70 italic uppercase leading-tight tracking-tighter">
+                                    Rear-axle thermal runaway is triggered at Exit 8. The narrower 2026 tyres shed trapped heat faster but remain chemically vulnerable to micro-slip.
+                                </p>
+                            </div>
+                         </div>
+                     </div>
+                </div>
+            </section>
+
+            <!-- 2026 Testing Telemetry -->
+            <section id="p1-testing" class="scroll-mt-40 py-20 bg-[#0B0E14]">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">2026 Pre-Season Telemetry</h2>
+                        <p class="max-w-2xl mx-auto text-gray-400">
+                            The final empirical correlation gathered before the geopolitical cancellation. Mercedes and McLaren emerged as the technical benchmarks.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <!-- Lap Count Bar Chart -->
+                        <div class="glass-panel p-8 rounded-2xl">
+                            <h4 class="text-white font-bold mb-6 uppercase tracking-widest text-center">Correlation Reliability (Laps Completed)</h4>
+                            <canvas id="testingLapsChart" height="200"></canvas>
+                        </div>
+                        
+                        <!-- Testing Leaderboard -->
+                        <div class="glass-panel p-8 rounded-2xl bg-[#0B0E14]/50">
+                            <h4 class="text-white font-bold mb-6 uppercase tracking-widest">Fastest Benchmarks (Day 3)</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-black">1</div>
+                                        <div>
+                                            <div class="text-white font-bold">Kimi Antonelli</div>
+                                            <div class="text-[10px] text-gray-500 uppercase tracking-widest">Mercedes-AMG Petronas</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xl font-display font-bold text-white">1:32.803</div>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-white/5 border border-white/10 rounded-xl">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 font-black">2</div>
+                                        <div>
+                                            <div class="text-white font-bold">Oscar Piastri</div>
+                                            <div class="text-[10px] text-gray-500 uppercase tracking-widest">McLaren Formula 1</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xl font-display font-bold text-white">1:32.861</div>
+                                </div>
+                                <div class="p-4 bg-indigo-900/20 border border-indigo-500/30 rounded-xl text-center">
+                                    <p class="text-xs text-indigo-300 uppercase tracking-widest font-bold">Empirical Delta: +0.058s</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Impact Section -->
+            <section class="py-32 relative overflow-hidden bg-gradient-to-b from-[#0B0E14] to-[#05070a]">
+                <div class="max-w-5xl mx-auto px-4 text-center">
+                    <p class="text-f1-red font-mono text-sm uppercase tracking-[0.5em] mb-8 animate-pulse">Session Suspended • Force Majeure</p>
+                    <h2 class="font-display text-5xl md:text-6xl font-bold text-white mb-10 uppercase leading-tight">
+                        The Road to <span class="gradient-text">Miami</span>
+                    </h2>
+                    <p class="text-gray-400 text-xl leading-relaxed mb-12 italic">
+                        "Validating a massive aerodynamic upgrade package—originally optimized to cure rear-end instability in Bahrain—on the high-speed street surface of Miami increases the risk of miscorrelation. If an upgrade fails, the season is technically compromised."
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <div class="glass-panel px-8 py-4 rounded-xl border border-white/10">
+                            <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1">Next Destination</span>
+                            <span class="block text-xl font-bold text-white uppercase tracking-tighter">Miami Grand Prix</span>
+                        </div>
+                        <div class="glass-panel px-8 py-4 rounded-xl border border-white/10">
+                            <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1">Hiatus Window</span>
+                            <span class="block text-xl font-bold text-emerald-400 uppercase tracking-tighter">35 Days Active</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-[#05070a] py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+            <div class="flex items-center gap-2 mb-8">
+                <img src="logo.png" alt="Speed Circuit Logo" class="h-6 w-auto object-contain drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]" />
+                <span class="font-display font-bold text-lg tracking-wider text-white">F1 STRATEGY HUB '26</span>
+            </div>
+            <p class="text-gray-500 text-sm text-center max-w-lg mb-8 leading-relaxed">
+                The Bahrain GP documentation remains an essential technical baseline for the 2026 season, despite the structural absence of racing telemetry.
+            </p>
+            <div class="text-xs text-gray-600 uppercase tracking-[0.3em]">
+                Verified by FIA Safety Directive 03-B26
+            </div>
+        </div>
+    </footer>
+
+    <!-- PDF Preview Modal -->
+    <div id="pdf-modal" class="items-center justify-center p-4 md:p-10">
+        <div class="relative w-full h-full max-w-6xl glass-panel rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+            <div class="flex items-center justify-between p-4 border-b border-white/10 bg-[#0B0E14]">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-file-pdf text-f1-red"></i>
+                    <span class="font-display font-bold uppercase tracking-wider text-sm">Engineering Analysis - Bahrain GP</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="resources/Bahrain GP F1 Engineering Analysis.pdf" download class="text-xs font-bold text-gray-400 hover:text-white uppercase transition-colors">
+                        <i class="fa-solid fa-download mr-1"></i> Download
+                    </a>
+                    <button onclick="closePdfPreview()" class="text-gray-400 hover:text-white transition-colors w-8 h-8 flex items-center justify-center rounded-full bg-white/5">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-grow bg-white">
+                <iframe src="resources/Bahrain GP F1 Engineering Analysis.pdf" class="w-full h-full border-none"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navbar scroll behavior
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-[#0B0E14]', 'shadow-lg');
+            } else {
+                nav.classList.remove('bg-[#0B0E14]', 'shadow-lg');
+            }
+        });
+
+        // PDF Preview logic
+        const pdfModal = document.getElementById('pdf-modal');
+        function openPdfPreview() {
+            pdfModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+        function closePdfPreview() {
+            pdfModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && pdfModal.classList.contains('active')) {
+                closePdfPreview();
+            }
+        });
+
+        // Chart.js Theme
+        const gridColor = 'rgba(148, 163, 184, 0.15)';
+        const tickColor = 'rgba(226, 232, 240, 0.5)';
+        Chart.defaults.color = tickColor;
+        Chart.defaults.font.family = 'Inter, ui-sans-serif, system-ui';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Aero Velocity Chart
+            const ctxAero = document.getElementById('sakhirAeroChart');
+            if(ctxAero) {
+                new Chart(ctxAero, {
+                    type: 'line',
+                    data: {
+                        labels: ['0m', '100m', '200m', '300m', '353m (T1)'],
+                        datasets: [
+                            {
+                                label: 'X-Mode (Min Drag)',
+                                data: [80, 180, 260, 310, 326],
+                                borderColor: '#10b981',
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                fill: true,
+                                tension: 0.4,
+                                borderWidth: 3
+                            },
+                            {
+                                label: 'Z-Mode (Base)',
+                                data: [80, 160, 230, 275, 290],
+                                borderColor: '#3b82f6',
+                                borderDash: [5, 5],
+                                tension: 0.4,
+                                borderWidth: 2
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { position: 'bottom', labels: { padding: 20 } } },
+                        scales: {
+                            y: { title: { display: true, text: 'Speed (km/h)' }, grid: { color: gridColor }, ticks: { color: tickColor } },
+                            x: { grid: { color: 'transparent' } }
+                        }
+                    }
+                });
+            }
+
+            // 2. Testing Laps Chart
+            const ctxLaps = document.getElementById('testingLapsChart');
+            if(ctxLaps) {
+                new Chart(ctxLaps, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Mercedes', 'McLaren', 'Ferrari', 'Red Bull', 'Alpine', 'Haas'],
+                        datasets: [{
+                            label: 'Laps Completed',
+                            data: [432, 395, 381, 350, 342, 310],
+                            backgroundColor: [
+                                'rgba(16, 185, 129, 0.8)', // Merc
+                                'rgba(249, 115, 22, 0.8)', // McL
+                                'rgba(239, 68, 68, 0.8)',  // Fer
+                                'rgba(59, 130, 246, 0.3)', // RB
+                                'rgba(59, 130, 246, 0.3)', // Alp
+                                'rgba(59, 130, 246, 0.1)'  // Haas
+                            ],
+                            borderWidth: 0,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { grid: { color: gridColor }, ticks: { color: tickColor }, title: { display: true, text: 'Total Laps' } },
+                            x: { grid: { color: 'transparent' } }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

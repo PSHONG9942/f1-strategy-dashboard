@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2026 F1 Saudi Arabian Grand Prix - The Jeddah Shadow Analysis</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Rajdhani:wght@500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B0E14;
+            color: #E2E8F0;
+        }
+
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .f1-red { color: #E10600; }
+        .bg-f1-red { background-color: #E10600; }
+        .border-f1-red { border-color: #E10600; }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(225, 6, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(225, 6, 0, 0.12);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0B0E14; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #E10600; }
+
+        /* Timeline styling for Cancelled Status */
+        .timeline-btn.active {
+            background-color: #E10600;
+            color: white;
+            border-color: #E10600;
+            box-shadow: 0 0 15px rgba(225, 6, 0, 0.4);
+        }
+        
+        .timeline-btn-cancelled {
+            border-color: #374151;
+            color: #4B5563;
+            cursor: not-allowed;
+            position: relative;
+        }
+        .timeline-btn-cancelled::after {
+            content: 'CANCELLED';
+            position: absolute;
+            top: -10px;
+            right: -5px;
+            font-size: 8px;
+            background: #E10600;
+            color: white;
+            padding: 1px 4px;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        /* PDF Modal Styling */
+        #pdf-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+        }
+        #pdf-modal.active { display: flex; }
+
+        .phase-content { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-red-600 selection:text-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0 border-white/10 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                    <a href="index.html" class="text-gray-400 hover:text-white transition-colors flex items-center justify-center w-8 h-8 rounded-full bg-white/5 hover:bg-white/10" title="Back to Home">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                    <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                        <img src="logo.png" alt="Speed Circuit Logo" class="h-8 w-auto object-contain drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]" />
+                        <span class="font-display font-bold text-xl tracking-wider text-white">SAU<span class="f1-red">'26</span> CASE STUDY</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div id="nav-links" class="ml-10 flex items-baseline space-x-8">
+                        <a href="#p1-epoch" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">The Shadow</a>
+                        <a href="#p1-aero" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Isochronal Ratio</a>
+                        <a href="#p1-track" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Jeddah Kinematics</a>
+                        <a href="#p1-braking" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">Deceleration</a>
+                        <a href="#p1-history" class="hover:text-white transition-colors text-sm font-semibold uppercase tracking-wider">2025 Analysis</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center border-b border-f1-red/20 shadow-xl shadow-f1-red/5">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1541443131876-44b03de101c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Jeddah street track backdrop" class="w-full h-full object-cover opacity-10 grayscale" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0B0E14] via-[#0B0E14]/80 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#0B0E14] via-transparent to-[#0B0E14]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/20 mb-6 text-sm font-medium uppercase tracking-widest text-gray-300">
+                <span class="w-2 h-2 rounded-full bg-f1-red animate-pulse"></span>
+                Event Status: Cancelled (Force Majeure) • Geopolitical Shadow
+            </div>
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 uppercase inline-block relative group">
+                The Jeddah <span class="f1-red drop-shadow-[0_0_15px_rgba(225,6,0,0.5)]">Shadow</span>
+            </h1>
+            <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-400 font-light leading-relaxed">
+                The world's fastest street circuit remains silent. A technical retrospective of the Jeddah Corniche Circuit, focusing on isochronal ratios and the 2025 Piastri mastery.
+            </p>
+            <div class="mt-10 flex justify-center gap-4">
+                <button onclick="openPdfPreview()" class="px-8 py-4 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(225,6,0,0.4)]">
+                    <i class="fa-solid fa-file-pdf mr-2"></i> PREVIEW DEEP DIVE
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Phase Navigator -->
+    <div id="weekend-timeline" class="sticky top-16 z-40 bg-[#0B0E14]/90 backdrop-blur-md border-y border-gray-800 py-4 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-sm font-bold uppercase tracking-widest text-gray-400 w-full md:w-auto text-center md:text-left">
+                    Progression Status
+                </div>
+                <div class="flex flex-wrap justify-center gap-2 w-full md:w-auto">
+                    <button class="timeline-btn active px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider transition-all">
+                        <i class="fa-solid fa-book-open mr-2"></i> Overview
+                    </button>
+                    <button class="timeline-btn-cancelled px-4 py-2 rounded border border-gray-800 text-gray-600 text-sm font-bold uppercase tracking-wider" disabled>
+                        <i class="fa-solid fa-lock mr-2"></i> The Problems
+                    </button>
+                    <button class="timeline-btn-cancelled px-4 py-2 rounded border border-gray-800 text-gray-600 text-sm font-bold uppercase tracking-wider" disabled>
+                        <i class="fa-solid fa-lock mr-2"></i> The Solutions
+                    </button>
+                    <button class="timeline-btn-cancelled px-4 py-2 rounded border border-gray-800 text-gray-600 text-sm font-bold uppercase tracking-wider" disabled>
+                        <i class="fa-solid fa-lock mr-2"></i> The End Game
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="min-h-screen">
+        <div id="phase-overview" class="phase-content">
+            <!-- The Shadow / Disruption -->
+            <section id="p1-epoch" class="scroll-mt-40 py-20 relative border-t border-white/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
+                        <div class="max-w-3xl">
+                            <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">
+                                The 2026 <span class="gradient-text">High-Speed Gap</span>
+                            </h2>
+                            <p class="text-gray-400 text-lg leading-relaxed">
+                                The erasure of the Saudi Arabian Grand Prix removes a critical node of telemetry validation. Jeddah serves as the second-longest venue on the calendar, with average lap speeds hovering around 252 km/h.
+                            </p>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border border-white/10 text-center">
+                            <div class="text-[10px] tracking-[0.2em] uppercase text-f1-red font-black mb-2">Revenue Impact</div>
+                            <div class="font-display text-4xl font-bold text-white">$200 <span class="text-xl text-gray-500">M</span></div>
+                            <div class="text-xs text-gray-500 uppercase tracking-widest mt-1">Calendar Contraction</div>
+                        </div>
+                    </div>
+
+                    <!-- Key stat cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-f1-red relative overflow-hidden">
+                            <i class="fa-solid fa-arrows-left-right text-2xl text-gray-500 mb-4"></i>
+                            <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Circuit Length</div>
+                            <div class="font-display text-4xl font-bold text-white">6.17<span class="text-xl text-gray-500 ml-1">KM</span></div>
+                            <div class="text-[10px] text-gray-500 mt-2">2nd Longest Venue (Spa is 1st).</div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-f1-red">
+                            <i class="fa-solid fa-rotate text-2xl text-gray-500 mb-4"></i>
+                            <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Total Corners</div>
+                            <div class="font-display text-4xl font-bold text-white">27</div>
+                            <div class="text-[10px] text-gray-500 mt-2">16 Left, 11 Right Geometric Radii.</div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-blue-500">
+                            <i class="fa-solid fa-gauge text-2xl text-blue-500 mb-4"></i>
+                            <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Avg Lap Speed</div>
+                            <div class="font-display text-4xl font-bold text-white">252<span class="text-xl text-gray-500 ml-1">KM/H</span></div>
+                            <div class="text-[10px] text-gray-500 mt-2">World's Fastest Street track.</div>
+                        </div>
+                        <div class="glass-panel p-6 rounded-xl border-l-4 border-emerald-500">
+                            <i class="fa-solid fa-shield-halved text-2xl text-emerald-500 mb-4"></i>
+                            <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Safety Car Prob</div>
+                            <div class="font-display text-4xl font-bold text-white">100<span class="text-xl text-gray-500 ml-1">%</span></div>
+                            <div class="text-[10px] text-gray-500 mt-2">Based on historical 2021-2024 data.</div>
+                        </div>
+                    </div>
+
+                    <!-- Isochronal Ratio Section -->
+                    <section id="p1-aero" class="scroll-mt-40 mt-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="font-display text-3xl font-bold text-white mb-6 uppercase tracking-wider">
+                                    The Isochronal Compromise
+                                </h3>
+                                <p class="text-gray-400 leading-relaxed mb-6">
+                                    Mastering the Jeddah corridor requires an aggressive "isochronal ratio"—balancing downforce requirement for sweeping high-speed bends against terminal velocity on the three DRS straights.
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="glass-panel p-5 rounded-xl border border-white/5">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-xs font-bold text-gray-500 uppercase">Trimmed Wing-Tip vortices</span>
+                                            <span class="text-emerald-400 font-bold">-18% Drag</span>
+                                        </div>
+                                        <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                            <div class="h-full bg-emerald-500" style="width: 18%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="glass-panel p-5 rounded-xl border border-white/5">
+                                        <div class="flex justify-between items-center mb-2">
+                                            <span class="text-xs font-bold text-gray-500 uppercase">Underbody Mastery (Red Bull)</span>
+                                            <span class="text-blue-400 font-bold">+25% Efficiency</span>
+                                        </div>
+                                        <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                                            <div class="h-full bg-blue-500" style="width: 25%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="glass-panel p-8 rounded-2xl bg-[#0B0E14]/80 text-center">
+                                <div class="text-xs tracking-widest uppercase text-gray-500 mb-4">2025 Speed Trap Distribution (Qualifying)</div>
+                                <canvas id="jeddahSpeedChart" height="200"></canvas>
+                                <div class="mt-4 text-[10px] text-gray-500 uppercase tracking-widest italic">Sauber/Stake F1 (Hulkenberg) dominated the traps.</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+            <!-- Jeddah Kinematics -->
+            <section id="p1-track" class="scroll-mt-40 py-20 relative bg-[#131822] border-y border-white/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">Physical Load Profile</h2>
+                        <p class="max-w-2xl mx-auto text-gray-400">
+                            From 12-degree banked sweeps to relentless lateral G-forces, Jeddah stresses the aerodynamic platform to its absolute thermal and structural limit.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="glass-panel p-8 rounded-2xl relative overflow-hidden group border-b-4 border-f1-red">
+                           <h4 class="text-f1-red font-bold text-lg mb-4 uppercase">Turn 13: The Banking</h4>
+                           <p class="text-sm text-gray-400 italic mb-4">"The track surface itself is physically pushing the car through the corner."</p>
+                           <div class="flex justify-between items-end">
+                               <div class="text-4xl font-display font-bold text-white">12°</div>
+                               <div class="text-[10px] uppercase text-gray-500">Positive Camber</div>
+                           </div>
+                        </div>
+                        <div class="glass-panel p-8 rounded-2xl border-b-4 border-blue-500 group">
+                           <h4 class="text-blue-500 font-bold text-lg mb-4 uppercase">"Clipping" Telemetry</h4>
+                           <p class="text-sm text-gray-400 mb-4">Terminal velocity is reached when drag equals power, leading to automatic electrical cutouts on long straights.</p>
+                           <div class="text-xs font-bold text-blue-300 uppercase tracking-widest">MGU-K Depletion risk: High</div>
+                        </div>
+                        <div class="glass-panel p-8 rounded-2xl border-b-4 border-emerald-500 group">
+                           <h4 class="text-emerald-500 font-bold text-lg mb-4 uppercase">Heave Decoupling</h4>
+                           <p class="text-sm text-gray-400 mb-4">Suspension decouples vertical displacement from roll to maintain floor height in banked vectors.</p>
+                           <div class="text-xs font-bold text-emerald-300 uppercase tracking-widest">Platform Control: Critical</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Deceleration Kinematics -->
+            <section id="p1-braking" class="scroll-mt-40 py-20 border-b border-white/10">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col lg:flex-row gap-12 items-center">
+                        <div class="glass-panel p-8 rounded-2xl flex-grow overflow-x-auto">
+                            <h4 class="text-white font-bold mb-6 uppercase tracking-widest">Brembo Deceleration Metrics (2025 Ref)</h4>
+                            <table class="w-full text-left text-sm border-collapse">
+                                <thead class="border-b border-white/10">
+                                    <tr class="text-gray-500 uppercase text-[10px] tracking-widest">
+                                        <th class="py-4 px-2">Sector Node</th>
+                                        <th class="py-4 px-2 text-right">Initial V</th>
+                                        <th class="py-4 px-2 text-right">Decel Force</th>
+                                        <th class="py-4 px-2 text-right">Pedal Load</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-300">
+                                    <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                        <td class="py-4 px-2 font-bold text-f1-red">Turn 01</td>
+                                        <td class="py-4 px-2 text-right">317 km/h</td>
+                                        <td class="py-4 px-2 text-right font-display text-xl text-white">4.4 G</td>
+                                        <td class="py-4 px-2 text-right">159 kg</td>
+                                    </tr>
+                                    <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                        <td class="py-4 px-2 font-bold text-gray-400">Turn 13</td>
+                                        <td class="py-4 px-2 text-right">250 km/h</td>
+                                        <td class="py-4 px-2 text-right font-display text-xl text-white">2.9 G</td>
+                                        <td class="py-4 px-2 text-right">98 kg</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="py-4 px-2 font-bold text-blue-400">Turn 27</td>
+                                        <td class="py-4 px-2 text-right">295 km/h</td>
+                                        <td class="py-4 px-2 text-right font-display text-xl text-white">3.6 G</td>
+                                        <td class="py-4 px-2 text-right">124 kg</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="max-w-md">
+                            <h2 class="font-display text-4xl font-bold text-white mb-6 uppercase">The Physics of the Lockup</h2>
+                            <p class="text-gray-400 mb-6 leading-relaxed">
+                                Turn 27 is notoriously treacherous. Lateral curvature unloads the inside front tyre, causing a transition from static friction (grip) to dynamic/kinetic friction (slide).
+                            </p>
+                            <div class="p-6 bg-red-950/20 border border-f1-red/30 rounded-2xl italic text-sm text-gray-300">
+                                "The front-left tyre ceasing rotation instantly arrested the lap... the tyre transitioned from static friction to dynamic sliding friction."
+                                <div class="mt-4 text-[10px] font-bold uppercase tracking-[0.2em] text-f1-red">— Technical Post-Mortem</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2025 Analysis -->
+            <section id="p1-history" class="scroll-mt-40 py-20 bg-[#0B0E14]">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase">The McLaren Ascendancy (2025)</h2>
+                        <p class="max-w-2xl mx-auto text-gray-400">
+                            A fundamental paradigm shift in the hierarchy. Piastri's strategic mastery overcame Verstappen's single-lap pole pace at Jeddah.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div class="glass-panel p-8 rounded-2xl border-l-4 border-orange-500">
+                             <div class="text-[10px] text-orange-500 font-black uppercase mb-2">Race Analysis</div>
+                             <h4 class="text-white font-display text-3xl font-bold mb-4 uppercase">Oscar Piastri Victory</h4>
+                             <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                                Piastri achieved a superior launch phase, managing rear-wheel slip targets more effectively than the Red Bull. The victory propelled Piastri into the lead of the Drivers' Championship by a 10-point margin.
+                             </p>
+                             <div class="space-y-4 text-xs font-bold uppercase tracking-widest text-gray-500">
+                                 <div class="flex justify-between border-b border-white/5 pb-2">
+                                     <span>Race Time:</span>
+                                     <span class="text-white">1:21:06.758</span>
+                                 </div>
+                                 <div class="flex justify-between border-b border-white/5 pb-2">
+                                     <span>Strategy:</span>
+                                     <span class="text-white uppercase">C5 Soft → C3 Hard</span>
+                                 </div>
+                             </div>
+                        </div>
+                        <div class="glass-panel p-8 rounded-2xl border-l-4 border-f1-red bg-red-950/5">
+                             <div class="text-[10px] text-f1-red font-black uppercase mb-2">Technical Infraction</div>
+                             <h4 class="text-white font-display text-3xl font-bold mb-4 uppercase">The 5s Penalty</h4>
+                             <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                                Max Verstappen initially secured pole (1:27.294) but served a 5s stationary penalty for failing to leave sufficient racing room at Turn 1 on the opening lap.
+                             </p>
+                             <div class="flex items-center gap-4">
+                                 <div class="w-12 h-12 rounded-full border border-f1-red flex items-center justify-center text-f1-red font-black text-xs">P2</div>
+                                 <div class="text-xl font-display font-medium text-white italic">+2.843s <span class="text-xs text-gray-500 not-italic uppercase ml-2">Delta to Leader</span></div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Impact -->
+            <section class="py-32 relative overflow-hidden bg-gradient-to-b from-[#0B0E14] to-[#040608]">
+                <div class="max-w-5xl mx-auto px-4 text-center">
+                    <p class="text-f1-red font-mono text-sm uppercase tracking-[0.5em] mb-8 animate-pulse">Structural Absence of Racing Telemetry</p>
+                    <h2 class="font-display text-5xl md:text-6xl font-bold text-white mb-10 uppercase leading-tight">
+                        The 33rd Day <span class="gradient-text">Void</span>
+                    </h2>
+                    <p class="text-gray-400 text-xl leading-relaxed mb-12 italic max-w-3xl mx-auto">
+                        "Midfield constructors have been gifted an extended window to finalize major aerodynamic packages. Parts originally prepositioned in the Middle East must now be re-routed, eating into the operational budget."
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-6">
+                         <div class="glass-panel px-8 py-4 rounded-xl border border-white/10 text-center">
+                             <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1">Logistics Deficit</span>
+                             <span class="block text-xl font-bold text-white uppercase tracking-tighter">Budget Reallocation</span>
+                         </div>
+                         <div class="glass-panel px-8 py-4 rounded-xl border border-white/10 text-center">
+                             <span class="block text-[10px] text-gray-500 uppercase tracking-widest mb-1">Technical Risk</span>
+                             <span class="block text-xl font-bold text-yellow-500 uppercase tracking-tighter">Empirical Vacuum</span>
+                         </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-[#040608] py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+            <div class="flex items-center gap-2 mb-8">
+                <img src="logo.png" alt="Speed Circuit Logo" class="h-6 w-auto object-contain drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]" />
+                <span class="font-display font-bold text-lg tracking-wider text-white">F1 STRATEGY HUB '26</span>
+            </div>
+            <p class="text-gray-500 text-sm text-center max-w-lg mb-8 leading-relaxed">
+                The Saudi Arabian GP case study serves as the final Middle East technical baseline prior to the Miami GP transition.
+            </p>
+            <div class="text-xs text-gray-600 uppercase tracking-[0.3em]">
+                Verified by FIA Safety Directive 03-B26
+            </div>
+        </div>
+    </footer>
+
+    <!-- PDF Preview Modal -->
+    <div id="pdf-modal" class="items-center justify-center p-4 md:p-10">
+        <div class="relative w-full h-full max-w-6xl glass-panel rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+            <div class="flex items-center justify-between p-4 border-b border-white/10 bg-[#0B0E14]">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-file-pdf text-f1-red"></i>
+                    <span class="font-display font-bold uppercase tracking-wider text-sm">Case Study - Saudi Arabian Deep Dive</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="resources/Saudi Arabian GP Deep Dive.pdf" download class="text-xs font-bold text-gray-400 hover:text-white uppercase transition-colors">
+                        <i class="fa-solid fa-download mr-1"></i> Download
+                    </a>
+                    <button onclick="closePdfPreview()" class="text-gray-400 hover:text-white transition-colors w-8 h-8 flex items-center justify-center rounded-full bg-white/5">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-grow bg-white">
+                <iframe src="resources/Saudi Arabian GP Deep Dive.pdf" class="w-full h-full border-none"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navbar scroll behavior
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-[#0B0E14]', 'shadow-lg');
+            } else {
+                nav.classList.remove('bg-[#0B0E14]', 'shadow-lg');
+            }
+        });
+
+        // PDF Preview logic
+        const pdfModal = document.getElementById('pdf-modal');
+        function openPdfPreview() {
+            pdfModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+        function closePdfPreview() {
+            pdfModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && pdfModal.classList.contains('active')) {
+                closePdfPreview();
+            }
+        });
+
+        // Chart.js Theme
+        const gridColor = 'rgba(148, 163, 184, 0.15)';
+        const tickColor = 'rgba(226, 232, 240, 0.5)';
+        Chart.defaults.color = tickColor;
+        Chart.defaults.font.family = 'Inter, ui-sans-serif, system-ui';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Speed Trap Chart
+            const ctxSpeed = document.getElementById('jeddahSpeedChart');
+            if(ctxSpeed) {
+                new Chart(ctxSpeed, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Hulkenberg', 'Bortoleto', 'Verstappen', 'Hamilton', 'Leclerc'],
+                        datasets: [{
+                            label: 'Speed (km/h)',
+                            data: [339.0, 338.0, 338.0, 332.0, 331.0],
+                            backgroundColor: [
+                                '#10b981', '#10b981', '#3b82f6', '#94a3b8', '#e10600'
+                            ],
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { 
+                                min: 320, 
+                                grid: { color: gridColor }, 
+                                ticks: { color: tickColor },
+                                title: { display: true, text: 'Qualifying Velocity (km/h)' }
+                            },
+                            y: { grid: { color: 'transparent' } }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
