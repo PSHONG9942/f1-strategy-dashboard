@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aero-Sim '26: The Miami Gap Challenge</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Rajdhani:wght@500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #05070A;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .f1-red { color: #E10600; }
+        .bg-f1-red { background-color: #E10600; }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .terminal-text {
+            color: #10b981;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            height: 4px;
+            border-radius: 2px;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: #E10600;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(225, 6, 0, 0.5);
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(16, 185, 129, 0.05) 50.5%, transparent 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 50;
+            animation: scanline 40s linear infinite;
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(225, 6, 0, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+        /* Leaderboard Table Styles */
+        .leaderboard-table th { 
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748b;
+            font-weight: 800;
+            padding: 1rem;
+        }
+        .leaderboard-table td { 
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .rank-gold { color: #facc15; }
+        .rank-silver { color: #94a3b8; }
+        .rank-bronze { color: #d97706; }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-red-600 selection:text-white min-h-screen flex flex-col">
+    <div class="scanline"></div>
+
+    <!-- Header -->
+    <header class="p-6 border-b border-white/5 flex items-center justify-between glass-panel z-10 sticky top-0">
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="text-gray-400 hover:text-white transition-colors flex items-center justify-center w-8 h-8 rounded-full bg-white/5">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="Speed Circuit Logo" class="h-8 w-auto object-contain drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]" />
+                <span class="font-display font-bold text-xl tracking-wider text-white">AERO-SIM <span class="f1-red">'26</span></span>
+            </div>
+        </div>
+        <div class="flex items-center gap-8">
+            <div class="text-right">
+                <div class="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold">ATR Hours Remaining</div>
+                <div id="atr-budget" class="font-display text-2xl font-bold text-emerald-500">12:00</div>
+            </div>
+            <div class="h-10 w-[1px] bg-white/10 hidden md:block"></div>
+            <div class="hidden md:block text-right">
+                 <div class="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold">Correlation Status</div>
+                 <div id="status-badge" class="font-display text-2xl font-bold text-yellow-500">IDLE</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Game Container -->
+    <main id="game-canvas" class="flex-grow flex flex-col items-center justify-center p-4 lg:p-12 relative overflow-hidden">
+        
+        <!-- INTRO STATE -->
+        <div id="state-intro" class="max-w-4xl w-full glass-panel p-10 rounded-3xl text-center fade-in z-20">
+            <h1 class="font-display text-6xl md:text-7xl font-bold text-white mb-6 uppercase tracking-tighter shimmer rounded-lg">THE MIAMI <span class="f1-red">GAP</span></h1>
+            <p class="text-gray-400 text-lg mb-10 leading-relaxed italic max-w-2xl mx-auto">
+                With Bahrain and Saudi Arabia cancelled, we have zero empirical data to validate the Miami Upgrade Package. As Head of Aerodynamics, you must correlate the simulation to its 'Theoretical Sweet Spot' before ATR hours run out.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <button onclick="selectTeam('Red Bull')" class="group glass-panel p-6 rounded-2xl hover:bg-blue-900/40 border-l-4 border-blue-500 transition-all text-left">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-blue-400">Team Alpha</span>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2">Red Bull Racing</h3>
+                    <p class="text-[10px] text-gray-500 leading-tight">Complex Underbody Focus. Critical Ride Height thresholds.</p>
+                </button>
+                <button onclick="selectTeam('Ferrari')" class="group glass-panel p-6 rounded-2xl hover:bg-red-900/40 border-l-4 border-f1-red transition-all text-left">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-f1-red">Team Beta</span>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2">Scuderia Ferrari</h3>
+                    <p class="text-[10px] text-gray-500 leading-tight">Front-Load bias. Aggressive Front Wing optimization.</p>
+                </button>
+                <button onclick="selectTeam('McLaren')" class="group glass-panel p-6 rounded-2xl hover:bg-orange-800/40 border-l-4 border-orange-500 transition-all text-left">
+                    <span class="text-[10px] font-black uppercase tracking-widest text-orange-400">Team Gamma</span>
+                    <h3 class="font-display text-2xl font-bold text-white mb-2">McLaren Mercedes</h3>
+                    <p class="text-[10px] text-gray-500 leading-tight">Efficient Balance specialist. Perfecting Rear Drag profile.</p>
+                </button>
+            </div>
+            
+            <!-- Technical Briefing Integration -->
+            <div class="max-w-2xl mx-auto">
+                <button onclick="toggleBriefing()" class="text-xs text-emerald-500 uppercase tracking-[0.3em] font-bold py-3 px-6 rounded-full border border-emerald-500/30 hover:bg-emerald-500/10 transition-all mb-4">
+                    <i class="fa-solid fa-circle-info mr-2"></i> Open Technical Briefing
+                </button>
+                
+                <div id="tech-briefing" class="hidden glass-panel p-8 rounded-2xl text-left border-l-4 border-emerald-500 fade-in">
+                    <h4 class="font-display text-xl font-bold text-white mb-4 uppercase tracking-widest flex items-center gap-2">
+                        <i class="fa-solid fa-microchip text-emerald-500"></i> Engineering Handbook
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-gray-400 leading-relaxed">
+                        <div>
+                            <p class="mb-3"><strong class="text-white uppercase tracking-tighter">Front Wing:</strong> Controls turn-in "bite". Increasing the angle improves cornering but adds drag. Keep it high for Ferrari setups.</p>
+                            <p class="mb-3"><strong class="text-white uppercase tracking-tighter">Rear Wing:</strong> Your stability anchor. High flap angles prevent spinning in high-speed sectors but penalize terminal velocity (Top Speed).</p>
+                        </div>
+                        <div>
+                            <p class="mb-3"><strong class="text-white uppercase tracking-tighter">Ride Height:</strong> The "Ground Effect" core. Lowering the car increases suction (Downforce). <span class="text-f1-red">Warning:</span> Going below 5mm causes floor-stall (Porpoising).</p>
+                            <p class="mb-3"><strong class="text-white uppercase tracking-tighter">ERS Mapping:</strong> Energy harvesting. A higher bias builds battery but induces "Clipping" which slows down your initial acceleration.</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-white/5">
+                        <h5 class="text-[10px] font-black text-emerald-400 uppercase tracking-[0.2em] mb-3">Intelligence Leaks (Hints)</h5>
+                        <ul class="space-y-2 text-[10px] italic text-gray-500">
+                           <li>• <strong class="text-blue-400 not-italic">Red Bull:</strong> They target ultra-low ride heights (6-8mm) for their Venturi floor.</li>
+                           <li>• <strong class="text-f1-red not-italic">Ferrari:</strong> The SF26 is front-biased; try wing angles above 19°.</li>
+                           <li>• <strong class="text-orange-400 not-italic">McLaren:</strong> Focus on the Rear Flap transition (5-8°) to maximize their DRS efficiency.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIMULATION STATE (Hidden by default) -->
+        <div id="state-sim" class="hidden w-full max-w-7xl flex flex-col lg:flex-row gap-8 fade-in z-20 h-full">
+            <!-- Left Side: Control Deck -->
+            <div class="lg:w-1/3 glass-panel p-8 rounded-3xl flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-8">
+                        <div id="team-logo-placeholder" class="w-10 h-10 rounded-lg flex items-center justify-center font-black text-xl bg-white/5">?</div>
+                        <h2 id="active-team-name" class="font-display text-2xl font-bold uppercase tracking-wider">Loading...</h2>
+                    </div>
+                    
+                    <div class="space-y-10">
+                        <div class="control-group">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Front Wing Angle</label>
+                                <span id="val-fw" class="font-display text-xl font-bold text-white">12.0°</span>
+                            </div>
+                            <input type="range" min="5" max="25" step="0.5" value="12" oninput="updateParam('fw', this.value)">
+                            <div class="flex justify-between text-[8px] text-gray-600 mt-1 uppercase"><span>Drag Shadow</span><span>Turn-In Bite</span></div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Rear Wing Flap</label>
+                                <span id="val-rw" class="font-display text-xl font-bold text-white">8.5°</span>
+                            </div>
+                            <input type="range" min="3" max="20" step="0.5" value="8.5" oninput="updateParam('rw', this.value)">
+                            <div class="flex justify-between text-[8px] text-gray-600 mt-1 uppercase"><span>Vortex Shed</span><span>Stability Anchor</span></div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500">Static Ride Height</label>
+                                <span id="val-rh" class="font-display text-xl font-bold text-white">15.0 mm</span>
+                            </div>
+                            <input type="range" min="2" max="35" step="0.5" value="15" oninput="updateParam('rh', this.value)">
+                            <div class="flex justify-between text-[8px] text-gray-600 mt-1 uppercase"><span>Ground Effect</span><span>Stall Risk (Porpoise)</span></div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-[10px] font-bold uppercase tracking-widest text-gray-500">ERS Harvesting Bias</label>
+                                <span id="val-ers" class="font-display text-xl font-bold text-white">65%</span>
+                            </div>
+                            <input type="range" min="20" max="95" step="1" value="65" oninput="updateParam('ers', this.value)">
+                            <div class="flex justify-between text-[8px] text-gray-600 mt-1 uppercase"><span>Clipping Risk</span><span>Energy Buffer</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                   <button onclick="runSimulation()" id="run-btn" class="w-full py-5 bg-f1-red text-white rounded font-display font-bold text-xl tracking-widest uppercase hover:bg-red-700 transition-all flex items-center justify-center gap-3">
+                       <i class="fa-solid fa-microchip"></i> RUN CFD SIMULATION
+                   </button>
+                   <p class="text-[9px] text-center text-gray-500 mt-3 uppercase tracking-widest">Consumes 1.0 ATR Hour per iteration</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Visual Data -->
+            <div class="lg:w-2/3 flex flex-col gap-8">
+                <!-- Result Display -->
+                <div class="glass-panel p-8 rounded-3xl relative overflow-hidden h-64 flex items-center justify-center">
+                    <div id="sim-visual-overlay" class="absolute inset-0 bg-black/40 flex items-center justify-center pointer-events-none opacity-0 transition-opacity">
+                         <div class="text-center">
+                             <div class="fa-solid fa-spinner fa-spin text-4xl text-f1-red mb-4"></div>
+                             <div class="font-mono text-emerald-500 text-sm uppercase tracking-[0.3em]">Processing Wind Tunnel Data...</div>
+                             <div id="progress-text" class="text-[10px] text-gray-500 mt-2">Iterating Reynolds Numbers</div>
+                         </div>
+                    </div>
+                    
+                    <div id="result-idle" class="text-center max-w-md">
+                        <i class="fa-solid fa-wind text-4xl text-gray-400 mb-6 block"></i>
+                        <h4 class="font-display text-3xl font-bold text-white uppercase mb-2">Idle Chamber</h4>
+                        <p class="text-sm text-gray-500 leading-relaxed uppercase tracking-tighter">Calibration complete. Set parameters and initiate CFD sequence to validate the Miami upgrade package.</p>
+                    </div>
+
+                    <div id="result-active" class="hidden w-full text-center">
+                         <div class="text-[10px] uppercase tracking-[0.2em] font-black text-f1-red mb-2">Correlation Index</div>
+                         <div id="final-score" class="font-display text-9xl font-bold text-white tabular-nums tracking-tighter">0.0<span class="text-3xl text-gray-500 ml-1">%</span></div>
+                         <div id="score-feedback" class="mt-4 text-xs font-bold uppercase py-2 px-6 rounded-full inline-block bg-white/5 tracking-widest">Ready for next run</div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow">
+                     <div class="glass-panel p-6 rounded-3xl">
+                         <div class="text-[10px] uppercase font-bold text-gray-500 mb-4 tracking-widest">Downforce vs Drag Profile</div>
+                         <canvas id="balanceChart"></canvas>
+                     </div>
+                     <div class="glass-panel p-6 rounded-3xl relative">
+                         <div class="text-[10px] uppercase font-bold text-gray-500 mb-4 tracking-widest">System Stability (Vibration)</div>
+                         <canvas id="stabilityChart"></canvas>
+                         <div id="porpoise-warning" class="absolute inset-0 bg-red-600/20 backdrop-blur-sm flex items-center justify-center hidden">
+                             <div class="text-center font-display font-bold text-white px-6">
+                                 <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
+                                 <div class="uppercase tracking-widest text-lg">CRITICAL PORPOISING</div>
+                                 <div class="text-xs uppercase text-red-200">Floor Oscillation Stalled</div>
+                             </div>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GLOBAL STRATEGY BOARD (Leaderboard) -->
+        <div id="strategy-board" class="w-full max-w-7xl mt-20 mb-32 fade-in z-20 mx-auto px-4 lg:px-0">
+             <div class="flex items-center justify-between mb-8">
+                 <div>
+                     <h2 class="font-display text-4xl font-bold text-white uppercase tracking-tighter">Global Strategy <span class="f1-red">Board</span></h2>
+                     <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">Cross-Team Package Correlation Benchmarks</p>
+                 </div>
+                 <div class="px-4 py-2 glass-panel border border-emerald-500/30 rounded-full flex items-center gap-2">
+                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                     <span class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">Verification Status: ACTIVE</span>
+                 </div>
+             </div>
+
+             <div class="glass-panel rounded-[2rem] overflow-hidden border border-white/10">
+                 <table class="w-full leaderboard-table text-left border-collapse">
+                     <thead>
+                         <tr class="bg-white/5">
+                             <th class="w-16 text-center">Rank</th>
+                             <th>Engineer</th>
+                             <th>Constructor</th>
+                             <th class="hidden md:table-cell text-center">Setup (FW/RW/RH/ERS)</th>
+                             <th class="text-right">Correlation Index Index</th>
+                             <th class="w-16 text-center">Status</th>
+                         </tr>
+                     </thead>
+                     <tbody id="leaderboard-body" class="text-sm text-gray-300">
+                         <!-- Dynamically populated -->
+                     </tbody>
+                 </table>
+             </div>
+             <p class="text-[9px] text-gray-600 uppercase tracking-[0.3em] font-medium text-center mt-6">
+                Physics-Engine Validation: Re-calculating all parameters to prevent telemetry spoofing.
+             </p>
+        </div>
+
+        <!-- WIN/LOSS MODALS -->
+        <div id="modal-container" class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-md hidden">
+             <!-- Victory -->
+             <div id="modal-victory" class="max-w-xl w-full glass-panel p-10 rounded-[3rem] text-center hidden">
+                  <div class="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <i class="fa-solid fa-check text-4xl text-emerald-500"></i>
+                  </div>
+                  <h2 class="font-display text-5xl font-bold text-white mb-4 uppercase">SIMULATION <span class="text-emerald-500">LOCKED</span></h2>
+                  <p class="text-gray-400 mb-6 leading-relaxed">
+                      Correlation Index achieved: <span id="win-score" class="text-white font-bold">96.5%</span>. The Miami Upgrade Package is validated.
+                  </p>
+                  
+                  <div class="mb-8">
+                      <input type="text" id="victory-name" placeholder="Enter Engineer Name" class="w-full glass-panel p-4 rounded-xl border border-white/20 text-white font-display text-lg focus:outline-none focus:border-emerald-500 transition-colors uppercase text-center placeholder:opacity-30 mb-3">
+                      <button onclick="submitTuning('victory')" class="w-full py-4 bg-emerald-500 text-black font-display font-black text-lg rounded-xl uppercase tracking-tighter hover:bg-emerald-400 transition-all">Submit to Strategy Board</button>
+                  </div>
+
+                  <div class="p-4 bg-orange-500/10 border border-orange-500/30 rounded-2xl mb-6 text-[10px] text-orange-200 uppercase tracking-widest">
+                      <i class="fa-solid fa-award mr-2"></i> Reward Unlocked: Miami Technical Blueprint
+                  </div>
+                  <button onclick="location.reload()" class="text-xs text-gray-500 hover:text-white transition-colors uppercase tracking-widest font-bold">Restart Simulation</button>
+             </div>
+             
+             <!-- Defeat -->
+             <div id="modal-failure" class="max-w-xl w-full glass-panel p-10 rounded-[3rem] text-center hidden">
+                  <div class="w-20 h-20 bg-f1-red/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <i class="fa-solid fa-xmark text-4xl text-f1-red"></i>
+                  </div>
+                  <h2 class="font-display text-5xl font-bold text-white mb-4 uppercase">ATR <span class="f1-red">EXHAUSTED</span></h2>
+                  <p class="text-gray-400 mb-6 leading-relaxed">
+                      Your wind tunnel allocation has been depleted. Correlation remains at <span id="lost-score" class="text-f1-red font-bold">78.2%</span>.
+                  </p>
+
+                  <div class="mb-8 p-6 glass-panel rounded-2xl border border-f1-red/20">
+                      <input type="text" id="failure-name" placeholder="Enter Engineer Name" class="w-full bg-black/40 p-4 rounded-xl border border-white/10 text-white font-display text-lg focus:outline-none focus:border-f1-red transition-colors uppercase text-center placeholder:opacity-30 mb-3">
+                      <button onclick="submitTuning('failure')" class="w-full py-4 bg-f1-red text-white font-display font-black text-lg rounded-xl uppercase tracking-tighter hover:bg-red-800 transition-all">Submit Incomplete Package</button>
+                      <button onclick="location.reload()" class="w-full py-3 mt-4 text-[10px] text-gray-500 hover:text-white transition-colors uppercase tracking-tighter font-black border border-white/5 rounded-lg">Request Emergency Budget</button>
+                  </div>
+             </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Stats Overlay -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 flex justify-center pointer-events-none z-30">
+        <div class="glass-panel px-6 py-2 rounded-full flex gap-8 pointer-events-auto border border-white/5">
+             <div class="flex items-center gap-2">
+                 <span class="text-[8px] text-gray-500 uppercase tracking-widest font-black">Downforce</span>
+                 <span id="stat-df" class="font-mono text-xs text-emerald-500">0.00 kN</span>
+             </div>
+             <div class="flex items-center gap-2">
+                 <span class="text-[8px] text-gray-500 uppercase tracking-widest font-black">Drag Coeff</span>
+                 <span id="stat-dg" class="font-mono text-xs text-blue-400">0.000</span>
+             </div>
+        </div>
+    </div>
+
+    <script>
+        let gameState = 'intro'; // intro, simulation, finished
+        let selectedTeam = null;
+        let atrHours = 12.0;
+        let currentScore = 0.0;
+        let currentParams = { fw: 12.0, rw: 8.5, rh: 15.0, ers: 65 };
+        let teamTargets = {
+             'Red Bull': { fw: 14.5, rw: 11.0, rh: 6.5, ers: 82 },
+             'Ferrari': { fw: 21.0, rw: 13.5, rh: 12.0, ers: 45 },
+             'McLaren': { fw: 16.0, rw: 6.0, rh: 15.0, ers: 68 }
+        };
+        let targetParams = { fw: 0, rw: 0, rh: 0, ers: 0 };
+        let balanceChart, stabilityChart;
+
+        // Core Physics Engine (Universal Calculation)
+        function calculateCorrelation(params, team) {
+            const target = teamTargets[team];
+            let totalDiff = 0;
+            totalDiff += Math.abs(params.fw - target.fw) * 2;
+            totalDiff += Math.abs(params.rw - target.rw) * 2;
+            totalDiff += Math.abs(params.rh - target.rh) * 3;
+            totalDiff += Math.abs(params.ers - target.ers) / 2;
+
+            let correlation = Math.max(0, 100 - totalDiff);
+            
+            // Critical Penalties
+            if(params.rh < 5.0) { correlation *= 0.6; }
+            if(params.fw > 19.0 && team !== 'Ferrari') { correlation *= 0.8; }
+            
+            return correlation;
+        }
+
+        // Initialize Charts
+        function initCharts() {
+            const ctx1 = document.getElementById('balanceChart');
+            balanceChart = new Chart(ctx1, {
+                type: 'radar',
+                data: {
+                    labels: ['Front Load', 'Top Speed', 'Corner Stability', 'Efficiency', 'Acceleration'],
+                    datasets: [{
+                        label: 'Simulated Profile',
+                        data: [0, 0, 0, 0, 0],
+                        backgroundColor: 'rgba(225, 6, 0, 0.2)',
+                        borderColor: '#E10600',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#E10600'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            min: 0, max: 100,
+                            grid: { color: 'rgba(255,255,255,0.05)' },
+                            angleLines: { color: 'rgba(255,255,255,0.1)' },
+                            ticks: { display: false }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            const ctx2 = document.getElementById('stabilityChart');
+            stabilityChart = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                    datasets: [{
+                        data: Array(10).fill(0),
+                        borderColor: '#10b981',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: { display: false },
+                        y: { min: -5, max: 5, grid: { display: false }, ticks: { display: false } }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        function toggleBriefing() {
+            const briefing = document.getElementById('tech-briefing');
+            briefing.classList.toggle('hidden');
+        }
+
+        function selectTeam(team) {
+            selectedTeam = team;
+            document.getElementById('state-intro').classList.add('hidden');
+            document.getElementById('state-sim').classList.remove('hidden');
+            document.getElementById('active-team-name').innerText = team;
+            
+            const logo = document.getElementById('team-logo-placeholder');
+            if(team === 'Red Bull') { logo.innerText = 'RB'; logo.className = "w-10 h-10 rounded-lg flex items-center justify-center font-black text-xl bg-blue-900/50 text-blue-400"; }
+            if(team === 'Ferrari') { logo.innerText = 'SF'; logo.className = "w-10 h-10 rounded-lg flex items-center justify-center font-black text-xl bg-red-900/50 text-f1-red"; }
+            if(team === 'McLaren') { logo.innerText = 'MC'; logo.className = "w-10 h-10 rounded-lg flex items-center justify-center font-black text-xl bg-orange-900/50 text-orange-500"; }
+
+            // Set specific targets
+            targetParams = teamTargets[team];
+
+            document.getElementById('status-badge').innerText = 'LINKED';
+            initCharts();
+            updateLeaderboardUI();
+        }
+
+        function updateParam(param, val) {
+            currentParams[param] = parseFloat(val);
+            document.getElementById(`val-${param}`).innerText = (param === 'rh') ? val + ' mm' : (param === 'ers') ? val + '%' : val + '°';
+        }
+
+        async function runSimulation() {
+            if(atrHours <= 0) return;
+            
+            atrHours -= 1;
+            document.getElementById('atr-budget').innerText = atrHours + ':00';
+            if(atrHours <= 3) document.getElementById('atr-budget').classList.add('text-f1-red');
+
+            const btn = document.getElementById('run-btn');
+            const overlay = document.getElementById('sim-visual-overlay');
+            const idle = document.getElementById('result-idle');
+            const active = document.getElementById('result-active');
+            
+            btn.disabled = true;
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            overlay.classList.remove('opacity-0');
+            idle.classList.add('hidden');
+            active.classList.add('hidden');
+
+            // Fake processing "visuals"
+            const stages = ["Correlating Reynolds Flow...", "Measuring Drag Vectors...", "Calibrating MGU-H Scavenge...", "Solving Navier-Stokes Matrix..."];
+            for(let i=0; i<4; i++) {
+                document.getElementById('progress-text').innerText = stages[i];
+                await new Promise(r => setTimeout(r, 600));
+            }
+
+            // Calculation using universal engine
+            let correlation = calculateCorrelation(currentParams, selectedTeam);
+            currentScore = correlation;
+            
+            // Critical Penalties for visual feedback ONLY (Logic moved to calculateCorrelation)
+            let isStalled = currentParams.rh < 5.0;
+
+            // Update UI
+            overlay.classList.add('opacity-0');
+            active.classList.remove('hidden');
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+            const scoreDisplay = document.getElementById('final-score');
+            const feedback = document.getElementById('score-feedback');
+            
+            scoreDisplay.innerText = correlation.toFixed(1) + '%';
+            
+            if(correlation > 95) {
+                feedback.innerText = "Target Achieved";
+                feedback.className = "mt-4 text-xs font-bold uppercase py-2 px-6 rounded-full inline-block bg-emerald-500/20 text-emerald-400 tracking-widest";
+                setTimeout(() => showModal('victory', correlation), 1000);
+            } else if(correlation > 85) {
+                feedback.innerText = "High Correlation - Fine Tuning Required";
+                feedback.className = "mt-4 text-xs font-bold uppercase py-2 px-6 rounded-full inline-block bg-yellow-500/20 text-yellow-400 tracking-widest";
+            } else {
+                feedback.innerText = "Correlation Delta High";
+                feedback.className = "mt-4 text-xs font-bold uppercase py-2 px-6 rounded-full inline-block bg-f1-red/20 text-f1-red tracking-widest";
+            }
+
+            // Charts Update
+            updateCharts(correlation, isStalled);
+
+            if(atrHours <= 0 && correlation < 95) {
+                setTimeout(() => showModal('failure', correlation), 1000);
+            }
+        }
+
+        function updateCharts(score, isStalled) {
+            // Radar Balance
+            balanceChart.data.datasets[0].data = [
+                currentParams.fw * 4,
+                100 - (currentParams.rw * 4),
+                score,
+                (score + (100 - currentParams.rw*4))/2,
+                currentParams.ers
+            ];
+            balanceChart.update();
+
+            // Line Stability
+            let stabilityData = [];
+            const amp = isStalled ? 4 : (100-score)/10;
+            for(let i=0; i<10; i++) {
+                stabilityData.push(Math.sin(i * 1.5) * amp);
+            }
+            stabilityChart.data.datasets[0].data = stabilityData;
+            stabilityChart.data.datasets[0].borderColor = isStalled ? '#E10600' : '#10b981';
+            stabilityChart.update();
+
+            document.getElementById('porpoise-warning').classList.toggle('hidden', !isStalled);
+
+            // Bottom Stats
+            document.getElementById('stat-df').innerText = (14.2 + (score/10)).toFixed(2) + " kN";
+            document.getElementById('stat-dg').innerText = (0.345 + (currentParams.rw/100)).toFixed(3);
+        }
+
+        function showModal(type, score) {
+            document.getElementById('modal-container').classList.remove('hidden');
+            if(type === 'victory') {
+                document.getElementById('modal-victory').classList.remove('hidden');
+                document.getElementById('win-score').innerText = score.toFixed(1) + '%';
+            } else {
+                document.getElementById('modal-failure').classList.remove('hidden');
+                document.getElementById('lost-score').innerText = score.toFixed(1) + '%';
+            }
+        }
+
+        // Leaderboard Logic
+        function submitTuning(type) {
+            const nameInput = document.getElementById(type + '-name');
+            const name = nameInput.value.trim() || 'Anonymous Engineer';
+            
+            const record = {
+                name: name,
+                team: selectedTeam,
+                params: { ...currentParams },
+                score: currentScore,
+                timestamp: Date.now()
+            };
+
+            let leaderboard = JSON.parse(localStorage.getItem('f1_aero_leaderboard') || '[]');
+            leaderboard.push(record);
+            leaderboard.sort((a, b) => b.score - a.score);
+            localStorage.setItem('f1_aero_leaderboard', JSON.stringify(leaderboard));
+
+            updateLeaderboardUI();
+            location.reload(); // Restart game after submission
+        }
+
+        function getAIBenchmarks() {
+            return [
+                { name: "Adrian N. (Bot)", team: "Red Bull", params: {fw: 14.5, rw: 11.0, rh: 6.5, ers: 82}, score: 100.0, isAI: true },
+                { name: "Enrico C. (Bot)", team: "Ferrari", params: {fw: 21.0, rw: 13.5, rh: 12.0, ers: 45}, score: 100.0, isAI: true },
+                { name: "Rob M. (Bot)", team: "McLaren", params: {fw: 16.0, rw: 6.0, rh: 15.0, ers: 68}, score: 100.0, isAI: true },
+                { name: "Simulation Alpha", team: "Red Bull", params: {fw: 15.0, rw: 11.5, rh: 7.0, ers: 80}, score: 98.2, isAI: true },
+                { name: "Wind Tunnel 3", team: "Ferrari", params: {fw: 20.0, rw: 14.0, rh: 11.5, ers: 48}, score: 96.7, isAI: true }
+            ];
+        }
+
+        function updateLeaderboardUI() {
+            const body = document.getElementById('leaderboard-body');
+            let userScores = JSON.parse(localStorage.getItem('f1_aero_leaderboard') || '[]');
+            let allScores = [...getAIBenchmarks(), ...userScores];
+            
+            // Re-Verification of all scores to fight cheating
+            allScores = allScores.map(entry => {
+                const verifiedScore = calculateCorrelation(entry.params, entry.team);
+                const isCheat = Math.abs(verifiedScore - entry.score) > 0.01;
+                return { ...entry, verifiedScore, isCheat };
+            });
+
+            allScores.sort((a, b) => b.verifiedScore - a.verifiedScore);
+
+            body.innerHTML = allScores.slice(0, 10).map((entry, index) => {
+                const rankClass = index === 0 ? 'rank-gold' : index === 1 ? 'rank-silver' : index === 2 ? 'rank-bronze' : 'text-gray-500';
+                const teamClass = entry.team === 'Red Bull' ? 'text-blue-400' : entry.team === 'Ferrari' ? 'text-f1-red' : 'text-orange-500';
+                const statusIcon = entry.isCheat ? '<i class="fa-solid fa-triangle-exclamation text-f1-red animate-pulse" title="SPOOFED DATA"></i>' : '<i class="fa-solid fa-circle-check text-emerald-500" title="VERIFIED PHYSICS"></i>';
+                
+                return `
+                    <tr class="${entry.isAI ? 'bg-white/2' : 'bg-f1-red/5'}">
+                        <td class="${rankClass} font-display font-black">#${index + 1}</td>
+                        <td class="font-bold text-white uppercase">${entry.name} ${entry.isAI ? '<span class="text-[8px] opacity-30 ml-1">SYSTEM</span>' : ''}</td>
+                        <td class="${teamClass} font-black text-xs uppercase tracking-tighter">${entry.team}</td>
+                        <td class="hidden md:table-cell text-center font-mono text-[10px] text-gray-500 italic">
+                            [${entry.params.fw}/${entry.params.rw}/${entry.params.rh}/${entry.params.ers}]
+                        </td>
+                        <td class="text-right font-display text-xl font-bold ${entry.isCheat ? 'line-through text-f1-red' : 'text-white'}">
+                            ${entry.verifiedScore.toFixed(1)}%
+                        </td>
+                        <td class="text-center">${statusIcon}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            updateLeaderboardUI();
+        });
+    </script>
+</body>
+
+</html>
