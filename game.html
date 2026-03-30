@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aero-Sim '26: The Miami Gap Challenge</title>
+    <title>Aero-Sim '26: The Engineering Hub</title>
     <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -133,11 +133,67 @@
     <!-- Main Game Container -->
     <main id="game-canvas" class="flex-grow flex flex-col items-center justify-center p-4 lg:p-12 relative overflow-hidden">
         
-        <!-- INTRO STATE -->
-        <div id="state-intro" class="max-w-4xl w-full glass-panel p-10 rounded-3xl text-center fade-in z-20">
-            <h1 class="font-display text-6xl md:text-7xl font-bold text-white mb-6 uppercase tracking-tighter shimmer rounded-lg">THE MIAMI <span class="f1-red">GAP</span></h1>
-            <p class="text-gray-400 text-lg mb-10 leading-relaxed italic max-w-2xl mx-auto">
-                With Bahrain and Saudi Arabia cancelled, we have zero empirical data to validate the Miami Upgrade Package. As Head of Aerodynamics, you must correlate the simulation to its 'Theoretical Sweet Spot' before ATR hours run out.
+        <!-- SCENARIO SELECTION STATE -->
+        <div id="state-scenario" class="max-w-6xl w-full glass-panel p-10 rounded-[3rem] text-center fade-in z-20">
+            <h1 class="font-display text-6xl md:text-7xl font-bold text-white mb-4 uppercase tracking-tighter shimmer rounded-lg">ENGINEERING <span class="f1-red">HUB</span></h1>
+            <p class="text-gray-400 text-lg mb-12 leading-relaxed italic max-w-2xl mx-auto">
+                Select a simulation timeframe to initialize the correlation environment. Each scenario carries unique ATR constraints and atmospheric variables.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- Miami Gap -->
+                <button onclick="selectScenario('Miami')" class="group relative overflow-hidden glass-panel p-8 rounded-3xl border-b-4 border-emerald-500 hover:bg-emerald-950/20 transition-all text-left">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+                        <i class="fa-solid fa-sun text-6xl"></i>
+                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-emerald-500">Early Season</span>
+                    <h3 class="font-display text-3xl font-bold text-white mb-3 uppercase">The Miami Gap</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed mb-6">Validating the first major 2026 upgrade package. Focused on turn-in bite and low-speed mechanical grip.</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase">ATR Budget: 12h</span>
+                        <i class="fa-solid fa-arrow-right text-emerald-500 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </button>
+
+                <!-- Summer Standstill -->
+                <button onclick="selectScenario('Summer')" class="group relative overflow-hidden glass-panel p-8 rounded-3xl border-b-4 border-orange-500 hover:bg-orange-950/20 transition-all text-left">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+                        <i class="fa-solid fa-temperature-high text-6xl"></i>
+                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-orange-500">Mid Season</span>
+                    <h3 class="font-display text-3xl font-bold text-white mb-3 uppercase">Summer Standstill</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed mb-6">Optimizing cooling efficiency for the European triple-header. High thermal stress on ERS components.</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase">ATR Budget: 8h</span>
+                        <i class="fa-solid fa-arrow-right text-orange-500 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </button>
+
+                <!-- Winter Revolution -->
+                <button onclick="selectScenario('Winter')" class="group relative overflow-hidden glass-panel p-8 rounded-3xl border-b-4 border-blue-500 hover:bg-blue-950/20 transition-all text-left">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+                        <i class="fa-solid fa-snowflake text-6xl"></i>
+                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-blue-500">Off Season</span>
+                    <h3 class="font-display text-3xl font-bold text-white mb-3 uppercase">2027 Revolution</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed mb-6">Foundational mapping for next year's chassis. Extensive CFD iterations required for correlation.</p>
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase">ATR Budget: 24h</span>
+                        <i class="fa-solid fa-arrow-right text-blue-500 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                </button>
+            </div>
+            <div class="text-[10px] text-gray-600 uppercase tracking-[0.4em] font-black mt-8">Engineering Directive 2026.04-Alpha</div>
+        </div>
+
+        <!-- TEAM SELECTION STATE (Hidden by default) -->
+        <div id="state-intro" class="hidden max-w-4xl w-full glass-panel p-10 rounded-3xl text-center fade-in z-20">
+            <div class="inline-block px-4 py-1 rounded-full bg-f1-red/10 border border-f1-red/20 text-[10px] font-bold text-f1-red uppercase tracking-widest mb-6">
+                Scenario: <span id="display-scenario">NONE</span>
+            </div>
+            <h1 class="font-display text-6xl md:text-7xl font-bold text-white mb-6 uppercase tracking-tighter">SELECT <span class="f1-red">CONSTRUCTOR</span></h1>
+            <p id="scenario-desc" class="text-gray-400 text-lg mb-10 leading-relaxed italic max-w-2xl mx-auto">
+                Initial text...
             </p>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -178,13 +234,8 @@
                             <p class="mb-3"><strong class="text-white uppercase tracking-tighter">ERS Mapping:</strong> Energy harvesting. A higher bias builds battery but induces "Clipping" which slows down your initial acceleration.</p>
                         </div>
                     </div>
-                    <div class="mt-6 pt-6 border-t border-white/5">
-                        <h5 class="text-[10px] font-black text-emerald-400 uppercase tracking-[0.2em] mb-3">Intelligence Leaks (Hints)</h5>
-                        <ul class="space-y-2 text-[10px] italic text-gray-500">
-                           <li>• <strong class="text-blue-400 not-italic">Red Bull:</strong> They target ultra-low ride heights (6-8mm) for their Venturi floor.</li>
-                           <li>• <strong class="text-f1-red not-italic">Ferrari:</strong> The SF26 is front-biased; try wing angles above 19°.</li>
-                           <li>• <strong class="text-orange-400 not-italic">McLaren:</strong> Focus on the Rear Flap transition (5-8°) to maximize their DRS efficiency.</li>
-                        </ul>
+                    <div id="dynamic-hints" class="mt-6 pt-6 border-t border-white/5">
+                        <!-- Dynamic Hints -->
                     </div>
                 </div>
             </div>
@@ -313,8 +364,9 @@
                              <th class="w-16 text-center">Rank</th>
                              <th>Engineer</th>
                              <th>Constructor</th>
+                             <th>Scenario</th>
                              <th class="hidden md:table-cell text-center">Setup (FW/RW/RH/ERS)</th>
-                             <th class="text-right">Correlation Index Index</th>
+                             <th class="text-right">Correlation Index</th>
                              <th class="w-16 text-center">Status</th>
                          </tr>
                      </thead>
@@ -387,11 +439,52 @@
 
     <script>
         let gameState = 'intro'; // intro, simulation, finished
+        let selectedScenario = null;
         let selectedTeam = null;
         let atrHours = 12.0;
         let currentScore = 0.0;
         let currentParams = { fw: 12.0, rw: 8.5, rh: 15.0, ers: 65 };
-        let teamTargets = {
+        
+        const scenarioData = {
+            'Miami': {
+                title: 'The Miami Gap',
+                atr: 12.0,
+                desc: 'With Bahrain and Saudi Arabia cancelled, we have zero empirical data to validate the Miami Upgrade Package. Correlate the simulation to its Theoretical Sweet Spot.',
+                hints: `
+                    <h5 class="text-[10px] font-black text-emerald-400 uppercase tracking-[0.2em] mb-3">Early Season Intelligence</h5>
+                    <ul class="space-y-2 text-[10px] italic text-gray-500">
+                       <li>• <strong class="text-blue-400 not-italic">Red Bull:</strong> They target ultra-low ride heights (6-8mm) for their Venturi floor.</li>
+                       <li>• <strong class="text-f1-red not-italic">Ferrari:</strong> The SF26 is front-biased; try wing angles above 19°.</li>
+                       <li>• <strong class="text-orange-400 not-italic">McLaren:</strong> Focus on the Rear Flap transition (5-8°) to maximize DRS.</li>
+                    </ul>`
+            },
+            'Summer': {
+                title: 'Summer Standstill',
+                atr: 8.0,
+                desc: '14 days of factory shutdown. You have a skeletal crew to optimize cooling for the European triple-header. Thermal management is the primary objective.',
+                hints: `
+                    <h5 class="text-[10px] font-black text-orange-400 uppercase tracking-[0.2em] mb-3">Mid-Season Thermal Data</h5>
+                    <ul class="space-y-2 text-[10px] italic text-gray-500">
+                       <li>• <strong class="text-white not-italic">Radiator Flow:</strong> Higher ride heights (10mm+) improve auxiliary cooling flow.</li>
+                       <li>• <strong class="text-white not-italic">ERS Clipping:</strong> Keep ERS bias below 60% to prevent battery overheating.</li>
+                       <li>• <strong class="text-white not-italic">Drag Tradeoff:</strong> Trim rear wing flap (below 7°) to reduce radiator-induced drag.</li>
+                    </ul>`
+            },
+            'Winter': {
+                title: '2027 Revolution',
+                atr: 24.0,
+                desc: 'Foundational architecture mapping for next year. With unlimited CFD iterations but complex new 2027 regs, precision correlation is everything.',
+                hints: `
+                    <h5 class="text-[10px] font-black text-blue-400 uppercase tracking-[0.2em] mb-3">Off-Season Chassis Briefing</h5>
+                    <ul class="space-y-2 text-[10px] italic text-gray-500">
+                       <li>• <strong class="text-white not-italic">Chassis Stability:</strong> Wide setup sweeps (10-20°) are needed to map the aero-elasticity.</li>
+                       <li>• <strong class="text-white not-italic">Long-Run correlation:</strong> Ride height sensitivity is doubled in 2027 mapping.</li>
+                       <li>• <strong class="text-white not-italic">Energy Flow:</strong> Match ERS bias to the 2027 discharge curve (target 75%+).</li>
+                    </ul>`
+            }
+        };
+
+        const teamTargets = {
              'Red Bull': { fw: 14.5, rw: 11.0, rh: 6.5, ers: 82 },
              'Ferrari': { fw: 21.0, rw: 13.5, rh: 12.0, ers: 45 },
              'McLaren': { fw: 16.0, rw: 6.0, rh: 15.0, ers: 68 }
@@ -399,14 +492,33 @@
         let targetParams = { fw: 0, rw: 0, rh: 0, ers: 0 };
         let balanceChart, stabilityChart;
 
+        function selectScenario(key) {
+            selectedScenario = key;
+            const data = scenarioData[key];
+            atrHours = data.atr;
+            
+            document.getElementById('display-scenario').innerText = data.title;
+            document.getElementById('scenario-desc').innerText = data.desc;
+            document.getElementById('dynamic-hints').innerHTML = data.hints;
+            document.getElementById('atr-budget').innerText = atrHours + ':00';
+            
+            document.getElementById('state-scenario').classList.add('hidden');
+            document.getElementById('state-intro').classList.remove('hidden');
+        }
+
         // Core Physics Engine (Universal Calculation)
-        function calculateCorrelation(params, team) {
+        function calculateCorrelation(params, team, scenario = 'Miami') {
             const target = teamTargets[team];
             let totalDiff = 0;
             totalDiff += Math.abs(params.fw - target.fw) * 2;
             totalDiff += Math.abs(params.rw - target.rw) * 2;
-            totalDiff += Math.abs(params.rh - target.rh) * 3;
-            totalDiff += Math.abs(params.ers - target.ers) / 2;
+            
+            // Scenario Specific Weighting
+            const rhWeight = (scenario === 'Winter') ? 4.5 : 3.0;
+            const ersWeight = (scenario === 'Summer') ? 1.5 : 0.5;
+
+            totalDiff += Math.abs(params.rh - target.rh) * rhWeight;
+            totalDiff += Math.abs(params.ers - target.ers) * ersWeight;
 
             let correlation = Math.max(0, 100 - totalDiff);
             
@@ -420,6 +532,7 @@
         // Initialize Charts
         function initCharts() {
             const ctx1 = document.getElementById('balanceChart');
+            if (balanceChart) balanceChart.destroy();
             balanceChart = new Chart(ctx1, {
                 type: 'radar',
                 data: {
@@ -447,6 +560,7 @@
             });
 
             const ctx2 = document.getElementById('stabilityChart');
+            if (stabilityChart) stabilityChart.destroy();
             stabilityChart = new Chart(ctx2, {
                 type: 'line',
                 data: {
@@ -485,9 +599,7 @@
             if(team === 'Ferrari') { logo.innerText = 'SF'; logo.className = "w-10 h-10 rounded-lg flex items-center justify-center font-black text-xl bg-red-900/50 text-f1-red"; }
             if(team === 'McLaren') { logo.innerText = 'MC'; logo.className = "w-10 h-10 rounded-lg flex items-center justify-center font-black text-xl bg-orange-900/50 text-orange-500"; }
 
-            // Set specific targets
             targetParams = teamTargets[team];
-
             document.getElementById('status-badge').innerText = 'LINKED';
             initCharts();
             updateLeaderboardUI();
@@ -503,7 +615,10 @@
             
             atrHours -= 1;
             document.getElementById('atr-budget').innerText = atrHours + ':00';
-            if(atrHours <= 3) document.getElementById('atr-budget').classList.add('text-f1-red');
+            if(atrHours <= 3) {
+                document.getElementById('atr-budget').classList.add('text-f1-red');
+                document.getElementById('atr-budget').classList.remove('text-emerald-500');
+            }
 
             const btn = document.getElementById('run-btn');
             const overlay = document.getElementById('sim-visual-overlay');
@@ -516,21 +631,17 @@
             idle.classList.add('hidden');
             active.classList.add('hidden');
 
-            // Fake processing "visuals"
-            const stages = ["Correlating Reynolds Flow...", "Measuring Drag Vectors...", "Calibrating MGU-H Scavenge...", "Solving Navier-Stokes Matrix..."];
+            const stages = ["Correlating Reynolds Flow...", "Measuring Drag Vectors...", "Calibrating Thermal Sync...", "Solving Navier-Stokes Matrix..."];
             for(let i=0; i<4; i++) {
                 document.getElementById('progress-text').innerText = stages[i];
                 await new Promise(r => setTimeout(r, 600));
             }
 
-            // Calculation using universal engine
-            let correlation = calculateCorrelation(currentParams, selectedTeam);
+            let correlation = calculateCorrelation(currentParams, selectedTeam, selectedScenario);
             currentScore = correlation;
             
-            // Critical Penalties for visual feedback ONLY (Logic moved to calculateCorrelation)
             let isStalled = currentParams.rh < 5.0;
 
-            // Update UI
             overlay.classList.add('opacity-0');
             active.classList.remove('hidden');
             btn.disabled = false;
@@ -553,7 +664,6 @@
                 feedback.className = "mt-4 text-xs font-bold uppercase py-2 px-6 rounded-full inline-block bg-f1-red/20 text-f1-red tracking-widest";
             }
 
-            // Charts Update
             updateCharts(correlation, isStalled);
 
             if(atrHours <= 0 && correlation < 95) {
@@ -562,7 +672,6 @@
         }
 
         function updateCharts(score, isStalled) {
-            // Radar Balance
             balanceChart.data.datasets[0].data = [
                 currentParams.fw * 4,
                 100 - (currentParams.rw * 4),
@@ -572,7 +681,6 @@
             ];
             balanceChart.update();
 
-            // Line Stability
             let stabilityData = [];
             const amp = isStalled ? 4 : (100-score)/10;
             for(let i=0; i<10; i++) {
@@ -583,8 +691,6 @@
             stabilityChart.update();
 
             document.getElementById('porpoise-warning').classList.toggle('hidden', !isStalled);
-
-            // Bottom Stats
             document.getElementById('stat-df').innerText = (14.2 + (score/10)).toFixed(2) + " kN";
             document.getElementById('stat-dg').innerText = (0.345 + (currentParams.rw/100)).toFixed(3);
         }
@@ -600,7 +706,6 @@
             }
         }
 
-        // Leaderboard Logic
         function submitTuning(type) {
             const nameInput = document.getElementById(type + '-name');
             const name = nameInput.value.trim() || 'Anonymous Engineer';
@@ -608,6 +713,7 @@
             const record = {
                 name: name,
                 team: selectedTeam,
+                scenario: selectedScenario,
                 params: { ...currentParams },
                 score: currentScore,
                 timestamp: Date.now()
@@ -619,16 +725,14 @@
             localStorage.setItem('f1_aero_leaderboard', JSON.stringify(leaderboard));
 
             updateLeaderboardUI();
-            location.reload(); // Restart game after submission
+            location.reload();
         }
 
         function getAIBenchmarks() {
             return [
-                { name: "Adrian N. (Bot)", team: "Red Bull", params: {fw: 14.5, rw: 11.0, rh: 6.5, ers: 82}, score: 100.0, isAI: true },
-                { name: "Enrico C. (Bot)", team: "Ferrari", params: {fw: 21.0, rw: 13.5, rh: 12.0, ers: 45}, score: 100.0, isAI: true },
-                { name: "Rob M. (Bot)", team: "McLaren", params: {fw: 16.0, rw: 6.0, rh: 15.0, ers: 68}, score: 100.0, isAI: true },
-                { name: "Simulation Alpha", team: "Red Bull", params: {fw: 15.0, rw: 11.5, rh: 7.0, ers: 80}, score: 98.2, isAI: true },
-                { name: "Wind Tunnel 3", team: "Ferrari", params: {fw: 20.0, rw: 14.0, rh: 11.5, ers: 48}, score: 96.7, isAI: true }
+                { name: "Adrian N. (Bot)", team: "Red Bull", scenario: "Miami", params: {fw: 14.5, rw: 11.0, rh: 6.5, ers: 82}, score: 100.0, isAI: true },
+                { name: "Enrico C. (Bot)", team: "Ferrari", scenario: "Summer", params: {fw: 21.0, rw: 13.5, rh: 12.0, ers: 45}, score: 100.0, isAI: true },
+                { name: "Rob M. (Bot)", team: "McLaren", scenario: "Winter", params: {fw: 16.0, rw: 6.0, rh: 15.0, ers: 68}, score: 100.0, isAI: true }
             ];
         }
 
@@ -637,25 +741,26 @@
             let userScores = JSON.parse(localStorage.getItem('f1_aero_leaderboard') || '[]');
             let allScores = [...getAIBenchmarks(), ...userScores];
             
-            // Re-Verification of all scores to fight cheating
             allScores = allScores.map(entry => {
-                const verifiedScore = calculateCorrelation(entry.params, entry.team);
-                const isCheat = Math.abs(verifiedScore - entry.score) > 0.01;
+                const verifiedScore = calculateCorrelation(entry.params, entry.team, entry.scenario);
+                const isCheat = Math.abs(verifiedScore - (entry.score || 0)) > 0.05;
                 return { ...entry, verifiedScore, isCheat };
             });
 
             allScores.sort((a, b) => b.verifiedScore - a.verifiedScore);
 
-            body.innerHTML = allScores.slice(0, 10).map((entry, index) => {
+            body.innerHTML = allScores.slice(0, 15).map((entry, index) => {
                 const rankClass = index === 0 ? 'rank-gold' : index === 1 ? 'rank-silver' : index === 2 ? 'rank-bronze' : 'text-gray-500';
                 const teamClass = entry.team === 'Red Bull' ? 'text-blue-400' : entry.team === 'Ferrari' ? 'text-f1-red' : 'text-orange-500';
                 const statusIcon = entry.isCheat ? '<i class="fa-solid fa-triangle-exclamation text-f1-red animate-pulse" title="SPOOFED DATA"></i>' : '<i class="fa-solid fa-circle-check text-emerald-500" title="VERIFIED PHYSICS"></i>';
-                
+                const scenarioTag = entry.scenario === 'Winter' ? 'bg-blue-500/20 text-blue-400' : entry.scenario === 'Summer' ? 'bg-orange-500/20 text-orange-400' : 'bg-emerald-500/20 text-emerald-400';
+
                 return `
-                    <tr class="${entry.isAI ? 'bg-white/2' : 'bg-f1-red/5'}">
-                        <td class="${rankClass} font-display font-black">#${index + 1}</td>
+                    <tr class="${entry.isAI ? 'bg-white/5' : 'bg-f1-red/5'}">
+                        <td class="${rankClass} font-display font-black text-center">#${index + 1}</td>
                         <td class="font-bold text-white uppercase">${entry.name} ${entry.isAI ? '<span class="text-[8px] opacity-30 ml-1">SYSTEM</span>' : ''}</td>
                         <td class="${teamClass} font-black text-xs uppercase tracking-tighter">${entry.team}</td>
+                        <td class="text-center"><span class="text-[8px] font-bold px-2 py-0.5 rounded-full ${scenarioTag} uppercase tracking-widest">${entry.scenario || 'MIAMI'}</span></td>
                         <td class="hidden md:table-cell text-center font-mono text-[10px] text-gray-500 italic">
                             [${entry.params.fw}/${entry.params.rw}/${entry.params.rh}/${entry.params.ers}]
                         </td>
@@ -668,7 +773,6 @@
             }).join('');
         }
 
-        // Initialize on load
         window.addEventListener('load', () => {
             updateLeaderboardUI();
         });
