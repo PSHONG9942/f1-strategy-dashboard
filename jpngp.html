@@ -1693,22 +1693,330 @@
     <!-- ========================= -->
     <!-- PHASE 4: THE END GAME     -->
     <!-- ========================= -->
-    <div id="phase-endgame" class="phase-content">
-      <section class="scroll-mt-40 py-20 relative border-t border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="locked-view text-center">
-            <i class="fa-solid fa-lock text-4xl text-gray-600 mb-4"></i>
-            <h2 class="font-display text-3xl font-bold text-white mb-2 uppercase">The End Game</h2>
-            <p class="text-gray-400 mb-4">This section unlocks post-race.</p>
-            <div id="countdown-endgame" class="font-mono text-2xl text-f1-red">Initializing...</div>
-          </div>
-          <div class="unlocked-view hidden">
-            <div class="text-center py-20">
-              <h3 class="text-2xl text-gray-500">Locked</h3>
+    <div id="phase-endgame" class="phase-content p-4">
+        <!-- Unlocked View -->
+        <div class="unlocked-view">
+            <!-- Phase Header -->
+            <div id="p4-recap" class="border-l-4 border-teal-500 pl-4 mb-12 scroll-mt-40">
+                <h3 class="font-display text-4xl font-bold tracking-tight text-white uppercase">The Suzuka Verdict</h3>
+                <p class="mt-2 text-md text-gray-400">Post-race tactical analysis and the 2026 championship's inaugural shift in leadership.</p>
             </div>
-          </div>
+
+            <!-- PODIUM INFOGRAPHIC -->
+            <div class="glass-panel p-8 rounded-2xl text-center relative overflow-hidden mb-12 border border-white/5">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 pointer-events-none"></div>
+                <h3 class="font-display text-3xl font-bold mb-10 uppercase tracking-widest text-white/90">Official Podium</h3>
+                
+                <div class="flex flex-row justify-center items-end gap-2 md:gap-8 max-w-4xl mx-auto h-[300px] md:h-[350px] pb-4 px-2 md:px-0 relative">
+                    <!-- 2nd Place -->
+                    <div class="w-[30%] md:w-1/3 flex flex-col items-center justify-end h-[65%] order-1 relative group">
+                        <div class="w-16 h-16 rounded-full bg-gray-900 border-4 border-orange-500 mb-4 flex items-center justify-center text-xl font-bold overflow-hidden shadow-[0_0_15px_rgba(249,115,22,0.3)]">
+                            <i class="fas fa-user text-orange-500/50"></i>
+                        </div>
+                        <h4 class="font-bold text-xl mb-1 text-white">O. Piastri</h4>
+                        <span class="text-[10px] text-orange-500 font-black uppercase tracking-[0.2em] mb-3">McLaren</span>
+                        <div class="w-full h-full bg-gradient-to-t from-gray-900 to-gray-800 rounded-t-2xl border-t-4 border-gray-400 flex items-start justify-center pt-4 shadow-2xl">
+                            <span class="text-5xl font-black text-white/10 italic">2</span>
+                        </div>
+                    </div>
+                    <!-- 1st Place -->
+                    <div class="w-[40%] md:w-1/3 flex flex-col items-center justify-end h-[95%] order-2 relative group scale-105">
+                        <div class="w-24 h-24 rounded-full bg-gray-900 border-4 border-teal-500 mb-4 flex items-center justify-center text-2xl font-bold overflow-hidden shadow-[0_0_30px_rgba(20,184,166,0.5)]">
+                            <i class="fas fa-crown text-teal-400"></i>
+                        </div>
+                        <h4 class="font-bold text-2xl mb-1 text-white uppercase tracking-tighter">K. Antonelli</h4>
+                        <span class="text-[10px] text-teal-400 font-black uppercase tracking-[0.3em] mb-4">Mercedes</span>
+                        <div class="w-full h-full bg-gradient-to-t from-gray-900 to-teal-900/40 rounded-t-2xl border-t-4 border-teal-500 flex items-start justify-center pt-6 shadow-[0_-20px_40px_rgba(20,184,166,0.2)]">
+                            <span class="text-7xl font-black text-teal-400/20 italic">1</span>
+                        </div>
+                    </div>
+                    <!-- 3rd Place -->
+                    <div class="w-[30%] md:w-1/3 flex flex-col items-center justify-end h-[50%] order-3 relative group">
+                        <div class="w-16 h-16 rounded-full bg-gray-900 border-4 border-f1-red mb-4 flex items-center justify-center text-xl font-bold overflow-hidden shadow-[0_0_15px_rgba(225,6,0,0.3)]">
+                            <i class="fas fa-user-tie text-f1-red/50"></i>
+                        </div>
+                        <h4 class="font-bold text-xl mb-1 text-white">C. Leclerc</h4>
+                        <span class="text-[10px] text-f1-red font-black uppercase tracking-[0.2em] mb-3">Ferrari</span>
+                        <div class="w-full h-full bg-gradient-to-t from-gray-900 to-red-900/40 rounded-t-2xl border-t-4 border-red-800 flex items-start justify-center pt-4 shadow-2xl">
+                            <span class="text-4xl font-black text-f1-red/10 italic">3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CLASSIFICATION TABLE & CHART -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Data Center (Tables) -->
+                <div class="bg-gray-800/30 rounded-2xl border border-gray-700/50 overflow-hidden glass-panel">
+                    <div class="p-6 bg-[#0B0E14] border-b border-gray-800 flex justify-between items-center">
+                        <h3 class="font-display text-xl font-bold text-white uppercase tracking-wider">Race Results (Top 10)</h3>
+                        <span class="text-xs text-gray-500 font-mono">53 Laps / Suzuka Circuit</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-300">
+                            <thead class="text-[10px] text-gray-500 uppercase bg-black/40 font-black tracking-widest">
+                                <tr>
+                                    <th class="px-6 py-4">Pos</th>
+                                    <th class="px-6 py-4">Driver</th>
+                                    <th class="px-6 py-4">Team</th>
+                                    <th class="px-6 py-4">Time/Gap</th>
+                                    <th class="px-6 py-4 text-right">Pts</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5">
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-6 py-4 font-black text-teal-400">1</td>
+                                    <td class="px-6 py-4 font-bold text-white uppercase tracking-tighter">Kimi Antonelli</td>
+                                    <td class="px-6 py-4 text-xs font-bold text-teal-500">Mercedes</td>
+                                    <td class="px-6 py-4 font-mono text-xs">1:28:03.403</td>
+                                    <td class="px-6 py-4 text-right font-black text-white">25</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-6 py-4 font-black">2</td>
+                                    <td class="px-6 py-4 font-bold text-white uppercase tracking-tighter">Oscar Piastri</td>
+                                    <td class="px-6 py-4 text-xs font-bold text-orange-500">McLaren</td>
+                                    <td class="px-6 py-4 font-mono text-xs">+13.722s</td>
+                                    <td class="px-6 py-4 text-right font-black text-white">18</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-6 py-4 font-black">3</td>
+                                    <td class="px-6 py-4 font-bold text-white uppercase tracking-tighter">Charles Leclerc</td>
+                                    <td class="px-6 py-4 text-xs font-bold text-f1-red">Ferrari</td>
+                                    <td class="px-6 py-4 font-mono text-xs">+15.270s</td>
+                                    <td class="px-6 py-4 text-right font-black text-white">15</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors text-gray-500">
+                                    <td class="px-6 py-4 font-black">4</td>
+                                    <td class="px-6 py-4 font-bold uppercase tracking-tighter scale-95 origin-left">George Russell</td>
+                                    <td class="px-6 py-4 text-xs font-bold">Mercedes</td>
+                                    <td class="px-6 py-4 font-mono text-xs">+15.754s</td>
+                                    <td class="px-6 py-4 text-right font-black text-gray-400">12</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-6 py-4 font-black">5</td>
+                                    <td class="px-6 py-4 font-bold text-white uppercase tracking-tighter">Lando Norris</td>
+                                    <td class="px-6 py-4 text-xs font-bold text-orange-500">McLaren</td>
+                                    <td class="px-6 py-4 font-mono text-xs">+23.479s</td>
+                                    <td class="px-6 py-4 text-right font-black text-white">10</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-6 py-4 font-black text-gray-500">6</td>
+                                    <td class="px-6 py-4 font-bold text-white/80">Esteban Ocon</td>
+                                    <td class="px-6 py-4 text-xs font-bold text-gray-400">Haas</td>
+                                    <td class="px-6 py-4 font-mono text-xs">+44.112s</td>
+                                    <td class="px-6 py-4 text-right text-gray-400">8</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors text-gray-500">
+                                    <td class="px-6 py-4">7</td>
+                                    <td class="px-6 py-4">Arvid Lindblad</td>
+                                    <td class="px-6 py-4 text-xs">VCARB</td>
+                                    <td class="px-6 py-4 font-mono">+1:02.390</td>
+                                    <td class="px-6 py-4 text-right">6</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors text-gray-500">
+                                    <td class="px-6 py-4">8</td>
+                                    <td class="px-6 py-4">Max Verstappen</td>
+                                    <td class="px-6 py-4 text-xs">Red Bull</td>
+                                    <td class="px-6 py-4 font-mono">+1:15.901</td>
+                                    <td class="px-6 py-4 text-right">4</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors text-gray-500 text-xs italic">
+                                    <td class="px-6 py-4">DNF</td>
+                                    <td class="px-6 py-4 font-bold text-f1-red/60">Oliver Bearman</td>
+                                    <td class="px-6 py-4">Haas</td>
+                                    <td class="px-6 py-4">Lap 22 Crash</td>
+                                    <td class="px-6 py-4 text-right">0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- RACE PERFORMANCE CHART -->
+                <div class="bg-[#0B0E14] p-8 rounded-2xl border border-gray-800 glass-panel">
+                    <h3 class="font-display text-xl font-bold text-white mb-6 text-center uppercase tracking-widest">
+                        Race Time Delta (Gap to Leader)
+                    </h3>
+                    <div class="relative w-full mx-auto h-[350px]">
+                        <canvas id="raceStandingsChart"></canvas>
+                    </div>
+                    <div class="mt-6 p-4 bg-teal-900/20 border border-teal-500/30 rounded-lg">
+                        <p class="text-[11px] text-gray-400 leading-relaxed uppercase tracking-tighter">
+                            <i class="fas fa-microchip text-teal-400 mr-2"></i>
+                            <strong>Telemetry Pulse:</strong> Antonelli's delta was heavily augmented by the Lap 22 "Safety Car Discount," saving 10.4s during the pit transit relative to green-flag stops.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE LAP 22 INFLECTION POINT -->
+            <div id="p4-strategy" class="bg-gray-800/50 rounded-2xl p-6 md:p-10 border border-red-900/30 relative overflow-hidden mb-12 scroll-mt-40 shadow-2xl">
+                <div class="absolute top-0 left-0 w-2 h-full bg-f1-red"></div>
+                <div class="flex items-center mb-6">
+                    <div class="w-14 h-14 rounded-full bg-red-500/20 flex items-center justify-center text-f1-red text-2xl mr-4 shadow-[0_0_20px_rgba(225,6,0,0.2)]">
+                        <i class="fas fa-car-burst"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white uppercase tracking-tight">Lap 22: The 130R Fracture</h3>
+                        <p class="text-sm text-red-500 font-black uppercase tracking-widest">Global Safety Car Intervention</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                    <div class="space-y-6">
+                        <p class="text-gray-300 leading-relaxed">
+                            Oliver Bearman (Haas) suffered a catastrophic 50G impact at the 130R apex. Closing at 324 km/h behind a "super-clipping" Alpine, Bearman took evasive action onto the grass at high speed. The resulting vibration severed the floor seal, inducing terminal aero-instability.
+                        </p>
+                        <div class="bg-black/40 p-5 rounded-xl border border-white/5">
+                            <h4 class="text-sm font-bold text-white mb-3 uppercase tracking-widest">Tactical Repercussions</h4>
+                            <ul class="space-y-3 text-[13px] text-gray-400">
+                                <li class="flex items-center gap-3">
+                                    <i class="fas fa-check text-emerald-500"></i>
+                                    <span><strong>Antonelli's Benefit:</strong> Inherited the lead via "cheap" SC pitstop.</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i class="fas fa-times text-f1-red"></i>
+                                    <span><strong>Piastri's Loss:</strong> Had pitted 1 lap prior under Green, losing track position.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="relative rounded-xl overflow-hidden border border-white/10 group">
+                         <div class="absolute inset-0 bg-red-900/10 group-hover:bg-red-900/0 transition-colors z-10"></div>
+                         <div class="p-6 bg-[#0B0E14] h-full flex flex-col justify-center items-center text-center">
+                            <div class="text-f1-red text-5xl mb-4 font-black">50.4G</div>
+                            <div class="text-white font-display text-xl uppercase font-bold tracking-widest">Bearman Impact Sensor</div>
+                            <div class="mt-4 text-xs text-gray-500 uppercase tracking-widest">Telemetry ID: R22_CRASH_SUZ_130R</div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GEOPOLITICAL HIATUS & ATR ALLOCATIONS -->
+            <div id="p4-development" class="border-l-4 border-indigo-500 pl-4 mt-20 mb-8 scroll-mt-40">
+                <h3 class="font-display text-4xl font-bold tracking-tight text-white uppercase">The 5-Week War</h3>
+                <p class="mt-2 text-md text-gray-400">Geopolitical disruption creates an unprecedented development bridge to Miami.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Geopolitical Context -->
+                <div class="lg:col-span-1 glass-panel p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-4 uppercase tracking-tighter">Calendar Redesign</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Severe regional conflict in the Middle East led to the emergency cancellation of the Bahrain and Saudi Arabian Grands Prix. This inadvertently created a 35-day operational hiatus.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="bg-indigo-900/20 p-4 rounded border-r-2 border-indigo-500 text-right">
+                                <span class="block text-[10px] text-indigo-400 font-black uppercase">Next Round</span>
+                                <span class="block text-lg font-display text-white font-bold">MIAMI GP</span>
+                            </div>
+                            <div class="bg-gray-900/60 p-4 rounded border-r-2 border-gray-500 text-right">
+                                <span class="block text-[10px] text-gray-500 font-black uppercase">Development Gap</span>
+                                <span class="block text-lg font-display text-white font-bold text-emerald-400">35 DAYS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ATR Allocation Table -->
+                <div class="lg:col-span-2 glass-panel p-8 rounded-2xl border border-white/5 bg-[#0B0E14]/80">
+                    <h4 class="text-xl font-bold text-white mb-6 uppercase tracking-tighter text-center">ATR Aerodynamic Testing Allocations (Miami Window)</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-gray-400">
+                            <thead class="text-[10px] text-white/30 uppercase font-black border-b border-white/5">
+                                <tr>
+                                    <th class="px-4 py-3">Team</th>
+                                    <th class="px-4 py-3">ATR Allowance</th>
+                                    <th class="px-4 py-3">Wind Tunnel Hours</th>
+                                    <th class="px-4 py-3">CFD Compute Units</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5">
+                                <tr class="text-white hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-4 font-bold border-l-2 border-blue-600">Red Bull</td>
+                                    <td class="px-4 py-4">70%</td>
+                                    <td class="px-4 py-4 font-mono">168h</td>
+                                    <td class="px-4 py-4 font-mono">1,400</td>
+                                </tr>
+                                <tr class="text-white hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-4 font-bold border-l-2 border-teal-500">Mercedes</td>
+                                    <td class="px-4 py-4">75%</td>
+                                    <td class="px-4 py-4 font-mono">180h</td>
+                                    <td class="px-4 py-4 font-mono">1,500</td>
+                                </tr>
+                                <tr class="text-white hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-4 font-bold border-l-2 border-f1-red">Ferrari</td>
+                                    <td class="px-4 py-4">80%</td>
+                                    <td class="px-4 py-4 font-mono">192h</td>
+                                    <td class="px-4 py-4 font-mono">1,600</td>
+                                </tr>
+                                <tr class="text-white hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-4 font-bold border-l-2 border-orange-500">McLaren</td>
+                                    <td class="px-4 py-4">85%</td>
+                                    <td class="px-4 py-4 font-mono">204h</td>
+                                    <td class="px-4 py-4 font-mono">1,700</td>
+                                </tr>
+                                <tr class="text-gray-500 hover:bg-white/5 transition-colors">
+                                    <td class="px-4 py-4 font-bold border-l-2 border-gray-600">Haas / Alpine</td>
+                                    <td class="px-4 py-4">115%</td>
+                                    <td class="px-4 py-4 font-mono">276h</td>
+                                    <td class="px-4 py-4 font-mono">2,300</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIAMI TECHNICAL PREVIEW -->
+            <div id="p4-upgrades" class="border-l-4 border-emerald-400 pl-4 mt-20 mb-8 scroll-mt-40">
+                <h3 class="font-display text-4xl font-bold tracking-tight text-white uppercase">Development Roadmap: Miami</h3>
+                <p class="mt-2 text-md text-gray-400">Technical blueprints for the upcoming American round.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20 text-center">
+                <div class="glass-panel p-10 rounded-2xl border border-white/5 group hover:border-f1-red transition-all cursor-crosshair">
+                    <div class="w-16 h-16 bg-f1-red/10 rounded-full flex items-center justify-center text-f1-red text-2xl mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-fan"></i>
+                    </div>
+                    <h4 class="text-white font-bold text-xl uppercase mb-3 px-2">Ferrari "Macarena" Wing</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed uppercase tracking-widest">Dual-Element Actuation Upgrade</p>
+                    <div class="mt-6 text-[11px] text-left text-gray-500 bg-black/40 p-4 rounded-xl border border-white/5 space-y-2">
+                        <div class="flex justify-between"><span>DRAG COEFF</span> <span class="text-emerald-400 font-black">-4.2%</span></div>
+                        <div class="flex justify-between"><span>STIFFNESS</span> <span class="text-f1-red font-black">+18%</span></div>
+                    </div>
+                </div>
+                <div class="glass-panel p-10 rounded-2xl border border-white/5 group hover:border-blue-500 transition-all cursor-crosshair">
+                    <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-500 text-2xl mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h4 class="text-white font-bold text-xl uppercase mb-3 px-2">Red Bull Floor V2</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed uppercase tracking-widest">Rear-Axle Thermal Correction</p>
+                    <div class="mt-6 text-[11px] text-left text-gray-500 bg-black/40 p-4 rounded-xl border border-white/5 space-y-2">
+                        <div class="flex justify-between"><span>DOWNFORCE</span> <span class="text-emerald-400 font-black">+12kg</span></div>
+                        <div class="flex justify-between"><span>PORPOISING</span> <span class="text-blue-400 font-black">STABLE</span></div>
+                    </div>
+                </div>
+                <div class="glass-panel p-10 rounded-2xl border border-white/5 group hover:border-teal-400 transition-all cursor-crosshair">
+                    <div class="w-16 h-16 bg-teal-400/10 rounded-full flex items-center justify-center text-teal-400 text-2xl mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h4 class="text-white font-bold text-xl uppercase mb-3 px-2">Mercedes Software v1.2</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed uppercase tracking-widest">MGU-K Handshake Refinement</p>
+                    <div class="mt-6 text-[11px] text-left text-gray-500 bg-black/40 p-4 rounded-xl border border-white/5 space-y-2">
+                        <div class="flex justify-between"><span>HARVEST EFF</span> <span class="text-emerald-400 font-black">+2.4%</span></div>
+                        <div class="flex justify-between"><span>CLIPPING RISK</span> <span class="text-teal-400 font-black">MINIMAL</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-20 mb-32">
+                <p class="text-gray-500 font-mono text-sm uppercase tracking-[0.4em] mb-6 animate-pulse">End of Tactical Session</p>
+                <button onclick="resetProgress()" class="text-white/30 hover:text-white border border-white/10 hover:border-white/40 px-6 py-2 rounded-full text-[10px] uppercase font-black tracking-widest transition-all">
+                    Reset Strategic Timeline
+                </button>
+            </div>
         </div>
-      </section>
     </div>
   </main>
 
@@ -1821,9 +2129,10 @@
         { label: 'Expert Predictions', id: 'predictions' }
       ],
       'endgame': [
-        { label: 'Sprint Outcome', id: 'sprint' },
-        { label: 'GP Forecast', id: 'forecast' },
-        { label: 'Strategic War', id: 'war' }
+        { label: 'Suzuka Verdict', id: 'recap' },
+        { label: 'Lap 22 Fracture', id: 'strategy' },
+        { label: '5-Week War', id: 'development' },
+        { label: 'Miami Roadmap', id: 'upgrades' }
       ]
     };
 
@@ -2148,7 +2457,7 @@
       const futurePhases = ['problem', 'solution', 'endgame'];
       const unlockDatePhase2 = new Date('2026-03-01T00:00:00+08:00'); // Permanently Unlocked for Review
       const unlockDatePhase3 = new Date('2026-03-01T00:00:00+08:00'); // Permanently Unlocked for Phase 3
-      const unlockDatePhase4 = new Date('2026-03-29T22:00:00+08:00'); // Sun after Race
+      const unlockDatePhase4 = new Date('2026-03-01T00:00:00+08:00'); // Permanently Unlocked for Review
 
       try {
         if (window.location.protocol !== 'blob:' && window.location.protocol !== 'data:') {
@@ -2515,7 +2824,45 @@
       checkPhaseStatuses();
       initPhase3Charts();
       initPhase3Interactivity();
+      initPhase4Charts();
     });
+
+    function initPhase4Charts() {
+      const ctxRace = document.getElementById('raceStandingsChart');
+      if (ctxRace) {
+        new Chart(ctxRace, {
+          type: 'bar',
+          data: {
+            labels: ['Antonelli', 'Piastri', 'Leclerc', 'Russell', 'Norris', 'Ocon', 'Lindblad', 'Verstappen'],
+            datasets: [{
+              label: 'Gap to Leader (s)',
+              data: [0.00, 13.72, 15.27, 15.75, 23.48, 44.11, 62.39, 75.90],
+              backgroundColor: [
+                'rgba(20, 184, 166, 0.7)', // Merc
+                'rgba(249, 115, 22, 0.7)', // McL
+                'rgba(225, 6, 0, 0.7)',   // Ferrari
+                'rgba(20, 184, 166, 0.5)', // Merc (Russell)
+                'rgba(249, 115, 22, 0.5)', // McL (Norris)
+                'rgba(156, 163, 175, 0.7)', // Haas
+                'rgba(59, 130, 246, 0.7)',  // VCARB
+                'rgba(6, 0, 239, 0.7)'     // RB
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { grid: { color: gridColor }, ticks: { color: tickColor }, title: { display: true, text: 'Seconds', color: tickColor } },
+              y: { grid: { color: 'transparent' }, ticks: { color: tickColor } }
+            }
+          }
+        });
+      }
+    }
   </script>
 
   <!-- VIP Image Modal -->
