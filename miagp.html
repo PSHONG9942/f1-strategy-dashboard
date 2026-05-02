@@ -339,14 +339,7 @@
     <div id="phase-problem" class="phase-content">
       <section class="scroll-mt-40 py-20 relative bg-[#131822] border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="locked-view text-center">
-            <i class="fa-solid fa-lock text-4xl text-gray-600 mb-4"></i>
-            <h2 class="font-display text-3xl font-bold text-white mb-2 uppercase">The Problems</h2>
-            <p class="text-gray-400 mb-4">This section unlocks 8 hours after Friday FP1.</p>
-            <div id="countdown-problem" class="font-mono text-2xl text-blue-500">Initializing...</div>
-          </div>
-          
-          <div class="unlocked-view hidden">
+          <div class="unlocked-view">
             <div class="text-center mb-16 relative">
               <div class="absolute inset-0 bg-red-900/20 blur-[80px] rounded-full pointer-events-none"></div>
               <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase inline-block relative group">
@@ -439,6 +432,109 @@
                     </tr>
                   </tbody>
                 </table>
+              </div>
+            </section>
+
+            <!-- Miami Sprint Analysis -->
+            <section id="p2-sprint" class="scroll-mt-40 py-12 relative border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Sprint Validation</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">Miami Sprint Analysis</div>
+                </div>
+                <i class="fa-solid fa-flag-checkered text-3xl text-blue-500"></i>
+              </div>
+              
+              <!-- Championship & Weather/Thermal Cards -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="glass-panel p-6 rounded-2xl border-l-4 border-f1-red">
+                  <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Championship Top 5</h3>
+                  <table class="w-full text-left text-sm text-gray-300">
+                    <tbody class="divide-y divide-white/5">
+                      <tr class="hover:bg-white/5"><td class="py-2">1. Kimi Antonelli</td><td class="py-2 text-blue-400">Mercedes</td><td class="py-2 font-bold">72 pts</td></tr>
+                      <tr class="hover:bg-white/5"><td class="py-2">2. George Russell</td><td class="py-2 text-blue-400">Mercedes</td><td class="py-2 font-bold">63 pts</td></tr>
+                      <tr class="hover:bg-white/5"><td class="py-2">3. Charles Leclerc</td><td class="py-2 text-red-500">Ferrari</td><td class="py-2 font-bold">49 pts</td></tr>
+                      <tr class="hover:bg-white/5"><td class="py-2">4. Lewis Hamilton</td><td class="py-2 text-red-500">Ferrari</td><td class="py-2 font-bold">41 pts</td></tr>
+                      <tr class="hover:bg-white/5"><td class="py-2">5. Lando Norris</td><td class="py-2 text-orange-500">McLaren</td><td class="py-2 font-bold">25 pts</td></tr>
+                    </tbody>
+                  </table>
+                  <p class="text-xs text-gray-500 mt-2">McLaren (Piastri, 21), Haas (Bearman, 17), Alpine (Gasly, 15), Red Bull (Verstappen, 12), Racing Bulls (Lawson, 10).</p>
+                </div>
+                
+                <div class="glass-panel p-6 rounded-2xl border-l-4 border-orange-500">
+                  <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Thermal & Environmental Threat</h3>
+                  <div class="grid grid-cols-2 gap-4">
+                    <div>
+                      <div class="text-xs text-gray-400 uppercase tracking-widest">Peak Track Temp</div>
+                      <div class="font-display text-3xl font-bold text-f1-red">52.1°C</div>
+                      <div class="text-xs text-gray-500">High thermal degradation risk.</div>
+                    </div>
+                    <div>
+                      <div class="text-xs text-gray-400 uppercase tracking-widest">Tire Strategy</div>
+                      <div class="font-display text-3xl font-bold text-yellow-500">C4 Medium</div>
+                      <div class="text-xs text-gray-500">Soft C5 lacks thermal endurance.</div>
+                    </div>
+                    <div>
+                      <div class="text-xs text-gray-400 uppercase tracking-widest">Thunderstorm Risk</div>
+                      <div class="font-display text-3xl font-bold text-blue-400">57%</div>
+                      <div class="text-xs text-gray-500">Threatens Sunday's GP.</div>
+                    </div>
+                    <div>
+                      <div class="text-xs text-gray-400 uppercase tracking-widest">VSC Probability</div>
+                      <div class="font-display text-3xl font-bold text-purple-400">75%</div>
+                      <div class="text-xs text-gray-500">High race neutralization chance.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Charts: Sprint Quali & Speed Trap -->
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                <div class="glass-panel p-6 rounded-2xl border border-gray-800">
+                  <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Sprint Qualifying Gaps (SQ3)</h3>
+                  <p class="text-sm text-gray-400 mb-4">McLaren's high-downforce, short-gear ratio MCL40 excels in mechanical grip.</p>
+                  <div class="relative h-[250px] w-full">
+                    <canvas id="qualiGapsChart"></canvas>
+                  </div>
+                </div>
+                <div class="glass-panel p-6 rounded-2xl border border-gray-800">
+                  <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Speed Trap (T16-17 Straight)</h3>
+                  <p class="text-sm text-gray-400 mb-4">Ferrari's 'Macarena' active wing yields massive straight-line efficiency.</p>
+                  <div class="relative h-[250px] w-full">
+                    <canvas id="speedTrapChart"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Macarena Wing Infographic -->
+              <div class="glass-panel p-8 rounded-2xl border-t-2 border-emerald-500 mb-8">
+                <h3 class="font-display text-2xl font-bold text-white mb-6 uppercase text-center tracking-wider">The "Macarena" Active Rear Wing</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="bg-black/40 p-6 rounded-xl border border-red-500/30">
+                    <h4 class="font-bold text-white text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-horse text-f1-red"></i> Ferrari SF-26 (The Original)</h4>
+                    <ul class="text-sm text-gray-300 space-y-2">
+                      <li>• <strong>Mechanism:</strong> Dual actuators hidden within carbon endplates.</li>
+                      <li>• <strong>Rotation:</strong> Flips main flap by over <span class="text-f1-red font-bold">200 degrees</span>.</li>
+                      <li>• <strong>Aero Effect:</strong> Creates massive central hole, inverting profile to generate lift and drastically shed drag.</li>
+                      <li>• <strong>Delta:</strong> ~10 km/h terminal velocity increase.</li>
+                    </ul>
+                  </div>
+                  <div class="bg-black/40 p-6 rounded-xl border border-blue-500/30">
+                    <h4 class="font-bold text-white text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-bullhorn text-blue-500"></i> Red Bull RB22 (The Reaction)</h4>
+                    <ul class="text-sm text-gray-300 space-y-2">
+                      <li>• <strong>Mechanism:</strong> Central vertical actuator with straight extensions.</li>
+                      <li>• <strong>Rotation:</strong> Limited to <span class="text-blue-400 font-bold">110-120 degrees</span>. Flap is pushed backward and lifted above endplates.</li>
+                      <li>• <strong>Aero Effect:</strong> Mechanically simpler, but central actuator creates persistent airflow disruption (less efficient).</li>
+                      <li>• <strong>Objective:</strong> Brute-force compensation for lack of mechanical grip.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+                <button onclick="completePhase('problem')" class="px-8 py-4 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(225,6,0,0.35)]">
+                  <i class="fa-solid fa-flag-checkered mr-2"></i> Complete Phase 2: Unlock Solutions
+                </button>
               </div>
             </section>
           </div>
@@ -613,7 +709,7 @@
     // Weekend progression lock/unlock
     const PHASES = ['overview', 'problem', 'solution', 'endgame'];
     const STORAGE_KEY = 'mia26_weekend_progress_v1';
-    let unlockedIndex = Math.max(0, Math.min(3, Number(localStorage.getItem(STORAGE_KEY) ?? '0')));
+    let unlockedIndex = Math.max(1, Math.min(3, Number(localStorage.getItem(STORAGE_KEY) ?? '1')));
     let currentPhaseStatuses = {
       "problem": { "locked": true },
       "solution": { "locked": true },
@@ -658,7 +754,8 @@
       ],
       'problem': [
         { label: 'Superclipping', id: 'epoch' },
-        { label: 'Freight Crisis', id: 'logistics' }
+        { label: 'Freight Crisis', id: 'logistics' },
+        { label: 'Miami Sprint Analysis', id: 'sprint' }
       ],
       'solution': [
         { label: 'The Directives', id: 'solution' }
@@ -949,6 +1046,77 @@
                     scales: {
                         x: { grid: { color: gridColor } },
                         y: { grid: { color: 'transparent' } }
+                    }
+                }
+            });
+        }
+        
+        // Phase 2: Sprint Quali Gaps
+        const ctxQuali = document.getElementById('qualiGapsChart');
+        if(ctxQuali) {
+            new Chart(ctxQuali, {
+                type: 'bar',
+                data: {
+                    labels: ['NOR', 'ANT', 'PIA', 'LEC', 'VER', 'RUS', 'HAM', 'COL', 'HAD', 'GAS'],
+                    datasets: [{
+                        label: 'Gap to Leader (s)',
+                        data: [0.000, 0.222, 0.239, 0.370, 0.592, 0.624, 0.749, 1.451, 1.553, 1.605],
+                        backgroundColor: [
+                            'rgba(249, 115, 22, 0.8)', // NOR
+                            'rgba(59, 130, 246, 0.8)', // ANT
+                            'rgba(249, 115, 22, 0.8)', // PIA
+                            'rgba(239, 68, 68, 0.8)',  // LEC
+                            'rgba(30, 64, 175, 0.8)',  // VER
+                            'rgba(59, 130, 246, 0.8)', // RUS
+                            'rgba(239, 68, 68, 0.8)',  // HAM
+                            'rgba(236, 72, 153, 0.8)', // COL
+                            'rgba(30, 64, 175, 0.8)',  // HAD
+                            'rgba(236, 72, 153, 0.8)'  // GAS
+                        ],
+                        borderWidth: 1,
+                        borderColor: 'rgba(255, 255, 255, 0.1)'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { title: { display: true, text: 'Gap (Seconds)', color: tickColor }, grid: { color: gridColor }, min: 0 },
+                        y: { grid: { color: 'transparent' } }
+                    }
+                }
+            });
+        }
+
+        // Phase 2: Speed Trap
+        const ctxTrap = document.getElementById('speedTrapChart');
+        if(ctxTrap) {
+            new Chart(ctxTrap, {
+                type: 'bar',
+                data: {
+                    labels: ['LEC (FER)', 'HAM (FER)', 'VER (RBR)', 'PIA (MCL)'],
+                    datasets: [{
+                        label: 'Top Speed (km/h)',
+                        data: [343.5, 342.0, 340.0, 336.6],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(239, 68, 68, 0.8)',
+                            'rgba(30, 64, 175, 0.8)',
+                            'rgba(249, 115, 22, 0.8)'
+                        ],
+                        borderWidth: 1,
+                        borderColor: 'rgba(255, 255, 255, 0.1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { min: 330, max: 345, title: { display: true, text: 'Speed (km/h)', color: tickColor }, grid: { color: gridColor } },
+                        x: { grid: { color: 'transparent' } }
                     }
                 }
             });
