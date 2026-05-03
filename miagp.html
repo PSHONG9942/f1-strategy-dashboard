@@ -18,13 +18,25 @@
       color: #E2E8F0;
     }
 
-    h1, h2, h3, h4, .font-display {
+    h1,
+    h2,
+    h3,
+    h4,
+    .font-display {
       font-family: 'Rajdhani', sans-serif;
     }
 
-    .f1-red { color: #E10600; }
-    .bg-f1-red { background-color: #E10600; }
-    .border-f1-red { border-color: #E10600; }
+    .f1-red {
+      color: #E10600;
+    }
+
+    .bg-f1-red {
+      background-color: #E10600;
+    }
+
+    .border-f1-red {
+      border-color: #E10600;
+    }
 
     .glass-panel {
       background: rgba(30, 41, 59, 0.7);
@@ -46,21 +58,43 @@
       -webkit-text-fill-color: transparent;
     }
 
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: #0B0E14; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0B0E14;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b82f6;
+    }
 
     .phase-content {
       display: none;
       animation: fadeIn 0.5s ease-in-out;
     }
 
-    .phase-content.active { display: block; }
+    .phase-content.active {
+      display: block;
+    }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .timeline-btn.active {
@@ -82,12 +116,16 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-4">
-          <a href="index.html" class="text-gray-400 hover:text-white transition-colors flex items-center justify-center w-8 h-8 rounded-full bg-white/5 hover:bg-white/10" title="Back to Home">
+          <a href="index.html"
+            class="text-gray-400 hover:text-white transition-colors flex items-center justify-center w-8 h-8 rounded-full bg-white/5 hover:bg-white/10"
+            title="Back to Home">
             <i class="fa-solid fa-arrow-left"></i>
           </a>
           <div class="flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-            <img src="logo.png" alt="Speed Circuit Logo" class="h-8 w-auto object-contain drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
-            <span class="font-display font-bold text-xl tracking-wider text-white">MIA<span class="text-blue-500">'26</span> STRATEGY</span>
+            <img src="logo.png" alt="Speed Circuit Logo"
+              class="h-8 w-auto object-contain drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+            <span class="font-display font-bold text-xl tracking-wider text-white">MIA<span
+                class="text-blue-500">'26</span> STRATEGY</span>
           </div>
         </div>
         <div class="hidden md:block">
@@ -100,26 +138,34 @@
   </nav>
 
   <!-- Hero Section -->
-  <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center border-b border-blue-500/20 shadow-xl shadow-blue-500/5">
+  <header
+    class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center border-b border-blue-500/20 shadow-xl shadow-blue-500/5">
     <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Miami Night" class="w-full h-full object-cover opacity-20" />
+      <img
+        src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+        alt="Miami Night" class="w-full h-full object-cover opacity-20" />
       <div class="absolute inset-0 bg-gradient-to-t from-[#0B0E14] via-[#0B0E14]/80 to-transparent"></div>
       <div class="absolute inset-0 bg-gradient-to-r from-[#0B0E14] via-transparent to-[#0B0E14]"></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/20 mb-6 text-sm font-medium uppercase tracking-widest text-gray-300">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/20 mb-6 text-sm font-medium uppercase tracking-widest text-gray-300">
         <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
         Miami International Autodrome • 57 Laps • Sprint Weekend
       </div>
-      <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 uppercase inline-block relative group">
+      <h1
+        class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 uppercase inline-block relative group">
         The Miami <span class="text-blue-500 drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]">Reality Check</span>
       </h1>
       <p class="mt-4 max-w-3xl mx-auto text-xl text-gray-400 font-light leading-relaxed">
-        Following a volatile 35-day geopolitical hiatus, the FIA intervenes. Drastic mid-season regulatory shifts to energy recovery, superclipping, and active aerodynamics redefine the 2026 formula on the high-speed streets of Florida.
+        Following a volatile 35-day geopolitical hiatus, the FIA intervenes. Drastic mid-season regulatory shifts to
+        energy recovery, superclipping, and active aerodynamics redefine the 2026 formula on the high-speed streets of
+        Florida.
       </p>
       <div class="mt-10 flex justify-center gap-4">
-        <a href="#weekend-timeline" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(59,130,246,0.4)]">
+        <a href="#weekend-timeline"
+          class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(59,130,246,0.4)]">
           EXPLORE ANALYSIS
         </a>
       </div>
@@ -127,26 +173,36 @@
   </header>
 
   <!-- Dynamic Weekend Progression Navigator -->
-  <div id="weekend-timeline" class="sticky top-16 z-40 bg-[#0B0E14]/90 backdrop-blur-md border-y border-gray-800 py-4 shadow-xl">
+  <div id="weekend-timeline"
+    class="sticky top-16 z-40 bg-[#0B0E14]/90 backdrop-blur-md border-y border-gray-800 py-4 shadow-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="text-sm font-bold uppercase tracking-widest text-gray-400 w-full md:w-auto text-center md:text-left">
+        <div
+          class="text-sm font-bold uppercase tracking-widest text-gray-400 w-full md:w-auto text-center md:text-left">
           Weekend Progression
         </div>
         <div class="flex flex-wrap justify-center gap-2 w-full md:w-auto">
-          <button onclick="switchPhase('overview')" id="btn-overview" data-label="Overview" data-icon="fa-book-open" class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+          <button onclick="switchPhase('overview')" id="btn-overview" data-label="Overview" data-icon="fa-book-open"
+            class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
             <i class="fa-solid fa-book-open mr-2"></i> Overview
           </button>
-          <button onclick="switchPhase('problem')" id="btn-problem" data-label="The Problems" data-icon="fa-triangle-exclamation" class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+          <button onclick="switchPhase('problem')" id="btn-problem" data-label="The Problems"
+            data-icon="fa-triangle-exclamation"
+            class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
             <i class="fa-solid fa-triangle-exclamation mr-2"></i> The Problems
           </button>
-          <button onclick="switchPhase('solution')" id="btn-solution" data-label="The Solutions" data-icon="fa-lightbulb" class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+          <button onclick="switchPhase('solution')" id="btn-solution" data-label="The Solutions"
+            data-icon="fa-lightbulb"
+            class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
             <i class="fa-solid fa-lightbulb mr-2"></i> The Solutions
           </button>
-          <button onclick="switchPhase('endgame')" id="btn-endgame" data-label="The End Game" data-icon="fa-flag-checkered" class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
+          <button onclick="switchPhase('endgame')" id="btn-endgame" data-label="The End Game"
+            data-icon="fa-flag-checkered"
+            class="timeline-btn px-4 py-2 rounded border border-gray-700 text-gray-300 text-sm font-bold uppercase tracking-wider hover:bg-white/5 transition-all">
             <i class="fa-solid fa-flag-checkered mr-2"></i> The End Game
           </button>
-          <button onclick="resetProgress()" id="btn-reset" class="px-4 py-2 rounded border border-gray-800 text-gray-500 text-xs font-bold uppercase tracking-wider hover:bg-white/5 hover:text-gray-300 transition-all">
+          <button onclick="resetProgress()" id="btn-reset"
+            class="px-4 py-2 rounded border border-gray-800 text-gray-500 text-xs font-bold uppercase tracking-wider hover:bg-white/5 hover:text-gray-300 transition-all">
             Reset
           </button>
         </div>
@@ -164,10 +220,13 @@
           <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-10">
             <div class="max-w-3xl">
               <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase inline-block group">
-                The 2026 <span class="text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.3)]">Paradigm</span> Meets Miami
+                The 2026 <span class="text-blue-500 drop-shadow-[0_0_10px_rgba(59,130,246,0.3)]">Paradigm</span> Meets
+                Miami
               </h2>
               <p class="text-gray-400 text-lg leading-relaxed">
-                Following the geopolitical cancellation of Bahrain and Saudi Arabia, an involuntary 35-day hiatus has acted as a catalyst. Miami is now the ultimate stress test for the 2026 regulations, demanding a complex compromise between high-speed aerodynamic efficiency and low-speed mechanical traction.
+                Following the geopolitical cancellation of Bahrain and Saudi Arabia, an involuntary 35-day hiatus has
+                acted as a catalyst. Miami is now the ultimate stress test for the 2026 regulations, demanding a complex
+                compromise between high-speed aerodynamic efficiency and low-speed mechanical traction.
               </p>
             </div>
             <div class="glass-panel p-4 rounded-xl border border-white/10 flex items-center gap-3">
@@ -179,28 +238,35 @@
 
           <!-- Key stat cards -->
           <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12">
-            <div class="glass-panel p-6 rounded-xl border-l-4 border-blue-500 hover:bg-white/5 transition duration-300 relative overflow-hidden">
+            <div
+              class="glass-panel p-6 rounded-xl border-l-4 border-blue-500 hover:bg-white/5 transition duration-300 relative overflow-hidden">
               <i class="fa-solid fa-wind text-2xl text-blue-500 mb-4"></i>
               <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Downforce Cut</div>
-              <div class="font-display text-4xl font-bold text-white">15-30<span class="text-xl text-gray-500 ml-1">%</span></div>
+              <div class="font-display text-4xl font-bold text-white">15-30<span
+                  class="text-xl text-gray-500 ml-1">%</span></div>
               <div class="text-xs text-gray-400 mt-2">Reduction vs 2025 due to ground-effect tunnel removal.</div>
             </div>
             <div class="glass-panel p-6 rounded-xl border-l-4 border-f1-red hover:bg-white/5 transition duration-300">
               <i class="fa-solid fa-gauge-high text-2xl text-f1-red mb-4"></i>
               <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Top Speed Target</div>
-              <div class="font-display text-4xl font-bold text-white">~320<span class="text-xl text-gray-500 mx-1">km/h</span></div>
+              <div class="font-display text-4xl font-bold text-white">~320<span
+                  class="text-xl text-gray-500 mx-1">km/h</span></div>
               <div class="text-xs text-gray-400 mt-2">Achieved on the 1.2km back straight using X-Mode aero.</div>
             </div>
-            <div class="glass-panel p-6 rounded-xl border-l-4 border-purple-500 hover:bg-white/5 transition duration-300">
+            <div
+              class="glass-panel p-6 rounded-xl border-l-4 border-purple-500 hover:bg-white/5 transition duration-300">
               <i class="fa-solid fa-bolt-lightning text-2xl text-purple-500 mb-4"></i>
               <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Race Boost Cap</div>
-              <div class="font-display text-4xl font-bold text-white">+150<span class="text-xl text-gray-500 ml-1">kW</span></div>
+              <div class="font-display text-4xl font-bold text-white">+150<span
+                  class="text-xl text-gray-500 ml-1">kW</span></div>
               <div class="text-xs text-gray-400 mt-2">New regulation to prevent unpredictable closing speeds.</div>
             </div>
-            <div class="glass-panel p-6 rounded-xl border-l-4 border-emerald-500 hover:bg-white/5 transition duration-300">
+            <div
+              class="glass-panel p-6 rounded-xl border-l-4 border-emerald-500 hover:bg-white/5 transition duration-300">
               <i class="fa-solid fa-battery-three-quarters text-2xl text-emerald-500 mb-4"></i>
               <div class="text-sm text-gray-400 uppercase tracking-wider mb-1">Quali Harvest Max</div>
-              <div class="font-display text-4xl font-bold text-white">7<span class="text-xl text-gray-500 ml-1">MJ</span></div>
+              <div class="font-display text-4xl font-bold text-white">7<span
+                  class="text-xl text-gray-500 ml-1">MJ</span></div>
               <div class="text-xs text-gray-400 mt-2">Reduced from 8MJ to eliminate 'Lift and Coast' qualifying.</div>
             </div>
           </div>
@@ -208,25 +274,31 @@
           <section id="p1-track" class="scroll-mt-40">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
-                <h3 class="font-display text-2xl font-bold text-white mb-4 uppercase tracking-wider flex items-center gap-2">
+                <h3
+                  class="font-display text-2xl font-bold text-white mb-4 uppercase tracking-wider flex items-center gap-2">
                   Track Topology: The Miami Autodrome
                 </h3>
                 <p class="text-gray-400 leading-relaxed mb-6">
-                  Spanning 5.412 kilometers with 19 corners and three distinct DRS zones, Miami forces a brutal compromise. The 2026 cars are 30kg lighter and 100mm narrower, making them inherently more agile in tight sections but significantly more nervous and yaw-sensitive at high speeds.
+                  Spanning 5.412 kilometers with 19 corners and three distinct DRS zones, Miami forces a brutal
+                  compromise. The 2026 cars are 30kg lighter and 100mm narrower, making them inherently more agile in
+                  tight sections but significantly more nervous and yaw-sensitive at high speeds.
                 </p>
-                
+
                 <div class="space-y-4">
                   <div class="bg-white/5 p-4 rounded-xl border border-white/10 border-l-4 border-blue-500">
                     <h4 class="font-bold text-white">Sector 1 Sweeps</h4>
-                    <p class="text-sm text-gray-400">Reduced downforce means these are no longer flat-out. Drivers must feather the throttle and manipulate active aero on demand.</p>
+                    <p class="text-sm text-gray-400">Reduced downforce means these are no longer flat-out. Drivers must
+                      feather the throttle and manipulate active aero on demand.</p>
                   </div>
                   <div class="bg-white/5 p-4 rounded-xl border border-white/10 border-l-4 border-f1-red">
                     <h4 class="font-bold text-white">Turn 14-15 Chicane</h4>
-                    <p class="text-sm text-gray-400">Low-speed mechanical traction test beneath the Turnpike overpasses, leading directly to the longest straight.</p>
+                    <p class="text-sm text-gray-400">Low-speed mechanical traction test beneath the Turnpike overpasses,
+                      leading directly to the longest straight.</p>
                   </div>
                   <div class="bg-white/5 p-4 rounded-xl border border-white/10 border-l-4 border-emerald-500">
                     <h4 class="font-bold text-white">Turn 17 Braking Zone</h4>
-                    <p class="text-sm text-gray-400">The prime overtaking opportunity. With the new 7MJ harvest limit, drivers can brake as late as possible without lifting early.</p>
+                    <p class="text-sm text-gray-400">The prime overtaking opportunity. With the new 7MJ harvest limit,
+                      drivers can brake as late as possible without lifting early.</p>
                   </div>
                 </div>
               </div>
@@ -240,11 +312,13 @@
                     </div>
                   </div>
                   <p class="text-sm text-gray-400 mb-4">
-                    The FIA introduced spatial zoning. Exiting T15 onto the 1.2km straight, cars deploy full 350kW. Mid-straight, the ECU electronically throttles deployment to 250kW.
+                    The FIA introduced spatial zoning. Exiting T15 onto the 1.2km straight, cars deploy full 350kW.
+                    Mid-straight, the ECU electronically throttles deployment to 250kW.
                   </p>
                   <canvas id="mgukSpatialChart" height="200"></canvas>
                   <div class="mt-4 text-xs text-gray-500 bg-blue-900/20 p-2 rounded border border-blue-500/30">
-                    <span class="text-blue-400 font-bold">Engineering Challenge:</span> Blending ICE output to disguise the sudden 100kW electrical drop to prevent lift-off oversteer while X-Mode aero is active.
+                    <span class="text-blue-400 font-bold">Engineering Challenge:</span> Blending ICE output to disguise
+                    the sudden 100kW electrical drop to prevent lift-off oversteer while X-Mode aero is active.
                   </div>
                 </div>
               </div>
@@ -261,7 +335,8 @@
                   <i class="fa-solid fa-chart-area text-2xl text-f1-red"></i>
                 </div>
                 <p class="text-sm text-gray-400 mb-4">
-                  Velocity tracking across a single qualifying lap, highlighting the extreme delta between the slow-speed T14-15 chicane and the ~320km/h back straight.
+                  Velocity tracking across a single qualifying lap, highlighting the extreme delta between the
+                  slow-speed T14-15 chicane and the ~320km/h back straight.
                 </p>
                 <div class="relative h-[220px] w-full">
                   <canvas id="speedTraceChart"></canvas>
@@ -277,7 +352,8 @@
                   <i class="fa-solid fa-compress text-2xl text-blue-500"></i>
                 </div>
                 <p class="text-sm text-gray-400 mb-4">
-                  Comparing lateral G-forces between the high-downforce 2025 cars and the new reduced-downforce 2026 regulations through key corners.
+                  Comparing lateral G-forces between the high-downforce 2025 cars and the new reduced-downforce 2026
+                  regulations through key corners.
                 </p>
                 <div class="relative h-[220px] w-full">
                   <canvas id="gForceChart"></canvas>
@@ -286,46 +362,55 @@
             </div>
           </section>
 
-            <!-- Corner Struggles Telemetry -->
-            <section id="p1-corners" class="scroll-mt-40 py-12 relative border-t border-white/10">
-              <div class="flex items-center justify-between mb-8">
-                <div>
-                  <div class="text-xs tracking-widest uppercase text-gray-400">Telemetry Profile</div>
-                  <div class="font-display text-3xl font-bold text-white uppercase">T14 Chicane Struggles</div>
-                </div>
-                <i class="fa-solid fa-steering-wheel text-3xl text-orange-500"></i>
+          <!-- Corner Struggles Telemetry -->
+          <section id="p1-corners" class="scroll-mt-40 py-12 relative border-t border-white/10">
+            <div class="flex items-center justify-between mb-8">
+              <div>
+                <div class="text-xs tracking-widest uppercase text-gray-400">Telemetry Profile</div>
+                <div class="font-display text-3xl font-bold text-white uppercase">T14 Chicane Struggles</div>
               </div>
-              <p class="text-gray-300 mb-6">With reduced downforce and the massive 30kg weight reduction, mechanical grip through the tight Turn 14-15 chicane becomes hyper-sensitive. The telemetry reveals the delicate balance drivers must strike between throttle application and brake trailing. Applying throttle too early induces aggressive snap oversteer, forcing drivers into an immediate lift.</p>
-              
-              <div class="glass-panel p-8 rounded-2xl relative overflow-hidden border border-orange-500/30">
-                <div class="relative h-[300px] w-full">
-                  <canvas id="cornerStrugglesChart"></canvas>
-                </div>
-                <div class="mt-4 text-xs text-center text-gray-400">Throttle % vs Brake Pressure through T14-T15 transition. Note the aggressive throttle blip correction (snap oversteer moment).</div>
-              </div>
-            </section>
+              <i class="fa-solid fa-steering-wheel text-3xl text-orange-500"></i>
+            </div>
+            <p class="text-gray-300 mb-6">With reduced downforce and the massive 30kg weight reduction, mechanical grip
+              through the tight Turn 14-15 chicane becomes hyper-sensitive. The telemetry reveals the delicate balance
+              drivers must strike between throttle application and brake trailing. Applying throttle too early induces
+              aggressive snap oversteer, forcing drivers into an immediate lift.</p>
 
-            <!-- Race Strategy -->
-            <section id="p1-strategy" class="scroll-mt-40 py-12 relative border-t border-white/10 mb-12">
-              <div class="flex items-center justify-between mb-8">
-                <div>
-                  <div class="text-xs tracking-widest uppercase text-gray-400">Race Day Simulation</div>
-                  <div class="font-display text-3xl font-bold text-white uppercase">Pit Strategy & The Undercut</div>
-                </div>
-                <i class="fa-solid fa-stopwatch text-3xl text-emerald-500"></i>
+            <div class="glass-panel p-8 rounded-2xl relative overflow-hidden border border-orange-500/30">
+              <div class="relative h-[300px] w-full">
+                <canvas id="cornerStrugglesChart"></canvas>
               </div>
-              <p class="text-gray-300 mb-6">The extreme 48°C track temperatures and the high-speed nature of the Miami circuit dictate high thermal degradation. Teams face a brutal choice: a conservative 1-stop strategy (Medium to Hard) protecting track position, or an aggressive 2-stop strategy utilizing the Undercut advantage to leapfrog rivals struggling with rear-tyre thermal decay.</p>
-              
-              <div class="glass-panel p-8 rounded-2xl relative overflow-hidden border border-emerald-500/30">
-                <div class="relative h-[300px] w-full">
-                  <canvas id="strategyChart"></canvas>
-                </div>
-                <div class="mt-4 text-xs text-center text-gray-400">Projected race time delta over 57 laps. The aggressive 2-stop yields a 5.4s delta advantage if clear air is maintained.</div>
+              <div class="mt-4 text-xs text-center text-gray-400">Throttle % vs Brake Pressure through T14-T15
+                transition. Note the aggressive throttle blip correction (snap oversteer moment).</div>
+            </div>
+          </section>
+
+          <!-- Race Strategy -->
+          <section id="p1-strategy" class="scroll-mt-40 py-12 relative border-t border-white/10 mb-12">
+            <div class="flex items-center justify-between mb-8">
+              <div>
+                <div class="text-xs tracking-widest uppercase text-gray-400">Race Day Simulation</div>
+                <div class="font-display text-3xl font-bold text-white uppercase">Pit Strategy & The Undercut</div>
               </div>
-            </section>
+              <i class="fa-solid fa-stopwatch text-3xl text-emerald-500"></i>
+            </div>
+            <p class="text-gray-300 mb-6">The extreme 48°C track temperatures and the high-speed nature of the Miami
+              circuit dictate high thermal degradation. Teams face a brutal choice: a conservative 1-stop strategy
+              (Medium to Hard) protecting track position, or an aggressive 2-stop strategy utilizing the Undercut
+              advantage to leapfrog rivals struggling with rear-tyre thermal decay.</p>
+
+            <div class="glass-panel p-8 rounded-2xl relative overflow-hidden border border-emerald-500/30">
+              <div class="relative h-[300px] w-full">
+                <canvas id="strategyChart"></canvas>
+              </div>
+              <div class="mt-4 text-xs text-center text-gray-400">Projected race time delta over 57 laps. The aggressive
+                2-stop yields a 5.4s delta advantage if clear air is maintained.</div>
+            </div>
+          </section>
 
           <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-            <button onclick="completePhase('overview')" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(59,130,246,0.35)]">
+            <button onclick="completePhase('overview')"
+              class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(59,130,246,0.35)]">
               <i class="fa-solid fa-flag-checkered mr-2"></i> Complete Phase 1: Unlock Data
             </button>
           </div>
@@ -342,11 +427,13 @@
           <div class="unlocked-view">
             <div class="text-center mb-16 relative">
               <div class="absolute inset-0 bg-red-900/20 blur-[80px] rounded-full pointer-events-none"></div>
-              <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase inline-block relative group">
+              <h2
+                class="font-display text-4xl md:text-5xl font-bold text-white mb-4 uppercase inline-block relative group">
                 The Early-Season <span class="text-f1-red drop-shadow-[0_0_10px_rgba(225,6,0,0.6)]">Catastrophe</span>
               </h2>
               <p class="max-w-2xl mx-auto text-gray-300 font-medium tracking-wide">
-                Prior to Miami, the 2026 regulations were fundamentally failing in their execution, exposing drivers to immense cognitive load and catastrophic safety risks.
+                Prior to Miami, the 2026 regulations were fundamentally failing in their execution, exposing drivers to
+                immense cognitive load and catastrophic safety risks.
               </p>
             </div>
 
@@ -357,44 +444,56 @@
                   <div class="text-xs tracking-widest uppercase text-gray-400">Kinematic Chaos</div>
                   <div class="font-display text-3xl font-bold text-white uppercase">Superclipping & Lift-and-Coast</div>
                 </div>
-                <i class="fa-solid fa-triangle-exclamation text-3xl text-f1-red drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]"></i>
+                <i
+                  class="fa-solid fa-triangle-exclamation text-3xl text-f1-red drop-shadow-[0_0_8px_rgba(225,6,0,0.5)]"></i>
               </div>
-              
+
               <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                 <div class="glass-panel p-8 rounded-2xl border border-red-500/20">
                   <h3 class="font-display text-2xl font-bold text-white mb-4">The 8MJ Requirement Flaw</h3>
                   <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                    The 50/50 power split relies heavily on a 350kW MGU-K. Originally, a massive 8 Megajoule (MJ) per lap harvesting target forced drivers to perform extreme "lift and coast" maneuvers hundreds of meters before braking zones, completely compromising the nature of qualifying.
+                    The 50/50 power split relies heavily on a 350kW MGU-K. Originally, a massive 8 Megajoule (MJ) per
+                    lap harvesting target forced drivers to perform extreme "lift and coast" maneuvers hundreds of
+                    meters before braking zones, completely compromising the nature of qualifying.
                   </p>
                   <p class="text-gray-300 text-sm leading-relaxed mb-6">
-                    Worse, <span class="text-f1-red font-bold">"Superclipping"</span>—where the MGU-K harvests energy from the ICE while the driver is full throttle mid-straight—was originally capped at a slow 250kW harvest rate. This meant long, unpredictable deceleration zones.
+                    Worse, <span class="text-f1-red font-bold">"Superclipping"</span>—where the MGU-K harvests energy
+                    from the ICE while the driver is full throttle mid-straight—was originally capped at a slow 250kW
+                    harvest rate. This meant long, unpredictable deceleration zones.
                   </p>
-                  
+
                   <div class="bg-black/50 p-4 rounded-xl border border-f1-red">
-                    <h4 class="text-white font-bold mb-2"><i class="fa-solid fa-car-burst text-f1-red mr-2"></i> Suzuka Ramifications</h4>
-                    <p class="text-sm text-gray-400">Extreme speed differentials directly contributed to Oliver Bearman's heavy 50G impact with the barriers. Driver A deploying energy while Driver B was superclipping created massive, fatal closing speeds.</p>
+                    <h4 class="text-white font-bold mb-2"><i class="fa-solid fa-car-burst text-f1-red mr-2"></i> Suzuka
+                      Ramifications</h4>
+                    <p class="text-sm text-gray-400">Extreme speed differentials directly contributed to Oliver
+                      Bearman's heavy 50G impact with the barriers. Driver A deploying energy while Driver B was
+                      superclipping created massive, fatal closing speeds.</p>
                   </div>
                 </div>
 
                 <div class="glass-panel p-8 rounded-2xl border border-gray-800">
-                  <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Kinematic Speed Trace (Pre-Miami)</h3>
+                  <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Kinematic Speed Trace (Pre-Miami)
+                  </h3>
                   <canvas id="superclipChart" height="220"></canvas>
-                  <div class="mt-4 text-xs text-center text-gray-500">Sudden mid-straight velocity drop due to forced 250kW ICE harvesting.</div>
+                  <div class="mt-4 text-xs text-center text-gray-500">Sudden mid-straight velocity drop due to forced
+                    250kW ICE harvesting.</div>
                 </div>
               </div>
             </section>
 
             <!-- Logistical Crisis Table -->
             <section id="p2-logistics" class="scroll-mt-40 py-12 relative border-t border-white/10">
-               <div class="flex items-center justify-between mb-8">
+              <div class="flex items-center justify-between mb-8">
                 <div>
                   <div class="text-xs tracking-widest uppercase text-gray-400">Macroeconomic Disruption</div>
                   <div class="font-display text-3xl font-bold text-white uppercase">The Freight Extraction Crisis</div>
                 </div>
                 <i class="fa-solid fa-ship text-3xl text-gray-400"></i>
               </div>
-              <p class="text-gray-300 mb-6">The cancellation of Sakhir and Jeddah trapped team assets in the Middle East. Extracting telemetry and garage paneling amidst 18% drops in air freight capacity and $120/barrel oil prices severely impacted aerodynamic development budgets under the cost cap.</p>
-              
+              <p class="text-gray-300 mb-6">The cancellation of Sakhir and Jeddah trapped team assets in the Middle
+                East. Extracting telemetry and garage paneling amidst 18% drops in air freight capacity and $120/barrel
+                oil prices severely impacted aerodynamic development budgets under the cost cap.</p>
+
               <div class="overflow-x-auto glass-panel rounded-xl border border-white/10">
                 <table class="w-full text-left text-sm text-gray-300">
                   <thead class="bg-black/40 text-xs uppercase text-gray-400 font-bold">
@@ -444,25 +543,47 @@
                 </div>
                 <i class="fa-solid fa-flag-checkered text-3xl text-blue-500"></i>
               </div>
-              
+
               <!-- Championship & Weather/Thermal Cards -->
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div class="glass-panel p-6 rounded-2xl border-l-4 border-f1-red">
                   <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Championship Top 5</h3>
                   <table class="w-full text-left text-sm text-gray-300">
                     <tbody class="divide-y divide-white/5">
-                      <tr class="hover:bg-white/5"><td class="py-2">1. Kimi Antonelli</td><td class="py-2 text-blue-400">Mercedes</td><td class="py-2 font-bold">72 pts</td></tr>
-                      <tr class="hover:bg-white/5"><td class="py-2">2. George Russell</td><td class="py-2 text-blue-400">Mercedes</td><td class="py-2 font-bold">63 pts</td></tr>
-                      <tr class="hover:bg-white/5"><td class="py-2">3. Charles Leclerc</td><td class="py-2 text-red-500">Ferrari</td><td class="py-2 font-bold">49 pts</td></tr>
-                      <tr class="hover:bg-white/5"><td class="py-2">4. Lewis Hamilton</td><td class="py-2 text-red-500">Ferrari</td><td class="py-2 font-bold">41 pts</td></tr>
-                      <tr class="hover:bg-white/5"><td class="py-2">5. Lando Norris</td><td class="py-2 text-orange-500">McLaren</td><td class="py-2 font-bold">25 pts</td></tr>
+                      <tr class="hover:bg-white/5">
+                        <td class="py-2">1. Kimi Antonelli</td>
+                        <td class="py-2 text-blue-400">Mercedes</td>
+                        <td class="py-2 font-bold">72 pts</td>
+                      </tr>
+                      <tr class="hover:bg-white/5">
+                        <td class="py-2">2. George Russell</td>
+                        <td class="py-2 text-blue-400">Mercedes</td>
+                        <td class="py-2 font-bold">63 pts</td>
+                      </tr>
+                      <tr class="hover:bg-white/5">
+                        <td class="py-2">3. Charles Leclerc</td>
+                        <td class="py-2 text-red-500">Ferrari</td>
+                        <td class="py-2 font-bold">49 pts</td>
+                      </tr>
+                      <tr class="hover:bg-white/5">
+                        <td class="py-2">4. Lewis Hamilton</td>
+                        <td class="py-2 text-red-500">Ferrari</td>
+                        <td class="py-2 font-bold">41 pts</td>
+                      </tr>
+                      <tr class="hover:bg-white/5">
+                        <td class="py-2">5. Lando Norris</td>
+                        <td class="py-2 text-orange-500">McLaren</td>
+                        <td class="py-2 font-bold">25 pts</td>
+                      </tr>
                     </tbody>
                   </table>
-                  <p class="text-xs text-gray-500 mt-2">McLaren (Piastri, 21), Haas (Bearman, 17), Alpine (Gasly, 15), Red Bull (Verstappen, 12), Racing Bulls (Lawson, 10).</p>
+                  <p class="text-xs text-gray-500 mt-2">McLaren (Piastri, 21), Haas (Bearman, 17), Alpine (Gasly, 15),
+                    Red Bull (Verstappen, 12), Racing Bulls (Lawson, 10).</p>
                 </div>
-                
+
                 <div class="glass-panel p-6 rounded-2xl border-l-4 border-orange-500">
-                  <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Thermal & Environmental Threat</h3>
+                  <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Thermal & Environmental Threat
+                  </h3>
                   <div class="grid grid-cols-2 gap-4">
                     <div>
                       <div class="text-xs text-gray-400 uppercase tracking-widest">Peak Track Temp</div>
@@ -492,14 +613,16 @@
               <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
                 <div class="glass-panel p-6 rounded-2xl border border-gray-800">
                   <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Sprint Qualifying Gaps (SQ3)</h3>
-                  <p class="text-sm text-gray-400 mb-4">McLaren's high-downforce, short-gear ratio MCL40 excels in mechanical grip.</p>
+                  <p class="text-sm text-gray-400 mb-4">McLaren's high-downforce, short-gear ratio MCL40 excels in
+                    mechanical grip.</p>
                   <div class="relative h-[250px] w-full">
                     <canvas id="qualiGapsChart"></canvas>
                   </div>
                 </div>
                 <div class="glass-panel p-6 rounded-2xl border border-gray-800">
                   <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Speed Trap (T16-17 Straight)</h3>
-                  <p class="text-sm text-gray-400 mb-4">Ferrari's 'Macarena' active wing yields massive straight-line efficiency.</p>
+                  <p class="text-sm text-gray-400 mb-4">Ferrari's 'Macarena' active wing yields massive straight-line
+                    efficiency.</p>
                   <div class="relative h-[250px] w-full">
                     <canvas id="speedTrapChart"></canvas>
                   </div>
@@ -508,23 +631,30 @@
 
               <!-- Macarena Wing Infographic -->
               <div class="glass-panel p-8 rounded-2xl border-t-2 border-emerald-500 mb-8">
-                <h3 class="font-display text-2xl font-bold text-white mb-6 uppercase text-center tracking-wider">The "Macarena" Active Rear Wing</h3>
+                <h3 class="font-display text-2xl font-bold text-white mb-6 uppercase text-center tracking-wider">The
+                  "Macarena" Active Rear Wing</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div class="bg-black/40 p-6 rounded-xl border border-red-500/30">
-                    <h4 class="font-bold text-white text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-horse text-f1-red"></i> Ferrari SF-26 (The Original)</h4>
+                    <h4 class="font-bold text-white text-lg mb-2 flex items-center gap-2"><i
+                        class="fa-solid fa-horse text-f1-red"></i> Ferrari SF-26 (The Original)</h4>
                     <ul class="text-sm text-gray-300 space-y-2">
                       <li>• <strong>Mechanism:</strong> Dual actuators hidden within carbon endplates.</li>
-                      <li>• <strong>Rotation:</strong> Flips main flap by over <span class="text-f1-red font-bold">200 degrees</span>.</li>
-                      <li>• <strong>Aero Effect:</strong> Creates massive central hole, inverting profile to generate lift and drastically shed drag.</li>
+                      <li>• <strong>Rotation:</strong> Flips main flap by over <span class="text-f1-red font-bold">200
+                          degrees</span>.</li>
+                      <li>• <strong>Aero Effect:</strong> Creates massive central hole, inverting profile to generate
+                        lift and drastically shed drag.</li>
                       <li>• <strong>Delta:</strong> ~10 km/h terminal velocity increase.</li>
                     </ul>
                   </div>
                   <div class="bg-black/40 p-6 rounded-xl border border-blue-500/30">
-                    <h4 class="font-bold text-white text-lg mb-2 flex items-center gap-2"><i class="fa-solid fa-bullhorn text-blue-500"></i> Red Bull RB22 (The Reaction)</h4>
+                    <h4 class="font-bold text-white text-lg mb-2 flex items-center gap-2"><i
+                        class="fa-solid fa-bullhorn text-blue-500"></i> Red Bull RB22 (The Reaction)</h4>
                     <ul class="text-sm text-gray-300 space-y-2">
                       <li>• <strong>Mechanism:</strong> Central vertical actuator with straight extensions.</li>
-                      <li>• <strong>Rotation:</strong> Limited to <span class="text-blue-400 font-bold">110-120 degrees</span>. Flap is pushed backward and lifted above endplates.</li>
-                      <li>• <strong>Aero Effect:</strong> Mechanically simpler, but central actuator creates persistent airflow disruption (less efficient).</li>
+                      <li>• <strong>Rotation:</strong> Limited to <span class="text-blue-400 font-bold">110-120
+                          degrees</span>. Flap is pushed backward and lifted above endplates.</li>
+                      <li>• <strong>Aero Effect:</strong> Mechanically simpler, but central actuator creates persistent
+                        airflow disruption (less efficient).</li>
                       <li>• <strong>Objective:</strong> Brute-force compensation for lack of mechanical grip.</li>
                     </ul>
                   </div>
@@ -532,7 +662,8 @@
               </div>
 
               <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
-                <button onclick="completePhase('problem')" class="px-8 py-4 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(225,6,0,0.35)]">
+                <button onclick="completePhase('problem')"
+                  class="px-8 py-4 bg-f1-red hover:bg-red-700 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(225,6,0,0.35)]">
                   <i class="fa-solid fa-flag-checkered mr-2"></i> Complete Phase 2: Unlock Solutions
                 </button>
               </div>
@@ -548,35 +679,45 @@
     <div id="phase-solution" class="phase-content">
       <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative border-t border-white/10">
         <div class="locked-view text-center py-20">
-            <i class="fa-solid fa-lock text-4xl text-gray-600 mb-4"></i>
-            <h2 class="font-display text-3xl font-bold text-white mb-2 uppercase">The Solutions</h2>
-            <p class="text-gray-400 mb-4">This section unlocks 8 hours after Saturday Sprint Race.</p>
-            <div id="countdown-solution" class="font-mono text-2xl text-blue-500">Initializing...</div>
+          <i class="fa-solid fa-lock text-4xl text-gray-600 mb-4"></i>
+          <h2 class="font-display text-3xl font-bold text-white mb-2 uppercase">The Solutions</h2>
+          <p class="text-gray-400 mb-4">This section unlocks before the Sunday Main Race.</p>
+          <div id="countdown-solution" class="font-mono text-2xl text-emerald-500">Initializing...</div>
         </div>
 
         <div class="unlocked-view hidden">
           <div class="mb-16">
-            <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-4 uppercase border-l-8 border-emerald-500 pl-6 tracking-tighter">The Solutions</h2>
+            <h2
+              class="font-display text-4xl md:text-6xl font-bold text-white mb-4 uppercase border-l-8 border-emerald-500 pl-6 tracking-tighter">
+              The Solutions</h2>
             <p class="text-xl text-gray-400 max-w-3xl leading-relaxed">
-              On April 20, the FIA World Motor Sport Council executed a unanimous e-vote to bypass bureaucracy, implementing surgical technical directives designed to decouple driver cognitive load from battery software demands.
+              On April 20, the FIA World Motor Sport Council executed a unanimous e-vote to bypass bureaucracy,
+              implementing surgical technical directives designed to decouple driver cognitive load from battery
+              software demands.
             </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div class="glass-panel p-6 rounded-2xl border-t-4 border-emerald-500">
               <h4 class="font-bold text-white text-lg mb-2">Qualifying Revolution</h4>
-              <div class="text-4xl font-display font-bold text-emerald-400 mb-2">7.0 <span class="text-xl text-gray-500">MJ</span></div>
-              <p class="text-sm text-gray-400">Harvest ceiling reduced from 8MJ. Drivers demand 12.5% less recuperation, eliminating lift-and-coast and restoring flat-out limit driving into braking zones.</p>
+              <div class="text-4xl font-display font-bold text-emerald-400 mb-2">7.0 <span
+                  class="text-xl text-gray-500">MJ</span></div>
+              <p class="text-sm text-gray-400">Harvest ceiling reduced from 8MJ. Drivers demand 12.5% less recuperation,
+                eliminating lift-and-coast and restoring flat-out limit driving into braking zones.</p>
             </div>
             <div class="glass-panel p-6 rounded-2xl border-t-4 border-emerald-500">
               <h4 class="font-bold text-white text-lg mb-2">Faster Regeneration</h4>
-              <div class="text-4xl font-display font-bold text-emerald-400 mb-2">350 <span class="text-xl text-gray-500">kW</span></div>
-              <p class="text-sm text-gray-400">Peak superclip power increased from 250kW. The battery reaches state-of-charge drastically faster, reducing the drag duration to a mere 2-4 seconds per lap.</p>
+              <div class="text-4xl font-display font-bold text-emerald-400 mb-2">350 <span
+                  class="text-xl text-gray-500">kW</span></div>
+              <p class="text-sm text-gray-400">Peak superclip power increased from 250kW. The battery reaches
+                state-of-charge drastically faster, reducing the drag duration to a mere 2-4 seconds per lap.</p>
             </div>
             <div class="glass-panel p-6 rounded-2xl border-t-4 border-emerald-500">
               <h4 class="font-bold text-white text-lg mb-2">Safety Mechanisms</h4>
-              <div class="text-4xl font-display font-bold text-emerald-400 mb-2">Auto <span class="text-xl text-gray-500">MGU-K</span></div>
-              <p class="text-sm text-gray-400">Low power start detection system automatically triggers MGU-K bursts if a car bogs down off the grid, preventing catastrophic trailing impacts.</p>
+              <div class="text-4xl font-display font-bold text-emerald-400 mb-2">Auto <span
+                  class="text-xl text-gray-500">MGU-K</span></div>
+              <p class="text-sm text-gray-400">Low power start detection system automatically triggers MGU-K bursts if a
+                car bogs down off the grid, preventing catastrophic trailing impacts.</p>
             </div>
           </div>
 
@@ -586,24 +727,226 @@
               <h3 class="font-display text-2xl font-bold text-white uppercase">Operational Overhaul: Extended FP1</h3>
             </div>
             <p class="text-gray-300 leading-relaxed mb-4">
-              Because of the massive upgrade packages and new energy algorithms, the FIA exceptionally extended Free Practice 1 from 60 minutes to 90 minutes.
+              Because of the massive upgrade packages and new energy algorithms, the FIA exceptionally extended Free
+              Practice 1 from 60 minutes to 90 minutes.
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="bg-black/40 p-4 rounded border border-white/5">
                 <strong class="text-white block mb-1">First 45 Minutes</strong>
-                <span class="text-sm text-gray-400">Aero-rake data collection, flow-vis paint runs, and validation of newly delivered chassis upgrades.</span>
+                <span class="text-sm text-gray-400">Aero-rake data collection, flow-vis paint runs, and validation of
+                  newly delivered chassis upgrades.</span>
               </div>
               <div class="bg-black/40 p-4 rounded border border-white/5">
                 <strong class="text-white block mb-1">Final 45 Minutes</strong>
-                <span class="text-sm text-gray-400">Frantic race-simulation mapping to calibrate MGU-K spatial zones before Sprint Qualifying Parc Fermé locks setups permanently.</span>
+                <span class="text-sm text-gray-400">Frantic race-simulation mapping to calibrate MGU-K spatial zones
+                  before Sprint Qualifying Parc Fermé locks setups permanently.</span>
               </div>
             </div>
           </div>
-          
-          <div class="glass-panel p-8 rounded-2xl">
-              <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Parameter Shift Visualization</h3>
-              <canvas id="parameterShiftChart" height="150"></canvas>
+
+          <div class="glass-panel p-8 rounded-2xl mb-12">
+            <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Parameter Shift Visualization</h3>
+            <canvas id="parameterShiftChart" height="150"></canvas>
           </div>
+
+          <!-- Advanced Race Deployment Protocols -->
+          <section id="p3-deployment" class="scroll-mt-40 relative border-t border-white/10 pt-12">
+            <div class="flex items-center justify-between mb-8">
+              <div>
+                <div class="text-xs tracking-widest uppercase text-gray-400">Technical Directive Execution</div>
+                <div class="font-display text-3xl font-bold text-white uppercase">Advanced Race Deployment & Safety
+                </div>
+              </div>
+              <i class="fa-solid fa-shield-halved text-3xl text-blue-400"></i>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              <div class="glass-panel p-6 rounded-2xl border-t-4 border-blue-500">
+                <h4 class="font-bold text-white text-lg mb-2">Boost Deployment Cap</h4>
+                <div class="text-4xl font-display font-bold text-blue-400 mb-2">+150 <span
+                    class="text-xl text-gray-500">kW</span></div>
+                <p class="text-sm text-gray-400">Maximum boost power relative to current level. Drastically limits
+                  sudden performance differentials to prevent high-speed collisions.</p>
+              </div>
+              <div class="glass-panel p-6 rounded-2xl border-t-4 border-blue-500">
+                <h4 class="font-bold text-white text-lg mb-2">MGU-K Spatial Zoning</h4>
+                <div class="text-4xl font-display font-bold text-blue-400 mb-2">350/250 <span
+                    class="text-xl text-gray-500">kW</span></div>
+                <p class="text-sm text-gray-400">Full 350kW deployment restricted to critical acceleration zones.
+                  Electronically limited to 250kW in other sectors.</p>
+              </div>
+              <div class="glass-panel p-6 rounded-2xl border-t-4 border-blue-500">
+                <h4 class="font-bold text-white text-lg mb-2">Wet Weather Contingency</h4>
+                <div class="text-4xl font-display font-bold text-blue-400 mb-2"><i class="fa-solid fa-cloud-bolt"></i>
+                  <span class="text-xl text-gray-500">57%</span>
+                </div>
+                <p class="text-sm text-gray-400">Increased blanket temps for intermediates. ERS deployment automatically
+                  reduced in wet conditions to prevent aquaplaning.</p>
+              </div>
+            </div>
+
+            <div class="glass-panel p-8 rounded-2xl border border-gray-800">
+              <h3 class="font-display text-xl font-bold text-white mb-4 uppercase">Superclip Metamorphosis</h3>
+              <p class="text-sm text-gray-400 mb-4">Comparing the devastating 8MJ "lift-and-coast" harvesting against
+                the punchy 7MJ directive.</p>
+              <div class="relative h-[250px] w-full">
+                <canvas id="superclipMetamorphosisChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Main Race Qualifying & Expectations -->
+            <div id="p3-expectations" class="scroll-mt-40 pt-12 mt-12 border-t border-white/10">
+              <div class="flex items-center justify-between mb-8">
+                <div>
+                  <div class="text-xs tracking-widest uppercase text-gray-400">Main Race Forecast</div>
+                  <div class="font-display text-3xl font-bold text-white uppercase">Podium Expectations & Grid</div>
+                </div>
+                <i class="fa-solid fa-trophy text-3xl text-yellow-500"></i>
+              </div>
+
+              <!-- Podium Expectations -->
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
+                <div
+                  class="glass-panel p-6 rounded-2xl border-t-4 border-yellow-500 flex flex-col items-center text-center relative overflow-hidden group">
+                  <div class="absolute inset-0 bg-yellow-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                  </div>
+                  <div
+                    class="w-16 h-16 rounded-full bg-yellow-900/50 border-2 border-yellow-500 flex items-center justify-center text-2xl font-bold text-white mb-4 z-10 shadow-[0_0_15px_rgba(234,179,8,0.6)]">
+                    <i class="fa-solid fa-sun"></i>
+                  </div>
+                  <h4 class="font-display text-2xl font-bold text-white uppercase mb-1 z-10">Dry Weather</h4>
+                  <p class="text-yellow-500 font-bold mb-3 z-10 uppercase text-sm tracking-wider">The Favorites</p>
+                  <p class="text-sm text-gray-400 z-10">If dry, <span class="py-3 px-2 text-emerald-400">Kimi Antonelli
+                      (pole)</span> and <span class="py-3 px-2 text-blue-400">Max Verstappen (P2)</span> are heavy
+                    favorites. Antonelli has the fastest heavy-fuel pace, but Verstappen's top-speed advantage makes him
+                    a major overtaking threat. <span class="py-3 px-2 text-red-400">Charles Leclerc (P3)</span> is best
+                    positioned for the final spot using
+                    Ferrari's slow-corner grip.</p>
+                </div>
+
+                <div
+                  class="glass-panel p-6 rounded-2xl border-t-4 border-orange-500 flex flex-col items-center text-center relative overflow-hidden group">
+                  <div class="absolute inset-0 bg-orange-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                  </div>
+                  <div
+                    class="w-16 h-16 rounded-full bg-orange-900/50 border-2 border-orange-500 flex items-center justify-center text-2xl font-bold text-white mb-4 z-10 shadow-[0_0_15px_rgba(249,115,22,0.6)]">
+                    <i class="fa-solid fa-rocket"></i>
+                  </div>
+                  <h4 class="font-display text-2xl font-bold text-white uppercase mb-1 z-10">The Wildcard</h4>
+                  <p class="text-orange-500 font-bold mb-3 z-10 uppercase text-sm tracking-wider">Lando Norris</p>
+                  <p class="text-sm text-gray-400 z-10">Starting P4, Norris cannot be discounted. Having dominated the
+                    Sprint, the MCL40 is arguably the fastest car in cornering. If McLaren resolves their software
+                    glitches, Norris will be an immediate threat for the podium or even victory.</p>
+                </div>
+
+                <div
+                  class="glass-panel p-6 rounded-2xl border-t-4 border-blue-500 flex flex-col items-center text-center relative overflow-hidden group">
+                  <div class="absolute inset-0 bg-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                  </div>
+                  <div
+                    class="w-16 h-16 rounded-full bg-blue-900/50 border-2 border-blue-500 flex items-center justify-center text-2xl font-bold text-white mb-4 z-10 shadow-[0_0_15px_rgba(59,130,246,0.6)]">
+                    <i class="fa-solid fa-cloud-bolt"></i>
+                  </div>
+                  <h4 class="font-display text-2xl font-bold text-white uppercase mb-1 z-10">Wet Chaos</h4>
+                  <p class="text-blue-400 font-bold mb-3 z-10 uppercase text-sm tracking-wider">The Ultimate Variable
+                  </p>
+                  <p class="text-sm text-gray-400 z-10">With a 40% chance of rain, all dry-weather data becomes
+                    obsolete. The 350kW hybrid system makes wheelspin highly likely. The podium will be dictated by
+                    driver intuition and rapid setup adaptation under the new "Rain Hazard" regulations.</p>
+                </div>
+              </div>
+
+              <!-- Main Qualifying Grid -->
+              <div class="glass-panel p-6 rounded-2xl border border-gray-800">
+                <h3 class="font-display text-xl font-bold text-white mb-6 uppercase flex items-center gap-2">
+                  <i class="fa-solid fa-stopwatch text-f1-red"></i> Main Race Qualifying Results
+                </h3>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left text-sm">
+                    <thead>
+                      <tr class="text-gray-500 uppercase tracking-wider border-b border-white/10">
+                        <th class="pb-3 px-2 font-medium">Pos</th>
+                        <th class="pb-3 px-2 font-medium">Driver</th>
+                        <th class="pb-3 px-2 font-medium">Team</th>
+                        <th class="pb-3 px-2 font-medium">Gap To Pole</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-2 text-white font-bold">1</td>
+                        <td class="py-3 px-2 text-white font-bold">Kimi Antonelli</td>
+                        <td class="py-3 px-2 text-emerald-400">Mercedes</td>
+                        <td class="py-3 px-2 text-gray-400 font-mono">Pole</td>
+                      </tr>
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-2 text-white font-bold">2</td>
+                        <td class="py-3 px-2 text-white font-bold">Max Verstappen</td>
+                        <td class="py-3 px-2 text-blue-400">Red Bull Racing</td>
+                        <td class="py-3 px-2 text-gray-400 font-mono">+0.166s</td>
+                      </tr>
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-2 text-white font-bold">3</td>
+                        <td class="py-3 px-2 text-white font-bold">Charles Leclerc</td>
+                        <td class="py-3 px-2 text-red-500">Ferrari</td>
+                        <td class="py-3 px-2 text-gray-400 font-mono">+0.345s</td>
+                      </tr>
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-2 text-gray-300">4</td>
+                        <td class="py-3 px-2 text-gray-300">Lando Norris</td>
+                        <td class="py-3 px-2 text-orange-500">McLaren</td>
+                        <td class="py-3 px-2 text-gray-400 font-mono">+0.385s</td>
+                      </tr>
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-2 text-gray-300">5</td>
+                        <td class="py-3 px-2 text-gray-300">George Russell</td>
+                        <td class="py-3 px-2 text-emerald-400">Mercedes</td>
+                        <td class="py-3 px-2 text-gray-400 font-mono">+0.399s</td>
+                      </tr>
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-2 text-gray-300">6</td>
+                        <td class="py-3 px-2 text-gray-300">Lewis Hamilton</td>
+                        <td class="py-3 px-2 text-red-500">Ferrari</td>
+                        <td class="py-3 px-2 text-gray-400 font-mono">+0.521s</td>
+                      </tr>
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-2 text-gray-300">7</td>
+                        <td class="py-3 px-2 text-gray-300">Oscar Piastri</td>
+                        <td class="py-3 px-2 text-orange-500">McLaren</td>
+                        <td class="py-3 px-2 text-gray-400 font-mono">+0.702s</td>
+                      </tr>
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-2 text-gray-300">8</td>
+                        <td class="py-3 px-2 text-gray-300">Franco Colapinto</td>
+                        <td class="py-3 px-2 text-pink-400">Alpine</td>
+                        <td class="py-3 px-2 text-gray-400 font-mono">+0.964s</td>
+                      </tr>
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-2 text-gray-300">9</td>
+                        <td class="py-3 px-2 text-gray-300">Isack Hadjar</td>
+                        <td class="py-3 px-2 text-blue-400">Red Bull Racing</td>
+                        <td class="py-3 px-2 text-gray-400 font-mono">+0.991s</td>
+                      </tr>
+                      <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 px-2 text-gray-300">10</td>
+                        <td class="py-3 px-2 text-gray-300">Pierre Gasly</td>
+                        <td class="py-3 px-2 text-pink-400">Alpine</td>
+                        <td class="py-3 px-2 text-gray-400 font-mono">+1.012s</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p class="text-xs text-gray-500 mt-3 italic">* Note: Grid reflects standard qualifying
+                    classifications, accounting for the massive Alpine midfield surge.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
+              <button onclick="completePhase('solution')"
+                class="px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-display font-bold text-lg tracking-wider transition-all transform hover:-translate-y-1 shadow-[0_0_20px_rgba(16,185,129,0.35)]">
+                <i class="fa-solid fa-flag-checkered mr-2"></i> Complete Phase 3: Unlock The End Game
+              </button>
+            </div>
+          </section>
         </div>
       </section>
     </div>
@@ -614,61 +957,82 @@
     <div id="phase-endgame" class="phase-content">
       <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative border-t border-white/10">
         <div class="locked-view text-center py-20">
-            <i class="fa-solid fa-lock text-4xl text-gray-600 mb-4"></i>
-            <h2 class="font-display text-3xl font-bold text-white mb-2 uppercase">The End Game</h2>
-            <p class="text-gray-400 mb-4">This section unlocks 8 hours after Sunday Main Race.</p>
-            <div id="countdown-endgame" class="font-mono text-2xl text-blue-500">Initializing...</div>
+          <i class="fa-solid fa-lock text-4xl text-gray-600 mb-4"></i>
+          <h2 class="font-display text-3xl font-bold text-white mb-2 uppercase">The End Game</h2>
+          <p class="text-gray-400 mb-4">This section unlocks 8 hours after Sunday Main Race.</p>
+          <div id="countdown-endgame" class="font-mono text-2xl text-blue-500">Initializing...</div>
         </div>
 
         <div class="unlocked-view hidden">
-            <div class="mb-12 border-l-4 border-f1-red pl-4">
-                <h3 class="font-display text-4xl font-bold tracking-tight text-white uppercase">The Miami Litmus Test</h3>
-                <p class="mt-2 text-md text-gray-400">Paddock dynamics, technological gambles, and the future trajectory of the 2026 formula.</p>
+          <div class="mb-12 border-l-4 border-f1-red pl-4">
+            <h3 class="font-display text-4xl font-bold tracking-tight text-white uppercase">The Miami Litmus Test</h3>
+            <p class="mt-2 text-md text-gray-400">Paddock dynamics, technological gambles, and the future trajectory of
+              the 2026 formula.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="space-y-6">
+              <div class="glass-panel p-6 rounded-2xl border-t-2 border-f1-red">
+                <h4 class="font-bold text-white text-xl mb-2 flex items-center gap-2"><img src="logo.png"
+                    class="h-4 opacity-50 grayscale" /> Challenger Upgrades</h4>
+                <p class="text-sm text-gray-300 mb-4">While Mercedes and Kimi Antonelli dominated early rounds, the
+                  35-day break allowed rivals to rethink.</p>
+                <ul class="space-y-3 text-sm">
+                  <li class="p-3 bg-black/40 rounded border border-white/5"><strong
+                      class="text-f1-red">Ferrari:</strong> Arrives with a "package and a half" to address high-speed
+                    drag inefficiencies. The 350kW superclip directive directly masks their early-season engine derating
+                    deficit.</li>
+                  <li class="p-3 bg-black/40 rounded border border-white/5"><strong
+                      class="text-orange-500">McLaren:</strong> Debuting a completely revamped B-spec chassis after
+                    simulator correlations revealed their initial aero concept was fatally flawed under the new energy
+                    parameters.</li>
+                </ul>
+              </div>
+
+              <div class="glass-panel p-6 rounded-2xl">
+                <h4 class="font-bold text-white text-xl mb-2">Driver Psychology</h4>
+                <p class="text-sm text-gray-300 mb-4"><strong>Max Verstappen</strong> threatened early retirement over
+                  the 50/50 power split, calling it "Formula E on steroids."</p>
+                <p class="text-sm text-gray-300">Conversely, <strong>Lando Norris</strong> notes the FIA's rapid
+                  intervention proves the sport is listening, hoping the new 7MJ rules will restore natural racecraft
+                  and keep the four-time champion engaged.</p>
+              </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                <div class="space-y-6">
-                    <div class="glass-panel p-6 rounded-2xl border-t-2 border-f1-red">
-                        <h4 class="font-bold text-white text-xl mb-2 flex items-center gap-2"><img src="logo.png" class="h-4 opacity-50 grayscale"/> Challenger Upgrades</h4>
-                        <p class="text-sm text-gray-300 mb-4">While Mercedes and Kimi Antonelli dominated early rounds, the 35-day break allowed rivals to rethink.</p>
-                        <ul class="space-y-3 text-sm">
-                            <li class="p-3 bg-black/40 rounded border border-white/5"><strong class="text-f1-red">Ferrari:</strong> Arrives with a "package and a half" to address high-speed drag inefficiencies. The 350kW superclip directive directly masks their early-season engine derating deficit.</li>
-                            <li class="p-3 bg-black/40 rounded border border-white/5"><strong class="text-orange-500">McLaren:</strong> Debuting a completely revamped B-spec chassis after simulator correlations revealed their initial aero concept was fatally flawed under the new energy parameters.</li>
-                        </ul>
-                    </div>
-
-                    <div class="glass-panel p-6 rounded-2xl">
-                        <h4 class="font-bold text-white text-xl mb-2">Driver Psychology</h4>
-                        <p class="text-sm text-gray-300 mb-4"><strong>Max Verstappen</strong> threatened early retirement over the 50/50 power split, calling it "Formula E on steroids."</p>
-                        <p class="text-sm text-gray-300">Conversely, <strong>Lando Norris</strong> notes the FIA's rapid intervention proves the sport is listening, hoping the new 7MJ rules will restore natural racecraft and keep the four-time champion engaged.</p>
-                    </div>
-                </div>
-
-                <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between bg-[url('https://images.unsplash.com/photo-1574621100236-d26bea0ec353?auto=format&fit=crop&q=80')] bg-cover bg-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gray-900/90 backdrop-blur-sm"></div>
-                    <div class="relative z-10">
-                        <h4 class="font-display text-3xl font-bold text-white uppercase tracking-wider mb-4 border-b border-white/20 pb-2">Cultural & Commercial Footprint</h4>
-                        <p class="text-gray-300 leading-relaxed mb-6">
-                            South Florida Motorsports expanded infrastructure for over 275,000 fans. The venue boasts the MSC Marina Zone and Hard Rock Beach Club featuring global artists (Ed Sheeran, Steve Aoki).
-                        </p>
-                        <div class="bg-emerald-900/40 border border-emerald-500/50 p-4 rounded-xl">
-                            <h5 class="text-emerald-400 font-bold uppercase text-sm tracking-widest mb-1">FIA Three-Star Accreditation</h5>
-                            <p class="text-xs text-gray-300">The event strictly aligns with Formula 1's 2026 technical regulations mandating zero fossil carbon burn, leveraging advanced sustainable fuels across the paddock.</p>
-                        </div>
-                        <div class="mt-6 p-4 border border-white/20 rounded-xl bg-black/50">
-                            <h5 class="text-white font-bold uppercase text-sm tracking-widest mb-2">Security Protocols</h5>
-                            <p class="text-xs text-gray-400">Strict clear-bag policies, X-ray screening, and an anonymous text-reporting system for unruly behavior ensure safety amid geopolitical tensions.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-10 p-8 glass-panel rounded-2xl border border-blue-500/30">
-                <h3 class="font-display text-2xl text-white uppercase font-bold mb-4">The Verdict</h3>
-                <p class="text-gray-400 max-w-3xl mx-auto">
-                    If the racing proves spectacular and safe, the FIA's unprecedented intervention will be validated. If complex energy management issues persist, closing speeds remain erratic, and drivers remain restricted by the hybrid system, the entire 2026 framework may face calls for total abandonment.
+            <div
+              class="glass-panel p-8 rounded-2xl flex flex-col justify-between bg-[url('https://images.unsplash.com/photo-1574621100236-d26bea0ec353?auto=format&fit=crop&q=80')] bg-cover bg-center relative overflow-hidden">
+              <div class="absolute inset-0 bg-gray-900/90 backdrop-blur-sm"></div>
+              <div class="relative z-10">
+                <h4
+                  class="font-display text-3xl font-bold text-white uppercase tracking-wider mb-4 border-b border-white/20 pb-2">
+                  Cultural & Commercial Footprint</h4>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                  South Florida Motorsports expanded infrastructure for over 275,000 fans. The venue boasts the MSC
+                  Marina Zone and Hard Rock Beach Club featuring global artists (Ed Sheeran, Steve Aoki).
                 </p>
+                <div class="bg-emerald-900/40 border border-emerald-500/50 p-4 rounded-xl">
+                  <h5 class="text-emerald-400 font-bold uppercase text-sm tracking-widest mb-1">FIA Three-Star
+                    Accreditation</h5>
+                  <p class="text-xs text-gray-300">The event strictly aligns with Formula 1's 2026 technical regulations
+                    mandating zero fossil carbon burn, leveraging advanced sustainable fuels across the paddock.</p>
+                </div>
+                <div class="mt-6 p-4 border border-white/20 rounded-xl bg-black/50">
+                  <h5 class="text-white font-bold uppercase text-sm tracking-widest mb-2">Security Protocols</h5>
+                  <p class="text-xs text-gray-400">Strict clear-bag policies, X-ray screening, and an anonymous
+                    text-reporting system for unruly behavior ensure safety amid geopolitical tensions.</p>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div class="text-center mt-10 p-8 glass-panel rounded-2xl border border-blue-500/30">
+            <h3 class="font-display text-2xl text-white uppercase font-bold mb-4">The Verdict</h3>
+            <p class="text-gray-400 max-w-3xl mx-auto">
+              If the racing proves spectacular and safe, the FIA's unprecedented intervention will be validated. If
+              complex energy management issues persist, closing speeds remain erratic, and drivers remain restricted by
+              the hybrid system, the entire 2026 framework may face calls for total abandonment.
+            </p>
+          </div>
         </div>
       </section>
     </div>
@@ -677,7 +1041,8 @@
   <footer class="bg-[#05070a] py-12 border-t border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
       <div class="flex items-center gap-2 mb-6">
-        <img src="logo.png" alt="Speed Circuit Logo" class="h-6 w-auto object-contain drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+        <img src="logo.png" alt="Speed Circuit Logo"
+          class="h-6 w-auto object-contain drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
         <span class="font-display font-bold text-lg tracking-wider text-white">F1 STRATEGY HUB '26</span>
       </div>
       <p class="text-gray-500 text-sm text-center max-w-2xl">
@@ -685,7 +1050,9 @@
         electrical energy states, and dynamic aerodynamic profiles at 340 km/h.
       </p>
       <div class="mt-4 text-gray-400 text-sm text-center">
-        Got feedback or suggestions? <a href="mailto:pangsh0402@proton.me" class="text-f1-red hover:text-white transition-colors border-b border-f1-red hover:border-white pb-0.5">Contact me at pangsh0402@proton.me</a>
+        Got feedback or suggestions? <a href="mailto:pangsh0402@proton.me"
+          class="text-f1-red hover:text-white transition-colors border-b border-f1-red hover:border-white pb-0.5">Contact
+          me at pangsh0402@proton.me</a>
       </div>
       <div class="mt-8 text-xs text-gray-600">
         Data synthesized from FIA 2026 Regulations, Miami Logistics Protocols, and official technical directives.
@@ -722,17 +1089,17 @@
       PHASES.forEach((p, i) => {
         const btn = document.getElementById(`btn-${p}`);
         const panel = document.getElementById(`phase-${p}`);
-        
+
         btn.disabled = false;
         btn.classList.toggle('active', p === activePhase);
         if (panel) panel.classList.toggle('active', p === activePhase);
 
         const label = btn.getAttribute('data-label') || p;
         const baseIcon = btn.getAttribute('data-icon') || 'fa-circle';
-        
+
         // Wait for checkPhaseStatuses to handle lock icon overrides
-        if(!btn.innerHTML.includes('fa-lock')) {
-             btn.innerHTML = `<i class="fa-solid ${baseIcon} mr-2"></i> ${label}`;
+        if (!btn.innerHTML.includes('fa-lock')) {
+          btn.innerHTML = `<i class="fa-solid ${baseIcon} mr-2"></i> ${label}`;
         }
       });
     }
@@ -758,7 +1125,9 @@
         { label: 'Miami Sprint Analysis', id: 'sprint' }
       ],
       'solution': [
-        { label: 'The Directives', id: 'solution' }
+        { label: 'The Directives', id: 'solution' },
+        { label: 'Deployment & Safety', id: 'deployment' },
+        { label: 'Main Race Forecast', id: 'expectations' }
       ],
       'endgame': [
         { label: 'The Litmus Test', id: 'endgame' }
@@ -804,7 +1173,7 @@
 
       const phasePrefix = activePhaseStr === 'overview' ? 'p1' :
         activePhaseStr === 'problem' ? 'p2' :
-        activePhaseStr === 'solution' ? 'p3' : 'p4';
+          activePhaseStr === 'solution' ? 'p3' : 'p4';
 
       const targetId = `${phasePrefix}-${sectionSuffix}`;
       const targetEl = document.getElementById(targetId) || document.getElementById(`phase-${activePhaseStr}`);
@@ -818,319 +1187,358 @@
     Chart.defaults.font.family = 'Inter, ui-sans-serif, system-ui';
 
     function initCharts() {
-        // Phase 1: MGU-K Spatial Zones
-        const ctxSpatial = document.getElementById('mgukSpatialChart');
-        if(ctxSpatial) {
-            new Chart(ctxSpatial, {
-                type: 'line',
-                data: {
-                    labels: ['T15 Exit', 'Early Straight', 'Mid Straight', 'Late Straight', 'T17 Braking'],
-                    datasets: [{
-                        label: 'MGU-K Deployment (kW)',
-                        data: [350, 350, 250, 250, 0],
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                        borderWidth: 3,
-                        tension: 0.1,
-                        fill: true,
-                        stepped: 'middle'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { min: 0, max: 400, title: { display: true, text: 'Power (kW)', color: tickColor }, grid: { color: gridColor } },
-                        x: { grid: { color: 'transparent' } }
-                    }
-                }
-            });
-        }
+      // Phase 1: MGU-K Spatial Zones
+      const ctxSpatial = document.getElementById('mgukSpatialChart');
+      if (ctxSpatial) {
+        new Chart(ctxSpatial, {
+          type: 'line',
+          data: {
+            labels: ['T15 Exit', 'Early Straight', 'Mid Straight', 'Late Straight', 'T17 Braking'],
+            datasets: [{
+              label: 'MGU-K Deployment (kW)',
+              data: [350, 350, 250, 250, 0],
+              borderColor: '#3b82f6',
+              backgroundColor: 'rgba(59, 130, 246, 0.2)',
+              borderWidth: 3,
+              tension: 0.1,
+              fill: true,
+              stepped: 'middle'
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { min: 0, max: 400, title: { display: true, text: 'Power (kW)', color: tickColor }, grid: { color: gridColor } },
+              x: { grid: { color: 'transparent' } }
+            }
+          }
+        });
+      }
 
-        // Phase 1: Speed Trace
-        const ctxSpeed = document.getElementById('speedTraceChart');
-        if(ctxSpeed) {
-            new Chart(ctxSpeed, {
-                type: 'line',
-                data: {
-                    labels: ['Start', 'T1-3', 'T4-8 Sweeps', 'T11', 'T14 Chicane', '1.2km Straight', 'T17 Braking', 'T18-19'],
-                    datasets: [{
-                        label: 'Velocity (km/h)',
-                        data: [280, 110, 260, 130, 75, 320, 85, 220],
-                        borderColor: '#ef4444',
-                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                        borderWidth: 2,
-                        tension: 0.4,
-                        fill: true,
-                        pointBackgroundColor: '#ef4444',
-                        pointRadius: 4,
-                        pointHoverRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } },
-                    scales: {
-                        y: { min: 0, max: 350, title: { display: true, text: 'Speed (km/h)', color: tickColor }, grid: { color: gridColor } },
-                        x: { grid: { color: 'transparent' }, ticks: { maxRotation: 45, minRotation: 45 } }
-                    }
-                }
-            });
-        }
+      // Phase 1: Speed Trace
+      const ctxSpeed = document.getElementById('speedTraceChart');
+      if (ctxSpeed) {
+        new Chart(ctxSpeed, {
+          type: 'line',
+          data: {
+            labels: ['Start', 'T1-3', 'T4-8 Sweeps', 'T11', 'T14 Chicane', '1.2km Straight', 'T17 Braking', 'T18-19'],
+            datasets: [{
+              label: 'Velocity (km/h)',
+              data: [280, 110, 260, 130, 75, 320, 85, 220],
+              borderColor: '#ef4444',
+              backgroundColor: 'rgba(239, 68, 68, 0.1)',
+              borderWidth: 2,
+              tension: 0.4,
+              fill: true,
+              pointBackgroundColor: '#ef4444',
+              pointRadius: 4,
+              pointHoverRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } },
+            scales: {
+              y: { min: 0, max: 350, title: { display: true, text: 'Speed (km/h)', color: tickColor }, grid: { color: gridColor } },
+              x: { grid: { color: 'transparent' }, ticks: { maxRotation: 45, minRotation: 45 } }
+            }
+          }
+        });
+      }
 
-        // Phase 1: G-Force Comparison
-        const ctxGForce = document.getElementById('gForceChart');
-        if(ctxGForce) {
-            new Chart(ctxGForce, {
-                type: 'radar',
-                data: {
-                    labels: ['T1 (Slow)', 'T4 (Sweep)', 'T7 (High-Speed)', 'T11 (Mid)', 'T14 (Chicane)', 'T17 (Braking)'],
-                    datasets: [
-                        {
-                            label: '2025 Generation (High DF)',
-                            data: [2.1, 4.5, 5.2, 3.1, 1.8, 5.5],
-                            borderColor: '#94a3b8',
-                            backgroundColor: 'rgba(148, 163, 184, 0.2)',
-                            borderDash: [5, 5],
-                            borderWidth: 2,
-                            pointRadius: 0
-                        },
-                        {
-                            label: '2026 Generation (Low DF)',
-                            data: [2.0, 3.8, 4.2, 2.7, 1.7, 5.5],
-                            borderColor: '#3b82f6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.4)',
-                            borderWidth: 3,
-                            pointBackgroundColor: '#3b82f6',
-                            pointRadius: 4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'bottom', labels: { color: tickColor } } },
-                    scales: {
-                        r: {
-                            angleLines: { color: gridColor },
-                            grid: { color: gridColor },
-                            pointLabels: { color: tickColor, font: { size: 11, family: 'Inter' } },
-                            ticks: { display: false, min: 0, max: 6 }
-                        }
-                    }
-                }
-            });
-        }
+      // Phase 1: G-Force Comparison
+      const ctxGForce = document.getElementById('gForceChart');
+      if (ctxGForce) {
+        new Chart(ctxGForce, {
+          type: 'radar',
+          data: {
+            labels: ['T1 (Slow)', 'T4 (Sweep)', 'T7 (High-Speed)', 'T11 (Mid)', 'T14 (Chicane)', 'T17 (Braking)'],
+            datasets: [
+              {
+                label: '2025 Generation (High DF)',
+                data: [2.1, 4.5, 5.2, 3.1, 1.8, 5.5],
+                borderColor: '#94a3b8',
+                backgroundColor: 'rgba(148, 163, 184, 0.2)',
+                borderDash: [5, 5],
+                borderWidth: 2,
+                pointRadius: 0
+              },
+              {
+                label: '2026 Generation (Low DF)',
+                data: [2.0, 3.8, 4.2, 2.7, 1.7, 5.5],
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.4)',
+                borderWidth: 3,
+                pointBackgroundColor: '#3b82f6',
+                pointRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom', labels: { color: tickColor } } },
+            scales: {
+              r: {
+                angleLines: { color: gridColor },
+                grid: { color: gridColor },
+                pointLabels: { color: tickColor, font: { size: 11, family: 'Inter' } },
+                ticks: { display: false, min: 0, max: 6 }
+              }
+            }
+          }
+        });
+      }
 
-        // Phase 2: Corner Struggles
-        const ctxCorner = document.getElementById('cornerStrugglesChart');
-        if(ctxCorner) {
-            new Chart(ctxCorner, {
-                type: 'line',
-                data: {
-                    labels: ['Entry (100m)', 'Turn 14 Apex', 'Transition', 'Turn 15 Apex', 'Exit Phase', 'Full Throttle'],
-                    datasets: [
-                        {
-                            label: 'Throttle (%)',
-                            data: [0, 10, 45, 20, 85, 100],
-                            borderColor: '#10b981',
-                            borderWidth: 3,
-                            tension: 0.3,
-                            pointBackgroundColor: '#10b981'
-                        },
-                        {
-                            label: 'Brake Pressure (bar)',
-                            data: [120, 40, 0, 15, 0, 0],
-                            borderColor: '#ef4444',
-                            borderWidth: 3,
-                            tension: 0.3,
-                            pointBackgroundColor: '#ef4444'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'top', labels: { color: tickColor } } },
-                    scales: {
-                        y: { title: { display: true, text: 'Input Value', color: tickColor }, grid: { color: gridColor }, min: 0 },
-                        x: { grid: { color: 'transparent' } }
-                    }
-                }
-            });
-        }
+      // Phase 2: Corner Struggles
+      const ctxCorner = document.getElementById('cornerStrugglesChart');
+      if (ctxCorner) {
+        new Chart(ctxCorner, {
+          type: 'line',
+          data: {
+            labels: ['Entry (100m)', 'Turn 14 Apex', 'Transition', 'Turn 15 Apex', 'Exit Phase', 'Full Throttle'],
+            datasets: [
+              {
+                label: 'Throttle (%)',
+                data: [0, 10, 45, 20, 85, 100],
+                borderColor: '#10b981',
+                borderWidth: 3,
+                tension: 0.3,
+                pointBackgroundColor: '#10b981'
+              },
+              {
+                label: 'Brake Pressure (bar)',
+                data: [120, 40, 0, 15, 0, 0],
+                borderColor: '#ef4444',
+                borderWidth: 3,
+                tension: 0.3,
+                pointBackgroundColor: '#ef4444'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'top', labels: { color: tickColor } } },
+            scales: {
+              y: { title: { display: true, text: 'Input Value', color: tickColor }, grid: { color: gridColor }, min: 0 },
+              x: { grid: { color: 'transparent' } }
+            }
+          }
+        });
+      }
 
-        // Phase 4: Strategy Chart
-        const ctxStrategy = document.getElementById('strategyChart');
-        if(ctxStrategy) {
-            new Chart(ctxStrategy, {
-                type: 'line',
-                data: {
-                    labels: ['Lap 1', 'Lap 15 (Pit 1)', 'Lap 25', 'Lap 38 (Pit 2)', 'Lap 45', 'Lap 57'],
-                    datasets: [
-                        {
-                            label: '1-Stop Strategy (Med -> Hard)',
-                            data: [0, 0, 0, 0, 0, 0], // Baseline
-                            borderColor: '#94a3b8',
-                            borderDash: [5, 5],
-                            borderWidth: 2,
-                            tension: 0.1,
-                            pointRadius: 0
-                        },
-                        {
-                            label: '2-Stop Undercut (Med -> Hard -> Med)',
-                            data: [0, 2.5, -1.2, 4.5, -3.8, -5.4], // Delta to 1-stop
-                            borderColor: '#f97316',
-                            backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                            fill: true,
-                            borderWidth: 3,
-                            tension: 0.4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'top', labels: { color: tickColor } } },
-                    scales: {
-                        y: { title: { display: true, text: 'Delta vs 1-Stop Baseline (Seconds)', color: tickColor }, grid: { color: gridColor } },
-                        x: { grid: { color: 'transparent' } }
-                    }
-                }
-            });
-        }
+      // Phase 4: Strategy Chart
+      const ctxStrategy = document.getElementById('strategyChart');
+      if (ctxStrategy) {
+        new Chart(ctxStrategy, {
+          type: 'line',
+          data: {
+            labels: ['Lap 1', 'Lap 15 (Pit 1)', 'Lap 25', 'Lap 38 (Pit 2)', 'Lap 45', 'Lap 57'],
+            datasets: [
+              {
+                label: '1-Stop Strategy (Med -> Hard)',
+                data: [0, 0, 0, 0, 0, 0], // Baseline
+                borderColor: '#94a3b8',
+                borderDash: [5, 5],
+                borderWidth: 2,
+                tension: 0.1,
+                pointRadius: 0
+              },
+              {
+                label: '2-Stop Undercut (Med -> Hard -> Med)',
+                data: [0, 2.5, -1.2, 4.5, -3.8, -5.4], // Delta to 1-stop
+                borderColor: '#f97316',
+                backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                fill: true,
+                borderWidth: 3,
+                tension: 0.4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'top', labels: { color: tickColor } } },
+            scales: {
+              y: { title: { display: true, text: 'Delta vs 1-Stop Baseline (Seconds)', color: tickColor }, grid: { color: gridColor } },
+              x: { grid: { color: 'transparent' } }
+            }
+          }
+        });
+      }
 
-        // Phase 2: Superclip Trace
-        const ctxClip = document.getElementById('superclipChart');
-        if(ctxClip) {
-            new Chart(ctxClip, {
-                type: 'line',
-                data: {
-                    labels: ['0m', '200m', '400m (Superclip start)', '600m', '800m', '1000m'],
-                    datasets: [{
-                        label: 'Velocity (km/h) - Pre Directive',
-                        data: [250, 290, 315, 280, 285, 320],
-                        borderColor: '#ef4444',
-                        borderWidth: 3,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { min: 200, title: { display: true, text: 'Speed', color: tickColor }, grid: { color: gridColor } },
-                        x: { grid: { color: 'transparent' } }
-                    }
-                }
-            });
-        }
+      // Phase 2: Superclip Trace
+      const ctxClip = document.getElementById('superclipChart');
+      if (ctxClip) {
+        new Chart(ctxClip, {
+          type: 'line',
+          data: {
+            labels: ['0m', '200m', '400m (Superclip start)', '600m', '800m', '1000m'],
+            datasets: [{
+              label: 'Velocity (km/h) - Pre Directive',
+              data: [250, 290, 315, 280, 285, 320],
+              borderColor: '#ef4444',
+              borderWidth: 3,
+              tension: 0.3
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { min: 200, title: { display: true, text: 'Speed', color: tickColor }, grid: { color: gridColor } },
+              x: { grid: { color: 'transparent' } }
+            }
+          }
+        });
+      }
 
-        // Phase 3: Parameter Shifts
-        const ctxParam = document.getElementById('parameterShiftChart');
-        if(ctxParam) {
-            new Chart(ctxParam, {
-                type: 'bar',
-                data: {
-                    labels: ['Quali Harvest (MJ)', 'Peak Superclip (kW/10)'],
-                    datasets: [
-                        { label: 'Old Regulations', data: [8.0, 25.0], backgroundColor: 'rgba(239, 68, 68, 0.7)' },
-                        { label: 'Miami Directive', data: [7.0, 35.0], backgroundColor: 'rgba(16, 185, 129, 0.7)' }
-                    ]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    plugins: { legend: { position: 'bottom', labels: { color: tickColor } } },
-                    scales: {
-                        x: { grid: { color: gridColor } },
-                        y: { grid: { color: 'transparent' } }
-                    }
-                }
-            });
-        }
-        
-        // Phase 2: Sprint Quali Gaps
-        const ctxQuali = document.getElementById('qualiGapsChart');
-        if(ctxQuali) {
-            new Chart(ctxQuali, {
-                type: 'bar',
-                data: {
-                    labels: ['NOR', 'ANT', 'PIA', 'LEC', 'VER', 'RUS', 'HAM', 'COL', 'HAD', 'GAS'],
-                    datasets: [{
-                        label: 'Gap to Leader (s)',
-                        data: [0.000, 0.222, 0.239, 0.370, 0.592, 0.624, 0.749, 1.451, 1.553, 1.605],
-                        backgroundColor: [
-                            'rgba(249, 115, 22, 0.8)', // NOR
-                            'rgba(59, 130, 246, 0.8)', // ANT
-                            'rgba(249, 115, 22, 0.8)', // PIA
-                            'rgba(239, 68, 68, 0.8)',  // LEC
-                            'rgba(30, 64, 175, 0.8)',  // VER
-                            'rgba(59, 130, 246, 0.8)', // RUS
-                            'rgba(239, 68, 68, 0.8)',  // HAM
-                            'rgba(236, 72, 153, 0.8)', // COL
-                            'rgba(30, 64, 175, 0.8)',  // HAD
-                            'rgba(236, 72, 153, 0.8)'  // GAS
-                        ],
-                        borderWidth: 1,
-                        borderColor: 'rgba(255, 255, 255, 0.1)'
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { title: { display: true, text: 'Gap (Seconds)', color: tickColor }, grid: { color: gridColor }, min: 0 },
-                        y: { grid: { color: 'transparent' } }
-                    }
-                }
-            });
-        }
+      // Phase 3: Parameter Shifts
+      const ctxParam = document.getElementById('parameterShiftChart');
+      if (ctxParam) {
+        new Chart(ctxParam, {
+          type: 'bar',
+          data: {
+            labels: ['Quali Harvest (MJ)', 'Peak Superclip (kW/10)'],
+            datasets: [
+              { label: 'Old Regulations', data: [8.0, 25.0], backgroundColor: 'rgba(239, 68, 68, 0.7)' },
+              { label: 'Miami Directive', data: [7.0, 35.0], backgroundColor: 'rgba(16, 185, 129, 0.7)' }
+            ]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: { legend: { position: 'bottom', labels: { color: tickColor } } },
+            scales: {
+              x: { grid: { color: gridColor } },
+              y: { grid: { color: 'transparent' } }
+            }
+          }
+        });
+      }
 
-        // Phase 2: Speed Trap
-        const ctxTrap = document.getElementById('speedTrapChart');
-        if(ctxTrap) {
-            new Chart(ctxTrap, {
-                type: 'bar',
-                data: {
-                    labels: ['LEC (FER)', 'HAM (FER)', 'VER (RBR)', 'PIA (MCL)'],
-                    datasets: [{
-                        label: 'Top Speed (km/h)',
-                        data: [343.5, 342.0, 340.0, 336.6],
-                        backgroundColor: [
-                            'rgba(239, 68, 68, 0.8)',
-                            'rgba(239, 68, 68, 0.8)',
-                            'rgba(30, 64, 175, 0.8)',
-                            'rgba(249, 115, 22, 0.8)'
-                        ],
-                        borderWidth: 1,
-                        borderColor: 'rgba(255, 255, 255, 0.1)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        y: { min: 330, max: 345, title: { display: true, text: 'Speed (km/h)', color: tickColor }, grid: { color: gridColor } },
-                        x: { grid: { color: 'transparent' } }
-                    }
-                }
-            });
-        }
+      // Phase 2: Sprint Quali Gaps
+      const ctxQuali = document.getElementById('qualiGapsChart');
+      if (ctxQuali) {
+        new Chart(ctxQuali, {
+          type: 'bar',
+          data: {
+            labels: ['NOR', 'ANT', 'PIA', 'LEC', 'VER', 'RUS', 'HAM', 'COL', 'HAD', 'GAS'],
+            datasets: [{
+              label: 'Gap to Leader (s)',
+              data: [0.000, 0.222, 0.239, 0.370, 0.592, 0.624, 0.749, 1.451, 1.553, 1.605],
+              backgroundColor: [
+                'rgba(249, 115, 22, 0.8)', // NOR
+                'rgba(59, 130, 246, 0.8)', // ANT
+                'rgba(249, 115, 22, 0.8)', // PIA
+                'rgba(239, 68, 68, 0.8)',  // LEC
+                'rgba(30, 64, 175, 0.8)',  // VER
+                'rgba(59, 130, 246, 0.8)', // RUS
+                'rgba(239, 68, 68, 0.8)',  // HAM
+                'rgba(236, 72, 153, 0.8)', // COL
+                'rgba(30, 64, 175, 0.8)',  // HAD
+                'rgba(236, 72, 153, 0.8)'  // GAS
+              ],
+              borderWidth: 1,
+              borderColor: 'rgba(255, 255, 255, 0.1)'
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              x: { title: { display: true, text: 'Gap (Seconds)', color: tickColor }, grid: { color: gridColor }, min: 0 },
+              y: { grid: { color: 'transparent' } }
+            }
+          }
+        });
+      }
+
+      // Phase 2: Speed Trap
+      const ctxTrap = document.getElementById('speedTrapChart');
+      if (ctxTrap) {
+        new Chart(ctxTrap, {
+          type: 'bar',
+          data: {
+            labels: ['LEC (FER)', 'HAM (FER)', 'VER (RBR)', 'PIA (MCL)'],
+            datasets: [{
+              label: 'Top Speed (km/h)',
+              data: [343.5, 342.0, 340.0, 336.6],
+              backgroundColor: [
+                'rgba(239, 68, 68, 0.8)',
+                'rgba(239, 68, 68, 0.8)',
+                'rgba(30, 64, 175, 0.8)',
+                'rgba(249, 115, 22, 0.8)'
+              ],
+              borderWidth: 1,
+              borderColor: 'rgba(255, 255, 255, 0.1)'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { min: 330, max: 345, title: { display: true, text: 'Speed (km/h)', color: tickColor }, grid: { color: gridColor } },
+              x: { grid: { color: 'transparent' } }
+            }
+          }
+        });
+      }
+
+      // Phase 3: Superclip Metamorphosis
+      const ctxMetamorphosis = document.getElementById('superclipMetamorphosisChart');
+      if (ctxMetamorphosis) {
+        new Chart(ctxMetamorphosis, {
+          type: 'line',
+          data: {
+            labels: ['0m', '200m', '400m', '600m', '800m', '1000m'],
+            datasets: [
+              {
+                label: 'Old Directive (8MJ, 250kW max rate)',
+                data: [250, 290, 315, 280, 285, 320],
+                borderColor: '#ef4444',
+                borderWidth: 2,
+                borderDash: [5, 5],
+                tension: 0.3
+              },
+              {
+                label: 'New Directive (7MJ, 350kW max rate)',
+                data: [250, 290, 315, 330, 340, 345],
+                borderColor: '#10b981',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                fill: true,
+                borderWidth: 3,
+                tension: 0.3
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'top', labels: { color: tickColor } } },
+            scales: {
+              y: { min: 200, title: { display: true, text: 'Speed (km/h)', color: tickColor }, grid: { color: gridColor } },
+              x: { grid: { color: 'transparent' } }
+            }
+          }
+        });
+      }
     }
 
     // Dynamic Locks
     function checkPhaseStatuses() {
       const futurePhases = ['problem', 'solution', 'endgame'];
-      
+
       // Malaysian Timezone Unlocks based on user request
-      const unlockDatePhase2 = new Date('2026-05-02T10:30:00+08:00'); 
-      const unlockDatePhase3 = new Date('2026-05-03T12:00:00+08:00'); 
-      const unlockDatePhase4 = new Date('2026-05-04T12:00:00+08:00'); 
+      const unlockDatePhase2 = new Date('2026-05-02T10:30:00+08:00');
+      const unlockDatePhase3 = new Date('2026-05-03T12:00:00+08:00');
+      const unlockDatePhase4 = new Date('2026-05-04T12:00:00+08:00');
 
       function processPhaseLocks(d2, d3, d4, phases) {
         const now = new Date();
@@ -1209,4 +1617,5 @@
     });
   </script>
 </body>
+
 </html>
